@@ -3,122 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senior System Administrator Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        header {
-            background-color: #004080;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        header p {
-            font-size: 1.2em;
-            margin: 5px 0 20px;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        .certifications, .tasks {
-            margin-bottom: 30px;
-        }
-
-        .certifications h2, .tasks h2 {
-            font-size: 1.8em;
-            color: #004080;
-            margin-bottom: 10px;
-        }
-
-        .certifications .button, .tasks .button {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            padding: 10px 20px;
-            margin: 10px auto;
-            font-size: 1em;
-            color: #fff;
-            background-color: #004080;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .certifications .button:hover, .tasks .button:hover {
-            background-color: #00274d;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9em;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-    </style>
+    <title>Portfolio - Hashmatullah Bahadari</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Senior System Administrator Portfolio</h1>
-        <p>Welcome to my professional portfolio showcasing my certifications and experience.</p>
+        <h1>Hashmatullah Bahadari's IT & Cybersecurity Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="container">
-        <!-- Certifications Section -->
-        <section class="certifications">
-            <h2>Certifications</h2>
-            <a href="certification_iso27001.html" class="button">ISO/IEC 27001 Senior Lead Auditor</a>
-            <a href="certification_azure.html" class="button">Microsoft Certified: Azure Security Engineer Associate</a>
-            <a href="certification_ceh.html" class="button">Certified Ethical Hacker (CEH) v10</a>
-            <a href="certification_fortinet.html" class="button">Fortinet NSE 1 & NSE 2 Network Security Associate</a>
-            <a href="certification_azure_fundamentals.html" class="button">Microsoft Azure Fundamentals</a>
-            <a href="certification_security_compliance.html" class="button">Microsoft Security, Compliance & Identity Fundamentals</a>
-            <a href="certification_comptia_security.html" class="button">CompTIA Security+</a>
-            <a href="certification_comptia_network.html" class="button">CompTIA Network+</a>
-        </section>
+    <section id="certifications">
+        <h2>Certifications</h2>
+        <div class="certifications-buttons">
+            <button onclick="window.location.href='https://www.pecb.com/verify'">ISO/IEC 27001 Lead Auditor</button>
+            <button onclick="window.location.href='https://www.microsoft.com/credentials'">Azure Security Engineer</button>
+            <button onclick="window.location.href='https://www.fortinet.com/training-certification/certifications'">Fortinet NSE 1 & 2</button>
+        </div>
+    </section>
 
-        <!-- Overview Section -->
-        <section class="overview">
-            <h2>Overview</h2>
-            <p>This portfolio highlights my extensive experience and skills as a Senior System Administrator at the Central Bank of Afghanistan. It includes detailed insights into certifications I have earned, projects I have successfully delivered, and key tasks and responsibilities handled during my tenure.</p>
-        </section>
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>
+            Welcome to my portfolio, where I showcase my expertise in server administration, network management, security and compliance, disaster recovery, and performance optimization. My extensive experience in IT and cybersecurity demonstrates a commitment to excellence and innovation.
+        </p>
+    </section>
 
-        <!-- Tasks and Responsibilities Section -->
-        <section class="tasks">
-            <h2>Key Tasks and Responsibilities</h2>
-            <a href="task_network_administration.html" class="button">Network Administration</a>
-            <a href="task_server_management.html" class="button">Server Management</a>
-            <a href="task_security_configuration.html" class="button">Security Configuration</a>
-            <a href="task_incident_response.html" class="button">Incident Response</a>
-            <a href="task_backup_recovery.html" class="button">Backup and Disaster Recovery</a>
-            <a href="task_audit.html" class="button">IT Audits and Compliance</a>
-        </section>
-    </div>
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+
+        <div class="portfolio-item">
+            <h3>1. Server Administration</h3>
+            <ul>
+                <li>Installed, configured, and maintained Windows Server and Linux operating systems.</li>
+                <li>Managed Active Directory, including user accounts, group policies, and domain services.</li>
+                <li>Ensured high availability of server infrastructure through clustering, load balancing, and failover mechanisms.</li>
+                <li>Implemented and maintained virtualization platforms like VMware and Hyper-V.</li>
+                <li>Scheduled and executed regular updates, patches, and security configurations for servers.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>2. Network Administration</h3>
+            <ul>
+                <li>Monitored and maintained LAN/WAN infrastructure, including switches, routers, and firewalls.</li>
+                <li>Troubleshot network connectivity issues using tools like Wireshark, Nmap, and NetFlow.</li>
+                <li>Configured VPNs and remote access solutions for secure communication.</li>
+                <li>Ensured network performance and scalability through capacity planning and QoS configurations.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>3. Backup and Disaster Recovery</h3>
+            <ul>
+                <li>Developed and implemented data backup strategies using tools like Veeam, Backup Exec, or native OS solutions.</li>
+                <li>Conducted periodic restoration tests to validate data integrity and recovery processes.</li>
+                <li>Designed and maintained disaster recovery plans (DRPs) and ensured compliance with organizational policies.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>4. Security and Compliance</h3>
+            <ul>
+                <li>Deployed and managed endpoint protection solutions, including antivirus, DLP, and encryption tools.</li>
+                <li>Enforced security best practices like Multi-Factor Authentication (MFA) and the Principle of Least Privilege (PoLP).</li>
+                <li>Conducted vulnerability assessments and system hardening to mitigate risks.</li>
+                <li>Ensured compliance with industry standards such as ISO/IEC 27001 or GDPR.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>5. Performance Monitoring and Optimization</h3>
+            <ul>
+                <li>Monitored server and application performance using tools like Nagios, SolarWinds, or Zabbix.</li>
+                <li>Analyzed resource usage trends and recommended hardware or software upgrades.</li>
+                <li>Optimized server configurations to improve response times and reduce downtime.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>6. Automation and Scripting</h3>
+            <ul>
+                <li>Automated routine administrative tasks using PowerShell, Bash, or Python scripts.</li>
+                <li>Developed scripts for bulk user creation, permission changes, and scheduled reporting.</li>
+                <li>Managed Infrastructure-as-Code (IaC) using tools like Ansible or Terraform.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>7. Collaboration and Documentation</h3>
+            <ul>
+                <li>Collaborated with cross-functional teams to resolve IT issues and implement new solutions.</li>
+                <li>Documented system configurations, processes, and incident resolutions for future reference.</li>
+                <li>Trained junior staff on IT best practices, new technologies, and troubleshooting methods.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>8. Project Management</h3>
+            <ul>
+                <li>Led server migration projects, ensuring minimal downtime and data loss.</li>
+                <li>Played a key role in planning and executing infrastructure upgrades and expansions.</li>
+                <li>Evaluated new technologies and provided recommendations for IT investments.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>9. User Support and Troubleshooting</h3>
+            <ul>
+                <li>Provided Level 2/3 support to resolve escalated technical issues.</li>
+                <li>Conducted root cause analysis for recurring problems and implemented long-term fixes.</li>
+                <li>Ensured excellent user experience by addressing IT concerns promptly.</li>
+            </ul>
+        </div>
+
+        <div class="portfolio-item">
+            <h3>10. Achievements and Impact</h3>
+            <ul>
+                <li>Reduced system downtime by X% through proactive maintenance and monitoring.</li>
+                <li>Improved backup reliability by implementing a new backup solution, reducing recovery times by Y%.</li>
+                <li>Enhanced security posture by introducing MFA, achieving compliance with ISO/IEC 27001 standards.</li>
+            </ul>
+        </div>
+
+    </section>
 
     <footer>
-        <p>&copy; 2025 Hashmatullah Bahadari | Portfolio</p>
+        <p>&copy; 2025 Hashmatullah Bahadari. All rights reserved.</p>
     </footer>
 </body>
 </html>
