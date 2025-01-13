@@ -41,94 +41,84 @@
             border-radius: 8px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px 5px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #004080;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s;
+        .certifications, .tasks {
+            margin-bottom: 30px;
         }
 
-        .button:hover {
-            background-color: #00274d;
-        }
-
-        section {
-            margin-bottom: 20px;
-        }
-
-        section h2 {
+        .certifications h2, .tasks h2 {
             font-size: 1.8em;
             color: #004080;
             margin-bottom: 10px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        .certifications .button, .tasks .button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 10px 20px;
+            margin: 10px auto;
+            font-size: 1em;
+            color: #fff;
+            background-color: #004080;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        ul li {
+        .certifications .button:hover, .tasks .button:hover {
+            background-color: #00274d;
+        }
+
+        footer {
+            text-align: center;
             padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        ul li:last-child {
-            border-bottom: none;
-        }
-
-        .fa {
-            margin-right: 10px;
-            color: #004080;
+            font-size: 0.9em;
+            background-color: #f4f4f9;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Senior System Administrator Portfolio</h1>
-        <p>Central Bank of Afghanistan Projects</p>
-        <a href="#certifications" class="button">View Certifications</a>
-        <a href="#projects" class="button">View Projects</a>
+        <p>Welcome to my professional portfolio showcasing my certifications and experience.</p>
     </header>
 
     <div class="container">
         <!-- Certifications Section -->
-        <section id="certifications">
+        <section class="certifications">
             <h2>Certifications</h2>
-            <ul>
-                <li><i class="fa fa-certificate"></i> ISO/IEC 27001 Senior Lead Auditor (PECB)</li>
-                <li><i class="fa fa-certificate"></i> Microsoft Certified: Azure Security Engineer Associate</li>
-                <li><i class="fa fa-certificate"></i> Certified Ethical Hacker (CEH) v10</li>
-                <li><i class="fa fa-certificate"></i> Fortinet NSE 1 & NSE 2 Network Security Associate</li>
-                <li><i class="fa fa-certificate"></i> Microsoft Azure Fundamentals</li>
-                <li><i class="fa fa-certificate"></i> Microsoft Security, Compliance & Identity Fundamentals</li>
-                <li><i class="fa fa-certificate"></i> CompTIA Security+</li>
-                <li><i class="fa fa-certificate"></i> CompTIA Network+</li>
-            </ul>
+            <a href="certification_iso27001.html" class="button">ISO/IEC 27001 Senior Lead Auditor</a>
+            <a href="certification_azure.html" class="button">Microsoft Certified: Azure Security Engineer Associate</a>
+            <a href="certification_ceh.html" class="button">Certified Ethical Hacker (CEH) v10</a>
+            <a href="certification_fortinet.html" class="button">Fortinet NSE 1 & NSE 2 Network Security Associate</a>
+            <a href="certification_azure_fundamentals.html" class="button">Microsoft Azure Fundamentals</a>
+            <a href="certification_security_compliance.html" class="button">Microsoft Security, Compliance & Identity Fundamentals</a>
+            <a href="certification_comptia_security.html" class="button">CompTIA Security+</a>
+            <a href="certification_comptia_network.html" class="button">CompTIA Network+</a>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Projects</h2>
-            <ul>
-                <li><i class="fa fa-server"></i> Monitoring and Logging Implementation for Incident Detection</li>
-                <li><i class="fa fa-network-wired"></i> Network Infrastructure Enhancement and Security Configuration</li>
-                <li><i class="fa fa-lock"></i> Implementation of Multi-Factor Authentication (MFA)</li>
-                <li><i class="fa fa-database"></i> Backup and Disaster Recovery Strategy Development</li>
-            </ul>
+        <!-- Overview Section -->
+        <section class="overview">
+            <h2>Overview</h2>
+            <p>This portfolio highlights my extensive experience and skills as a Senior System Administrator at the Central Bank of Afghanistan. It includes detailed insights into certifications I have earned, projects I have successfully delivered, and key tasks and responsibilities handled during my tenure.</p>
         </section>
 
-        <!-- Footer -->
-        <footer>
-            <p style="text-align: center; padding: 10px; font-size: 0.9em;">
-                &copy; 2025 Hashmatullah Bahadari | Portfolio
-            </p>
-        </footer>
+        <!-- Tasks and Responsibilities Section -->
+        <section class="tasks">
+            <h2>Key Tasks and Responsibilities</h2>
+            <a href="task_network_administration.html" class="button">Network Administration</a>
+            <a href="task_server_management.html" class="button">Server Management</a>
+            <a href="task_security_configuration.html" class="button">Security Configuration</a>
+            <a href="task_incident_response.html" class="button">Incident Response</a>
+            <a href="task_backup_recovery.html" class="button">Backup and Disaster Recovery</a>
+            <a href="task_audit.html" class="button">IT Audits and Compliance</a>
+        </section>
     </div>
+
+    <footer>
+        <p>&copy; 2025 Hashmatullah Bahadari | Portfolio</p>
+    </footer>
 </body>
 </html>
