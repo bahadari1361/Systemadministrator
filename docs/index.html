@@ -1,112 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Hashmatullah Bahadari</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Hashmatullah Bahadari's IT & Cybersecurity Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-            </ul>
-        </nav>
-    </header>
+import React from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { PieChart, Cloud, Server } from "lucide-react";
 
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <div class="certifications-buttons">
-            <button onclick="window.location.href='https://www.pecb.com/verify'">ISO/IEC 27001 Lead Auditor</button>
-            <button onclick="window.location.href='https://www.microsoft.com/credentials'">Azure Security Engineer</button>
-            <button onclick="window.location.href='https://www.fortinet.com/training-certification/certifications'">Fortinet NSE 1 & 2</button>
-        </div>
-    </section>
+const Portfolio = () => {
+  return (
+    <div className="min-h-screen bg-gray-100 py-10">
+      <div className="max-w-7xl mx-auto px-4">
+        <header className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-gray-800">
+            Senior System Administrator & Network Administrator Portfolio
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Highlighting expertise in system management, network optimization, and IT infrastructure projects.
+          </p>
+        </header>
 
-    <section id="overview">
-        <h2>Overview</h2>
-        <p>
-            Welcome to my portfolio, where I showcase my expertise as a Senior System Administrator with a focus on server management, network administration, disaster recovery, security, and compliance. I am dedicated to maintaining efficient and secure IT environments.
-        </p>
-    </section>
+        {/* Overview Section */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <Card>
+            <CardHeader>
+              <h2 className="text-xl font-semibold">Role Overview</h2>
+            </CardHeader>
+            <CardContent>
+              <p>
+                As a Senior System Administrator and Network Administrator, I managed and optimized IT infrastructures, ensuring seamless operations across server and network environments. Key areas of focus included virtualization, backup solutions, and system security.
+              </p>
+            </CardContent>
+          </Card>
 
-    <section id="portfolio">
-        <h2>Portfolio</h2>
+          <Card>
+            <CardHeader>
+              <h2 className="text-xl font-semibold">Technologies Used</h2>
+            </CardHeader>
+            <CardContent>
+              <ul className="list-disc ml-5">
+                <li>Windows Server (2012, 2016, 2019)</li>
+                <li>Linux (Ubuntu, CentOS)</li>
+                <li>VMware, Hyper-V</li>
+                <li>Active Directory, DNS, DHCP</li>
+                <li>LAN/WAN Management</li>
+                <li>Cloud Platforms: Microsoft Azure</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
 
-        <div class="portfolio-item">
-            <h3>1. Server Administration</h3>
-            <ul>
-                <li>Installed, configured, and maintained Windows Server and Linux operating systems.</li>
-                <li>Managed Active Directory, including user accounts, group policies, and domain services.</li>
-                <li>Ensured high availability of server infrastructure through clustering, load balancing, and failover mechanisms.</li>
-                <li>Implemented and maintained virtualization platforms like VMware and Hyper-V.</li>
-                <li>Scheduled and executed regular updates, patches, and security configurations for servers.</li>
-            </ul>
-        </div>
+        {/* Project Highlights */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Project Highlights</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card>
+              <CardHeader>
+                <h3 className="text-lg font-semibold">Server Optimization</h3>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Implemented advanced monitoring and optimization for over 100 servers, improving performance and uptime by 25%.
+                </p>
+              </CardContent>
+            </Card>
 
-        <div class="portfolio-item">
-            <h3>2. Network Administration</h3>
-            <ul>
-                <li>Monitored and maintained LAN/WAN infrastructure, including switches, routers, and firewalls.</li>
-                <li>Troubleshot network connectivity issues using tools like Wireshark, Nmap, and NetFlow.</li>
-                <li>Configured VPNs and remote access solutions for secure communication.</li>
-                <li>Ensured network performance and scalability through capacity planning and QoS configurations.</li>
-            </ul>
-        </div>
+            <Card>
+              <CardHeader>
+                <h3 className="text-lg font-semibold">LAN/WAN Infrastructure</h3>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Designed and deployed scalable LAN/WAN solutions to enhance network reliability and speed across multiple branches.
+                </p>
+              </CardContent>
+            </Card>
 
-        <div class="portfolio-item">
-            <h3>3. Backup and Disaster Recovery</h3>
-            <ul>
-                <li>Developed and implemented data backup strategies using tools like Veeam, Backup Exec, or native OS solutions.</li>
-                <li>Conducted periodic restoration tests to validate data integrity and recovery processes.</li>
-                <li>Designed and maintained disaster recovery plans (DRPs) and ensured compliance with organizational policies.</li>
-            </ul>
-        </div>
+            <Card>
+              <CardHeader>
+                <h3 className="text-lg font-semibold">Virtualization</h3>
+              </CardHeader>
+              <CardContent>
+                <p>
+                  Deployed VMware and Hyper-V solutions, consolidating hardware and reducing costs by 30%.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
 
-        <div class="portfolio-item">
-            <h3>4. Security and Compliance</h3>
-            <ul>
-                <li>Deployed and managed endpoint protection solutions, including antivirus, DLP, and encryption tools.</li>
-                <li>Enforced security best practices like Multi-Factor Authentication (MFA) and the Principle of Least Privilege (PoLP).</li>
-                <li>Conducted vulnerability assessments and system hardening to mitigate risks.</li>
-                <li>Ensured compliance with industry standards such as ISO/IEC 27001 or GDPR.</li>
-            </ul>
-        </div>
+        {/* Diagrams Section */}
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">IT Infrastructure Diagram</h2>
+          <div className="flex justify-center">
+            <div className="bg-white p-6 rounded-2xl shadow-lg">
+              <Cloud className="text-blue-500 w-16 h-16 mx-auto" />
+              <p className="mt-4 text-center text-gray-600">
+                Diagram showcasing cloud integration and on-premises infrastructure.
+              </p>
+            </div>
+          </div>
+        </section>
 
-        <div class="portfolio-item">
-            <h3>5. Performance Monitoring and Optimization</h3>
-            <ul>
-                <li>Monitored server and application performance using tools like Nagios, SolarWinds, or Zabbix.</li>
-                <li>Analyzed resource usage trends and recommended hardware or software upgrades.</li>
-                <li>Optimized server configurations to improve response times and reduce downtime.</li>
-            </ul>
-        </div>
+        {/* Contact Section */}
+        <section className="text-center mt-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Contact</h2>
+          <p className="text-gray-600 mb-4">
+            Interested in learning more about my work or discussing opportunities? Reach out below.
+          </p>
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full">
+            Contact Me
+          </Button>
+        </section>
+      </div>
+    </div>
+  );
+};
 
-        <div class="portfolio-item">
-            <h3>6. Collaboration and Documentation</h3>
-            <ul>
-                <li>Collaborated with cross-functional teams to resolve IT issues and implement new solutions.</li>
-                <li>Documented system configurations, processes, and incident resolutions for future reference.</li>
-                <li>Trained junior staff on IT best practices, new technologies, and troubleshooting methods.</li>
-            </ul>
-        </div>
-
-        <div class="portfolio-item">
-            <h3>7. Project Management</h3>
-            <ul>
-                <li>Led server migration projects, ensuring minimal downtime and data loss.</li>
-                <li>Played a key role in planning and executing infrastructure upgrades and expansions.</li>
-                <li>Evaluated new technologies and provided recommendations for IT investments.</li>
-            </ul>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Hashmatullah Bahadari. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+export default Portfolio;
