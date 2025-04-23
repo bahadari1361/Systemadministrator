@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Administrator Portfolio</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; padding: 20px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 2rem; color: #333; }
+    .header p { font-size: 1rem; color: #555; margin: 5px 0; }
+    .section { margin-bottom: 50px; }
+    .section h3 { font-size: 1.5rem; color: #006bb3; margin-bottom: 10px; }
+    .section p { margin: 5px 0; color: #333; }
+    .section ul { margin: 10px 0 20px 20px; }
+    .config-panel { background: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 10px; }
+    .panel-header { background: #006bb3; color: #fff; padding: 10px 15px; font-size: 1.1rem; border-top-left-radius: 5px; border-top-right-radius: 5px; }
+    .panel-body { padding: 15px; }
+    .panel-body table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    .panel-body th, .panel-body td { border: 1px solid #ddd; padding: 8px; }
+    .panel-body th { background: #e9eff5; text-align: left; }
+    .panel-body .form-group { margin-bottom: 10px; }
+    .panel-body .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+    .panel-body .form-group input, .panel-body .form-group select { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 3px; }
+    .screenshot { text-align: center; font-style: italic; color: #777; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>System Administrator Portfolio</h1>
+    <p>Key Configurations: AD, DHCP, DNS</p>
+    <p>Prepared by: Hashmatullah Bahadari (BahadariTech)</p>
+  </div>
+
+  <div class="section">
+    <h3>1. Active Directory Configuration</h3>
+    <p><strong>Overview:</strong> Configured and managed Active Directory (AD) environment including domain controllers, group policies, and user account permissions to ensure secure and organized access control.</p>
+    <p><strong>Key Tasks:</strong></p>
+    <ul>
+      <li>Domain Controller setup and replication configuration.</li>
+      <li>Group Policy Objects (GPO) creation for security and software deployment.</li>
+      <li>User, group, and OU management for role-based access.</li>
+    </ul>
+    <div class="config-panel">
+      <div class="panel-header">Active Directory Installation</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Forest Name</label><input type="text" value="corp.bank.local" disabled />
+        </div>
+        <div class="form-group">
+          <label>Domain Functional Level</label><select disabled><option>Windows Server 2016</option></select>
+        </div>
+        <div class="form-group">
+          <label>Domain Controller Roles</label><input type="text" value="DNS, GC, RID Master" disabled />
+        </div>
+        <div class="form-group">
+          <label>Site Name</label><input type="text" value="Default-First-Site-Name" disabled />
+        </div>
+      </div>
+    </div>
+    <div class="screenshot">(Insert AD Configuration Screenshot Here)</div>
+  </div>
+
+  <div class="section">
+    <h3>2. DHCP Configuration</h3>
+    <p><strong>Overview:</strong> Deployed and maintained DHCP servers to dynamically assign IP addresses across the network, reducing manual configuration and IP conflicts.</p>
+    <p><strong>Key Tasks:</strong></p>
+    <ul>
+      <li>Created and managed DHCP scopes for different network segments.</li>
+      <li>Configured reservations and exclusions for critical devices.</li>
+      <li>Implemented DHCP failover for high availability.</li>
+    </ul>
+    <div class="config-panel">
+      <div class="panel-header">DHCP Scope Configuration</div>
+      <div class="panel-body">
+        <table>
+          <thead><tr><th>Scope Name</th><th>Range</th><th>Subnet Mask</th><th>Lease Duration</th></tr></thead>
+          <tbody>
+            <tr><td>Office_Net</td><td>192.168.1.100 - 192.168.1.200</td><td>255.255.255.0</td><td>8 days</td></tr>
+            <tr><td>Guest_WiFi</td><td>192.168.2.50 - 192.168.2.100</td><td>255.255.255.0</td><td>1 day</td></tr>
+          </tbody>
+        </table>
+        <div class="form-group"><label>Default Gateway</label><input type="text" value="192.168.1.1" disabled /></div>
+        <div class="form-group"><label>DNS Servers</label><input type="text" value="192.168.1.10; 192.168.1.11" disabled /></div>
+        <div class="form-group"><label>Exclusions</label><input type="text" value="192.168.1.150 - 192.168.1.160" disabled /></div>
+      </div>
+    </div>
+    <div class="screenshot">(Insert DHCP Console Screenshot Here)</div>
+  </div>
+
+  <div class="section">
+    <h3>3. DNS Configuration</h3>
+    <p><strong>Overview:</strong> Managed DNS infrastructure to ensure reliable name resolution for internal and external services, enhancing network reliability.</p>
+    <p><strong>Key Tasks:</strong></p>
+    <ul>
+      <li>Installed and configured primary and secondary DNS servers.</li>
+      <li>Created forward and reverse lookup zones.</li>
+      <li>Secured DNS with DNSSEC and monitoring for spoofing attempts.</li>
+    </ul>
+    <div class="config-panel">
+      <div class="panel-header">DNS Zone Configuration</div>
+      <div class="panel-body">
+        <table>
+          <thead><tr><th>Zone Name</th><th>Type</th><th>Replication Scope</th></tr></thead>
+          <tbody>
+            <tr><td>corp.bank.local</td><td>Primary</td><td>Forest-wide</td></tr>
+            <tr><td>bank.af</td><td>Secondary</td><td>To all DNS servers</td></tr>
+          </tbody>
+        </table>
+        <div class="form-group"><label>Forwarders</label><input type="text" value="8.8.8.8; 8.8.4.4" disabled /></div>
+        <div class="form-group"><label>Root Hints</label><input type="text" value="(Default Server Hints)" disabled /></div>
+      </div>
+    </div>
+    <div class="screenshot">(Insert DNS Management Screenshot Here)</div>
+  </div>
+
+</body>
+</html>
