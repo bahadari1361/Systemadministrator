@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock System Admin Consoles</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #e5e5e5; padding: 20px; }
+    .console-window { background: #fff; border: 1px solid #666; border-radius: 4px; margin-bottom: 40px; box-shadow: 2px 2px 6px rgba(0,0,0,0.2); }
+    .console-header { background: #0078d7; color: #fff; padding: 8px 12px; border-top-left-radius: 4px; border-top-right-radius: 4px; font-weight: bold; }
+    .console-body { padding: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+    th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <!-- Active Directory Console Mockup -->
+  <div class="console-window">
+    <div class="console-header">Active Directory Users and Computers</div>
+    <div class="console-body">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Organizational Unit</th><th>Last Logon</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>jdoe</td><td>Users</td><td>2025-04-22 09:15</td></tr>
+          <tr><td>asmith</td><td>Finance\Analysts</td><td>2025-04-21 14:32</td></tr>
+          <tr><td>tkarimi</td><td>IT\Admins</td><td>2025-04-22 08:45</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DHCP Console Mockup -->
+  <div class="console-window">
+    <div class="console-header">DHCP Manager</div>
+    <div class="console-body">
+      <table>
+        <thead>
+          <tr><th>Scope Name</th><th>Start IP</th><th>End IP</th><th>Leases</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Office_Network</td><td>192.168.10.100</td><td>192.168.10.200</td><td>45/100</td></tr>
+          <tr><td>Guest_WIFI</td><td>192.168.20.50</td><td>192.168.20.150</td><td>30/100</td></tr>
+          <tr><td>Backup_Segment</td><td>10.0.1.10</td><td>10.0.1.60</td><td>5/50</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DNS Manager Mockup -->
+  <div class="console-window">
+    <div class="console-header">DNS Manager</div>
+    <div class="console-body">
+      <table>
+        <thead>
+          <tr><th>Zone Name</th><th>Type</th><th>Record Count</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>bank.local</td><td>Forward Lookup</td><td>24</td></tr>
+          <tr><td>10.168.192.in-addr.arpa</td><td>Reverse Lookup</td><td>24</td></tr>
+          <tr><td>external.bank.af</td><td>Forward Lookup</td><td>12</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
