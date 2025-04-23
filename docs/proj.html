@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Admin Configuration Mockups</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; padding: 20px; }
+    .config-panel { background: #fff; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .panel-header { background: #006bb3; color: #fff; padding: 10px 15px; font-size: 18px; border-top-left-radius: 5px; border-top-right-radius: 5px; }
+    .panel-body { padding: 15px; }
+    .panel-body table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    .panel-body th, .panel-body td { border: 1px solid #ddd; padding: 8px; }
+    .panel-body th { background: #e9eff5; text-align: left; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
+    .form-group input, .form-group select { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <div class="config-panel">
+    <div class="panel-header">Active Directory Installation</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label>Forest Name</label>
+        <input type="text" value="corp.bank.local" disabled />
+      </div>
+      <div class="form-group">
+        <label>Domain Functional Level</label>
+        <select disabled>
+          <option>Windows Server 2016</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Domain Controller Roles</label>
+        <input type="text" value="DNS, GC, RID Master" disabled />
+      </div>
+      <div class="form-group">
+        <label>Site Name</label>
+        <input type="text" value="Default-First-Site-Name" disabled />
+      </div>
+    </div>
+  </div>
+
+  <div class="config-panel">
+    <div class="panel-header">DNS Zone Configuration</div>
+    <div class="panel-body">
+      <table>
+        <thead>
+          <tr><th>Zone Name</th><th>Type</th><th>Replication Scope</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>corp.bank.local</td><td>Primary</td><td>Forest-wide</td></tr>
+          <tr><td>bank.af</td><td>Secondary</td><td>To all DNS servers</td></tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label>Forwarders</label>
+        <input type="text" value="8.8.8.8; 8.8.4.4" disabled />
+      </div>
+      <div class="form-group">
+        <label>Root Hints</label>
+        <input type="text" value="(Default Server Hints)" disabled />
+      </div>
+    </div>
+  </div>
+
+  <div class="config-panel">
+    <div class="panel-header">DHCP Scope Configuration</div>
+    <div class="panel-body">
+      <table>
+        <thead>
+          <tr><th>Scope Name</th><th>Range</th><th>Subnet Mask</th><th>Lease Duration</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Office_Net</td><td>192.168.1.100 - 192.168.1.200</td><td>255.255.255.0</td><td>8 days</td></tr>
+          <tr><td>Guest_WiFi</td><td>192.168.2.50 - 192.168.2.100</td><td>255.255.255.0</td><td>1 day</td></tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label>Default Gateway</label>
+        <input type="text" value="192.168.1.1" disabled />
+      </div>
+      <div class="form-group">
+        <label>DNS Servers</label>
+        <input type="text" value="192.168.1.10; 192.168.1.11" disabled />
+      </div>
+      <div class="form-group">
+        <label>Exclusions</label>
+        <input type="text" value="192.168.1.150 - 192.168.1.160" disabled />
+      </div>
+    </div>
+  </div>
+
+  <div class="config-panel">
+    <div class="panel-header">VMware vSphere Host Setup</div>
+    <div class="panel-body">
+      <table>
+        <thead>
+          <tr><th>Host Name</th><th>ESXi Version</th><th>CPU</th><th>RAM</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>esxi01.bank.local</td><td>7.0.3</td><td>2 x Intel Xeon Silver</td><td>128 GB</td></tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label>Datastore</label>
+        <input type="text" value="Datastore1 (3 TB)" disabled />
+      </div>
+      <div class="form-group">
+        <label>Cluster Name</label>
+        <input type="text" value="BankCluster01" disabled />
+      </div>
+    </div>
+  </div>
+
+  <div class="config-panel">
+    <div class="panel-header">Veeam Backup Job Configuration</div>
+    <div class="panel-body">
+      <table>
+        <thead>
+          <tr><th>Job Name</th><th>Type</th><th>Schedule</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Daily_Full</td><td>Full Backup</td><td>12:00 AM Daily</td></tr>
+          <tr><td>Incremental_VM</td><td>Incremental</td><td>Every 4 hours</td></tr>
+        </tbody>
+      </table>
+      <div class="form-group">
+        <label>Repository</label>
+        <input type="text" value="OffsiteRepo (Encrypted)" disabled />
+      </div>
+      <div class="form-group">
+        <label>Retention Policy</label>
+        <input type="text" value="14 restore points" disabled />
+      </div>
+    </div>
+  </div>
+
+  <!-- Add more panels as needed -->
+
+</body>
+</html>
