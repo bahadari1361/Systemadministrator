@@ -1,107 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security Best Practices for System Administrators</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: #f5f8fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    h1 {
-      color: #004080;
-    }
-    h2 {
-      color: #0066cc;
-      margin-top: 2rem;
-    }
-    .icon {
-      color: #0077b6;
-      margin-right: 0.5rem;
+    .header {
+      background: #0d6efd;
+      color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
     }
     .section {
-      margin-bottom: 1.5rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+    }
+    .section h3 {
+      color: #0d6efd;
+    }
+    .icon {
+      margin-right: 0.5rem;
+      color: #0d6efd;
     }
     blockquote {
       font-style: italic;
       color: #555;
-      border-left: 4px solid #ccc;
+      border-left: 4px solid #0d6efd;
       padding-left: 1rem;
       margin-top: 2rem;
-    }
-    .footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #777;
     }
   </style>
 </head>
 <body>
+  <div class="container my-5">
+    <div class="header text-center">
+      <h1><i class="fas fa-shield-alt"></i> Security Best Practices for System Administrators</h1>
+      <p class="lead">Professional Guidelines by <strong>BahadariTech</strong></p>
+    </div>
 
-  <h1><i class="fas fa-shield-alt icon"></i>Security Best Practices for System Administrators</h1>
-  <p><strong>by BahadariTech</strong></p>
+    <div class="section">
+      <h3><i class="fas fa-user-shield icon"></i>Principle of Least Privilege (PoLP)</h3>
+      <p>Limit user and process permissions to only what is required for tasks. Use role-based access control and review permissions regularly.</p>
+    </div>
 
-  <div class="section">
-    <h2><i class="fas fa-user-shield icon"></i>1. Principle of Least Privilege (PoLP)</h2>
-    <p>Grant users and applications the minimum access necessary. Use role-based access controls and audit privileges regularly.</p>
+    <div class="section">
+      <h3><i class="fas fa-sync-alt icon"></i>Regular Patching and Updates</h3>
+      <p>Keep systems up-to-date by applying security patches promptly. Automate updates when possible and validate them in staging before production rollout.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-search icon"></i>Continuous Monitoring and Logging</h3>
+      <p>Implement centralized logging and real-time monitoring. Use tools like ELK Stack or Splunk to detect anomalies and respond to incidents quickly.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-network-wired icon"></i>Network Segmentation</h3>
+      <p>Reduce attack surfaces by isolating critical systems and using firewalls between segments. Deploy DMZs for public-facing applications.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-lock icon"></i>Secure Authentication and Access Control</h3>
+      <p>Enforce multi-factor authentication (MFA) and centralized identity management to ensure secure and trackable access to resources.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-key icon"></i>Strong Password Policies</h3>
+      <p>Mandate complex passwords, change cycles, and lockout thresholds. Encourage password manager usage for safer password handling.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-database icon"></i>Encryption of Data in Transit and at Rest</h3>
+      <p>Use encryption standards (TLS, AES) to secure data at all stages. Encrypt databases, communications, and backups to prevent unauthorized access.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-dumpster-fire icon"></i>Backup and Disaster Recovery</h3>
+      <p>Maintain automatic and secure backups. Test disaster recovery plans periodically to ensure business continuity during incidents.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-users icon"></i>Security Awareness Training</h3>
+      <p>Educate employees on cyber threats, phishing, and proper handling of sensitive data. Conduct regular training and simulations.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-bug icon"></i>Security Audits and Penetration Testing</h3>
+      <p>Conduct internal and external audits. Perform penetration testing to discover and fix vulnerabilities before they are exploited.</p>
+    </div>
+
+    <blockquote>
+      “Security is not a product, but a process.” — Bruce Schneier
+    </blockquote>
+
+    <footer class="text-center mt-5">
+      <p class="text-muted">&copy; 2025 BahadariTech. All rights reserved.</p>
+    </footer>
   </div>
 
-  <div class="section">
-    <h2><i class="fas fa-sync-alt icon"></i>2. Regular Patching and Updates</h2>
-    <p>Keep systems and applications up-to-date. Automate patching and test updates in a staging environment before deploying to production.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-search icon"></i>3. Continuous Monitoring and Logging</h2>
-    <p>Use centralized logging and monitor for suspicious activity. Tools like Splunk or ELK Stack help identify anomalies in real-time.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-network-wired icon"></i>4. Network Segmentation</h2>
-    <p>Segment networks using VLANs and firewalls. Limit communication between segments to only what's necessary and secure public-facing services using a DMZ.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-lock icon"></i>5. Secure Authentication and Access Control</h2>
-    <p>Implement multi-factor authentication (MFA), manage credentials securely, and centralize identity management with tools like Active Directory.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-key icon"></i>6. Strong Password Policies</h2>
-    <p>Enforce complex password policies, use password managers, and lock accounts after repeated login failures to reduce brute-force risks.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-database icon"></i>7. Encryption of Data in Transit and at Rest</h2>
-    <p>Encrypt sensitive data using industry standards like TLS/SSL for data in transit and disk encryption for data at rest.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-dumpster-fire icon"></i>8. Backup and Disaster Recovery</h2>
-    <p>Regularly back up critical data. Store backups off-site or in the cloud, and test recovery procedures periodically.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-users icon"></i>9. Security Awareness Training</h2>
-    <p>Educate users about phishing, social engineering, and security policies. Awareness is your first line of defense.</p>
-  </div>
-
-  <div class="section">
-    <h2><i class="fas fa-bug icon"></i>10. Regular Security Audits and Penetration Testing</h2>
-    <p>Conduct regular assessments and penetration testing to identify and fix vulnerabilities before they are exploited.</p>
-  </div>
-
-  <blockquote>
-    “Security is not a product, but a process.” — Bruce Schneier
-  </blockquote>
-
-  <div class="footer">
-    &copy; 2025 BahadariTech. All rights reserved.
-  </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
