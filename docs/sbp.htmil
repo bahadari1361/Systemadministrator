@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Security Best Practices for System Administrators</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #004080;
+    }
+    h2 {
+      color: #0066cc;
+      margin-top: 2rem;
+    }
+    .icon {
+      color: #0077b6;
+      margin-right: 0.5rem;
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      font-style: italic;
+      color: #555;
+      border-left: 4px solid #ccc;
+      padding-left: 1rem;
+      margin-top: 2rem;
+    }
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1><i class="fas fa-shield-alt icon"></i>Security Best Practices for System Administrators</h1>
+  <p><strong>by BahadariTech</strong></p>
+
+  <div class="section">
+    <h2><i class="fas fa-user-shield icon"></i>1. Principle of Least Privilege (PoLP)</h2>
+    <p>Grant users and applications the minimum access necessary. Use role-based access controls and audit privileges regularly.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-sync-alt icon"></i>2. Regular Patching and Updates</h2>
+    <p>Keep systems and applications up-to-date. Automate patching and test updates in a staging environment before deploying to production.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-search icon"></i>3. Continuous Monitoring and Logging</h2>
+    <p>Use centralized logging and monitor for suspicious activity. Tools like Splunk or ELK Stack help identify anomalies in real-time.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-network-wired icon"></i>4. Network Segmentation</h2>
+    <p>Segment networks using VLANs and firewalls. Limit communication between segments to only what's necessary and secure public-facing services using a DMZ.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-lock icon"></i>5. Secure Authentication and Access Control</h2>
+    <p>Implement multi-factor authentication (MFA), manage credentials securely, and centralize identity management with tools like Active Directory.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-key icon"></i>6. Strong Password Policies</h2>
+    <p>Enforce complex password policies, use password managers, and lock accounts after repeated login failures to reduce brute-force risks.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-database icon"></i>7. Encryption of Data in Transit and at Rest</h2>
+    <p>Encrypt sensitive data using industry standards like TLS/SSL for data in transit and disk encryption for data at rest.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-dumpster-fire icon"></i>8. Backup and Disaster Recovery</h2>
+    <p>Regularly back up critical data. Store backups off-site or in the cloud, and test recovery procedures periodically.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-users icon"></i>9. Security Awareness Training</h2>
+    <p>Educate users about phishing, social engineering, and security policies. Awareness is your first line of defense.</p>
+  </div>
+
+  <div class="section">
+    <h2><i class="fas fa-bug icon"></i>10. Regular Security Audits and Penetration Testing</h2>
+    <p>Conduct regular assessments and penetration testing to identify and fix vulnerabilities before they are exploited.</p>
+  </div>
+
+  <blockquote>
+    “Security is not a product, but a process.” — Bruce Schneier
+  </blockquote>
+
+  <div class="footer">
+    &copy; 2025 BahadariTech. All rights reserved.
+  </div>
+
+</body>
+</html>
