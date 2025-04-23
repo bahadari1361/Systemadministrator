@@ -10,15 +10,16 @@
     body {
       background-color: #f5f8fa;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      position: relative;
-      min-height: 100vh;
-      padding-bottom: 80px; /* Space for the back button */
+      margin: 0;
+      padding: 0;
+      padding-bottom: 100px; /* Space to avoid hiding content behind button */
     }
     .header {
       background: #0d6efd;
       color: white;
       padding: 2rem;
       border-radius: 0.5rem;
+      margin-bottom: 2rem;
     }
     .section {
       background-color: white;
@@ -47,6 +48,9 @@
       left: 20px;
       z-index: 1000;
     }
+    footer {
+      margin-top: 3rem;
+    }
   </style>
 </head>
 <body>
@@ -56,25 +60,66 @@
       <p class="lead">Professional Guidelines by <strong>BahadariTech</strong></p>
     </div>
 
-    <!-- Your Sections (unchanged) -->
-
     <div class="section">
       <h3><i class="fas fa-user-shield icon"></i>Principle of Least Privilege (PoLP)</h3>
       <p>Limit user and process permissions to only what is required for tasks. Use role-based access control and review permissions regularly.</p>
     </div>
 
-    <!-- ... (Other sections remain the same) ... -->
+    <div class="section">
+      <h3><i class="fas fa-sync-alt icon"></i>Regular Patching and Updates</h3>
+      <p>Keep systems up-to-date by applying security patches promptly. Automate updates when possible and validate them in staging before production rollout.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-search icon"></i>Continuous Monitoring and Logging</h3>
+      <p>Implement centralized logging and real-time monitoring. Use tools like ELK Stack or Splunk to detect anomalies and respond to incidents quickly.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-network-wired icon"></i>Network Segmentation</h3>
+      <p>Reduce attack surfaces by isolating critical systems and using firewalls between segments. Deploy DMZs for public-facing applications.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-lock icon"></i>Secure Authentication and Access Control</h3>
+      <p>Enforce multi-factor authentication (MFA) and centralized identity management to ensure secure and trackable access to resources.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-key icon"></i>Strong Password Policies</h3>
+      <p>Mandate complex passwords, change cycles, and lockout thresholds. Encourage password manager usage for safer password handling.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-database icon"></i>Encryption of Data in Transit and at Rest</h3>
+      <p>Use encryption standards (TLS, AES) to secure data at all stages. Encrypt databases, communications, and backups to prevent unauthorized access.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-dumpster-fire icon"></i>Backup and Disaster Recovery</h3>
+      <p>Maintain automatic and secure backups. Test disaster recovery plans periodically to ensure business continuity during incidents.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-users icon"></i>Security Awareness Training</h3>
+      <p>Educate employees on cyber threats, phishing, and proper handling of sensitive data. Conduct regular training and simulations.</p>
+    </div>
+
+    <div class="section">
+      <h3><i class="fas fa-bug icon"></i>Security Audits and Penetration Testing</h3>
+      <p>Conduct internal and external audits. Perform penetration testing to discover and fix vulnerabilities before they are exploited.</p>
+    </div>
 
     <blockquote>
       “Security is not a product, but a process.” — Bruce Schneier
     </blockquote>
 
-    <footer class="text-center mt-5">
+    <footer class="text-center">
       <p class="text-muted">&copy; 2025 BahadariTech. All rights reserved.</p>
     </footer>
   </div>
 
-  <!-- Back Button -->
+  <!-- Fixed back button -->
   <a href="index.html" class="btn btn-primary back-button">
     <i class="fas fa-arrow-left"></i> Back to Home
   </a>
