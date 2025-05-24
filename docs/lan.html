@@ -14,6 +14,7 @@
       --light: #ecf0f1;
       --dark: #2c3e50;
       --text: #34495e;
+      --header-bg: #f8f9fa;
     }
     
     * {
@@ -24,58 +25,39 @@
     
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #f8f9fa;
+      background-color: var(--header-bg);
       color: var(--text);
       line-height: 1.7;
-    }
-    
-    .header-container {
-      position: relative;
-      height: 300px; /* Slimmer header height */
-      overflow: hidden;
-    }
-    
-    .header-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       background-image: url('photo.jpeg');
       background-size: cover;
       background-position: center;
-      z-index: 1;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
     }
     
-    .header-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    .content-wrapper {
+      background-color: rgba(255, 255, 255, 0.9);
+      min-height: 100vh;
+    }
+    
+    header {
+      background-color: var(--header-bg);
+      color: var(--primary);
+      padding: 2rem 1rem;
       text-align: center;
-      padding: 0 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
     
     header h1 {
       font-family: 'Montserrat', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
-      color: white;
       margin-bottom: 0.5rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     
     header p {
       font-size: 1.2rem;
       font-weight: 300;
-      color: white;
       opacity: 0.9;
       max-width: 800px;
       margin: 0 auto;
@@ -84,9 +66,7 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      position: relative;
-      z-index: 3;
-      margin-top: -30px; /* Adjusted to match slimmer header */
+      padding: 0 20px;
     }
     
     .nav-buttons {
@@ -94,11 +74,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      margin: 0 20px;
+      margin-top: 1.5rem;
     }
     
     .dropdown {
@@ -183,16 +159,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 500px;
-    }
-    
-    .profile-about {
       padding: 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
     
     .profile-about h2 {
@@ -224,17 +191,11 @@
       margin-bottom: 1.5rem;
     }
     
-    .profile-highlights {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-      padding: 3rem;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
     .highlight-item {
       margin-bottom: 2rem;
+      background: rgba(236, 240, 241, 0.5);
+      padding: 1.5rem;
+      border-radius: 8px;
     }
     
     .highlight-item h3 {
@@ -244,6 +205,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      color: var(--primary);
     }
     
     .highlight-item h3 i {
@@ -251,7 +213,7 @@
     }
     
     .highlight-item p {
-      opacity: 0.9;
+      color: var(--text);
       font-size: 0.95rem;
     }
     
@@ -274,14 +236,6 @@
     }
     
     @media (max-width: 900px) {
-      .profile-section {
-        grid-template-columns: 1fr;
-      }
-      
-      .header-container {
-        height: 250px;
-      }
-      
       header h1 {
         font-size: 2rem;
       }
@@ -292,15 +246,7 @@
     }
     
     @media (max-width: 600px) {
-      .header-container {
-        height: 200px;
-      }
-      
-      header h1 {
-        font-size: 1.8rem;
-      }
-      
-      .profile-about, .profile-highlights {
+      .profile-section {
         padding: 2rem;
       }
       
@@ -317,124 +263,121 @@
 </head>
 
 <body>
-  <div class="header-container">
-    <div class="header-image"></div>
-    <div class="header-overlay">
+  <div class="content-wrapper">
+    <header>
       <h1>Hashmatullah Bahadari</h1>
       <p>IT Security Specialist & System Administrator</p>
+
+      <div class="nav-container">
+        <div class="nav-buttons">
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
+            <div class="dropdown-content">
+              <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank"><i class="fas fa-shield-alt"></i> Fortinet NSE 2</a>
+              <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank"><i class="fas fa-network-wired"></i> CompTIA Network+</a>
+              <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank"><i class="fas fa-lock"></i> CompTIA Security+</a>
+              <a href="https://www.pecb.com/en/verify-certificate" target="_blank"><i class="fas fa-certificate"></i> ISO 27001</a>
+              <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank"><i class="fab fa-microsoft"></i> Azure Fundamentals</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fab fa-windows"></i> Windows</button>
+            <div class="dropdown-content">
+              <a href="dir.html"><i class="fas fa-network-wired"></i> Active Directory</a>
+              <a href="windows/group-policy.html"><i class="fas fa-cogs"></i> Group Policy</a>
+              <a href="windows/dns.html"><i class="fas fa-globe"></i> DNS</a>
+              <a href="windows/dhcp.html"><i class="fas fa-plug"></i> DHCP</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fab fa-linux"></i> Linux</button>
+            <div class="dropdown-content">
+              <a href="linux/user-group-management.html"><i class="fas fa-users"></i> User Management</a>
+              <a href="linux/systemd-services.html"><i class="fas fa-tasks"></i> Systemd</a>
+              <a href="linux/firewall-security.html"><i class="fas fa-shield-alt"></i> Firewall</a>
+              <a href="linux/shell-scripting.html"><i class="fas fa-terminal"></i> Shell Scripting</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud</button>
+            <div class="dropdown-content">
+              <a href="cloud/azure.html"><i class="fab fa-microsoft"></i> Azure</a>
+              <a href="cloud/aws-iam-policies.html"><i class="fab fa-aws"></i> AWS IAM</a>
+              <a href="cloud/cloud-storage-backup.html"><i class="fas fa-database"></i> Cloud Storage</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
+            <div class="dropdown-content">
+              <a href="security/mfa-rbac.html"><i class="fas fa-mobile-alt"></i> MFA</a>
+              <a href="security/endpoint-protection.html"><i class="fas fa-desktop"></i> Endpoint</a>
+              <a href="security/security-hardening.html"><i class="fas fa-hard-hat"></i> Hardening</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fas fa-network-wired"></i> Networking</button>
+            <div class="dropdown-content">
+              <a href="networking/lan-wan.html"><i class="fas fa-sitemap"></i> LAN/WAN</a>
+              <a href="networking/firewalls.html"><i class="fas fa-fire"></i> Firewalls</a>
+              <a href="networking/vpn-configuration.html"><i class="fas fa-user-secret"></i> VPN</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="dropdown-button"><i class="fas fa-save"></i> Backup</button>
+            <div class="dropdown-content">
+              <a href="backup/backup-strategies.html"><i class="fas fa-copy"></i> Strategies</a>
+              <a href="backup/disaster-recovery.html"><i class="fas fa-life-ring"></i> Recovery</a>
+              <a href="backup/system-snapshots.html"><i class="fas fa-camera"></i> Snapshots</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <section class="profile-section">
+        <div class="profile-about">
+          <h2>Professional Profile</h2>
+          <div class="profile-text">
+            <p>
+              As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
+            </p>
+            <p>
+              Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
+            </p>
+            <p>
+              What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures.
+            </p>
+          </div>
+
+          <div class="highlight-item">
+            <h3><i class="fas fa-shield-alt"></i> Security Expertise</h3>
+            <p>Implemented enterprise-wide security measures that reduced vulnerabilities by 85% while maintaining operational efficiency across all departments.</p>
+          </div>
+          
+          <div class="highlight-item">
+            <h3><i class="fas fa-server"></i> Infrastructure Design</h3>
+            <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime across hybrid cloud and on-premises environments.</p>
+          </div>
+          
+          <div class="highlight-item">
+            <h3><i class="fas fa-cloud"></i> Cloud Migration</h3>
+            <p>Led successful migration of critical business systems to Azure, reducing hardware costs by 40% while improving accessibility and disaster recovery capabilities.</p>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <footer>
+      <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | <a href="https://github.com/bahadari1361" target="_blank">GitHub</a></p>
+      <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
+    </footer>
   </div>
-
-  <div class="nav-container">
-    <div class="nav-buttons">
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-shield-alt"></i> Fortinet NSE 2</a>
-          <a href="#"><i class="fas fa-network-wired"></i> CompTIA Network+</a>
-          <a href="#"><i class="fas fa-lock"></i> CompTIA Security+</a>
-          <a href="#"><i class="fas fa-certificate"></i> ISO 27001</a>
-          <a href="#"><i class="fab fa-microsoft"></i> Azure Fundamentals</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fab fa-windows"></i> Windows</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-network-wired"></i> Active Directory</a>
-          <a href="#"><i class="fas fa-cogs"></i> Group Policy</a>
-          <a href="#"><i class="fas fa-globe"></i> DNS</a>
-          <a href="#"><i class="fas fa-plug"></i> DHCP</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fab fa-linux"></i> Linux</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-users"></i> User Management</a>
-          <a href="#"><i class="fas fa-tasks"></i> Systemd</a>
-          <a href="#"><i class="fas fa-shield-alt"></i> Firewall</a>
-          <a href="#"><i class="fas fa-terminal"></i> Shell Scripting</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fab fa-microsoft"></i> Azure</a>
-          <a href="#"><i class="fab fa-aws"></i> AWS IAM</a>
-          <a href="#"><i class="fas fa-database"></i> Cloud Storage</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-mobile-alt"></i> MFA</a>
-          <a href="#"><i class="fas fa-desktop"></i> Endpoint</a>
-          <a href="#"><i class="fas fa-hard-hat"></i> Hardening</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-network-wired"></i> Networking</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-sitemap"></i> LAN/WAN</a>
-          <a href="#"><i class="fas fa-fire"></i> Firewalls</a>
-          <a href="#"><i class="fas fa-user-secret"></i> VPN</a>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-save"></i> Backup</button>
-        <div class="dropdown-content">
-          <a href="#"><i class="fas fa-copy"></i> Strategies</a>
-          <a href="#"><i class="fas fa-life-ring"></i> Recovery</a>
-          <a href="#"><i class="fas fa-camera"></i> Snapshots</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="main-container">
-    <section class="profile-section">
-      <div class="profile-about">
-        <h2>Professional Profile</h2>
-        <div class="profile-text">
-          <p>
-            As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
-          </p>
-          <p>
-            Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
-          </p>
-          <p>
-            What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures.
-          </p>
-        </div>
-      </div>
-      
-      <div class="profile-highlights">
-        <div class="highlight-item">
-          <h3><i class="fas fa-shield-alt"></i> Security Expertise</h3>
-          <p>Implemented enterprise-wide security measures that reduced vulnerabilities by 85% while maintaining operational efficiency across all departments.</p>
-        </div>
-        
-        <div class="highlight-item">
-          <h3><i class="fas fa-server"></i> Infrastructure Design</h3>
-          <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime across hybrid cloud and on-premises environments.</p>
-        </div>
-        
-        <div class="highlight-item">
-          <h3><i class="fas fa-cloud"></i> Cloud Migration</h3>
-          <p>Led successful migration of critical business systems to Azure, reducing hardware costs by 40% while improving accessibility and disaster recovery capabilities.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/">LinkedIn</a> | <a href="https://github.com/bahadari1361">GitHub</a></p>
-    <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
-  </footer>
 </body>
 </html>
