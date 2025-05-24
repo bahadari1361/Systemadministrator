@@ -19,6 +19,7 @@
       color: #2d3748;
       min-height: 100vh;
       position: relative;
+      line-height: 1.6;
     }
     
     header {
@@ -45,11 +46,16 @@
       opacity: 0.9;
     }
     
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
     .nav-buttons {
       display: flex;
       justify-content: center;
-      gap: 15px;
       flex-wrap: wrap;
+      gap: 12px;
       margin-top: 1.5rem;
       padding: 0 1rem;
     }
@@ -57,12 +63,13 @@
     .dropdown {
       position: relative;
       display: inline-block;
+      flex-shrink: 0;
     }
     
     .dropdown-button {
       background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
       color: white;
-      padding: 12px 24px;
+      padding: 12px 20px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -76,6 +83,7 @@
       align-items: center;
       gap: 8px;
       white-space: nowrap;
+      height: 44px;
     }
     
     .dropdown-button:hover {
@@ -142,139 +150,155 @@
       display: block;
     }
     
-    .main-section {
+    .main-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 20px;
+    }
+    
+    .profile-section {
       display: flex;
       flex-wrap: wrap;
-      margin: 3rem auto;
-      max-width: 1200px;
-      padding: 0 20px;
       gap: 30px;
-      justify-content: center;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
     
-    .about-me {
+    .profile-content {
       flex: 1;
       min-width: 300px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
       padding: 3rem;
-      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
       position: relative;
-      overflow: hidden;
-    }
-    
-    .about-me::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(255, 255, 255, 0) 60%
-      );
-      transform: rotate(30deg);
-      z-index: -1;
-    }
-    
-    .about-me:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 50px rgba(31, 38, 135, 0.2);
-    }
-    
-    .about-me h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
-      color: #2c3e50;
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
-      font-weight: 700;
-    }
-    
-    .about-me h2::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #3498db, #2980b9);
-      border-radius: 4px;
-    }
-    
-    .about-me p {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: #4a5568;
-      margin-bottom: 1.8rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    
-    .about-me p::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.7em;
-      height: 6px;
-      width: 6px;
-      background: #3498db;
-      border-radius: 50%;
-    }
-    
-    .about-me p:first-of-type::first-letter {
-      font-size: 1.5em;
-      font-weight: 700;
-      color: #2c3e50;
-      line-height: 1;
-      margin-right: 2px;
-    }
-    
-    .about-image {
-      flex: 1;
-      min-width: 300px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
-      transition: transform 0.4s ease;
-      position: relative;
     }
     
-    .about-image::before {
+    .profile-content::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(41, 128, 185, 0.2) 100%);
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,247,255,0.95) 100%);
+      z-index: 0;
+    }
+    
+    .profile-content > * {
+      position: relative;
       z-index: 1;
     }
     
-    .about-image:hover {
-      transform: translateY(-8px);
+    .profile-content h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      position: relative;
+      font-weight: 700;
     }
     
-    .about-image img {
+    .profile-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #3498db, #2980b9);
+      border-radius: 4px;
+    }
+    
+    .profile-text {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin-bottom: 1.8rem;
+      position: relative;
+    }
+    
+    .profile-text p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .profile-text p:first-of-type::first-letter {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #2c3e50;
+      line-height: 0.8;
+      float: left;
+      margin-right: 8px;
+      margin-top: 4px;
+    }
+    
+    .profile-image {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .profile-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('admin.jpeg') center/cover no-repeat;
+      opacity: 0.9;
+      mix-blend-mode: luminosity;
+    }
+    
+    .profile-image-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      color: white;
+      text-align: center;
       width: 100%;
-      height: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
     }
     
-    .about-image:hover img {
-      transform: scale(1.03);
+    .profile-image h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .profile-image p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      margin-top: 2rem;
+    }
+    
+    .skill-item {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 500;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .skill-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
     
     footer {
@@ -283,7 +307,6 @@
       text-align: center;
       padding: 1.5rem;
       margin-top: 3rem;
-      position: relative;
     }
     
     footer p {
@@ -303,6 +326,17 @@
       text-decoration: underline;
     }
     
+    @media (max-width: 900px) {
+      .nav-buttons {
+        gap: 8px;
+      }
+      
+      .dropdown-button {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+      }
+    }
+    
     @media (max-width: 768px) {
       header h1 {
         font-size: 2rem;
@@ -312,35 +346,24 @@
         font-size: 1rem;
       }
       
-      .nav-buttons {
-        gap: 10px;
-      }
-      
-      .dropdown-button {
-        padding: 10px 16px;
-        font-size: 0.85rem;
-      }
-      
-      .main-section {
+      .profile-section {
         flex-direction: column;
-        gap: 20px;
-        padding: 0 15px;
       }
       
-      .about-me, .about-image {
-        min-width: 100%;
-      }
-      
-      .about-me {
+      .profile-content {
         padding: 2rem;
       }
       
-      .about-me h2 {
+      .profile-content h2 {
         font-size: 1.8rem;
       }
       
-      .about-me p {
+      .profile-text {
         font-size: 1rem;
+      }
+      
+      .profile-image {
+        min-height: 300px;
       }
     }
     
@@ -362,128 +385,152 @@
       .dropdown-content {
         width: 100%;
       }
+      
+      .profile-content {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>BahadariTech</h1>
-    <p>IT Security Specialist & System Administrator Portfolio</p>
+    <div class="nav-container">
+      <h1>BahadariTech</h1>
+      <p>IT Security Specialist & System Administrator Portfolio</p>
 
-    <div class="nav-buttons">
-      <!-- Certifications -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
-        <div class="dropdown-content">
-          <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank">
-            <i class="fas fa-shield-alt"></i> Fortinet NSE 2
-          </a>
-          <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank">
-            <i class="fas fa-network-wired"></i> CompTIA Network+
-          </a>
-          <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank">
-            <i class="fas fa-lock"></i> CompTIA Security+
-          </a>
-          <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
-            <i class="fas fa-certificate"></i> ISO/IEC 27001 Lead Auditor
-          </a>
-          <a href="https://training.fortinet.com/local/staticpage/view.php?page=fct_fundamentals" target="_blank">
-            <i class="fas fa-laptop-code"></i> Fortinet Fundamentals
-          </a>
-          <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
-            <i class="fab fa-microsoft"></i> Microsoft Azure Fundamentals
-          </a>
-          <a href="https://www.credly.com/badges/73b9026e-b8d4-4aab-a5fd-4b3d4c1f9c9b/public_url" target="_blank">
-            <i class="fas fa-user-shield"></i> Azure Security Engineer
-          </a>
+      <div class="nav-buttons">
+        <!-- Certifications -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
+          <div class="dropdown-content">
+            <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank">
+              <i class="fas fa-shield-alt"></i> Fortinet NSE 2
+            </a>
+            <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank">
+              <i class="fas fa-network-wired"></i> CompTIA Network+
+            </a>
+            <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank">
+              <i class="fas fa-lock"></i> CompTIA Security+
+            </a>
+            <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
+              <i class="fas fa-certificate"></i> ISO/IEC 27001 Lead Auditor
+            </a>
+            <a href="https://training.fortinet.com/local/staticpage/view.php?page=fct_fundamentals" target="_blank">
+              <i class="fas fa-laptop-code"></i> Fortinet Fundamentals
+            </a>
+            <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
+              <i class="fab fa-microsoft"></i> Microsoft Azure Fundamentals
+            </a>
+            <a href="https://www.credly.com/badges/73b9026e-b8d4-4aab-a5fd-4b3d4c1f9c9b/public_url" target="_blank">
+              <i class="fas fa-user-shield"></i> Azure Security Engineer
+            </a>
+          </div>
         </div>
-      </div>
 
-      <!-- Windows Server -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fab fa-windows"></i> Windows Server</button>
-        <div class="dropdown-content">
-          <a href="dir.html"><i class="fas fa-network-wired"></i> Active Directory</a>
-          <a href="windows/group-policy.html"><i class="fas fa-cogs"></i> Group Policy</a>
-          <a href="windows/dns.html"><i class="fas fa-globe"></i> DNS</a>
-          <a href="windows/dhcp.html"><i class="fas fa-plug"></i> DHCP</a>
-          <a href="windows/file-print-services.html"><i class="fas fa-file-alt"></i> File & Print Services</a>
+        <!-- Windows Server -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fab fa-windows"></i> Windows Server</button>
+          <div class="dropdown-content">
+            <a href="dir.html"><i class="fas fa-network-wired"></i> Active Directory</a>
+            <a href="windows/group-policy.html"><i class="fas fa-cogs"></i> Group Policy</a>
+            <a href="windows/dns.html"><i class="fas fa-globe"></i> DNS</a>
+            <a href="windows/dhcp.html"><i class="fas fa-plug"></i> DHCP</a>
+            <a href="windows/file-print-services.html"><i class="fas fa-file-alt"></i> File & Print Services</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Linux Administration -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fab fa-linux"></i> Linux Administration</button>
-        <div class="dropdown-content">
-          <a href="linux/user-group-management.html"><i class="fas fa-users"></i> User & Group Management</a>
-          <a href="linux/systemd-services.html"><i class="fas fa-tasks"></i> Systemd & Services</a>
-          <a href="linux/firewall-security.html"><i class="fas fa-shield-alt"></i> Firewall & Security</a>
-          <a href="linux/shell-scripting.html"><i class="fas fa-terminal"></i> Shell Scripting</a>
+        <!-- Linux Administration -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fab fa-linux"></i> Linux Administration</button>
+          <div class="dropdown-content">
+            <a href="linux/user-group-management.html"><i class="fas fa-users"></i> User & Group Management</a>
+            <a href="linux/systemd-services.html"><i class="fas fa-tasks"></i> Systemd & Services</a>
+            <a href="linux/firewall-security.html"><i class="fas fa-shield-alt"></i> Firewall & Security</a>
+            <a href="linux/shell-scripting.html"><i class="fas fa-terminal"></i> Shell Scripting</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Cloud Services -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud Services</button>
-        <div class="dropdown-content">
-          <a href="cloud/azure.html"><i class="fab fa-microsoft"></i> Microsoft Azure</a>
-          <a href="cloud/aws-iam-policies.html"><i class="fab fa-aws"></i> AWS IAM & Policies</a>
-          <a href="cloud/cloud-storage-backup.html"><i class="fas fa-database"></i> Cloud Storage & Backup</a>
+        <!-- Cloud Services -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud Services</button>
+          <div class="dropdown-content">
+            <a href="cloud/azure.html"><i class="fab fa-microsoft"></i> Microsoft Azure</a>
+            <a href="cloud/aws-iam-policies.html"><i class="fab fa-aws"></i> AWS IAM & Policies</a>
+            <a href="cloud/cloud-storage-backup.html"><i class="fas fa-database"></i> Cloud Storage & Backup</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Security -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
-        <div class="dropdown-content">
-          <a href="security/mfa-rbac.html"><i class="fas fa-mobile-alt"></i> MFA & RBAC</a>
-          <a href="security/endpoint-protection.html"><i class="fas fa-desktop"></i> Endpoint Protection</a>
-          <a href="security/iso-27001.html"><i class="fas fa-file-contract"></i> ISO 27001</a>
-          <a href="security/security-hardening.html"><i class="fas fa-hard-hat"></i> Security Hardening</a>
+        <!-- Security -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
+          <div class="dropdown-content">
+            <a href="security/mfa-rbac.html"><i class="fas fa-mobile-alt"></i> MFA & RBAC</a>
+            <a href="security/endpoint-protection.html"><i class="fas fa-desktop"></i> Endpoint Protection</a>
+            <a href="security/iso-27001.html"><i class="fas fa-file-contract"></i> ISO 27001</a>
+            <a href="security/security-hardening.html"><i class="fas fa-hard-hat"></i> Security Hardening</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Networking -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-ethernet"></i> Networking</button>
-        <div class="dropdown-content">
-          <a href="networking/lan-wan.html"><i class="fas fa-sitemap"></i> LAN/WAN</a>
-          <a href="networking/firewalls.html"><i class="fas fa-fire"></i> Firewalls</a>
-          <a href="networking/vpn-configuration.html"><i class="fas fa-user-secret"></i> VPN Configuration</a>
-          <a href="networking/wireshark-nmap.html"><i class="fas fa-search"></i> Wireshark & Nmap</a>
+        <!-- Networking -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fas fa-ethernet"></i> Networking</button>
+          <div class="dropdown-content">
+            <a href="networking/lan-wan.html"><i class="fas fa-sitemap"></i> LAN/WAN</a>
+            <a href="networking/firewalls.html"><i class="fas fa-fire"></i> Firewalls</a>
+            <a href="networking/vpn-configuration.html"><i class="fas fa-user-secret"></i> VPN Configuration</a>
+            <a href="networking/wireshark-nmap.html"><i class="fas fa-search"></i> Wireshark & Nmap</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Backup & DR -->
-      <div class="dropdown">
-        <button class="dropdown-button"><i class="fas fa-save"></i> Backup & DR</button>
-        <div class="dropdown-content">
-          <a href="backup/backup-strategies.html"><i class="fas fa-copy"></i> Backup Strategies</a>
-          <a href="backup/disaster-recovery.html"><i class="fas fa-life-ring"></i> Disaster Recovery Planning</a>
-          <a href="backup/system-snapshots.html"><i class="fas fa-camera"></i> System Snapshots</a>
+        <!-- Backup & DR -->
+        <div class="dropdown">
+          <button class="dropdown-button"><i class="fas fa-save"></i> Backup & DR</button>
+          <div class="dropdown-content">
+            <a href="backup/backup-strategies.html"><i class="fas fa-copy"></i> Backup Strategies</a>
+            <a href="backup/disaster-recovery.html"><i class="fas fa-life-ring"></i> Disaster Recovery Planning</a>
+            <a href="backup/system-snapshots.html"><i class="fas fa-camera"></i> System Snapshots</a>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="main-section">
-    <div class="about-me">
-      <h2>Professional Profile</h2>
-      <p>
-        As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
-      </p>
-      <p>
-        Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
-      </p>
-      <p>
-        What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures. My solutions have consistently reduced system vulnerabilities while improving operational throughput.
-      </p>
-    </div>
-    <div class="about-image">
-      <img src="admin.jpeg" alt="Hashmatullah Bahadari"/>
-    </div>
-  </section>
+  <div class="main-container">
+    <section class="profile-section">
+      <div class="profile-content">
+        <h2>Professional Profile</h2>
+        <div class="profile-text">
+          <p>
+            As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
+          </p>
+          <p>
+            Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
+          </p>
+          <p>
+            What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures. My solutions have consistently reduced system vulnerabilities while improving operational throughput.
+          </p>
+        </div>
+      </div>
+      
+      <div class="profile-image">
+        <div class="profile-image-content">
+          <h3>Hashmatullah Bahadari</h3>
+          <p>IT Security Specialist & System Administrator</p>
+          <div class="skills-grid">
+            <div class="skill-item">Active Directory</div>
+            <div class="skill-item">Azure Security</div>
+            <div class="skill-item">Network+</div>
+            <div class="skill-item">Security+</div>
+            <div class="skill-item">ISO 27001</div>
+            <div class="skill-item">Firewalls</div>
+            <div class="skill-item">Linux Admin</div>
+            <div class="skill-item">Disaster Recovery</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <footer>
     <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | <a href="https://bahadari1361.github.io/information-security-project/" target="_blank">GitHub</a></p>
