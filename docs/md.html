@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BahadariTech - System Administrator Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      color: #2d3748;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+    }
+    
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding: 0 1rem;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-button {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .dropdown-button:hover {
+      background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .dropdown-button i {
+      font-size: 1rem;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 220px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      border-radius: 8px;
+      overflow: hidden;
+      animation: fadeIn 0.3s ease-out forwards;
+      transform-origin: top center;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      color: #4a5568;
+      text-decoration: none;
+      border-bottom: 1px solid #edf2f7;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+    
+    .dropdown-content a i {
+      width: 20px;
+      text-align: center;
+      color: #3498db;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f7fafc;
+      color: #2b6cb0;
+      padding-left: 20px;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 3rem auto;
+      max-width: 1200px;
+      padding: 0 20px;
+      gap: 30px;
+      justify-content: center;
+    }
+    
+    .about-me {
+      flex: 1;
+      min-width: 300px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2.5rem;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-me::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 60%
+      );
+      transform: rotate(30deg);
+      z-index: -1;
+    }
+    
+    .about-me:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+    }
+    
+    .about-me h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .about-me h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #3498db, #2980b9);
+      border-radius: 3px;
+    }
+    
+    .about-me p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .about-image:hover {
+      transform: translateY(-5px);
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    
+    footer {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+    
+    footer p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    footer a {
+      color: #a0c4ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+    
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      .nav-buttons {
+        gap: 10px;
+      }
+      
+      .dropdown-button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+      }
+      
+      .main-section {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .about-me, .about-image {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>BahadariTech</h1>
+    <p>IT Security Specialist & System Administrator Portfolio</p>
+
+    <div class="nav-buttons">
+      <!-- Certifications -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
+        <div class="dropdown-content">
+          <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank">
+            <i class="fas fa-shield-alt"></i> Fortinet NSE 2
+          </a>
+          <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank">
+            <i class="fas fa-network-wired"></i> CompTIA Network+
+          </a>
+          <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank">
+            <i class="fas fa-lock"></i> CompTIA Security+
+          </a>
+          <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
+            <i class="fas fa-certificate"></i> ISO/IEC 27001 Lead Auditor
+          </a>
+          <a href="https://training.fortinet.com/local/staticpage/view.php?page=fct_fundamentals" target="_blank">
+            <i class="fas fa-laptop-code"></i> Fortinet Fundamentals
+          </a>
+          <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
+            <i class="fab fa-microsoft"></i> Microsoft Azure Fundamentals
+          </a>
+          <a href="https://www.credly.com/badges/73b9026e-b8d4-4aab-a5fd-4b3d4c1f9c9b/public_url" target="_blank">
+            <i class="fas fa-user-shield"></i> Azure Security Engineer
+          </a>
+        </div>
+      </div>
+
+      <!-- Windows Server -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fab fa-windows"></i> Windows Server</button>
+        <div class="dropdown-content">
+          <a href="dir.html"><i class="fas fa-network-wired"></i> Active Directory</a>
+          <a href="windows/group-policy.html"><i class="fas fa-cogs"></i> Group Policy</a>
+          <a href="windows/dns.html"><i class="fas fa-globe"></i> DNS</a>
+          <a href="windows/dhcp.html"><i class="fas fa-plug"></i> DHCP</a>
+          <a href="windows/file-print-services.html"><i class="fas fa-file-alt"></i> File & Print Services</a>
+        </div>
+      </div>
+
+      <!-- Linux Administration -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fab fa-linux"></i> Linux Administration</button>
+        <div class="dropdown-content">
+          <a href="linux/user-group-management.html"><i class="fas fa-users"></i> User & Group Management</a>
+          <a href="linux/systemd-services.html"><i class="fas fa-tasks"></i> Systemd & Services</a>
+          <a href="linux/firewall-security.html"><i class="fas fa-shield-alt"></i> Firewall & Security</a>
+          <a href="linux/shell-scripting.html"><i class="fas fa-terminal"></i> Shell Scripting</a>
+        </div>
+      </div>
+
+      <!-- Cloud Services -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud Services</button>
+        <div class="dropdown-content">
+          <a href="cloud/azure.html"><i class="fab fa-microsoft"></i> Microsoft Azure</a>
+          <a href="cloud/aws-iam-policies.html"><i class="fab fa-aws"></i> AWS IAM & Policies</a>
+          <a href="cloud/cloud-storage-backup.html"><i class="fas fa-database"></i> Cloud Storage & Backup</a>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
+        <div class="dropdown-content">
+          <a href="security/mfa-rbac.html"><i class="fas fa-mobile-alt"></i> MFA & RBAC</a>
+          <a href="security/endpoint-protection.html"><i class="fas fa-desktop"></i> Endpoint Protection</a>
+          <a href="security/iso-27001.html"><i class="fas fa-file-contract"></i> ISO 27001</a>
+          <a href="security/security-hardening.html"><i class="fas fa-hard-hat"></i> Security Hardening</a>
+        </div>
+      </div>
+
+      <!-- Networking -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-ethernet"></i> Networking</button>
+        <div class="dropdown-content">
+          <a href="networking/lan-wan.html"><i class="fas fa-sitemap"></i> LAN/WAN</a>
+          <a href="networking/firewalls.html"><i class="fas fa-fire"></i> Firewalls</a>
+          <a href="networking/vpn-configuration.html"><i class="fas fa-user-secret"></i> VPN Configuration</a>
+          <a href="networking/wireshark-nmap.html"><i class="fas fa-search"></i> Wireshark & Nmap</a>
+        </div>
+      </div>
+
+      <!-- Backup & DR -->
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-save"></i> Backup & DR</button>
+        <div class="dropdown-content">
+          <a href="backup/backup-strategies.html"><i class="fas fa-copy"></i> Backup Strategies</a>
+          <a href="backup/disaster-recovery.html"><i class="fas fa-life-ring"></i> Disaster Recovery Planning</a>
+          <a href="backup/system-snapshots.html"><i class="fas fa-camera"></i> System Snapshots</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="main-section">
+    <div class="about-me">
+      <h2>About Me</h2>
+      <p>
+        I am a seasoned IT professional with over a decade of experience in system administration, cybersecurity, and cloud infrastructure.  
+        My expertise spans across both Windows Server and Linux environments, including Active Directory, Group Policy, and shell scripting.  
+        <br><br>
+        I am certified in ISO/IEC 27001, Microsoft Azure, CompTIA Security+, and Fortinet NSE, and I apply these standards rigorously to ensure robust and compliant systems.  
+        My background includes configuring enterprise networks, deploying secure cloud solutions, and implementing disaster recovery plans.  
+        <br><br>
+        I thrive in environments where precision, efficiency, and continuous improvement are critical. My mission is to secure digital assets and streamline IT operations, supporting business growth through resilient technology.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="admin.jpeg" alt="Hashmatullah Bahadari"/>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | <a href="https://bahadari1361.github.io/information-security-project/" target="_blank">GitHub</a></p>
+    <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
+  </footer>
+</body>
+</html>
