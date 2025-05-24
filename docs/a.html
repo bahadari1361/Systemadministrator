@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BahadariTech - System Administrator Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #34495e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1rem;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-button {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .main-section {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        .about-me {
+            flex: 1;
+            background-image: url('https://www.transparenttextures.com/patterns/old-mathematics.png');
+            background-color: #fdf6e3;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-me h2 {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .about-me p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+        }
+
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>BahadariTech</h1>
+        <p>IT Security Specialist & System Administrator Portfolio</p>
+
+        <div class="nav-buttons">
+            <div class="dropdown">
+                <button class="dropdown-button">Certifications</button>
+                <div class="dropdown-content">
+                    <a href="#">Fortinet NSE 2</a>
+                    <a href="#">CompTIA Network+</a>
+                    <a href="#">CompTIA Security+</a>
+                    <a href="#">ISO/IEC 27001 Lead Auditor</a>
+                    <a href="#">Fortinet Fundamentals</a>
+                    <a href="#">Microsoft Azure Fundamentals</a>
+                    <a href="#">Azure Security Engineer</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Windows Server</button>
+                <div class="dropdown-content">
+                    <a href="#">Active Directory</a>
+                    <a href="#">Group Policy</a>
+                    <a href="#">DNS</a>
+                    <a href="#">DHCP</a>
+                    <a href="#">File & Print Services</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Linux Administration</button>
+                <div class="dropdown-content">
+                    <a href="#">User & Group Management</a>
+                    <a href="#">Systemd & Services</a>
+                    <a href="#">Firewall & Security</a>
+                    <a href="#">Shell Scripting</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Cloud Services</button>
+                <div class="dropdown-content">
+                    <a href="#">Microsoft Azure</a>
+                    <a href="#">AWS IAM & Policies</a>
+                    <a href="#">Cloud Storage & Backup</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Security</button>
+                <div class="dropdown-content">
+                    <a href="#">MFA & RBAC</a>
+                    <a href="#">Endpoint Protection</a>
+                    <a href="#">ISO 27001</a>
+                    <a href="#">Security Hardening</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Networking</button>
+                <div class="dropdown-content">
+                    <a href="#">LAN/WAN</a>
+                    <a href="#">Firewalls</a>
+                    <a href="#">VPN Configuration</a>
+                    <a href="#">Wireshark & Nmap</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-button">Backup & DR</button>
+                <div class="dropdown-content">
+                    <a href="#">Backup Strategies</a>
+                    <a href="#">Disaster Recovery Planning</a>
+                    <a href="#">System Snapshots</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-section">
+        <div class="about-me">
+            <h2>About Me</h2>
+            <p>
+                I’ve been working in IT for several years, specializing in system administration, network management, and information security.
+                I’ve gained hands-on experience managing both Windows Server and Linux systems, ensuring they run efficiently and securely.
+                I’ve also worked extensively with Microsoft Azure, virtualization, and backup strategies to maintain system reliability and protect critical data.
+                <br><br>
+                Security has always been a top priority for me. Over the years, I’ve implemented and adhered to ISO/IEC 27001 standards to secure IT infrastructures.
+                I enjoy troubleshooting technical issues and optimizing system performance, whether I’m on-site or working remotely.
+                I thrive in fast-paced environments where precision and efficiency are essential.
+                <br><br>
+                Now, I’m looking for a System Administrator role where I can apply my skills to enhance system efficiency and security.
+                I’m excited to take on new challenges and continue improving IT systems to meet evolving business needs.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="your-picture.jpg" alt="Hashmatullah Bahadari">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | <a href="https://bahadari1361.github.io/information-security-project/" target="_blank">GitHub</a></p>
+        <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
+    </footer>
+</body>
+
+</html>
