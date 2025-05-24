@@ -128,12 +128,24 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
         }
         
         .diagram img {
-            width: 100%;
+            max-width: 100%;
             height: auto;
             display: block;
+            margin: 0 auto;
+        }
+        
+        .diagram-placeholder {
+            font-size: 1rem;
+            color: #666;
+            padding: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
         }
         
         .config-block {
@@ -200,8 +212,12 @@
                 <section>
                     <h2>Architecture Diagram</h2>
                     <div class="diagram">
-                        <!-- Replace with your actual diagram or use a placeholder -->
-                        <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/images/ad-architecture.png" alt="Active Directory Architecture Diagram">
+                        <div class="diagram-placeholder">
+                            <i class="fas fa-project-diagram" style="font-size: 3rem; color: #0078d4; margin-bottom: 1rem;"></i>
+                            <p>Active Directory Architecture Diagram</p>
+                            <p>This would show the forest/domain structure, OU hierarchy,</p>
+                            <p>site topology, and replication relationships</p>
+                        </div>
                         <p class="caption">Figure 1: Active Directory forest and domain structure with site replication topology</p>
                     </div>
                 </section>
@@ -302,20 +318,13 @@ Set-GPRegistryValue -Name "Security Baseline" `
                     <p><i class="fas fa-file-pdf tech-icon"></i> <a href="#">GPO Baseline</a></p>
                     <p><i class="fas fa-file-pdf tech-icon"></i> <a href="#">Disaster Recovery Plan</a></p>
                 </div>
-                
-                <div class="card">
-                    <h3>Related Projects</h3>
-                    <p><i class="fas fa-link tech-icon"></i> <a href="azure-ad-connect.html">Azure AD Hybrid Identity</a></p>
-                    <p><i class="fas fa-link tech-icon"></i> <a href="mfa-implementation.html">Multi-Factor Authentication</a></p>
-                    <p><i class="fas fa-link tech-icon"></i> <a href="pki-implementation.html">Enterprise PKI Infrastructure</a></p>
-                </div>
             </aside>
         </div>
     </div>
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 Bahadari | IT Infrastructure Portfolio</p>
+            <p>&copy; 2023 Your Name | IT Infrastructure Portfolio</p>
         </div>
     </footer>
 </body>
