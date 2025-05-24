@@ -3,147 +3,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>System Admin Portfolio Diagram</title>
+  <title>BahadariTech - System Administrator Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background-color: #34495e;
+      color: #fff;
       padding: 20px;
-    }
-
-    h1 {
       text-align: center;
-      margin-bottom: 40px;
+      border-bottom: 3px solid #2c3e50;
     }
-
-    .diagram-container {
+    header h1 {font-size: 2rem; font-weight: 700;}
+    header p {font-size: 1rem; margin-top: 5px; font-weight: 400;}
+    .nav-buttons {
       display: flex;
       justify-content: center;
+      gap: 20px;
       flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .dropdown {position: relative;}
+    .dropdown-button {
+      background-color: #2980b9;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s;
+    }
+    .dropdown-content a:hover {background-color: #f1f1f1;}
+    .dropdown:hover .dropdown-content {display: block;}
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 40px auto;
+      max-width: 1200px;
+      padding: 20px;
       gap: 30px;
     }
-
-    .task-node {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      cursor: pointer;
-      width: 180px;
-      text-align: center;
-      transition: 0.3s;
-    }
-
-    .task-node:hover {
-      transform: scale(1.05);
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 99;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 20px;
+    .about-me {
+      flex: 1;
+      background-image: url('https://www.transparenttextures.com/patterns/old-mathematics.png');
+      background-color: #fdf6e3;
+      padding: 30px;
       border-radius: 12px;
-      width: 90%;
-      max-width: 700px;
-      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-
-    .close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
+    .about-me h2 {
+      font-size: 1.8rem;
+      color: #34495e;
+      margin-bottom: 15px;
     }
-
-    .diagram-img {
-      width: 100%;
-      margin-top: 15px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+    .about-me p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #2c3e50;
+    }
+    .about-image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-image img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    footer {
+      background-color: #34495e;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+    footer a {
+      color: #1abc9c;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
-  <h1>System Administrator Task Map</h1>
-  <div class="diagram-container">
-    <div class="task-node" onclick="openModal('ad')">Active Directory Setup</div>
-    <div class="task-node" onclick="openModal('backup')">Backup Automation</div>
-    <div class="task-node" onclick="openModal('monitoring')">Server Monitoring</div>
-  </div>
+  <header>
+    <h1>BahadariTech</h1>
+    <p>IT Security Specialist & System Administrator Portfolio</p>
 
-  <!-- Modal AD -->
-  <div class="modal" id="modal-ad">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('ad')">&times;</span>
-      <h2>Active Directory Setup</h2>
-      <p>This task includes setting up a Windows Server with AD DS, creating user groups, OUs, and applying group policies.</p>
-      <ul>
-        <li><strong>Tools:</strong> Windows Server, PowerShell, GPO</li>
-        <li><strong>Skills:</strong> OU Design, Permissions, Security Policies</li>
-      </ul>
-      <img src="https://raw.githubusercontent.com/yourusername/images/main/ad_diagram.png" alt="AD Diagram" class="diagram-img">
+    <div class="nav-buttons">
+
+      <!-- Certifications -->
+      <div class="dropdown">
+        <button class="dropdown-button">Certifications</button>
+        <div class="dropdown-content">
+          <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58" target="_blank"><i class="fas fa-shield-alt"></i>CompTIA Network+</a>
+          <a href="certifications/fortinet-nse2.html" target="_blank"><i class="fas fa-network-wired"></i>Fortinet NSE 2</a>
+          <a href="certifications/comptia-security-plus.html" target="_blank"><i class="fas fa-lock"></i>CompTIA Security+</a>
+          <a href="certifications/iso-27001-lead-auditor.html" target="_blank"><i class="fas fa-certificate"></i>ISO/IEC 27001 Lead Auditor</a>
+          <a href="certifications/fortinet-fundamentals.html" target="_blank"><i class="fas fa-shield-virus"></i>Fortinet Fundamentals</a>
+          <a href="certifications/azure-fundamentals.html" target="_blank"><i class="fab fa-microsoft"></i>Microsoft Azure Fundamentals</a>
+          <a href="certifications/azure-security-engineer.html" target="_blank"><i class="fas fa-user-shield"></i>Azure Security Engineer</a>
+        </div>
+      </div>
+
+      <!-- Windows Server -->
+      <div class="dropdown">
+        <button class="dropdown-button">Windows Server</button>
+        <div class="dropdown-content">
+          <a href="windows/active-directory.html" target="_blank"><i class="fas fa-users-cog"></i>Active Directory</a>
+          <a href="windows/group-policy.html" target="_blank"><i class="fas fa-project-diagram"></i>Group Policy</a>
+          <a href="windows/dns.html" target="_blank"><i class="fas fa-globe"></i>DNS</a>
+          <a href="windows/dhcp.html" target="_blank"><i class="fas fa-network-wired"></i>DHCP</a>
+          <a href="windows/file-print-services.html" target="_blank"><i class="fas fa-print"></i>File & Print Services</a>
+        </div>
+      </div>
+
+      <!-- Linux Administration -->
+      <div class="dropdown">
+        <button class="dropdown-button">Linux Administration</button>
+        <div class="dropdown-content">
+          <a href="linux/user-group-management.html" target="_blank"><i class="fas fa-users"></i>User & Group Management</a>
+          <a href="linux/systemd-services.html" target="_blank"><i class="fas fa-cogs"></i>Systemd & Services</a>
+          <a href="linux/firewall-security.html" target="_blank"><i class="fas fa-shield-alt"></i>Firewall & Security</a>
+          <a href="linux/shell-scripting.html" target="_blank"><i class="fas fa-terminal"></i>Shell Scripting</a>
+        </div>
+      </div>
+
+      <!-- Cloud Services -->
+      <div class="dropdown">
+        <button class="dropdown-button">Cloud Services</button>
+        <div class="dropdown-content">
+          <a href="cloud/azure.html" target="_blank"><i class="fab fa-microsoft"></i>Microsoft Azure</a>
+          <a href="cloud/aws-iam-policies.html" target="_blank"><i class="fab fa-aws"></i>AWS IAM & Policies</a>
+          <a href="cloud/cloud-storage-backup.html" target="_blank"><i class="fas fa-cloud-upload-alt"></i>Cloud Storage & Backup</a>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="dropdown">
+        <button class="dropdown-button">Security</button>
+        <div class="dropdown-content">
+          <a href="security/mfa-rbac.html" target="_blank"><i class="fas fa-user-lock"></i>MFA & RBAC</a>
+          <a href="security/endpoint-protection.html" target="_blank"><i class="fas fa-shield-virus"></i>Endpoint Protection</a>
+          <a href="security/iso-27001.html" target="_blank"><i class="fas fa-certificate"></i>ISO 27001</a>
+          <a href="security/security-hardening.html" target="_blank"><i class="fas fa-tools"></i>Security Hardening</a>
+        </div>
+      </div>
+
+      <!-- Networking -->
+      <div class="dropdown">
+        <button class="dropdown-button">Networking</button>
+        <div class="dropdown-content">
+          <a href="networking/lan-wan.html" target="_blank"><i class="fas fa-network-wired"></i>LAN/WAN</a>
+          <a href="networking/firewalls.html" target="_blank"><i class="fas fa-fire"></i>Firewalls</a>
+          <a href="networking/vpn-configuration.html" target="_blank"><i class="fas fa-lock"></i>VPN Configuration</a>
+          <a href="networking/wireshark-nmap.html" target="_blank"><i class="fas fa-microscope"></i>Wireshark & Nmap</a>
+        </div>
+      </div>
+
+      <!-- Backup & DR -->
+      <div class="dropdown">
+        <button class="dropdown-button">Backup & DR</button>
+        <div class="dropdown-content">
+          <a href="backup/backup-strategies.html" target="_blank"><i class="fas fa-database"></i>Backup Strategies</a>
+          <a href="backup/disaster-recovery.html" target="_blank"><i class="fas fa-recycle"></i>Disaster Recovery Planning</a>
+          <a href="backup/system-snapshots.html" target="_blank"><i class="fas fa-camera"></i>System Snapshots</a>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </header>
 
-  <!-- Modal Backup -->
-  <div class="modal" id="modal-backup">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('backup')">&times;</span>
-      <h2>Backup Automation</h2>
-      <p>Automated nightly backups using PowerShell scripts and Windows Task Scheduler, with logs and email alerts.</p>
-      <ul>
-        <li><strong>Tools:</strong> PowerShell, Task Scheduler</li>
-        <li><strong>Skills:</strong> Scripting, Logging, Email Config</li>
-      </ul>
-      <img src="https://raw.githubusercontent.com/yourusername/images/main/backup_diagram.png" alt="Backup Diagram" class="diagram-img">
+  <section class="main-section">
+    <div class="about-me">
+      <h2>About Me</h2>
+      <p>
+        I’ve been working in IT for several years, specializing in system administration, network management, and information security.
+        I’ve gained hands-on experience managing both Windows Server and Linux systems, ensuring they run efficiently and securely.
+        I’ve also worked extensively with Microsoft Azure, virtualization, and backup strategies to maintain system reliability and protect critical data.
+        <br><br>
+        Security has always been a top priority for me. Over the years, I’ve implemented and adhered to ISO/IEC 27001 standards to secure IT infrastructures.
+        I enjoy troubleshooting technical issues and optimizing system performance, whether I’m on-site or working remotely.
+        I thrive in fast-paced environments where precision and efficiency are essential.
+        <br><br>
+        Now, I’m looking for a System Administrator role where I can apply my skills to enhance system efficiency and security.
+        I’m excited to take on new challenges and continue improving IT systems to meet evolving business needs.
+      </p>
     </div>
-  </div>
-
-  <!-- Modal Monitoring -->
-  <div class="modal" id="modal-monitoring">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('monitoring')">&times;</span>
-      <h2>Server Monitoring</h2>
-      <p>Installed Zabbix/Prometheus for monitoring CPU, RAM, and disk usage. Alert rules configured for downtime.</p>
-      <ul>
-        <li><strong>Tools:</strong> Zabbix, SNMP, Grafana</li>
-        <li><strong>Skills:</strong> Network Monitoring, Alert Setup</li>
-      </ul>
-      <img src="https://raw.githubusercontent.com/yourusername/images/main/monitoring_diagram.png" alt="Monitoring Diagram" class="diagram-img">
+    <div class="about-image">
+      <img src="admin.jpeg" alt="Hashmatullah Bahadari"/>
     </div>
-  </div>
+  </section>
 
-  <script>
-    function openModal(id) {
-      document.getElementById('modal-' + id).style.display = 'block';
-    }
-
-    function closeModal(id) {
-      document.getElementById('modal-' + id).style.display = 'none';
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      ['ad', 'backup', 'monitoring'].forEach(id => {
-        const modal = document.getElementById('modal-' + id);
-        if (event.target === modal) modal.style.display = "none";
-      });
-    }
-  </script>
+  <footer>
+    <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | <a href="https://bahadari1361.github.io/information-security-project/" target="_blank">GitHub</a></p>
+    <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
+  </footer>
 </body>
 </html>
