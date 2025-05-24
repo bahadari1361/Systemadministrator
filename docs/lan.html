@@ -31,7 +31,7 @@
     
     .header-container {
       position: relative;
-      height: 400px;
+      height: 300px; /* Slimmer header height */
       overflow: hidden;
     }
     
@@ -53,7 +53,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       z-index: 2;
       display: flex;
       flex-direction: column;
@@ -65,7 +65,7 @@
     
     header h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: white;
       margin-bottom: 0.5rem;
@@ -73,7 +73,7 @@
     }
     
     header p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 300;
       color: white;
       opacity: 0.9;
@@ -86,7 +86,7 @@
       margin: 0 auto;
       position: relative;
       z-index: 3;
-      margin-top: -50px;
+      margin-top: -30px; /* Adjusted to match slimmer header */
     }
     
     .nav-buttons {
@@ -279,21 +279,21 @@
       }
       
       .header-container {
-        height: 350px;
+        height: 250px;
       }
       
       header h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
       
       header p {
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
     }
     
     @media (max-width: 600px) {
       .header-container {
-        height: 300px;
+        height: 200px;
       }
       
       header h1 {
