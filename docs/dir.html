@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Directory Implementation | IT Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0078d4;
+            --secondary: #106ebe;
+            --dark: #201f1e;
+            --light: #f3f2f1;
+            --accent: #ffaa44;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .project-content {
+                grid-template-columns: 3fr 1fr;
+            }
+        }
+        
+        .project-details {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--secondary);
+        }
+        
+        .tech-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-item {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .diagram img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .config-block {
+            background: #f8f8f8;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            font-family: 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-network-wired tech-icon"></i> Active Directory Implementation</h1>
+            <p>Enterprise-grade directory services for centralized authentication and authorization</p>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="project-content">
+            <main class="project-details">
+                <section>
+                    <h2>Project Overview</h2>
+                    <p>This project involved designing, implementing, and maintaining a Microsoft Active Directory (AD) infrastructure to provide centralized authentication, authorization, and management for a medium-sized enterprise with approximately 500 users across multiple departments and locations.</p>
+                    
+                    <div class="tech-stack">
+                        <div class="tech-item"><i class="fab fa-windows tech-icon"></i> Windows Server 2022</div>
+                        <div class="tech-item"><i class="fas fa-shield-alt tech-icon"></i> Group Policy</div>
+                        <div class="tech-item"><i class="fas fa-users tech-icon"></i> LDAP</div>
+                        <div class="tech-item"><i class="fas fa-key tech-icon"></i> Kerberos</div>
+                        <div class="tech-item"><i class="fas fa-sync-alt tech-icon"></i> DFS Replication</div>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>Architecture Diagram</h2>
+                    <div class="diagram">
+                        <!-- Replace with your actual diagram or use a placeholder -->
+                        <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/images/ad-architecture.png" alt="Active Directory Architecture Diagram">
+                        <p class="caption">Figure 1: Active Directory forest and domain structure with site replication topology</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>Key Features Implemented</h2>
+                    <ul class="feature-list">
+                        <li>Multi-domain forest architecture with parent-child trust relationships</li>
+                        <li>Organizational Unit (OU) structure mirroring company departments and security requirements</li>
+                        <li>Group Policy Objects (GPOs) for centralized management of security policies and user environments</li>
+                        <li>DFS Namespace and Replication for file services redundancy</li>
+                        <li>DNS integration with AD for seamless name resolution</li>
+                        <li>Certificate Services for internal PKI infrastructure</li>
+                        <li>Site-aware replication topology for WAN optimization</li>
+                        <li>Role-based access control (RBAC) with delegated administration</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Configuration Examples</h2>
+                    <h3>PowerShell AD User Creation Script</h3>
+                    <div class="config-block">
+                        <pre><code># Bulk user creation from CSV
+Import-Csv "C:\UserImport.csv" | ForEach-Object {
+    $password = ConvertTo-SecureString $_.Password -AsPlainText -Force
+    New-ADUser -Name $_.Name `
+               -GivenName $_.FirstName `
+               -Surname $_.LastName `
+               -SamAccountName $_.Username `
+               -UserPrincipalName "$($_.Username)@domain.com" `
+               -Path "OU=Users,DC=domain,DC=com" `
+               -AccountPassword $password `
+               -Enabled $true `
+               -ChangePasswordAtLogon $true
+    
+    Add-ADGroupMember -Identity $_.Department -Members $_.Username
+    Write-Host "Created user $($_.Username) in $($_.Department) group"
+}</code></pre>
+                    </div>
+                    
+                    <h3>Group Policy Configuration</h3>
+                    <div class="config-block">
+                        <pre><code># GPO to enforce password policies
+Set-GPRegistryValue -Name "Security Baseline" `
+                     -Key "HKLM\Software\Policies\Microsoft\Windows\System" `
+                     -ValueName "PasswordComplexity" `
+                     -Type DWORD `
+                     -Value 1
+
+Set-GPRegistryValue -Name "Security Baseline" `
+                     -Key "HKLM\Software\Policies\Microsoft\Windows\System" `
+                     -ValueName "MinimumPasswordLength" `
+                     -Type DWORD `
+                     -Value 12
+
+Set-GPRegistryValue -Name "Security Baseline" `
+                     -Key "HKLM\Software\Policies\Microsoft\Windows\System" `
+                     -ValueName "PasswordHistorySize" `
+                     -Type DWORD `
+                     -Value 24</code></pre>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>Challenges & Solutions</h2>
+                    <h3>Challenge: Cross-site Replication Latency</h3>
+                    <p>Users in remote offices experienced delays in authentication and access to shared resources due to high WAN latency.</p>
+                    <p><strong>Solution:</strong> Implemented AD Sites and Services configuration with site-aware topology, placed Read-Only Domain Controllers (RODCs) in remote locations, and configured DFS Replication for critical file shares.</p>
+                    
+                    <h3>Challenge: Security Compliance</h3>
+                    <p>The organization needed to meet strict security compliance requirements (NIST 800-171).</p>
+                    <p><strong>Solution:</strong> Designed and implemented granular Group Policy Objects (GPOs) for password policies, account lockout settings, audit policies, and user rights assignments that met all compliance requirements.</p>
+                </section>
+            </main>
+            
+            <aside class="sidebar">
+                <div class="card">
+                    <h3>Project Details</h3>
+                    <p><strong>Role:</strong> Active Directory Administrator</p>
+                    <p><strong>Duration:</strong> 6 months</p>
+                    <p><strong>Organization:</strong> Contoso Corporation</p>
+                    <p><strong>Team Size:</strong> 3 members</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Key Achievements</h3>
+                    <ul class="feature-list">
+                        <li>Reduced authentication issues by 85%</li>
+                        <li>Decreased password-related helpdesk tickets by 70%</li>
+                        <li>Implemented automated user provisioning</li>
+                        <li>Achieved 99.99% AD availability</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Documentation</h3>
+                    <p><i class="fas fa-file-pdf tech-icon"></i> <a href="#">AD Design Document</a></p>
+                    <p><i class="fas fa-file-pdf tech-icon"></i> <a href="#">GPO Baseline</a></p>
+                    <p><i class="fas fa-file-pdf tech-icon"></i> <a href="#">Disaster Recovery Plan</a></p>
+                </div>
+                
+                <div class="card">
+                    <h3>Related Projects</h3>
+                    <p><i class="fas fa-link tech-icon"></i> <a href="azure-ad-connect.html">Azure AD Hybrid Identity</a></p>
+                    <p><i class="fas fa-link tech-icon"></i> <a href="mfa-implementation.html">Multi-Factor Authentication</a></p>
+                    <p><i class="fas fa-link tech-icon"></i> <a href="pki-implementation.html">Enterprise PKI Infrastructure</a></p>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Bahadari | IT Infrastructure Portfolio</p>
+        </div>
+    </footer>
+</body>
+</html>
