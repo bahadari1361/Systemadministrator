@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>System Admin Portfolio Diagram</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .diagram-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .task-node {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      cursor: pointer;
+      width: 180px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .task-node:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 700px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .diagram-img {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>System Administrator Task Map</h1>
+  <div class="diagram-container">
+    <div class="task-node" onclick="openModal('ad')">Active Directory Setup</div>
+    <div class="task-node" onclick="openModal('backup')">Backup Automation</div>
+    <div class="task-node" onclick="openModal('monitoring')">Server Monitoring</div>
+  </div>
+
+  <!-- Modal AD -->
+  <div class="modal" id="modal-ad">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('ad')">&times;</span>
+      <h2>Active Directory Setup</h2>
+      <p>This task includes setting up a Windows Server with AD DS, creating user groups, OUs, and applying group policies.</p>
+      <ul>
+        <li><strong>Tools:</strong> Windows Server, PowerShell, GPO</li>
+        <li><strong>Skills:</strong> OU Design, Permissions, Security Policies</li>
+      </ul>
+      <img src="https://raw.githubusercontent.com/yourusername/images/main/ad_diagram.png" alt="AD Diagram" class="diagram-img">
+    </div>
+  </div>
+
+  <!-- Modal Backup -->
+  <div class="modal" id="modal-backup">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('backup')">&times;</span>
+      <h2>Backup Automation</h2>
+      <p>Automated nightly backups using PowerShell scripts and Windows Task Scheduler, with logs and email alerts.</p>
+      <ul>
+        <li><strong>Tools:</strong> PowerShell, Task Scheduler</li>
+        <li><strong>Skills:</strong> Scripting, Logging, Email Config</li>
+      </ul>
+      <img src="https://raw.githubusercontent.com/yourusername/images/main/backup_diagram.png" alt="Backup Diagram" class="diagram-img">
+    </div>
+  </div>
+
+  <!-- Modal Monitoring -->
+  <div class="modal" id="modal-monitoring">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('monitoring')">&times;</span>
+      <h2>Server Monitoring</h2>
+      <p>Installed Zabbix/Prometheus for monitoring CPU, RAM, and disk usage. Alert rules configured for downtime.</p>
+      <ul>
+        <li><strong>Tools:</strong> Zabbix, SNMP, Grafana</li>
+        <li><strong>Skills:</strong> Network Monitoring, Alert Setup</li>
+      </ul>
+      <img src="https://raw.githubusercontent.com/yourusername/images/main/monitoring_diagram.png" alt="Monitoring Diagram" class="diagram-img">
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById('modal-' + id).style.display = 'block';
+    }
+
+    function closeModal(id) {
+      document.getElementById('modal-' + id).style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      ['ad', 'backup', 'monitoring'].forEach(id => {
+        const modal = document.getElementById('modal-' + id);
+        if (event.target === modal) modal.style.display = "none";
+      });
+    }
+  </script>
+</body>
+</html>
