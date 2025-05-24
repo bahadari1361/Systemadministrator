@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BahadariTech - System Administrator Portfolio</title>
+  <title>BahadariTech - IT Security Specialist</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --text: #34495e;
+    }
+    
     * {
       margin: 0; 
       padding: 0; 
@@ -15,15 +24,14 @@
     
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-      color: #2d3748;
-      min-height: 100vh;
-      line-height: 1.6;
+      background-color: #f8f9fa;
+      color: var(--text);
+      line-height: 1.7;
     }
     
     header {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: #fff;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      color: white;
       padding: 2rem 1rem;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -31,13 +39,13 @@
     
     header h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
     
     header p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 300;
       opacity: 0.9;
     }
@@ -45,59 +53,40 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
     }
     
     .nav-buttons {
       display: flex;
-      overflow-x: auto;
-      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 1.5rem;
-      padding-bottom: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.3) transparent;
-    }
-    
-    .nav-buttons::-webkit-scrollbar {
-      height: 6px;
-    }
-    
-    .nav-buttons::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.3);
-      border-radius: 3px;
     }
     
     .dropdown {
       position: relative;
-      flex-shrink: 0;
     }
     
     .dropdown-button {
-      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      background: var(--secondary);
       color: white;
-      padding: 8px 12px;
+      padding: 12px 20px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 500;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-family: 'Montserrat', sans-serif;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      height: 36px;
+      gap: 8px;
     }
     
     .dropdown-button:hover {
-      background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
-      transform: translateY(-1px);
-    }
-    
-    .dropdown-button i {
-      font-size: 0.8rem;
+      background: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     .dropdown-content {
@@ -106,154 +95,173 @@
       top: 100%;
       left: 0;
       background-color: white;
-      min-width: 180px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      min-width: 220px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       z-index: 100;
       border-radius: 6px;
       overflow: hidden;
+      animation: fadeIn 0.3s ease-out;
     }
     
-    .dropdown-content a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      color: #4a5568;
-      text-decoration: none;
-      border-bottom: 1px solid #edf2f7;
-      font-size: 0.8rem;
-    }
-    
-    .dropdown-content a:hover {
-      background-color: #f7fafc;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
     .dropdown:hover .dropdown-content {
       display: block;
     }
     
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f8f9fa;
+      padding-left: 20px;
+      color: var(--secondary);
+    }
+    
+    .dropdown-content i {
+      width: 20px;
+      text-align: center;
+      margin-right: 8px;
+      color: var(--secondary);
+    }
+    
     .main-container {
       max-width: 1200px;
-      margin: 2rem auto;
+      margin: 3rem auto;
       padding: 0 20px;
     }
     
     .profile-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
     }
     
-    .infrastructure-diagram {
-      flex: 1;
-      min-width: 300px;
-      padding: 1.5rem;
-      background: #f8fafc;
+    .profile-about {
+      padding: 3rem;
       display: flex;
       flex-direction: column;
+      justify-content: center;
     }
     
-    .diagram-title {
+    .profile-about h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.2rem;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    
-    .diagram {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      background: #fff;
-      padding: 1rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .server {
-      display: inline-block;
-      width: 80px;
-      height: 40px;
-      background: #3498db;
-      color: white;
-      text-align: center;
-      line-height: 40px;
-      border-radius: 4px;
-      margin: 5px;
-      font-size: 0.7rem;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
       position: relative;
     }
     
-    .server::after {
+    .profile-about h2::after {
       content: '';
       position: absolute;
       bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 10px;
-      background: #a0aec0;
-    }
-    
-    .network {
-      stroke: #a0aec0;
-      stroke-width: 2;
-      fill: none;
-    }
-    
-    .cloud {
-      fill: #e2e8f0;
-      stroke: #a0aec0;
-      stroke-width: 1;
-    }
-    
-    .profile-content {
-      flex: 1;
-      min-width: 300px;
-      padding: 2rem;
-    }
-    
-    .profile-content h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      border-radius: 4px;
     }
     
     .profile-text {
-      font-size: 1rem;
-      color: #4a5568;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 2rem;
     }
     
     .profile-text p {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .profile-highlights {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      padding: 3rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .highlight-item {
+      margin-bottom: 2rem;
+    }
+    
+    .highlight-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .highlight-item h3 i {
+      color: var(--accent);
+    }
+    
+    .highlight-item p {
+      opacity: 0.9;
+      font-size: 0.95rem;
     }
     
     footer {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: #fff;
+      background: var(--primary);
+      color: white;
       text-align: center;
-      padding: 1.5rem;
-      margin-top: 2rem;
+      padding: 2rem;
+      margin-top: 3rem;
     }
     
     footer a {
-      color: #a0c4ff;
+      color: var(--light);
       text-decoration: none;
+      transition: color 0.3s;
     }
     
-    @media (max-width: 768px) {
+    footer a:hover {
+      color: var(--accent);
+    }
+    
+    @media (max-width: 900px) {
       .profile-section {
-        flex-direction: column;
+        grid-template-columns: 1fr;
       }
       
-      .dropdown-button {
-        padding: 6px 10px;
-        font-size: 0.7rem;
+      .nav-buttons {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      
+      .dropdown {
+        flex-shrink: 0;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .profile-about, .profile-highlights {
+        padding: 2rem;
+      }
+      
+      .profile-about h2 {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -263,7 +271,7 @@
   <header>
     <div class="nav-container">
       <h1>BahadariTech</h1>
-      <p>IT Security Specialist & System Administrator Portfolio</p>
+      <p>IT Security Specialist & System Administrator</p>
 
       <div class="nav-buttons">
         <div class="dropdown">
@@ -338,47 +346,7 @@
 
   <div class="main-container">
     <section class="profile-section">
-      <div class="infrastructure-diagram">
-        <h3 class="diagram-title">Enterprise Infrastructure</h3>
-        <div class="diagram">
-          <svg width="100%" height="300" viewBox="0 0 400 300">
-            <!-- Cloud -->
-            <path class="cloud" d="M50,50 Q60,30 80,30 Q90,10 110,30 Q130,20 150,40 Q170,30 190,50 Q210,40 230,60 Q250,50 270,70 Q290,60 310,80 Q330,70 350,90" />
-            
-            <!-- Servers -->
-            <rect x="50" y="120" class="server" rx="5">DC1</rect>
-            <rect x="150" y="120" class="server" rx="5">DC2</rect>
-            <rect x="250" y="120" class="server" rx="5">SQL</rect>
-            
-            <!-- Network -->
-            <line x1="90" y1="160" x2="110" y2="180" class="network"/>
-            <line x1="190" y1="160" x2="170" y2="180" class="network"/>
-            <line x1="190" y1="160" x2="210" y2="180" class="network"/>
-            <line x1="290" y1="160" x2="270" y2="180" class="network"/>
-            
-            <!-- Firewall -->
-            <rect x="130" y="190" width="60" height="30" fill="#e53e3e" stroke="#c53030" rx="3"/>
-            <text x="160" y="210" fill="white" text-anchor="middle" font-size="10">Firewall</text>
-            
-            <!-- Switch -->
-            <rect x="180" y="190" width="60" height="30" fill="#4a5568" stroke="#2d3748" rx="3"/>
-            <text x="210" y="210" fill="white" text-anchor="middle" font-size="10">Switch</text>
-            
-            <!-- Users -->
-            <circle cx="80" cy="250" r="15" fill="#4299e1"/>
-            <text x="80" y="255" fill="white" text-anchor="middle" font-size="10">Users</text>
-            
-            <circle cx="200" cy="250" r="15" fill="#4299e1"/>
-            <text x="200" y="255" fill="white" text-anchor="middle" font-size="10">Remote</text>
-            
-            <circle cx="320" cy="250" r="15" fill="#4299e1"/>
-            <text x="320" y="255" fill="white" text-anchor="middle" font-size="10">Admins</text>
-          </svg>
-          <p style="text-align: center; font-size: 0.8rem; margin-top: 1rem;">Figure 1: Enterprise network infrastructure with domain controllers, firewall, and user access</p>
-        </div>
-      </div>
-      
-      <div class="profile-content">
+      <div class="profile-about">
         <h2>Professional Profile</h2>
         <div class="profile-text">
           <p>
@@ -388,8 +356,25 @@
             Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
           </p>
           <p>
-            What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures. My solutions have consistently reduced system vulnerabilities while improving operational throughput.
+            What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures.
           </p>
+        </div>
+      </div>
+      
+      <div class="profile-highlights">
+        <div class="highlight-item">
+          <h3><i class="fas fa-shield-alt"></i> Security Expertise</h3>
+          <p>Implemented enterprise-wide security measures that reduced vulnerabilities by 85% while maintaining operational efficiency across all departments.</p>
+        </div>
+        
+        <div class="highlight-item">
+          <h3><i class="fas fa-server"></i> Infrastructure Design</h3>
+          <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime across hybrid cloud and on-premises environments.</p>
+        </div>
+        
+        <div class="highlight-item">
+          <h3><i class="fas fa-cloud"></i> Cloud Migration</h3>
+          <p>Led successful migration of critical business systems to Azure, reducing hardware costs by 40% while improving accessibility and disaster recovery capabilities.</p>
         </div>
       </div>
     </section>
