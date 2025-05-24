@@ -2,84 +2,439 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>LAN & WAN Diagram - Cisco Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BahadariTech - IT Security Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --text: #34495e;
+    }
+    
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 20px;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    
+    .header-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+    
+    .header-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('photo.jpeg');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+    
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      padding: 0 20px;
     }
-    h1 {
-      color: #003366;
+    
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
-    svg {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      margin-top: 20px;
+    
+    header p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: white;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
     }
-    .label {
-      font-size: 12px;
-      fill: #000;
-      text-anchor: middle;
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 3;
+      margin-top: -50px;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 0 20px;
+    }
+    
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-button {
+      background: var(--secondary);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .dropdown-button:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 220px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      border-radius: 6px;
+      overflow: hidden;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #f8f9fa;
+      padding-left: 20px;
+      color: var(--secondary);
+    }
+    
+    .dropdown-content i {
+      width: 20px;
+      text-align: center;
+      margin-right: 8px;
+      color: var(--secondary);
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 20px;
+    }
+    
+    .profile-section {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+    }
+    
+    .profile-about {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .profile-about h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .profile-about h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      border-radius: 4px;
+    }
+    
+    .profile-text {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    
+    .profile-text p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .profile-highlights {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      padding: 3rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .highlight-item {
+      margin-bottom: 2rem;
+    }
+    
+    .highlight-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .highlight-item h3 i {
+      color: var(--accent);
+    }
+    
+    .highlight-item p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+    
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    footer a {
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    footer a:hover {
+      color: var(--accent);
+    }
+    
+    @media (max-width: 900px) {
+      .profile-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-container {
+        height: 350px;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .header-container {
+        height: 300px;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .profile-about, .profile-highlights {
+        padding: 2rem;
+      }
+      
+      .profile-about h2 {
+        font-size: 1.8rem;
+      }
+      
+      .dropdown-button {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
+
 <body>
+  <div class="header-container">
+    <div class="header-image"></div>
+    <div class="header-overlay">
+      <h1>Hashmatullah Bahadari</h1>
+      <p>IT Security Specialist & System Administrator</p>
+    </div>
+  </div>
 
-  <h1>🌐 LAN & WAN Network Diagram (Cisco Style)</h1>
+  <div class="nav-container">
+    <div class="nav-buttons">
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-shield-alt"></i> Fortinet NSE 2</a>
+          <a href="#"><i class="fas fa-network-wired"></i> CompTIA Network+</a>
+          <a href="#"><i class="fas fa-lock"></i> CompTIA Security+</a>
+          <a href="#"><i class="fas fa-certificate"></i> ISO 27001</a>
+          <a href="#"><i class="fab fa-microsoft"></i> Azure Fundamentals</a>
+        </div>
+      </div>
 
-  <!-- SVG Diagram -->
-  <svg width="1000" height="600">
-    <!-- WAN Cloud -->
-    <ellipse cx="500" cy="80" rx="60" ry="40" fill="#e0e0e0" stroke="#666" />
-    <text x="500" y="85" class="label">Internet/WAN</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fab fa-windows"></i> Windows</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-network-wired"></i> Active Directory</a>
+          <a href="#"><i class="fas fa-cogs"></i> Group Policy</a>
+          <a href="#"><i class="fas fa-globe"></i> DNS</a>
+          <a href="#"><i class="fas fa-plug"></i> DHCP</a>
+        </div>
+      </div>
 
-    <!-- HQ Router -->
-    <rect x="450" y="150" width="100" height="60" rx="10" ry="10" fill="#336699" />
-    <text x="500" y="185" class="label" fill="#fff">HQ Router</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fab fa-linux"></i> Linux</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-users"></i> User Management</a>
+          <a href="#"><i class="fas fa-tasks"></i> Systemd</a>
+          <a href="#"><i class="fas fa-shield-alt"></i> Firewall</a>
+          <a href="#"><i class="fas fa-terminal"></i> Shell Scripting</a>
+        </div>
+      </div>
 
-    <!-- Branch Router -->
-    <rect x="750" y="250" width="100" height="60" rx="10" ry="10" fill="#336699" />
-    <text x="800" y="285" class="label" fill="#fff">Branch Router</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-cloud"></i> Cloud</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fab fa-microsoft"></i> Azure</a>
+          <a href="#"><i class="fab fa-aws"></i> AWS IAM</a>
+          <a href="#"><i class="fas fa-database"></i> Cloud Storage</a>
+        </div>
+      </div>
 
-    <!-- Switch -->
-    <rect x="450" y="250" width="100" height="50" rx="5" ry="5" fill="#0099cc" />
-    <text x="500" y="280" class="label" fill="#fff">Switch</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-mobile-alt"></i> MFA</a>
+          <a href="#"><i class="fas fa-desktop"></i> Endpoint</a>
+          <a href="#"><i class="fas fa-hard-hat"></i> Hardening</a>
+        </div>
+      </div>
 
-    <!-- PCs -->
-    <rect x="370" y="330" width="40" height="30" fill="#888" />
-    <text x="390" y="355" class="label">PC1</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-network-wired"></i> Networking</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-sitemap"></i> LAN/WAN</a>
+          <a href="#"><i class="fas fa-fire"></i> Firewalls</a>
+          <a href="#"><i class="fas fa-user-secret"></i> VPN</a>
+        </div>
+      </div>
 
-    <rect x="430" y="330" width="40" height="30" fill="#888" />
-    <text x="450" y="355" class="label">PC2</text>
+      <div class="dropdown">
+        <button class="dropdown-button"><i class="fas fa-save"></i> Backup</button>
+        <div class="dropdown-content">
+          <a href="#"><i class="fas fa-copy"></i> Strategies</a>
+          <a href="#"><i class="fas fa-life-ring"></i> Recovery</a>
+          <a href="#"><i class="fas fa-camera"></i> Snapshots</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <rect x="490" y="330" width="40" height="30" fill="#888" />
-    <text x="510" y="355" class="label">PC3</text>
+  <div class="main-container">
+    <section class="profile-section">
+      <div class="profile-about">
+        <h2>Professional Profile</h2>
+        <div class="profile-text">
+          <p>
+            As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
+          </p>
+          <p>
+            Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
+          </p>
+          <p>
+            What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures.
+          </p>
+        </div>
+      </div>
+      
+      <div class="profile-highlights">
+        <div class="highlight-item">
+          <h3><i class="fas fa-shield-alt"></i> Security Expertise</h3>
+          <p>Implemented enterprise-wide security measures that reduced vulnerabilities by 85% while maintaining operational efficiency across all departments.</p>
+        </div>
+        
+        <div class="highlight-item">
+          <h3><i class="fas fa-server"></i> Infrastructure Design</h3>
+          <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime across hybrid cloud and on-premises environments.</p>
+        </div>
+        
+        <div class="highlight-item">
+          <h3><i class="fas fa-cloud"></i> Cloud Migration</h3>
+          <p>Led successful migration of critical business systems to Azure, reducing hardware costs by 40% while improving accessibility and disaster recovery capabilities.</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    <rect x="550" y="330" width="40" height="30" fill="#888" />
-    <text x="570" y="355" class="label">PC4</text>
-
-    <!-- AP -->
-    <polygon points="600,250 620,270 600,290 580,270" fill="#00cc66" />
-    <text x="600" y="310" class="label">Access Point</text>
-
-    <!-- Branch PC -->
-    <rect x="750" y="330" width="40" height="30" fill="#888" />
-    <text x="770" y="355" class="label">PC5</text>
-
-    <!-- Lines (connections) -->
-    <line x1="500" y1="120" x2="500" y2="150" stroke="#000" stroke-width="2"/>
-    <line x1="500" y1="210" x2="500" y2="250" stroke="#000" stroke-width="2"/>
-    <line x1="500" y1="275" x2="370" y2="330" stroke="#000" stroke-width="1.5"/>
-    <line x1="500" y1="275" x2="450" y2="330" stroke="#000" stroke-width="1.5"/>
-    <line x1="500" y1="275" x2="510" y2="330" stroke="#000" stroke-width="1.5"/>
-    <line x1="500" y1="275" x2="570" y2="330" stroke="#000" stroke-width="1.5"/>
-    <line x1="500" y1="275" x2="600" y2="270" stroke="#000" stroke-width="1.5"/>
-    <line x1="500" y1="180" x2="750" y2="280" stroke="#000" stroke-dasharray="5,5" stroke-width="2"/>
-    <line x1="800" y1="310" x2="770" y2="330" stroke="#000" stroke-width="1.5"/>
-  </svg>
-
+  <footer>
+    <p>&copy; 2025 Hashmatullah Bahadari | <a href="https://www.linkedin.com/in/bahadari/">LinkedIn</a> | <a href="https://github.com/bahadari1361">GitHub</a></p>
+    <p>Location: Bremen, Germany | Contact: hashmat.bahadari@icloud.com</p>
+  </footer>
 </body>
 </html>
