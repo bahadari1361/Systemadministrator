@@ -27,6 +27,17 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+        
+        .main-content {
+            grid-column: 1;
+        }
+        
+        .sidebar {
+            grid-column: 2;
         }
         
         header {
@@ -35,6 +46,7 @@
             padding: 2rem 0;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            grid-column: 1 / -1;
         }
         
         h1 {
@@ -53,7 +65,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             padding: 2rem;
-            margin: 2rem 0;
+            margin-bottom: 2rem;
         }
         
         h2 {
@@ -138,15 +150,41 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
+        .sidebar-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .achievement-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+        
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
             padding: 2rem 0;
             margin-top: 3rem;
+            grid-column: 1 / -1;
         }
         
         @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                grid-column: 1;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
@@ -165,101 +203,118 @@
         </div>
     </header>
     
-    <main class="container">
-        <section class="project-section">
-            <h2>Project Overview</h2>
-            <p>This enterprise-grade DHCP solution was designed to provide reliable, scalable IP address management for large-scale networks. The implementation focuses on high availability, security, and automation to meet modern network infrastructure demands.</p>
+    <div class="container">
+        <main class="main-content">
+            <section class="project-section">
+                <h2>Project Overview</h2>
+                <p>This enterprise-grade DHCP solution was designed to provide reliable, scalable IP address management for large-scale networks. The implementation focuses on high availability, security, and automation to meet modern network infrastructure demands.</p>
+                
+                <div class="architecture-diagram">
+                    <h3>Solution Architecture</h3>
+                    <img src="dhcp.jpg" alt="Enterprise DHCP Architecture Diagram">
+                    <p class="diagram-caption">Figure 1: High-level architecture of the enterprise DHCP solution showing redundancy and integration points</p>
+                </div>
+            </section>
             
-            <div class="architecture-diagram">
-                <h3>Solution Architecture</h3>
-                <!-- Replace with your actual diagram or use this placeholder -->
-                <img src="https://via.placeholder.com/800x500/2c3e50/ecf0f1?text=DHCP+Architecture+Diagram" alt="Enterprise DHCP Architecture Diagram">
-                <p class="diagram-caption">Figure 1: High-level architecture of the enterprise DHCP solution showing redundancy and integration points</p>
-            </div>
-        </section>
+            <section class="project-section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>High Availability</h3>
+                        <p>Implemented DHCP failover protocols with load balancing across multiple servers to ensure continuous service availability.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Security Hardening</h3>
+                        <p>Integrated DHCP snooping, IP source guard, and dynamic ARP inspection to prevent common network attacks.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Automated IP Management</h3>
+                        <p>Developed scripts for automatic IP address range management and conflict resolution.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Reporting & Analytics</h3>
+                        <p>Built custom dashboards for IP utilization tracking and lease history analysis.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
         
-        <section class="project-section">
-            <h2>Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>High Availability</h3>
-                    <p>Implemented DHCP failover protocols with load balancing across multiple servers to ensure continuous service availability.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>Security Hardening</h3>
-                    <p>Integrated DHCP snooping, IP source guard, and dynamic ARP inspection to prevent common network attacks.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>Automated IP Management</h3>
-                    <p>Developed scripts for automatic IP address range management and conflict resolution.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>Reporting & Analytics</h3>
-                    <p>Built custom dashboards for IP utilization tracking and lease history analysis.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>Multi-subnet Support</h3>
-                    <p>Designed solution to handle multiple VLANs and subnets with appropriate scope configurations.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>Integration with DNS</h3>
-                    <p>Implemented seamless DDNS (Dynamic DNS) updates for accurate hostname resolution.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="project-section">
-            <h2>Technical Implementation</h2>
-            <p>The DHCP solution was built with enterprise requirements in mind, focusing on reliability, security, and ease of management:</p>
+        <aside class="sidebar">
+            <section class="sidebar-section">
+                <h2>Project Details</h2>
+                <p><strong>Client:</strong> Enterprise Corporation</p>
+                <p><strong>Duration:</strong> 6 months</p>
+                <p><strong>Team Size:</strong> 4 engineers</p>
+                <p><strong>Network Size:</strong> 5,000+ devices</p>
+                <p><strong>Implementation:</strong> Hybrid (On-prem + Cloud)</p>
+            </section>
             
-            <h3>Technology Stack</h3>
-            <div class="tech-stack">
-                <span class="tech-item">ISC DHCP</span>
-                <span class="tech-item">Python</span>
-                <span class="tech-item">Bash Scripting</span>
-                <span class="tech-item">Ansible</span>
-                <span class="tech-item">Prometheus</span>
-                <span class="tech-item">Grafana</span>
-                <span class="tech-item">Linux</span>
-                <span class="tech-item">Windows Server</span>
-            </div>
+            <section class="sidebar-section">
+                <h2>Technical Implementation</h2>
+                <h3>Technology Stack</h3>
+                <div class="tech-stack">
+                    <span class="tech-item">ISC DHCP</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Bash</span>
+                    <span class="tech-item">Ansible</span>
+                    <span class="tech-item">Prometheus</span>
+                    <span class="tech-item">Grafana</span>
+                    <span class="tech-item">Linux</span>
+                </div>
+                
+                <h3>Key Components</h3>
+                <ul>
+                    <li>DHCP Failover Protocol</li>
+                    <li>Lease Database</li>
+                    <li>Monitoring System</li>
+                    <li>Automation Scripts</li>
+                    <li>Security Modules</li>
+                </ul>
+            </section>
             
-            <h3>Implementation Highlights</h3>
-            <ul>
-                <li>Configured DHCP failover pairs with split-scope architecture for redundancy</li>
-                <li>Developed custom lease auditing tools to track IP address utilization</li>
-                <li>Implemented MAC address filtering for secure device registration</li>
-                <li>Created automated backup and restore procedures for DHCP configurations</li>
-                <li>Integrated with existing Active Directory for policy-based address assignment</li>
-            </ul>
-        </section>
-        
-        <section class="project-section">
-            <h2>Project Outcomes</h2>
-            <p>The implementation resulted in significant improvements to network reliability and management efficiency:</p>
+            <section class="sidebar-section">
+                <h2>Key Achievements</h2>
+                <div class="achievement-item">
+                    <strong>99.99% Uptime</strong>
+                    <p>Achieved through redundant server architecture</p>
+                </div>
+                <div class="achievement-item">
+                    <strong>98% Conflict Reduction</strong>
+                    <p>Eliminated IP address conflicts</p>
+                </div>
+                <div class="achievement-item">
+                    <strong>75% Faster Provisioning</strong>
+                    <p>Through automation scripts</p>
+                </div>
+                <div class="achievement-item">
+                    <strong>100% Compliance</strong>
+                    <p>Met all security requirements</p>
+                </div>
+            </section>
             
-            <ul>
-                <li>Reduced IP address conflicts by 98% through improved lease management</li>
-                <li>Achieved 99.99% DHCP service availability with the failover implementation</li>
-                <li>Decreased network provisioning time by 75% through automation</li>
-                <li>Improved security posture with DHCP snooping and rogue server detection</li>
-                <li>Enhanced visibility into IP address utilization with custom reporting</li>
-            </ul>
-            
-            <a href="#" class="btn">View Project Documentation</a>
-            <a href="#" class="btn">See Implementation Code</a>
-        </section>
-    </main>
+            <section class="sidebar-section">
+                <h2>Project Outcomes</h2>
+                <ul>
+                    <li>Reduced network incidents by 85%</li>
+                    <li>Improved troubleshooting efficiency</li>
+                    <li>Enabled seamless scaling</li>
+                    <li>Enhanced security posture</li>
+                    <li>Reduced manual workload</li>
+                </ul>
+                
+                <a href="#" class="btn">View Documentation</a>
+                <a href="#" class="btn">Source Code</a>
+            </section>
+        </aside>
+    </div>
     
     <footer>
         <div class="container">
             <p>© <span id="year"></span> Enterprise DHCP Solution Project</p>
-            <p>Designed for modern network infrastructure needs</p>
+            <p>Professional Network Infrastructure Implementation</p>
         </div>
     </footer>
     
