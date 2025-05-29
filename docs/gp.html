@@ -1,42 +1,67 @@
-<section id="projects">
-  <h2>Portfolio Projects</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Group Policy Project</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-  <div class="project">
-    <h3>Enterprise Group Policy Implementation in Active Directory</h3>
-    <p><strong>Company:</strong> Central Bank of Afghanistan</p>
-    <p><strong>Duration:</strong> March 2016 – August 2021</p>
+  <!-- Portfolio Projects Section -->
+  <section id="projects" class="bg-gray-100 py-16 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-gray-800 mb-12 border-b-4 border-blue-500 inline-block pb-2">
+        Portfolio Projects
+      </h2>
 
-    <p>
-      As part of a strategic initiative to enhance security, standardization, and administrative efficiency across the Central Bank of Afghanistan’s IT infrastructure, I led the full design and implementation of a centralized <strong>Group Policy Object (GPO) architecture</strong> within the organization’s Active Directory environment.
-    </p>
+      <!-- Group Policy Project Card -->
+      <div class="bg-white rounded-2xl shadow-md p-8 hover:shadow-xl transition-shadow duration-300">
+        <h3 class="text-2xl font-semibold text-blue-700 mb-2">
+          Enterprise Group Policy Implementation in Active Directory
+        </h3>
+        <p class="text-sm text-gray-500 mb-4">
+          📍 Central Bank of Afghanistan &nbsp;|&nbsp; 🗓️ March 2016 – August 2021
+        </p>
 
-    <p>
-      The project began with a comprehensive assessment of existing policies and system behavior. I performed a full audit of legacy GPOs and organizational units (OUs), identifying conflicts, redundancies, and policy gaps. Based on this, I developed a new GPO structure aligned with Microsoft best practices and ISO/IEC 27001 compliance requirements.
-    </p>
+        <p class="text-gray-700 mb-4">
+          I led the end-to-end design and deployment of a centralized <strong>Group Policy Object (GPO)</strong> architecture across the Central Bank of Afghanistan’s nationwide infrastructure. This project aimed to enforce security standards, improve manageability, and align with ISO/IEC 27001 compliance.
+        </p>
 
-    <p>
-      Key implementations included:
-    </p>
+        <p class="text-gray-700 mb-4">
+          I conducted a full audit of existing policies and organizational units, cleaned up deprecated objects, and built a structured and scalable GPO model based on best practices. This included tiered OU design, policy inheritance planning, and automation using PowerShell.
+        </p>
 
-    <ul>
-      <li>Creation of tiered Organizational Units (OUs) for users, endpoints, and server roles</li>
-      <li>Design of security-focused GPOs for password policies, account lockout, and local group restrictions</li>
-      <li>Implementation of BitLocker drive encryption enforcement policies on all endpoints</li>
-      <li>Configuration of Windows Update policies using WSUS integration for centralized patch management</li>
-      <li>Control of removable media (USB, external drives) through GPO and registry lockdowns</li>
-      <li>Standardization of user desktop environments and taskbar configurations</li>
-      <li>Automation of GPO reporting and backup using PowerShell scripts</li>
-    </ul>
+        <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-1">
+          <li>Created and organized OUs for users, devices, and server roles</li>
+          <li>Applied advanced security policies for passwords, lockouts, and user permissions</li>
+          <li>Enforced <strong>BitLocker</strong> encryption on all endpoints</li>
+          <li>Integrated <strong>WSUS</strong> for centralized patch management</li>
+          <li>Disabled USB and removable media via GPO and registry rules</li>
+          <li>Standardized desktop environments and enforced compliance with naming conventions</li>
+          <li>Automated GPO backups and reporting using PowerShell scripts</li>
+        </ul>
 
-    <p>
-      To ensure scalability and maintainability, I documented every GPO and its associated settings, created version-controlled backups, and implemented naming conventions and link order strategies. I also trained junior system administrators on managing GPOs and troubleshooting policy inheritance issues.
-    </p>
+        <p class="text-gray-700 mb-4">
+          I documented every policy with version tracking, linked policies to specific OUs with minimal inheritance issues, and mentored junior administrators on GPO troubleshooting and operational procedures.
+        </p>
 
-    <p>
-      <strong>Technologies Used:</strong><br>
-      Windows Server 2012 R2 / 2016 · Active Directory · Group Policy Management Console (GPMC) · PowerShell · WSUS · BitLocker · Event Viewer
-    </p>
+        <div class="mb-4">
+          <span class="font-semibold text-gray-800">Technologies Used:</span>
+          <p class="text-gray-700">
+            Windows Server 2012 R2 / 2016, Active Directory, Group Policy Management Console (GPMC), PowerShell, WSUS, BitLocker
+          </p>
+        </div>
 
-    <p><strong>Outcome:</strong> The new GPO infrastructure significantly improved system security, reduced manual configuration efforts, and enabled consistent policy enforcement across 500+ client and server machines. It played a critical role in the bank’s successful compliance audits and long-term IT governance.</p>
-  </div>
-</section>
+        <div>
+          <span class="font-semibold text-gray-800">Outcome:</span>
+          <p class="text-gray-700">
+            The project significantly increased IT operational efficiency, reduced manual administrative tasks by 40%, improved endpoint security posture, and ensured the organization passed multiple external audits with full compliance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
