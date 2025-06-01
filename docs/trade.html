@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTrader Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 0;
+            margin-bottom: 24px;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .profit { color: var(--success); }
+        .loss { color: var(--danger); }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo-text">ProTrader Journal</div>
+            <div>
+                <span id="totalTrades">0</span> Trades | 
+                <span id="winRate">0%</span> Win Rate | 
+                <span id="accountBalance">$10,000.00</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">New Trade</h2>
+            <form id="tradeForm">
+                <div class="form-grid">
+                    <div><label>Date</label><input type="date" id="date" required></div>
+                    <div><label>Pair</label>
+                        <select id="symbol" required>
+                            <option value="EUR/USD">EUR/USD</option>
+                            <option value="GBP/USD">GBP/USD</option>
+                            <option value="USD/JPY">USD/JPY</option>
+                            <option value="AUD/USD">AUD/USD</option>
+                        </select>
+                    </div>
+                    <div><label>Position</label>
+                        <select id="position" required>
+                            <option value="Long">Long</option>
+                            <option value="Short">Short</option>
+                        </select>
+                    </div>
+                    <div><label>Entry</label><input type="number" step="0.00001" id="entry" required></div>
+                    <div><label>Exit</label><input type="number" step="0.00001" id="exit" required></div>
+                    <div><label>Size (lots)</label><input type="number" step="0.01" id="lot" required></div>
+                </div>
+                <div style="margin-top:16px">
+                    <label>Notes</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-block" style="margin-top:16px">Save Trade</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Trade History</h2>
+            <table id="tradeTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Pair</th>
+                        <th>Position</th>
+                        <th>Entry</th>
+                        <th>Exit</th>
+                        <th>P/L</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('tradeForm');
+            const tableBody = document.querySelector('#tradeTable tbody');
+            let trades = JSON.parse(localStorage.getItem('trades')) || [];
+            let balance = 10000;
+
+            function renderTrades() {
+                tableBody.innerHTML = '';
+                trades.forEach((trade, index) => {
+                    const profit = calculateProfit(trade);
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${trade.date}</td>
+                        <td>${trade.symbol}</td>
+                        <td>${trade.position}</td>
+                        <td>${trade.entry.toFixed(5)}</td>
+                        <td>${trade.exit.toFixed(5)}</td>
+                        <td class="${profit >= 0 ? 'profit' : 'loss'}">${profit >= 0 ? '+' : ''}${profit.toFixed(2)}</td>
+                        <td>
+                            <button onclick="deleteTrade(${index})" style="color:var(--danger);border:none;background:none">✕</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+                updateStats();
+            }
+
+            function calculateProfit(trade) {
+                const pips = (trade.exit - trade.entry) * (trade.position === 'Long' ? 1 : -1);
+                return pips * trade.lot * 10; // Simplified calculation
+            }
+
+            function updateStats() {
+                document.getElementById('totalTrades').textContent = trades.length;
+                if (trades.length > 0) {
+                    const wins = trades.filter(t => calculateProfit(t) > 0).length;
+                    document.getElementById('winRate').textContent = `${(wins/trades.length*100).toFixed(1)}%`;
+                }
+            }
+
+            function deleteTrade(index) {
+                if (confirm('Delete this trade?')) {
+                    trades.splice(index, 1);
+                    localStorage.setItem('trades', JSON.stringify(trades));
+                    renderTrades();
+                }
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const trade = {
+                    date: form.date.value,
+                    symbol: form.symbol.value,
+                    position: form.position.value,
+                    entry: parseFloat(form.entry.value),
+                    exit: parseFloat(form.exit.value),
+                    lot: parseFloat(form.lot.value),
+                    notes: form.notes.value
+                };
+                trades.push(trade);
+                localStorage.setItem('trades', JSON.stringify(trades));
+                form.reset();
+                renderTrades();
+            });
+
+            renderTrades();
+        });
+    </script>
+</body>
+</html>
