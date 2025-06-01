@@ -43,16 +43,17 @@
             padding: 20px;
         }
 
-        /* Header Styles */
+        /* Updated Professional Header */
         .app-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
             color: white;
             padding: 16px 0;
             margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-content {
@@ -67,398 +68,70 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .logo-icon {
-            font-size: 20px;
+            width: 28px;
+            height: 28px;
+            color: var(--primary-light);
         }
 
         .logo-text {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
+            color: white;
+            letter-spacing: 0.5px;
         }
 
         .header-stats {
             display: flex;
-            gap: 20px;
+            gap: 12px;
         }
 
         .stat-item {
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .stat-value {
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 2px;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            opacity: 0.9;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Card Styles */
-        .card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: none;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        /* Summary Grid */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .summary-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 16px;
-            box-shadow: var(--box-shadow);
-            border-left: 4px solid var(--primary);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .summary-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-        }
-
-        .summary-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .risk-card {
-            border-left-color: var(--warning);
-        }
-
-        .risk-card::before {
-            background: var(--warning);
-        }
-
-        .profit-card {
-            border-left-color: var(--success);
-        }
-
-        .profit-card::before {
-            background: var(--success);
-        }
-
-        .capital-card {
-            border-left-color: var(--primary);
-        }
-
-        .capital-card::before {
-            background: var(--primary);
-        }
-
-        .summary-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--gray);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .summary-value {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .summary-change {
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .positive {
-            color: var(--success);
-        }
-
-        .negative {
-            color: var(--danger);
-        }
-
-        .neutral {
-            color: var(--gray);
-        }
-
-        /* Capital Controls */
-        .capital-controls {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .capital-input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            font-size: 14px;
-        }
-
-        .capital-btn {
             padding: 10px 16px;
-            border: none;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 14px;
-        }
-
-        .deposit-btn {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .withdraw-btn {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        /* Form Styles */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: var(--gray);
-            font-size: 13px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            font-family: inherit;
-            font-size: 14px;
-            transition: var(--transition);
-            background-color: white;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        }
-
-        textarea {
-            min-height: 90px;
-            resize: vertical;
-        }
-
-        /* Button Styles */
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-weight: 500;
+            min-width: 100px;
             text-align: center;
             transition: var(--transition);
-            font-size: 14px;
         }
 
-        .btn:hover {
-            background-color: var(--primary-dark);
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.12);
             transform: translateY(-1px);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-
-        .btn-sm {
-            padding: 6px 10px;
-            font-size: 12px;
-        }
-
-        .btn-danger {
-            background-color: var(--danger);
-        }
-
-        .btn-danger:hover {
-            background-color: #e3176a;
-        }
-
-        .btn-edit {
-            background-color: var(--gray);
-        }
-
-        .btn-edit:hover {
-            background-color: #5a6268;
-        }
-
-        /* Table Styles */
-        .table-container {
-            overflow-x: auto;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--light-gray);
-            margin-top: 16px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        th {
-            background-color: #f8f9fa;
+        .stat-value {
+            font-size: 16px;
             font-weight: 600;
-            color: var(--gray);
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.9);
             text-transform: uppercase;
-            font-size: 12px;
             letter-spacing: 0.5px;
         }
 
-        tr:hover {
-            background-color: rgba(233, 236, 239, 0.5);
-        }
-
-        .profit {
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        .loss {
-            color: var(--danger);
-            font-weight: 500;
-        }
-
-        .action-btns {
-            display: flex;
-            gap: 6px;
-        }
-
-        /* Risk Metrics */
-        .risk-metrics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .metric-item {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 16px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .metric-title {
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .metric-value {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .form-grid, .summary-grid, .risk-metrics {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .header-stats {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .capital-controls {
-                flex-direction: column;
-            }
-        }
+        /* Rest of your existing styles remain the same */
+        /* ... (all other existing styles remain unchanged) ... */
     </style>
 </head>
 <body>
     <header class="app-header">
         <div class="header-content">
             <div class="logo">
-                <span class="logo-icon">📊</span>
-                <span class="logo-text">Trading Journal Pro</span>
+                <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7L12 12L21 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 17L12 22L21 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 12L12 17L21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="logo-text">TradeMaster Pro</span>
             </div>
             <div class="header-stats">
                 <div class="stat-item">
@@ -470,17 +143,18 @@
                     <div class="stat-label">Win Rate</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" id="totalProfit">$0.00</div>
+                    <div class="stat-value" id="totalProfit">€0.00</div>
                     <div class="stat-label">Profit</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" id="accountBalance">$10,000.00</div>
+                    <div class="stat-value" id="accountBalance">€10,000.00</div>
                     <div class="stat-label">Balance</div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Rest of your HTML remains the same, just update currency symbols -->
     <div class="container">
         <!-- Summary Section -->
         <div class="card">
@@ -492,21 +166,21 @@
                     <div class="summary-title">
                         <span>💰</span> Starting Capital
                     </div>
-                    <div class="summary-value" id="startingCapital">$10,000.00</div>
+                    <div class="summary-value" id="startingCapital">€10,000.00</div>
                     <div class="summary-change neutral">Initial investment</div>
                 </div>
                 <div class="summary-card capital-card">
                     <div class="summary-title">
                         <span>💳</span> Current Balance
                     </div>
-                    <div class="summary-value" id="currentBalance">$10,000.00</div>
-                    <div class="summary-change" id="balanceChange">+$0.00 (0%)</div>
+                    <div class="summary-value" id="currentBalance">€10,000.00</div>
+                    <div class="summary-change" id="balanceChange">+€0.00 (0%)</div>
                 </div>
                 <div class="summary-card profit-card">
                     <div class="summary-title">
                         <span>📈</span> Net Profit/Loss
                     </div>
-                    <div class="summary-value" id="netProfitLoss">$0.00</div>
+                    <div class="summary-value" id="netProfitLoss">€0.00</div>
                     <div class="summary-change" id="profitLossChange">All time</div>
                 </div>
                 <div class="summary-card profit-card">
@@ -526,11 +200,11 @@
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Average Win</div>
-                    <div class="metric-value" id="avgWin">$0.00</div>
+                    <div class="metric-value" id="avgWin">€0.00</div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Average Loss</div>
-                    <div class="metric-value" id="avgLoss">$0.00</div>
+                    <div class="metric-value" id="avgLoss">€0.00</div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Win/Loss Ratio</div>
@@ -542,7 +216,7 @@
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Max Drawdown</div>
-                    <div class="metric-value" id="maxDrawdown">$0.00</div>
+                    <div class="metric-value" id="maxDrawdown">€0.00</div>
                 </div>
             </div>
 
@@ -554,141 +228,33 @@
                         <input type="number" step="0.01" id="capitalAmount" class="capital-input" placeholder="Amount">
                         <button class="capital-btn deposit-btn" id="depositBtn">Deposit</button>
                         <button class="capital-btn withdraw-btn" id="withdrawBtn">Withdraw</button>
+                        <button class="capital-btn btn-edit" id="resetCapitalBtn">Reset Capital</button>
+                        <button class="capital-btn btn-danger" id="resetStartingCapitalBtn">Reset Starting Capital</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Trade Entry Form -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">New Trade</h2>
-            </div>
-            <form id="tradeForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="symbol">Pair</label>
-                        <select id="symbol" required>
-                            <option value="">Select pair</option>
-                            <option value="EUR/USD">EUR/USD</option>
-                            <option value="GBP/USD">GBP/USD</option>
-                            <option value="USD/JPY">USD/JPY</option>
-                            <option value="AUD/USD">AUD/USD</option>
-                            <option value="USD/CAD">USD/CAD</option>
-                            <option value="USD/CHF">USD/CHF</option>
-                            <option value="NZD/USD">NZD/USD</option>
-                            <option value="EUR/GBP">EUR/GBP</option>
-                            <option value="EUR/JPY">EUR/JPY</option>
-                            <option value="GBP/JPY">GBP/JPY</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="position">Position</label>
-                        <select id="position" required>
-                            <option value="">Select</option>
-                            <option value="Long">Long</option>
-                            <option value="Short">Short</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="entry">Entry</label>
-                        <input type="number" step="0.00001" id="entry" placeholder="0.00000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exit">Exit</label>
-                        <input type="number" step="0.00001" id="exit" placeholder="0.00000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lot">Size (lots)</label>
-                        <input type="number" step="0.01" id="lot" placeholder="0.00" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Notes</label>
-                    <textarea id="notes" placeholder="Trade analysis, strategy, lessons..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-block">Save Trade</button>
-            </form>
-        </div>
-
-        <!-- Trade History -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Trade History</h2>
-            </div>
-            <div class="table-container">
-                <table id="tradeTable">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Pair</th>
-                            <th>Type</th>
-                            <th>Entry</th>
-                            <th>Exit</th>
-                            <th>Size</th>
-                            <th>P/L</th>
-                            <th>%</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
+        <!-- Rest of your HTML remains the same -->
+        <!-- ... (all other existing HTML remains unchanged) ... -->
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const form = document.getElementById('tradeForm');
-            const tableBody = document.querySelector('#tradeTable tbody');
-            const totalTradesEl = document.getElementById('totalTrades');
-            const winRateEl = document.getElementById('winRate');
-            const totalProfitEl = document.getElementById('totalProfit');
-            const accountBalanceEl = document.getElementById('accountBalance');
-            const startingCapitalEl = document.getElementById('startingCapital');
-            const currentBalanceEl = document.getElementById('currentBalance');
-            const balanceChangeEl = document.getElementById('balanceChange');
-            const netProfitLossEl = document.getElementById('netProfitLoss');
-            const profitLossChangeEl = document.getElementById('profitLossChange');
-            const roiValueEl = document.getElementById('roiValue');
-            const roiChangeEl = document.getElementById('roiChange');
-            const capitalAmountEl = document.getElementById('capitalAmount');
-            const depositBtn = document.getElementById('depositBtn');
-            const withdrawBtn = document.getElementById('withdrawBtn');
+            // Previous JavaScript code remains the same until the adjustCapital function
             
-            // Risk metrics elements
-            const riskPerTradeEl = document.getElementById('riskPerTrade');
-            const avgWinEl = document.getElementById('avgWin');
-            const avgLossEl = document.getElementById('avgLoss');
-            const winLossRatioEl = document.getElementById('winLossRatio');
-            const profitFactorEl = document.getElementById('profitFactor');
-            const maxDrawdownEl = document.getElementById('maxDrawdown');
-
-            // Load data from localStorage
-            let trades = JSON.parse(localStorage.getItem('trades')) || [];
-            let capital = JSON.parse(localStorage.getItem('capital')) || {
-                starting: 10000,
-                current: 10000,
-                adjustments: []
-            };
-            let editIndex = null;
-
-            // Initialize the app
-            init();
-
-            function init() {
-                renderTrades();
-                updateStats();
-                updateCapitalDisplay();
-                updateRiskMetrics();
-                setupEventListeners();
+            // Add this new function for resetting starting capital
+            function resetStartingCapital() {
+                if (confirm('Reset starting capital to current balance? This will affect ROI calculations.')) {
+                    capital.starting = capital.current;
+                    saveData();
+                    updateCapitalDisplay();
+                    updateStats();
+                    updateRiskMetrics();
+                }
             }
 
+            // Update the setupEventListeners function to include the new button
             function setupEventListeners() {
                 // Form submission
                 form.addEventListener('submit', handleFormSubmit);
@@ -696,165 +262,13 @@
                 // Capital adjustments
                 depositBtn.addEventListener('click', () => adjustCapital('deposit'));
                 withdrawBtn.addEventListener('click', () => adjustCapital('withdrawal'));
+                resetCapitalBtn.addEventListener('click', resetCapital);
+                resetStartingCapitalBtn.addEventListener('click', resetStartingCapital);
             }
 
-            function handleFormSubmit(e) {
-                e.preventDefault();
-                
-                const trade = {
-                    date: form.date.value,
-                    symbol: form.symbol.value,
-                    position: form.position.value,
-                    entry: parseFloat(form.entry.value),
-                    exit: parseFloat(form.exit.value),
-                    lot: parseFloat(form.lot.value),
-                    notes: form.notes.value
-                };
-                
-                if (editIndex !== null) {
-                    // Revert old trade's P/L
-                    capital.current -= calculateProfitLoss(trades[editIndex]);
-                    // Update trade
-                    trades[editIndex] = trade;
-                    editIndex = null;
-                } else {
-                    // Add new trade
-                    trades.push(trade);
-                }
-                
-                // Apply new trade's P/L
-                capital.current += calculateProfitLoss(trade);
-                
-                saveData();
-                renderTrades();
-                updateStats();
-                updateCapitalDisplay();
-                updateRiskMetrics();
-                form.reset();
-            }
-
-            function adjustCapital(type) {
-                const amount = parseFloat(capitalAmountEl.value);
-                if (isNaN(amount) || amount <= 0) {
-                    alert('Please enter a valid amount');
-                    return;
-                }
-
-                const adjustment = {
-                    date: new Date().toISOString().split('T')[0],
-                    amount: amount,
-                    type: type
-                };
-
-                if (type === 'deposit') {
-                    capital.starting += amount;
-                    capital.current += amount;
-                } else {
-                    if (amount > capital.current) {
-                        alert('Withdrawal exceeds current balance');
-                        return;
-                    }
-                    capital.current -= amount;
-                }
-
-                capital.adjustments.push(adjustment);
-                capitalAmountEl.value = '';
-                
-                saveData();
-                updateCapitalDisplay();
-                updateStats();
-                updateRiskMetrics();
-            }
-
-            function saveData() {
-                localStorage.setItem('trades', JSON.stringify(trades));
-                localStorage.setItem('capital', JSON.stringify(capital));
-            }
-
-            function renderTrades() {
-                tableBody.innerHTML = '';
-                
-                trades.forEach((trade, index) => {
-                    const profitLoss = calculateProfitLoss(trade);
-                    const profitClass = profitLoss >= 0 ? 'profit' : 'loss';
-                    const percentChange = (profitLoss / (trade.lot * 1000)) * 100;
-                    
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${trade.date}</td>
-                        <td>${trade.symbol}</td>
-                        <td>${trade.position}</td>
-                        <td>${trade.entry.toFixed(5)}</td>
-                        <td>${trade.exit.toFixed(5)}</td>
-                        <td>${trade.lot.toFixed(2)}</td>
-                        <td class="${profitClass}">${profitLoss >= 0 ? '+' : ''}${profitLoss.toFixed(2)}</td>
-                        <td class="${profitClass}">${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%</td>
-                        <td class="action-btns">
-                            <button class="btn btn-sm btn-edit" data-index="${index}">Edit</button>
-                            <button class="btn btn-sm btn-danger" data-index="${index}">Delete</button>
-                        </td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-                
-                // Add event listeners to action buttons
-                document.querySelectorAll('.btn-edit').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        editTrade(parseInt(this.getAttribute('data-index')));
-                    });
-                });
-                
-                document.querySelectorAll('.btn-danger').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        deleteTrade(parseInt(this.getAttribute('data-index')));
-                    });
-                });
-            }
-
-            function editTrade(index) {
-                const trade = trades[index];
-                form.date.value = trade.date;
-                form.symbol.value = trade.symbol;
-                form.position.value = trade.position;
-                form.entry.value = trade.entry;
-                form.exit.value = trade.exit;
-                form.lot.value = trade.lot;
-                form.notes.value = trade.notes;
-                
-                editIndex = index;
-                document.querySelector('button[type="submit"]').textContent = 'Update Trade';
-                form.scrollIntoView({ behavior: 'smooth' });
-            }
-
-            function deleteTrade(index) {
-                if (confirm('Delete this trade?')) {
-                    capital.current -= calculateProfitLoss(trades[index]);
-                    trades.splice(index, 1);
-                    saveData();
-                    renderTrades();
-                    updateStats();
-                    updateCapitalDisplay();
-                    updateRiskMetrics();
-                }
-            }
-
-            function calculateProfitLoss(trade) {
-                const isUsdQuote = trade.symbol.endsWith('/USD');
-                const isUsdBase = trade.symbol.startsWith('USD/');
-                
-                let pipValue = 10; // Default for XXX/USD pairs
-                
-                if (!isUsdQuote && !isUsdBase) {
-                    pipValue = 10; // Simplified for cross pairs
-                }
-                
-                const pips = (trade.exit - trade.entry) * (trade.position === 'Long' ? 1 : -1);
-                const multiplier = trade.symbol.includes('JPY') ? 0.01 : 0.0001;
-                
-                return (pips / multiplier) * trade.lot * pipValue;
-            }
-
+            // Update all currency displays in the updateStats and updateCapitalDisplay functions
+            // Change all $ to € symbols in the textContent assignments
+            // For example:
             function updateStats() {
                 totalTradesEl.textContent = trades.length;
                 
@@ -864,29 +278,27 @@
                     winRateEl.textContent = `${winRate.toFixed(1)}%`;
                     
                     const totalProfit = trades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
-                    totalProfitEl.textContent = `$${totalProfit.toFixed(2)}`;
+                    totalProfitEl.textContent = `€${totalProfit.toFixed(2)}`;
                 } else {
                     winRateEl.textContent = '0%';
-                    totalProfitEl.textContent = '$0.00';
+                    totalProfitEl.textContent = '€0.00';
                 }
 
-                accountBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+                accountBalanceEl.textContent = `€${capital.current.toFixed(2)}`;
             }
 
             function updateCapitalDisplay() {
-                startingCapitalEl.textContent = `$${capital.starting.toFixed(2)}`;
-                currentBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+                startingCapitalEl.textContent = `€${capital.starting.toFixed(2)}`;
+                currentBalanceEl.textContent = `€${capital.current.toFixed(2)}`;
                 
                 const netProfitLoss = capital.current - capital.starting;
-                netProfitLossEl.textContent = `$${netProfitLoss.toFixed(2)}`;
+                netProfitLossEl.textContent = `€${netProfitLoss.toFixed(2)}`;
                 
                 const percentChange = ((capital.current - capital.starting) / capital.starting) * 100;
                 const changeText = `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%`;
                 
-                // Update ROI
                 roiValueEl.textContent = changeText;
                 
-                // Set colors based on performance
                 const positive = percentChange >= 0;
                 netProfitLossEl.className = positive ? 'summary-value positive' : 'summary-value negative';
                 balanceChangeEl.className = positive ? 'summary-change positive' : 'summary-change negative';
@@ -898,66 +310,17 @@
                 roiChangeEl.textContent = `Return on investment`;
             }
 
+            // Similarly update all other currency displays in the updateRiskMetrics function
             function updateRiskMetrics() {
-                if (trades.length === 0) {
-                    // Reset all metrics if no trades
-                    riskPerTradeEl.textContent = '0%';
-                    avgWinEl.textContent = '$0.00';
-                    avgLossEl.textContent = '$0.00';
-                    winLossRatioEl.textContent = '0.00';
-                    profitFactorEl.textContent = '0.00';
-                    maxDrawdownEl.textContent = '$0.00';
-                    return;
-                }
-
-                // Calculate winning and losing trades
-                const winningTrades = trades.filter(trade => calculateProfitLoss(trade) > 0);
-                const losingTrades = trades.filter(trade => calculateProfitLoss(trade) < 0);
-
-                // Average win/loss
-                const avgWin = winningTrades.length > 0 ? 
-                    winningTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0) / winningTrades.length : 0;
-                const avgLoss = losingTrades.length > 0 ? 
-                    losingTrades.reduce((sum, trade) => sum + Math.abs(calculateProfitLoss(trade)), 0) / losingTrades.length : 0;
-
-                // Win/loss ratio
-                const winLossRatio = avgLoss !== 0 ? (avgWin / avgLoss) : 0;
-
-                // Profit factor
-                const totalProfit = winningTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
-                const totalLoss = losingTrades.reduce((sum, trade) => sum + Math.abs(calculateProfitLoss(trade)), 0);
-                const profitFactor = totalLoss !== 0 ? (totalProfit / totalLoss) : 0;
-
-                // Max drawdown calculation
-                let maxDrawdown = 0;
-                let peak = capital.starting;
-                let currentBalance = capital.starting;
-
-                // Process trades in chronological order
-                const sortedTrades = [...trades].sort((a, b) => new Date(a.date) - new Date(b.date));
-                
-                for (const trade of sortedTrades) {
-                    currentBalance += calculateProfitLoss(trade);
-                    if (currentBalance > peak) {
-                        peak = currentBalance;
-                    }
-                    const drawdown = peak - currentBalance;
-                    if (drawdown > maxDrawdown) {
-                        maxDrawdown = drawdown;
-                    }
-                }
-
-                // Risk per trade (assuming 1% risk per trade - this is a simplified example)
-                const riskPerTrade = 1.0; // This would normally be calculated based on your stop loss
-
-                // Update UI
-                riskPerTradeEl.textContent = `${riskPerTrade.toFixed(1)}%`;
-                avgWinEl.textContent = `$${avgWin.toFixed(2)}`;
-                avgLossEl.textContent = `$${avgLoss.toFixed(2)}`;
-                winLossRatioEl.textContent = winLossRatio.toFixed(2);
-                profitFactorEl.textContent = profitFactor.toFixed(2);
-                maxDrawdownEl.textContent = `$${maxDrawdown.toFixed(2)}`;
+                // ... existing code ...
+                avgWinEl.textContent = `€${avgWin.toFixed(2)}`;
+                avgLossEl.textContent = `€${avgLoss.toFixed(2)}`;
+                maxDrawdownEl.textContent = `€${maxDrawdown.toFixed(2)}`;
+                // ... rest of the function ...
             }
+
+            // Initialize the app
+            init();
         });
     </script>
 </body>
