@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Keep all your existing head content (styles, etc.) -->
+    <!-- ... -->
+</head>
+<body>
+    <!-- Keep all your existing HTML structure -->
+    <!-- ... -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const form = document.getElementById('tradeForm');
+            const tableBody = document.querySelector('#tradeTable tbody');
+            const totalTradesEl = document.getElementById('totalTrades');
+            const winRateEl = document.getElementById('winRate');
+            const totalProfitEl = document.getElementById('totalProfit');
+            const accountBalanceEl = document.getElementById('accountBalance');
+            const startingCapitalEl = document.getElementById('startingCapital');
+            const currentBalanceEl = document.getElementById('currentBalance');
+            const balanceChangeEl = document.getElementById('balanceChange');
+            const netProfitLossEl = document.getElementById('netProfitLoss');
+            const profitLossChangeEl = document.getElementById('profitLossChange');
+            const roiValueEl = document.getElementById('roiValue');
+            const roiChangeEl = document.getElementById('roiChange');
+            const capitalAmountEl = document.getElementById('capitalAmount');
+            const depositBtn = document.getElementById('depositBtn');
+            const withdrawBtn = document.getElementById('withdrawBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            const importBtn = document.getElementById('importBtn');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            // Initialize with default capital if none exists
+            let trades = JSON.parse(localStorage.getItem('trades')) || [];
+            let capital = JSON.parse(localStorage.getItem('capital')) || {
+                starting: 10000,
+                current: 10000,
+                adjustments: []
+            };
+            let editIndex = null;
+
+            // Initialize the app
+            init();
+
+            function init() {
+                renderTrades();
+                updateStats();
+                updateCapitalDisplay();
+                setupEventListeners();
+                
+                // Set default date to today
+                document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            }
+
+            function setupEventListeners() {
+                // Form submission
+                form.addEventListener('submit', handleFormSubmit);
+                
+                // Capital buttons
+                depositBtn.addEventListener('click', () => adjustCapital('deposit'));
+                withdrawBtn.addEventListener('click', () => adjustCapital('withdrawal'));
+                resetBtn.addEventListener('click', resetCapital);
+                
+                // Data buttons
+                exportBtn.addEventListener('click', exportData);
+                importBtn.addEventListener('click', importData);
+                
+                // Navigation
+                navItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+                        // Here you would add logic to show different sections
+                        console.log('Switched to:', this.textContent);
+                    });
+                });
+            }
+
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // Validate required fields
+                const requiredFields = ['date', 'symbol', 'position', 'entry', 'exit', 'lot'];
+                for (const field of requiredFields) {
+                    if (!form[field].value) {
+                        alert(`Please fill in the ${field} field`);
+                        return;
+                    }
+                }
+                
+                const trade = {
+                    date: form.date.value,
+                    symbol: form.symbol.value,
+                    position: form.position.value,
+                    entry: parseFloat(form.entry.value),
+                    exit: parseFloat(form.exit.value),
+                    lot: parseFloat(form.lot.value),
+                    risk: form.risk.value ? parseFloat(form.risk.value) : null,
+                    strategy: form.strategy.value || null,
+                    timeframe: form.timeframe.value || null,
+                    notes: form.notes.value || null,
+                    screenshot: form.screenshot.value || null
+                };
+                
+                // Calculate profit/loss
+                const profitLoss = calculateProfitLoss(trade);
+                
+                if (editIndex !== null) {
+                    // Revert old trade's P/L
+                    capital.current -= calculateProfitLoss(trades[editIndex]);
+                    // Update trade
+                    trades[editIndex] = trade;
+                    editIndex = null;
+                } else {
+                    // Add new trade
+                    trades.push(trade);
+                }
+                
+                // Apply new trade's P/L
+                capital.current += profitLoss;
+                
+                saveData();
+                renderTrades();
+                updateStats();
+                updateCapitalDisplay();
+                form.reset();
+                
+                // Reset date to today
+                document.getElementById('date').value = new Date().toISOString().split('T')[0];
+            }
+
+            function adjustCapital(type) {
+                const amount = parseFloat(capitalAmountEl.value);
+                if (isNaN(amount) {
+                    alert('Please enter a valid number');
+                    return;
+                }
+                
+                if (amount <= 0) {
+                    alert('Amount must be greater than 0');
+                    return;
+                }
+
+                if (type === 'withdrawal' && amount > capital.current) {
+                    alert('Withdrawal amount exceeds current balance');
+                    return;
+                }
+
+                const adjustment = {
+                    date: new Date().toISOString().split('T')[0],
+                    amount: amount,
+                    type: type
+                };
+
+                if (type === 'deposit') {
+                    capital.starting += amount;
+                    capital.current += amount;
+                } else {
+                    capital.current -= amount;
+                }
+
+                capital.adjustments.push(adjustment);
+                capitalAmountEl.value = '';
+                
+                saveData();
+                updateCapitalDisplay();
+                updateStats();
+                
+                alert(`Successfully ${type === 'deposit' ? 'deposited' : 'withdrew'} $${amount.toFixed(2)}`);
+            }
+            
+            function resetCapital() {
+                if (confirm('This will reset your capital to $0. Continue?')) {
+                    capital = {
+                        starting: 0,
+                        current: 0,
+                        adjustments: []
+                    };
+                    
+                    saveData();
+                    updateCapitalDisplay();
+                    updateStats();
+                }
+            }
+            
+            function exportData() {
+                const data = {
+                    trades: trades,
+                    capital: capital,
+                    exportedAt: new Date().toISOString()
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `trading-journal-export-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            function importData() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    
+                    reader.onload = event => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            
+                            if (confirm('Importing will overwrite current data. Continue?')) {
+                                trades = data.trades || [];
+                                capital = data.capital || {
+                                    starting: 0,
+                                    current: 0,
+                                    adjustments: []
+                                };
+                                
+                                saveData();
+                                renderTrades();
+                                updateStats();
+                                updateCapitalDisplay();
+                                alert('Data imported successfully!');
+                            }
+                        } catch (error) {
+                            alert('Error importing file: ' + error.message);
+                        }
+                    };
+                    
+                    reader.readAsText(file);
+                };
+                
+                input.click();
+            }
+
+            function saveData() {
+                localStorage.setItem('trades', JSON.stringify(trades));
+                localStorage.setItem('capital', JSON.stringify(capital));
+            }
+
+            function renderTrades() {
+                tableBody.innerHTML = '';
+                
+                if (trades.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="10" style="text-align:center;">No trades yet</td></tr>';
+                    return;
+                }
+                
+                // Sort by date (newest first)
+                trades.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                trades.forEach((trade, index) => {
+                    const profitLoss = calculateProfitLoss(trade);
+                    const profitClass = profitLoss >= 0 ? 'profit' : 'loss';
+                    const percentChange = (profitLoss / (trade.lot * 1000)) * 100;
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${trade.date}</td>
+                        <td>${trade.symbol}</td>
+                        <td><span class="badge ${trade.position === 'Long' ? 'badge-success' : 'badge-danger'}">${trade.position}</span></td>
+                        <td>${trade.entry.toFixed(5)}</td>
+                        <td>${trade.exit.toFixed(5)}</td>
+                        <td>${trade.lot.toFixed(2)}</td>
+                        <td>${trade.risk ? trade.risk.toFixed(1) + '%' : '-'}</td>
+                        <td class="${profitClass}">${profitLoss >= 0 ? '+' : ''}${profitLoss.toFixed(2)}</td>
+                        <td class="${profitClass}">${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%</td>
+                        <td class="action-btns">
+                            <button class="btn btn-sm btn-edit" data-index="${index}">✏️ Edit</button>
+                            <button class="btn btn-sm btn-danger" data-index="${index}">🗑️ Delete</button>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+                // Add event listeners to action buttons
+                document.querySelectorAll('.btn-edit').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        editTrade(parseInt(this.getAttribute('data-index')));
+                    });
+                });
+                
+                document.querySelectorAll('.btn-danger').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        deleteTrade(parseInt(this.getAttribute('data-index')));
+                    });
+                });
+            }
+
+            function editTrade(index) {
+                const trade = trades[index];
+                
+                // Fill form with trade data
+                form.date.value = trade.date;
+                form.symbol.value = trade.symbol;
+                form.position.value = trade.position;
+                form.entry.value = trade.entry;
+                form.exit.value = trade.exit;
+                form.lot.value = trade.lot;
+                form.risk.value = trade.risk || '';
+                form.strategy.value = trade.strategy || '';
+                form.timeframe.value = trade.timeframe || '';
+                form.notes.value = trade.notes || '';
+                form.screenshot.value = trade.screenshot || '';
+                
+                editIndex = index;
+                document.querySelector('button[type="submit"]').innerHTML = '<span>✓</span> Update Trade';
+                
+                // Scroll to form
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function deleteTrade(index) {
+                if (confirm('Delete this trade?')) {
+                    // Revert this trade's P/L
+                    capital.current -= calculateProfitLoss(trades[index]);
+                    trades.splice(index, 1);
+                    
+                    saveData();
+                    renderTrades();
+                    updateStats();
+                    updateCapitalDisplay();
+                }
+            }
+
+            function calculateProfitLoss(trade) {
+                // Simplified calculation - assumes USD is quote currency
+                const priceDifference = trade.exit - trade.entry;
+                const positionMultiplier = trade.position === 'Long' ? 1 : -1;
+                const pipValue = 10; // $10 per pip for standard lot
+                const lotSize = trade.lot;
+                
+                // For forex: (price difference) * position * pip value * lot size
+                return priceDifference * positionMultiplier * pipValue * lotSize;
+            }
+
+            function updateStats() {
+                // Update trade count
+                totalTradesEl.textContent = trades.length;
+                
+                // Calculate win rate
+                if (trades.length > 0) {
+                    const winningTrades = trades.filter(t => calculateProfitLoss(t) > 0).length;
+                    const winRate = (winningTrades / trades.length) * 100;
+                    winRateEl.textContent = `${winRate.toFixed(1)}%`;
+                    
+                    // Calculate total profit
+                    const totalProfit = trades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
+                    totalProfitEl.textContent = `${totalProfit >= 0 ? '+' : ''}$${totalProfit.toFixed(2)}`;
+                } else {
+                    winRateEl.textContent = '0%';
+                    totalProfitEl.textContent = '$0.00';
+                }
+                
+                // Update balance display
+                accountBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+            }
+
+            function updateCapitalDisplay() {
+                startingCapitalEl.textContent = `$${capital.starting.toFixed(2)}`;
+                currentBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+                
+                const netProfit = capital.current - capital.starting;
+                netProfitLossEl.textContent = `$${netProfit.toFixed(2)}`;
+                
+                if (capital.starting > 0) {
+                    const roi = (netProfit / capital.starting) * 100;
+                    roiValueEl.textContent = `${roi.toFixed(2)}%`;
+                    
+                    if (netProfit >= 0) {
+                        balanceChangeEl.textContent = `+$${netProfit.toFixed(2)} (+${roi.toFixed(2)}%)`;
+                        balanceChangeEl.className = 'metric-change positive';
+                        roiValueEl.className = 'metric-value positive';
+                    } else {
+                        balanceChangeEl.textContent = `-$${Math.abs(netProfit).toFixed(2)} (${roi.toFixed(2)}%)`;
+                        balanceChangeEl.className = 'metric-change negative';
+                        roiValueEl.className = 'metric-value negative';
+                    }
+                } else {
+                    roiValueEl.textContent = '0%';
+                    balanceChangeEl.textContent = 'No starting capital';
+                    balanceChangeEl.className = 'metric-change neutral';
+                    roiValueEl.className = 'metric-value neutral';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
