@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trading Journal</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+  label, input, textarea, button { display: block; width: 100%; margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+<h2>Trading Journal</h2>
+<form id="tradeForm">
+  <label>Trade Date:</label>
+  <input type="date" id="date" required />
+  
+  <label>Symbol:</label>
+  <input type="text" id="symbol" placeholder="e.g. EUR/USD" required />
+  
+  <label>Position (Long/Short):</label>
+  <input type="text" id="position" placeholder="Long or Short" required />
+  
+  <label>Entry Price:</label>
+  <input type="number" step="0.0001" id="entry" required />
+  
+  <label>Exit Price:</label>
+  <input type="number" step="0.0001" id="exit" required />
+  
+  <label>Lot Size:</label>
+  <input type="number" step="0.01" id="lot" required />
+  
+  <label>Notes:</label>
+  <textarea id="notes" rows="3"></textarea>
+  
+  <button type="submit">Add Trade</button>
+</form>
+
+<table id="tradeTable">
+  <thead>
+    <tr>
+      <th>Date</th><th>Symbol</th><th>Position</th><th>Entry</th><th>Exit</th><th>Lot</th><th>Profit/Loss</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+const form = document.getElementById('tradeForm');
+const tableBody = document.querySelector('#tradeTable tbody');
+
+// Load trades from localStorage
+let trades = JSON.parse(localStorage.getItem('trades')) || [];
+
+function saveTrades() {
+  localStorage.setItem('trades', JSON.stringify(trades));
+}
+
+function renderTrades() {
+  tableBody.innerHTML = '';
+  trades.forEach((trade, index) => {
+    const profitLoss = ((trade.exit - trade.entry) * (trade.position.toLowerCase() === 'long' ? 1 : -1)) * trade.lot * 100000;
+    const row = `<tr>
+      <td>${trade.date}</td>
+      <td>${trade.symbol}</td>
+      <td>${trade.position}</td>
+      <td>${trade.entry}</td>
+      <td>${trade.exit}</td>
+      <td>${trade.lot}</td>
+      <td>${profitLoss.toFixed(2)}</td>
+      <td>${trade.notes}</td>
+    </tr>`;
+    tableBody.insertAdjacentHTML('beforeend', row);
+  });
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const trade = {
+    date: form.date.value,
+    symbol: form.symbol.value.toUpperCase(),
+    position: form.position.value,
+    entry: parseFloat(form.entry.value),
+    exit: parseFloat(form.exit.value),
+    lot: parseFloat(form.lot.value),
+    notes: form.notes.value
+  };
+  trades.push(trade);
+  saveTrades();
+  renderTrades();
+  form.reset();
+});
+
+renderTrades();
+</script>
+</body>
+</html>
