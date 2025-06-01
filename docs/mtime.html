@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Trading Dashboard | Market Session Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --secondary-bg: #1e293b;
+            --card-bg: #334155;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .timezone {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background-color: var(--card-bg);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .time-display {
+            font-size: 2.5rem;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .date-display {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .market-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-open {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+        }
+
+        .status-closed {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+        }
+
+        .session-info {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .session-info h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .session-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+        }
+
+        .session-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .session-name::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+        }
+
+        .session-times {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .session-local-time {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .progress-container {
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-green);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Market Session Dashboard</h1>
+            <div class="last-updated" id="lastUpdated">Updating...</div>
+        </header>
+
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Frankfurt</div>
+                    <div class="timezone">CET/CEST</div>
+                </div>
+                <div class="time-display" id="frankfurtTime">--:--:--</div>
+                <div class="date-display" id="frankfurtDate">Loading...</div>
+                <div class="market-status status-closed" id="frankfurtStatus">Closed</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">London</div>
+                    <div class="timezone">GMT/BST</div>
+                </div>
+                <div class="time-display" id="londonTime">--:--:--</div>
+                <div class="date-display" id="londonDate">Loading...</div>
+                <div class="market-status status-closed" id="londonStatus">Closed</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">New York</div>
+                    <div class="timezone">EST/EDT</div>
+                </div>
+                <div class="time-display" id="newyorkTime">--:--:--</div>
+                <div class="date-display" id="newyorkDate">Loading...</div>
+                <div class="market-status status-closed" id="newyorkStatus">Closed</div>
+            </div>
+        </div>
+
+        <div class="session-info">
+            <h2>Trading Sessions</h2>
+            <div class="session-grid">
+                <div class="session-card">
+                    <div class="session-name">Asian Session</div>
+                    <div class="session-times">Tokyo: 00:00 - 09:00 GMT</div>
+                    <div class="session-local-time" id="asianLocalTime">Bremen: --:-- - --:--</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="asianProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="session-card">
+                    <div class="session-name">European Session</div>
+                    <div class="session-times">London: 08:00 - 16:30 GMT</div>
+                    <div class="session-local-time" id="europeanLocalTime">Bremen: --:-- - --:--</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="europeanProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="session-card">
+                    <div class="session-name">US Session</div>
+                    <div class="session-times">New York: 13:30 - 22:00 GMT</div>
+                    <div class="session-local-time" id="usLocalTime">Bremen: --:-- - --:--</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="usProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const config = {
+            updateInterval: 1000, // Update every second
+            sessions: {
+                asian: {
+                    startHourGMT: 0,
+                    endHourGMT: 9,
+                    name: 'Asian'
+                },
+                european: {
+                    startHourGMT: 8,
+                    endHourGMT: 16.5,
+                    name: 'European'
+                },
+                us: {
+                    startHourGMT: 13.5,
+                    endHourGMT: 22,
+                    name: 'US'
+                }
+            }
+        };
+
+        // DOM Elements
+        const elements = {
+            lastUpdated: document.getElementById('lastUpdated'),
+            // Frankfurt
+            frankfurtTime: document.getElementById('frankfurtTime'),
+            frankfurtDate: document.getElementById('frankfurtDate'),
+            frankfurtStatus: document.getElementById('frankfurtStatus'),
+            // London
+            londonTime: document.getElementById('londonTime'),
+            londonDate: document.getElementById('londonDate'),
+            londonStatus: document.getElementById('londonStatus'),
+            // New York
+            newyorkTime: document.getElementById('newyorkTime'),
+            newyorkDate: document.getElementById('newyorkDate'),
+            newyorkStatus: document.getElementById('newyorkStatus'),
+            // Session times
+            asianLocalTime: document.getElementById('asianLocalTime'),
+            europeanLocalTime: document.getElementById('europeanLocalTime'),
+            usLocalTime: document.getElementById('usLocalTime'),
+            // Progress bars
+            asianProgress: document.getElementById('asianProgress'),
+            europeanProgress: document.getElementById('europeanProgress'),
+            usProgress: document.getElementById('usProgress')
+        };
+
+        // Format time for display
+        function formatTime(date, timeZone) {
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone,
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).format(date).replace(',', '');
+        }
+
+        // Format date for display
+        function formatDate(date, timeZone) {
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone,
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            }).format(date);
+        }
+
+        // Convert GMT time to local Bremen time
+        function gmtToLocalTime(gmtHour, gmtMinute = 0) {
+            const now = new Date();
+            const gmtDate = new Date(now.toLocaleString('en-US', { timeZone: 'GMT' }));
+            
+            // Set the GMT time
+            gmtDate.setHours(gmtHour);
+            gmtDate.setMinutes(gmtMinute);
+            gmtDate.setSeconds(0);
+            
+            // Convert to Bremen time
+            return new Date(gmtDate.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+        }
+
+        // Format time without seconds
+        function formatShortTime(date) {
+            return date.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Calculate session progress percentage
+        function calculateSessionProgress(nowGMT, startHourGMT, endHourGMT) {
+            const sessionStart = new Date(nowGMT);
+            sessionStart.setHours(startHourGMT, 0, 0, 0);
+            
+            const sessionEnd = new Date(nowGMT);
+            sessionEnd.setHours(endHourGMT, 0, 0, 0);
+            
+            // If session hasn't started yet
+            if (nowGMT < sessionStart) return 0;
+            
+            // If session has ended
+            if (nowGMT > sessionEnd) return 100;
+            
+            // Calculate progress percentage
+            const sessionDuration = sessionEnd - sessionStart;
+            const elapsedTime = nowGMT - sessionStart;
+            return (elapsedTime / sessionDuration) * 100;
+        }
+
+        // Check if market is open (simplified logic)
+        function isMarketOpen(city, nowGMT) {
+            const localTime = new Date(nowGMT.toLocaleString('en-US', { timeZone: city === 'newyork' ? 'America/New_York' : 
+                                                                      city === 'london' ? 'Europe/London' : 'Europe/Berlin' }));
+            
+            const hour = localTime.getHours();
+            
+            switch(city) {
+                case 'frankfurt':
+                    // Frankfurt market hours: 8:00 - 22:00 local time
+                    return hour >= 8 && hour < 22;
+                case 'london':
+                    // London market hours: 8:00 - 16:30 local time
+                    return (hour >= 8 && hour < 16) || (hour === 16 && localTime.getMinutes() < 30);
+                case 'newyork':
+                    // NY market hours: 9:30 - 16:00 local time
+                    return (hour >= 9 && hour < 16) || (hour === 9 && localTime.getMinutes() >= 30);
+                default:
+                    return false;
+            }
+        }
+
+        // Update all clocks and session info
+        function updateDashboard() {
+            const now = new Date();
+            const nowGMT = new Date(now.toLocaleString('en-US', { timeZone: 'GMT' }));
+            
+            // Update last updated time
+            elements.lastUpdated.textContent = `Last updated: ${formatTime(now, 'GMT')} GMT`;
+            
+            // Update Frankfurt time
+            elements.frankfurtTime.textContent = formatTime(now, 'Europe/Berlin');
+            elements.frankfurtDate.textContent = formatDate(now, 'Europe/Berlin');
+            elements.frankfurtStatus.textContent = isMarketOpen('frankfurt', nowGMT) ? 'Open' : 'Closed';
+            elements.frankfurtStatus.className = isMarketOpen('frankfurt', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
+            
+            // Update London time
+            elements.londonTime.textContent = formatTime(now, 'Europe/London');
+            elements.londonDate.textContent = formatDate(now, 'Europe/London');
+            elements.londonStatus.textContent = isMarketOpen('london', nowGMT) ? 'Open' : 'Closed';
+            elements.londonStatus.className = isMarketOpen('london', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
+            
+            // Update New York time
+            elements.newyorkTime.textContent = formatTime(now, 'America/New_York');
+            elements.newyorkDate.textContent = formatDate(now, 'America/New_York');
+            elements.newyorkStatus.textContent = isMarketOpen('newyork', nowGMT) ? 'Open' : 'Closed';
+            elements.newyorkStatus.className = isMarketOpen('newyork', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
+            
+            // Update session times in local time (Bremen)
+            const asianStartLocal = gmtToLocalTime(config.sessions.asian.startHourGMT);
+            const asianEndLocal = gmtToLocalTime(config.sessions.asian.endHourGMT);
+            elements.asianLocalTime.textContent = `Bremen: ${formatShortTime(asianStartLocal)} - ${formatShortTime(asianEndLocal)}`;
+            
+            const europeanStartLocal = gmtToLocalTime(config.sessions.european.startHourGMT);
+            const europeanEndLocal = gmtToLocalTime(config.sessions.european.endHourGMT);
+            elements.europeanLocalTime.textContent = `Bremen: ${formatShortTime(europeanStartLocal)} - ${formatShortTime(europeanEndLocal)}`;
+            
+            const usStartLocal = gmtToLocalTime(config.sessions.us.startHourGMT);
+            const usEndLocal = gmtToLocalTime(config.sessions.us.endHourGMT);
+            elements.usLocalTime.textContent = `Bremen: ${formatShortTime(usStartLocal)} - ${formatShortTime(usEndLocal)}`;
+            
+            // Update progress bars
+            elements.asianProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.asian.startHourGMT, config.sessions.asian.endHourGMT)}%`;
+            elements.europeanProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.european.startHourGMT, config.sessions.european.endHourGMT)}%`;
+            elements.usProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.us.startHourGMT, config.sessions.us.endHourGMT)}%`;
+            
+            // Change progress bar color based on session status
+            const asianProgress = calculateSessionProgress(nowGMT, config.sessions.asian.startHourGMT, config.sessions.asian.endHourGMT);
+            elements.asianProgress.style.backgroundColor = asianProgress > 0 && asianProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
+            
+            const europeanProgress = calculateSessionProgress(nowGMT, config.sessions.european.startHourGMT, config.sessions.european.endHourGMT);
+            elements.europeanProgress.style.backgroundColor = europeanProgress > 0 && europeanProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
+            
+            const usProgress = calculateSessionProgress(nowGMT, config.sessions.us.startHourGMT, config.sessions.us.endHourGMT);
+            elements.usProgress.style.backgroundColor = usProgress > 0 && usProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
+        }
+
+        // Initialize and update dashboard
+        updateDashboard();
+        setInterval(updateDashboard, config.updateInterval);
+    </script>
+</body>
+</html>
