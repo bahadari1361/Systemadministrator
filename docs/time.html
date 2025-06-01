@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Real-Time New York & London Clocks</title>
+<title>Trading Session Times & Real-Time Clocks</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -12,98 +12,191 @@
     color: #fff;
     font-family: 'Roboto', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    padding: 30px;
     margin: 0;
-  }
-
-  .container {
-    background: #1f1f1f;
-    padding: 30px 50px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(255,255,255,0.1);
-    text-align: center;
-    max-width: 350px;
-    width: 100%;
+    min-height: 100vh;
   }
 
   h1 {
-    margin-bottom: 20px;
     font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .clocks {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 800px;
   }
 
   .clock {
-    background: #2a2a2a;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    background: #1f1f1f;
+    padding: 25px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    text-align: center;
+    width: 230px;
   }
 
   .city {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
   }
 
   .time {
-    font-size: 2.4rem;
-    font-weight: 700;
+    font-size: 2.5rem;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
   }
 
   .date {
-    font-size: 1rem;
-    margin-top: 5px;
+    font-size: 1.1rem;
     color: #aaa;
+    margin-top: 6px;
+  }
+
+  .session-info {
+    background: #222;
+    padding: 20px 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    font-size: 1.2rem;
+  }
+
+  .highlight {
+    color: #4caf50;
+    font-weight: 700;
   }
 </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Real-Time Clocks</h1>
-    <div class="clock" id="nyClock">
-      <div class="city">New York (EST/EDT)</div>
-      <div class="time" id="nyTime">--:--:--</div>
-      <div class="date" id="nyDate">Loading...</div>
+
+  <h1>Live Trading Times & Sessions (Bremen, London, New York)</h1>
+
+  <div class="clocks">
+    <div class="clock" id="bremenClock">
+      <div class="city">Bremen, Germany</div>
+      <div class="time" id="bremenTime">--:--:--</div>
+      <div class="date" id="bremenDate">Loading...</div>
     </div>
 
     <div class="clock" id="ldnClock">
-      <div class="city">London (GMT/BST)</div>
+      <div class="city">London, UK</div>
       <div class="time" id="ldnTime">--:--:--</div>
       <div class="date" id="ldnDate">Loading...</div>
     </div>
+
+    <div class="clock" id="nyClock">
+      <div class="city">New York, USA</div>
+      <div class="time" id="nyTime">--:--:--</div>
+      <div class="date" id="nyDate">Loading...</div>
+    </div>
+  </div>
+
+  <div class="session-info" id="sessionInfo">
+    Loading trading sessions info...
   </div>
 
 <script>
+  function formatTime(date, timeZone) {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone,
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }).format(date);
+  }
+
+  function formatDate(date, timeZone) {
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone,
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }).format(date);
+  }
+
   function updateClocks() {
-    // New York time (Eastern Time, handling daylight saving)
-    const nyOptions = { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const nyDateOptions = { timeZone: 'America/New_York', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+    const now = new Date();
 
-    const nyTimeString = new Intl.DateTimeFormat('en-US', nyOptions).format(new Date());
-    const nyDateString = new Intl.DateTimeFormat('en-US', nyDateOptions).format(new Date());
+    // Bremen time
+    const bremenTime = formatTime(now, 'Europe/Berlin');
+    const bremenDate = formatDate(now, 'Europe/Berlin');
+    document.getElementById('bremenTime').textContent = bremenTime;
+    document.getElementById('bremenDate').textContent = bremenDate;
 
-    document.getElementById('nyTime').textContent = nyTimeString;
-    document.getElementById('nyDate').textContent = nyDateString;
+    // London time
+    const ldnTime = formatTime(now, 'Europe/London');
+    const ldnDate = formatDate(now, 'Europe/London');
+    document.getElementById('ldnTime').textContent = ldnTime;
+    document.getElementById('ldnDate').textContent = ldnDate;
 
-    // London time (GMT/BST)
-    const ldnOptions = { timeZone: 'Europe/London', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    const ldnDateOptions = { timeZone: 'Europe/London', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+    // New York time
+    const nyTime = formatTime(now, 'America/New_York');
+    const nyDate = formatDate(now, 'America/New_York');
+    document.getElementById('nyTime').textContent = nyTime;
+    document.getElementById('nyDate').textContent = nyDate;
 
-    const ldnTimeString = new Intl.DateTimeFormat('en-GB', ldnOptions).format(new Date());
-    const ldnDateString = new Intl.DateTimeFormat('en-GB', ldnDateOptions).format(new Date());
+    updateSessionInfo(now);
+  }
 
-    document.getElementById('ldnTime').textContent = ldnTimeString;
-    document.getElementById('ldnDate').textContent = ldnDateString;
+  // Define session start times in Bremen local time (Europe/Berlin)
+// London trading session (usually 8:00 AM London time)
+// New York trading session (usually 1:30 PM London time)
+// We'll convert these times to Bremen time and show them.
+
+  function updateSessionInfo(now) {
+    const sessionDiv = document.getElementById('sessionInfo');
+
+    // Create Date objects for session start times today in London time
+    const londonStartTime = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+    londonStartTime.setHours(8, 0, 0, 0); // 08:00 London time
+
+    // New York session start time is 13:30 London time (1:30 PM)
+    const nyStartTimeLondon = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+    nyStartTimeLondon.setHours(13, 30, 0, 0); // 13:30 London time
+
+    // Convert session start times to Bremen time
+    // We do this by creating the same instant and then formatting it in Europe/Berlin timezone
+    const londonStartTimeBremen = new Date(londonStartTime.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+    const nyStartTimeBremen = new Date(nyStartTimeLondon.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+
+    // Format for display
+    const londonStartStr = londonStartTimeBremen.toLocaleTimeString('en-GB', { hour12: false, hour: '2-digit', minute: '2-digit' });
+    const nyStartStr = nyStartTimeBremen.toLocaleTimeString('en-GB', { hour12: false, hour: '2-digit', minute: '2-digit' });
+
+    // Check if sessions are currently open or closed (simple logic)
+    // London session: 8:00 - 16:30 London time (roughly 9:00 - 17:30 Bremen time in winter, 9:00 - 17:30 in summer)
+    // New York session: 13:30 - 22:00 London time
+
+    // Get now in London timezone for comparisons
+    const nowLondon = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
+
+    const londonSessionOpen = nowLondon >= londonStartTime && nowLondon <= new Date(londonStartTime.getTime() + 8.5 * 60 * 60 * 1000);
+    const nySessionOpen = nowLondon >= nyStartTimeLondon && nowLondon <= new Date(nyStartTimeLondon.getTime() + 8.5 * 60 * 60 * 1000);
+
+    sessionDiv.innerHTML = `
+      <p><strong>London Session Start Time (Bremen):</strong> <span class="highlight">${londonStartStr}</span></p>
+      <p><strong>New York Session Start Time (Bremen):</strong> <span class="highlight">${nyStartStr}</span></p>
+      <p><strong>London Market Status:</strong> ${londonSessionOpen ? '<span class="highlight">Open</span>' : 'Closed'}</p>
+      <p><strong>New York Market Status:</strong> ${nySessionOpen ? '<span class="highlight">Open</span>' : 'Closed'}</p>
+    `;
   }
 
   setInterval(updateClocks, 1000);
-  updateClocks(); // initial call
+  updateClocks(); // Initial call
+
 </script>
 </body>
 </html>
