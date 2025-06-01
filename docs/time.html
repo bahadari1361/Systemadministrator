@@ -3,16 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Professional Trading Dashboard</title>
+<title>Pro Trading Dashboard</title>
 <style>
-  /* Reset & base */
-  * {
-    box-sizing: border-box;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121417;
-    color: #e1e6ef;
+    font-family: 'Inter', sans-serif;
+    background-color: #0f111a;
+    color: #d1d5db;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -21,90 +18,93 @@
     min-height: 100vh;
   }
   h1 {
-    color: #5b9bff;
-    margin-bottom: 10px;
+    color: #4f46e5;
     font-weight: 700;
+    margin-bottom: 30px;
     font-size: 2.5rem;
   }
-  h2 {
-    color: #a0bfff;
-    border-bottom: 2px solid #5b9bff;
-    padding-bottom: 6px;
-    margin-bottom: 15px;
-    font-weight: 600;
-  }
   section {
-    background: #1f2430;
+    background: #1e213a;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(91, 155, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.25);
     padding: 25px 30px;
-    margin-bottom: 25px;
-    width: 90%;
-    max-width: 700px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 720px;
   }
-  #marketSessions p, #currencyPrices ul li, #economicNews ul li {
-    font-size: 1.15rem;
-    margin-bottom: 12px;
-  }
-  #currencyPrices ul, #economicNews ul, #usefulLinks ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  #currencyPrices ul li, #economicNews ul li {
-    background: #2a2f3d;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: background 0.3s ease;
-  }
-  #currencyPrices ul li:hover, #economicNews ul li:hover {
-    background: #3e4a75;
-  }
-  a {
-    color: #5b9bff;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  .price {
-    float: right;
+  h2 {
     font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4f46e5;
+    padding-bottom: 8px;
+    color: #818cf8;
   }
-  #times-container {
+  #clocks {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     flex-wrap: wrap;
   }
-  .time-box {
-    background: #2a2f3d;
-    border-radius: 12px;
-    padding: 15px 20px;
+  .clock {
+    background: #272b49;
+    border-radius: 10px;
+    padding: 20px;
     width: calc(33% - 10px);
     text-align: center;
-    box-shadow: 0 2px 10px rgba(91, 155, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
   }
-  .time-box h3 {
-    margin: 0 0 10px 0;
-    font-weight: 700;
+  .clock h3 {
+    margin-bottom: 8px;
+    font-weight: 600;
     font-size: 1.1rem;
+    color: #a5b4fc;
   }
-  .time-box .time {
+  .time {
     font-size: 2rem;
-    font-weight: 800;
-    color: #5b9bff;
+    font-weight: 700;
+    color: #c7d2fe;
   }
-  @media (max-width: 650px) {
-    .time-box {
+  #marketSessions {
+    margin-top: 20px;
+  }
+  #marketSessions p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+  }
+  #currencyPrices ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  #currencyPrices ul li {
+    background: #2d3153;
+    margin-bottom: 12px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: background 0.3s ease;
+  }
+  #currencyPrices ul li:hover {
+    background: #433e7c;
+  }
+  #currencyPrices .price {
+    color: #a5b4fc;
+  }
+  #status {
+    font-weight: 700;
+    color: #60a5fa;
+  }
+  #countdown {
+    font-weight: 700;
+    color: #fbbf24;
+  }
+  @media(max-width: 700px) {
+    .clock {
       width: 100%;
     }
-  }
-  footer {
-    margin-top: auto;
-    font-size: 0.9rem;
-    color: #5b9bff;
   }
 </style>
 </head>
@@ -112,26 +112,34 @@
 
 <h1>Professional Trading Dashboard</h1>
 
-<section id="marketSessions">
-  <h2>Market Times</h2>
-  <div id="times-container">
-    <div class="time-box">
+<section id="timesSection">
+  <h2>Real-Time Clocks</h2>
+  <div id="clocks">
+    <div class="clock">
       <h3>Bremen (Germany)</h3>
       <div class="time" id="bremenTime">--:--:--</div>
     </div>
-    <div class="time-box">
+    <div class="clock">
       <h3>London (UK)</h3>
       <div class="time" id="londonTime">--:--:--</div>
     </div>
-    <div class="time-box">
+    <div class="clock">
       <h3>New York (US)</h3>
       <div class="time" id="nyTime">--:--:--</div>
     </div>
   </div>
 </section>
 
+<section id="marketSessions">
+  <h2>Market Session Status (London & New York)</h2>
+  <p>London Market is: <span id="londonStatus" class="status">Checking...</span></p>
+  <p>Time till open/close: <span id="londonCountdown" class="countdown">--:--:--</span></p>
+  <p>New York Market is: <span id="nyStatus" class="status">Checking...</span></p>
+  <p>Time till open/close: <span id="nyCountdown" class="countdown">--:--:--</span></p>
+</section>
+
 <section id="currencyPrices">
-  <h2>Top Currency Prices (Live, approx.)</h2>
+  <h2>Top 5 Currency Pairs (EUR/USD, GBP/USD, USD/JPY, AUD/USD, USD/CAD)</h2>
   <ul>
     <li>EUR/USD <span class="price" id="eurusd">Loading...</span></li>
     <li>GBP/USD <span class="price" id="gbpusd">Loading...</span></li>
@@ -141,107 +149,107 @@
   </ul>
 </section>
 
-<section id="economicNews">
-  <h2>Latest Economic News</h2>
-  <ul id="newsList">
-    <li>Loading news...</li>
-  </ul>
-</section>
-
-<section id="usefulLinks">
-  <h2>Useful Trading Links</h2>
-  <ul>
-    <li><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></li>
-    <li><a href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">ForexFactory Economic Calendar</a></li>
-    <li><a href="https://www.investing.com/news/forex-news" target="_blank" rel="noopener">Investing.com Forex News</a></li>
-    <li><a href="https://www.dailyfx.com/forex-economic-events" target="_blank" rel="noopener">DailyFX Economic Calendar</a></li>
-  </ul>
-</section>
-
-<footer>
-  &copy; 2025 Trading Dashboard by You
-</footer>
-
 <script>
-  // Update market times every second
-  function updateTimes() {
+  // === 1. Real-time clocks update every second ===
+  function updateClocks() {
     const now = new Date();
 
-    // Bremen time (local Germany)
-    document.getElementById('bremenTime').textContent = now.toLocaleTimeString('de-DE', { hour12: false });
+    // Bremen (Europe/Berlin)
+    document.getElementById('bremenTime').textContent = now.toLocaleTimeString('de-DE', { hour12: false, timeZone: 'Europe/Berlin' });
 
-    // London time (BST/GMT)
-    document.getElementById('londonTime').textContent = now.toLocaleTimeString('en-GB', {
-      timeZone: 'Europe/London',
-      hour12: false,
-    });
+    // London (Europe/London)
+    document.getElementById('londonTime').textContent = now.toLocaleTimeString('en-GB', { hour12: false, timeZone: 'Europe/London' });
 
-    // New York time (EST/EDT)
-    document.getElementById('nyTime').textContent = now.toLocaleTimeString('en-US', {
-      timeZone: 'America/New_York',
-      hour12: false,
-    });
+    // New York (America/New_York)
+    document.getElementById('nyTime').textContent = now.toLocaleTimeString('en-US', { hour12: false, timeZone: 'America/New_York' });
   }
-  setInterval(updateTimes, 1000);
-  updateTimes();
+  setInterval(updateClocks, 1000);
+  updateClocks();
 
-  // Fetch currency prices approx from free source without API key
+  // === 2. Market session open/close logic & countdown ===
+  // London Forex Market usually open 08:00 - 17:00 local time (London)
+  // New York Forex Market open 13:00 - 22:00 London time (08:00 - 17:00 New York time)
+  // We'll use London local time for calculations for London market and New York local time for NY market.
+
+  function getSessionStatus(currentDate, openHour, closeHour) {
+    const openTime = new Date(currentDate);
+    openTime.setHours(openHour, 0, 0, 0);
+    const closeTime = new Date(currentDate);
+    closeTime.setHours(closeHour, 0, 0, 0);
+
+    if (currentDate >= openTime && currentDate < closeTime) {
+      return { status: 'Open', nextEvent: closeTime };
+    } else if (currentDate < openTime) {
+      return { status: 'Closed', nextEvent: openTime };
+    } else {
+      // After close, next open is tomorrow at openHour
+      const nextOpen = new Date(openTime);
+      nextOpen.setDate(nextOpen.getDate() + 1);
+      return { status: 'Closed', nextEvent: nextOpen };
+    }
+  }
+
+  function formatTimeDiff(diffMillis) {
+    if (diffMillis < 0) return "--:--:--";
+    const totalSeconds = Math.floor(diffMillis / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+  }
+
+  function updateMarketStatus() {
+    const nowLondon = new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
+    const londonDate = new Date(nowLondon);
+
+    const nowNY = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+    const nyDate = new Date(nowNY);
+
+    // London Market 08:00 - 17:00 London time
+    const londonSession = getSessionStatus(londonDate, 8, 17);
+    document.getElementById('londonStatus').textContent = londonSession.status;
+    const londonCountdown = londonSession.nextEvent - londonDate;
+    document.getElementById('londonCountdown').textContent = formatTimeDiff(londonCountdown);
+
+    // New York Market 08:00 - 17:00 NY time
+    const nySession = getSessionStatus(nyDate, 8, 17);
+    document.getElementById('nyStatus').textContent = nySession.status;
+    const nyCountdown = nySession.nextEvent - nyDate;
+    document.getElementById('nyCountdown').textContent = formatTimeDiff(nyCountdown);
+  }
+  setInterval(updateMarketStatus, 1000);
+  updateMarketStatus();
+
+  // === 3. Fetch live currency prices (no API key) using exchangerate.host ===
   async function fetchCurrencyPrices() {
     try {
-      // This free JSON contains rates with USD as base
-      const response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json');
+      // exchangerate.host supports base EUR, so we'll get rates relative to EUR
+      const response = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=EUR,GBP,JPY,AUD,CAD');
       const data = await response.json();
-      const rates = data.usd;
+      if (!data || !data.rates) throw new Error('No rates');
 
-      // Convert to currency pairs properly
-      // EUR/USD = 1 / USD to EUR
-      document.getElementById('eurusd').textContent = (1 / rates.eur).toFixed(5);
-      document.getElementById('gbpusd').textContent = (1 / rates.gbp).toFixed(5);
-      document.getElementById('usdjpy').textContent = rates.jpy.toFixed(3);
-      document.getElementById('audusd').textContent = (1 / rates.aud).toFixed(5);
-      document.getElementById('usdcad').textContent = rates.cad.toFixed(5);
+      // Calculate pairs we want:
+      // EUR/USD = 1 / USD/EUR
+      const eurusd = 1 / data.rates.EUR;
+      const gbpusd = 1 / data.rates.GBP;
+      const usdjpy = data.rates.JPY;
+      const audusd = 1 / data.rates.AUD;
+      const usdcad = data.rates.CAD;
+
+      document.getElementById('eurusd').textContent = eurusd.toFixed(4);
+      document.getElementById('gbpusd').textContent = gbpusd.toFixed(4);
+      document.getElementById('usdjpy').textContent = usdjpy.toFixed(2);
+      document.getElementById('audusd').textContent = audusd.toFixed(4);
+      document.getElementById('usdcad').textContent = usdcad.toFixed(4);
     } catch (error) {
-      console.error('Failed to load currency prices:', error);
-      ['eurusd','gbpusd','usdjpy','audusd','usdcad'].forEach(id => {
-        document.getElementById(id).textContent = 'N/A';
-      });
+      console.error('Error fetching currency prices:', error);
+      document.querySelectorAll('#currencyPrices .price').forEach(el => el.textContent = 'N/A');
     }
   }
   fetchCurrencyPrices();
-  setInterval(fetchCurrencyPrices, 5 * 60 * 1000);
-
-  // Fetch latest economic news from Investing.com RSS (via proxy to avoid CORS)
-  async function fetchEconomicNews() {
-    const rssUrl = 'https://www.investing.com/rss/news_25.rss';
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
-
-    try {
-      const response = await fetch(proxyUrl);
-      const data = await response.json();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(data.contents, "application/xml");
-      const items = xmlDoc.querySelectorAll('item');
-      const newsList = document.getElementById('newsList');
-
-      newsList.innerHTML = ''; // Clear old
-
-      for(let i = 0; i < Math.min(5, items.length); i++) {
-        const item = items[i];
-        const title = item.querySelector('title').textContent;
-        const link = item.querySelector('link').textContent;
-
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="${link}" target="_blank" rel="noopener">${title}</a>`;
-        newsList.appendChild(li);
-      }
-    } catch (error) {
-      console.error('Failed to load news:', error);
-      document.getElementById('newsList').innerHTML = '<li>Unable to load news at this time.</li>';
-    }
-  }
-  fetchEconomicNews();
-  setInterval(fetchEconomicNews, 10 * 60 * 1000);
+  setInterval(fetchCurrencyPrices, 60 * 1000); // Refresh every minute
 
 </script>
+
 </body>
 </html>
