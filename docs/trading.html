@@ -486,11 +486,11 @@
                     <div class="stat-label">Win Rate</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" id="totalProfit">€0.00</div>
+                    <div class="stat-value" id="totalProfit">$0.00</div>
                     <div class="stat-label">Profit</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" id="accountBalance">€10,000.00</div>
+                    <div class="stat-value" id="accountBalance">$10,000.00</div>
                     <div class="stat-label">Balance</div>
                 </div>
             </div>
@@ -508,21 +508,21 @@
                     <div class="summary-title">
                         <span>💰</span> Starting Capital
                     </div>
-                    <div class="summary-value" id="startingCapital">€10,000.00</div>
+                    <div class="summary-value" id="startingCapital">$10,000.00</div>
                     <div class="summary-change neutral">Initial investment</div>
                 </div>
                 <div class="summary-card capital-card">
                     <div class="summary-title">
                         <span>💳</span> Current Balance
                     </div>
-                    <div class="summary-value" id="currentBalance">€10,000.00</div>
-                    <div class="summary-change" id="balanceChange">+€0.00 (0%)</div>
+                    <div class="summary-value" id="currentBalance">$10,000.00</div>
+                    <div class="summary-change" id="balanceChange">+$0.00 (0%)</div>
                 </div>
                 <div class="summary-card profit-card">
                     <div class="summary-title">
                         <span>📈</span> Net Profit/Loss
                     </div>
-                    <div class="summary-value" id="netProfitLoss">€0.00</div>
+                    <div class="summary-value" id="netProfitLoss">$0.00</div>
                     <div class="summary-change" id="profitLossChange">All time</div>
                 </div>
                 <div class="summary-card profit-card">
@@ -542,11 +542,11 @@
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Average Win</div>
-                    <div class="metric-value" id="avgWin">€0.00</div>
+                    <div class="metric-value" id="avgWin">$0.00</div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Average Loss</div>
-                    <div class="metric-value" id="avgLoss">€0.00</div>
+                    <div class="metric-value" id="avgLoss">$0.00</div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Win/Loss Ratio</div>
@@ -558,7 +558,7 @@
                 </div>
                 <div class="metric-item">
                     <div class="metric-title">Max Drawdown</div>
-                    <div class="metric-value" id="maxDrawdown">€0.00</div>
+                    <div class="metric-value" id="maxDrawdown">$0.00</div>
                 </div>
             </div>
 
@@ -810,17 +810,17 @@
                     
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>€{trade.date}</td>
-                        <td>€{trade.symbol}</td>
-                        <td>€{trade.position}</td>
-                        <td>€{trade.entry.toFixed(5)}</td>
-                        <td>€{trade.exit.toFixed(5)}</td>
-                        <td>€{trade.lot.toFixed(2)}</td>
-                        <td class="€{profitClass}">€{profitLoss >= 0 ? '+' : ''}€{profitLoss.toFixed(2)}</td>
-                        <td class="€{profitClass}">€{percentChange >= 0 ? '+' : ''}€{percentChange.toFixed(2)}%</td>
+                        <td>${trade.date}</td>
+                        <td>${trade.symbol}</td>
+                        <td>${trade.position}</td>
+                        <td>${trade.entry.toFixed(5)}</td>
+                        <td>${trade.exit.toFixed(5)}</td>
+                        <td>${trade.lot.toFixed(2)}</td>
+                        <td class="${profitClass}">${profitLoss >= 0 ? '+' : ''}${profitLoss.toFixed(2)}</td>
+                        <td class="${profitClass}">${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%</td>
                         <td class="action-btns">
-                            <button class="btn btn-sm btn-edit" data-index="€{index}">Edit</button>
-                            <button class="btn btn-sm btn-danger" data-index="€{index}">Delete</button>
+                            <button class="btn btn-sm btn-edit" data-index="${index}">Edit</button>
+                            <button class="btn btn-sm btn-danger" data-index="${index}">Delete</button>
                         </td>
                     `;
                     
@@ -890,27 +890,27 @@
                 if (trades.length > 0) {
                     const profitableTrades = trades.filter(trade => calculateProfitLoss(trade) > 0).length;
                     const winRate = (profitableTrades / trades.length) * 100;
-                    winRateEl.textContent = `€{winRate.toFixed(1)}%`;
+                    winRateEl.textContent = `${winRate.toFixed(1)}%`;
                     
                     const totalProfit = trades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
-                    totalProfitEl.textContent = `€€{totalProfit.toFixed(2)}`;
+                    totalProfitEl.textContent = `$${totalProfit.toFixed(2)}`;
                 } else {
                     winRateEl.textContent = '0%';
-                    totalProfitEl.textContent = '€0.00';
+                    totalProfitEl.textContent = '$0.00';
                 }
 
-                accountBalanceEl.textContent = `€€{capital.current.toFixed(2)}`;
+                accountBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
             }
 
             function updateCapitalDisplay() {
-                startingCapitalEl.textContent = `€€{capital.starting.toFixed(2)}`;
-                currentBalanceEl.textContent = `€€{capital.current.toFixed(2)}`;
+                startingCapitalEl.textContent = `$${capital.starting.toFixed(2)}`;
+                currentBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
                 
                 const netProfitLoss = capital.current - capital.starting;
-                netProfitLossEl.textContent = `€€{netProfitLoss.toFixed(2)}`;
+                netProfitLossEl.textContent = `$${netProfitLoss.toFixed(2)}`;
                 
                 const percentChange = ((capital.current - capital.starting) / capital.starting) * 100;
-                const changeText = `€{percentChange >= 0 ? '+' : ''}€{percentChange.toFixed(2)}%`;
+                const changeText = `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%`;
                 
                 // Update ROI
                 roiValueEl.textContent = changeText;
@@ -922,7 +922,7 @@
                 profitLossChangeEl.className = positive ? 'summary-change positive' : 'summary-change negative';
                 roiValueEl.className = positive ? 'summary-value positive' : 'summary-value negative';
                 
-                balanceChangeEl.textContent = `€{netProfitLoss >= 0 ? '+' : ''}€{netProfitLoss.toFixed(2)} (€{changeText})`;
+                balanceChangeEl.textContent = `${netProfitLoss >= 0 ? '+' : ''}${netProfitLoss.toFixed(2)} (${changeText})`;
                 profitLossChangeEl.textContent = `All time`;
                 roiChangeEl.textContent = `Return on investment`;
             }
@@ -931,11 +931,11 @@
                 if (trades.length === 0) {
                     // Reset all metrics if no trades
                     riskPerTradeEl.textContent = '0%';
-                    avgWinEl.textContent = '€0.00';
-                    avgLossEl.textContent = '€0.00';
+                    avgWinEl.textContent = '$0.00';
+                    avgLossEl.textContent = '$0.00';
                     winLossRatioEl.textContent = '0.00';
                     profitFactorEl.textContent = '0.00';
-                    maxDrawdownEl.textContent = '€0.00';
+                    maxDrawdownEl.textContent = '$0.00';
                     return;
                 }
 
@@ -980,12 +980,12 @@
                 const riskPerTrade = 1.0; // This would normally be calculated based on your stop loss
 
                 // Update UI
-                riskPerTradeEl.textContent = `€{riskPerTrade.toFixed(1)}%`;
-                avgWinEl.textContent = `€€{avgWin.toFixed(2)}`;
-                avgLossEl.textContent = `€€{avgLoss.toFixed(2)}`;
+                riskPerTradeEl.textContent = `${riskPerTrade.toFixed(1)}%`;
+                avgWinEl.textContent = `$${avgWin.toFixed(2)}`;
+                avgLossEl.textContent = `$${avgLoss.toFixed(2)}`;
                 winLossRatioEl.textContent = winLossRatio.toFixed(2);
                 profitFactorEl.textContent = profitFactor.toFixed(2);
-                maxDrawdownEl.textContent = `€€{maxDrawdown.toFixed(2)}`;
+                maxDrawdownEl.textContent = `$${maxDrawdown.toFixed(2)}`;
             }
         });
     </script>
