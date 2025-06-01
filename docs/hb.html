@@ -1014,3 +1014,39 @@
                             }
                         }
                     }
+            const exportFileDefaultName = 'fx-trades-export.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function importTrades(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedTrades = JSON.parse(e.target.result);
+                    if (Array.isArray(importedTrades) && importedTrades.length > 0) {
+                        if (confirm(`Import ${importedTrades.length} trades? This will replace your current trade history.`)) {
+                            trades = importedTrades;
+                            saveTrades();
+                            renderTrades();
+                            updateStats();
+                            checkEmptyState();
+                        }
+                    } else {
+                        alert('Invalid trade data format');
+                    }
+                } catch (error) {
+                    alert('Error parsing file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            e.target.value = ''; // Reset file input
+        }
+    });
+</script>
