@@ -1,318 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pro Trading Dashboard | BahadariTech</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-<style>
-  /* Reset + base */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    background: #0e1217;
-    color: #e1e6eb;
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    padding: 1.5rem 2rem;
-    background: linear-gradient(90deg, #005bea, #00c6fb);
-    text-align: center;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 10px rgba(0, 198, 251, 0.3);
-  }
-  main {
-    flex: 1;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-  .card {
-    background: #1f2733;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgb(0 198 251 / 0.15);
-    padding: 1.8rem 2rem;
-    flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  h2 {
-    font-weight: 700;
-    margin: 0 0 0.8rem 0;
-    color: #00c6fb;
-  }
-  .time {
-    font-size: 2.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.2rem;
-  }
-  .date {
-    font-size: 1rem;
-    color: #8ca3b9;
-    margin-bottom: 1rem;
-  }
-  .status {
-    font-weight: 700;
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
-    display: inline-block;
-    margin-top: 0.6rem;
-    font-size: 1.1rem;
-  }
-  .open {
-    background: #00e676;
-    color: #003300;
-    box-shadow: 0 0 10px #00e676aa;
-  }
-  .closed {
-    background: #f44336;
-    color: #fff;
-    box-shadow: 0 0 12px #f44336aa;
-  }
-  /* News feed styling */
-  .news-list {
-    list-style: none;
-    padding-left: 0;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .news-item {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid #2c3643;
-  }
-  .news-item a {
-    text-decoration: none;
-    color: #00c6fb;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  .news-item a:hover {
-    text-decoration: underline;
-  }
-  .news-source {
-    font-size: 0.8rem;
-    color: #62718a;
-  }
-  /* Market summary */
-  .market-summary {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    color: #62718a;
-  }
-  /* Responsive */
-  @media (max-width: 680px) {
-    .grid {
-      flex-direction: column;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trading Dashboard - No API Needed</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 10px; background: #f4f6f8; color: #333; }
+    header { text-align: center; margin-bottom: 30px; }
+    section { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    h2 { border-bottom: 2px solid #007acc; padding-bottom: 5px; color: #007acc; }
+    ul { list-style-type: none; padding-left: 0; }
+    li { margin: 8px 0; }
+    a { color: #007acc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
 <header>
-  BahadariTech Professional Trading Dashboard
+  <h1>Trading Dashboard</h1>
+  <p>Times, Prices & News — No API Keys Needed</p>
 </header>
 
-<main>
-  <section class="grid">
+<section id="marketSessions">
+  <h2>Market Times</h2>
+  <p>Bremen Time: <span id="bremenTime">--:--</span></p>
+  <p>London Time: <span id="londonTime">--:--</span></p>
+  <p>New York Time: <span id="nyTime">--:--</span></p>
+</section>
 
-    <article class="card" id="localTimeCard">
-      <h2>Bremen Local Time</h2>
-      <div class="time" id="bremenTime">--:--:--</div>
-      <div class="date" id="bremenDate">Loading date...</div>
-    </article>
+<section id="currencyPrices">
+  <h2>Top Currency Prices (Unofficial, updated every 5 min)</h2>
+  <ul>
+    <li>EUR/USD: <span id="eurusd">Loading...</span></li>
+    <li>GBP/USD: <span id="gbpusd">Loading...</span></li>
+    <li>USD/JPY: <span id="usdjpy">Loading...</span></li>
+    <li>AUD/USD: <span id="audusd">Loading...</span></li>
+    <li>USD/CAD: <span id="usdcad">Loading...</span></li>
+  </ul>
+</section>
 
-    <article class="card" id="londonTimeCard">
-      <h2>London Time & Session</h2>
-      <div class="time" id="londonTime">--:--:--</div>
-      <div class="status closed" id="londonStatus">Checking...</div>
-      <div style="margin-top: 0.6rem; color: #8ca3b9; font-size: 0.9rem;">
-        Session Start: <span id="londonSessionStart">--:--</span> Bremen Time
-      </div>
-    </article>
+<section id="economicNews">
+  <h2>Latest Economic News (via RSS)</h2>
+  <ul id="newsList">
+    <li>Loading news...</li>
+  </ul>
+</section>
 
-    <article class="card" id="nyTimeCard">
-      <h2>New York Time & Session</h2>
-      <div class="time" id="nyTime">--:--:--</div>
-      <div class="status closed" id="nyStatus">Checking...</div>
-      <div style="margin-top: 0.6rem; color: #8ca3b9; font-size: 0.9rem;">
-        Session Start: <span id="nySessionStart">--:--</span> Bremen Time
-      </div>
-    </article>
-
-  </section>
-
-  <section style="margin-top: 3rem;">
-    <h2>Latest Economic News</h2>
-    <ul class="news-list" id="newsList">
-      <li>Loading news...</li>
-    </ul>
-  </section>
-
-  <section style="margin-top: 3rem;">
-    <h2>Top Currency Volatility (24h)</h2>
-    <div id="volatilitySummary" class="market-summary">Loading...</div>
-  </section>
-
-  <section style="margin-top: 3rem; font-size: 0.9rem; color: #62718a;">
-    <p>For detailed Economic Calendar, visit: <a href="https://www.investing.com/economic-calendar/" target="_blank" rel="noopener noreferrer">Investing.com Economic Calendar</a></p>
-  </section>
-
-</main>
-
-<footer>
-  &copy; 2025 BahadariTech | Trading dashboard updated every minute
-</footer>
+<section>
+  <h2>Useful Links</h2>
+  <ul>
+    <li><a href="https://www.tradingview.com/" target="_blank">TradingView</a></li>
+    <li><a href="https://www.forexfactory.com/calendar" target="_blank">ForexFactory Economic Calendar</a></li>
+    <li><a href="https://www.investing.com/news/forex-news" target="_blank">Investing.com Forex News</a></li>
+  </ul>
+</section>
 
 <script>
-  const pad = (n) => n.toString().padStart(2, '0');
-  const formatTime = (d) => `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  const formatDate = (d) => d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-
-  // Convert Date to specific timezone date object
-  function convertTZ(date, tzString) {
-    return new Date(date.toLocaleString("en-US", { timeZone: tzString }));
-  }
-
-  // Market open logic (Mon-Fri)
-  function isMarketOpen(now, startHour, startMinute, durationHours) {
-    const day = now.getDay();
-    if(day === 0 || day === 6) return false; // weekend
-    const openTime = new Date(now);
-    openTime.setHours(startHour, startMinute, 0, 0);
-    const closeTime = new Date(openTime.getTime() + durationHours * 60 * 60 * 1000);
-    return now >= openTime && now <= closeTime;
-  }
-
-  // Update clocks & sessions
+  // Update local times every second
   function updateTimes() {
-    const nowUTC = new Date();
-
-    // Bremen
-    const nowBremen = convertTZ(nowUTC, "Europe/Berlin");
-    document.getElementById('bremenTime').textContent = formatTime(nowBremen);
-    document.getElementById('bremenDate').textContent = formatDate(nowBremen);
-
-    // London
-    const nowLondon = convertTZ(nowUTC, "Europe/London");
-    document.getElementById('londonTime').textContent = formatTime(nowLondon);
-
-    const londonOpen = isMarketOpen(nowLondon, 8, 0, 8.5);
-    const londonStatus = document.getElementById('londonStatus');
-    if(londonOpen) {
-      londonStatus.textContent = "Market Open";
-      londonStatus.className = "status open";
-    } else {
-      londonStatus.textContent = "Market Closed";
-      londonStatus.className = "status closed";
-    }
-    document.getElementById('londonSessionStart').textContent = "09:00";
-
-    // New York
-    const nowNY = convertTZ(nowUTC, "America/New_York");
-    document.getElementById('nyTime').textContent = formatTime(nowNY);
-
-    const nyOpen = isMarketOpen(nowNY, 8, 30, 8);
-    const nyStatus = document.getElementById('nyStatus');
-    if(nyOpen) {
-      nyStatus.textContent = "Market Open";
-      nyStatus.className = "status open";
-    } else {
-      nyStatus.textContent = "Market Closed";
-      nyStatus.className = "status closed";
-    }
-    document.getElementById('nySessionStart').textContent = "14:30";
+    const now = new Date();
+    document.getElementById('bremenTime').textContent = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('londonTime').textContent = now.toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('nyTime').textContent = now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' });
   }
+  setInterval(updateTimes, 1000);
+  updateTimes();
 
-  // News API fetch - Using Finnhub.io free plan demo token (replace with your own key)
-  async function fetchNews() {
-    const newsList = document.getElementById('newsList');
-    newsList.innerHTML = "<li>Loading news...</li>";
-
+  // Fetch currency prices from a free public JSON source (unofficial, delay ~5 min)
+  async function fetchCurrencyPrices() {
     try {
-      // Using Finnhub Crypto/Forex news endpoint - You need to replace with your own API key for production
-      const apiKey = 'sandbox_c0v3knqad3if8q3nfi80'; // demo sandbox key (limited)
-      const url = `https://finnhub.io/api/v1/news?category=forex&token=${apiKey}`;
-
-      const res = await fetch(url);
-      if(!res.ok) throw new Error('Failed to fetch news');
-
-      const newsData = await res.json();
-
-      newsList.innerHTML = ''; // clear loading
-
-      newsData.slice(0, 8).forEach(item => {
-        const li = document.createElement('li');
-        li.classList.add('news-item');
-        li.innerHTML = `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.headline}</a><div class="news-source">${item.source} - ${new Date(item.datetime * 1000).toLocaleString()}</div>`;
-        newsList.appendChild(li);
-      });
-    } catch(err) {
-      newsList.innerHTML = `<li>Unable to load news. Please try again later.</li>`;
-      console.error('News fetch error:', err);
+      const response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json');
+      const data = await response.json();
+      const rates = data.usd;
+      document.getElementById('eurusd').textContent = (1 / rates.eur).toFixed(5);
+      document.getElementById('gbpusd').textContent = (1 / rates.gbp).toFixed(5);
+      document.getElementById('usdjpy').textContent = rates.jpy.toFixed(2);
+      document.getElementById('audusd').textContent = (1 / rates.aud).toFixed(5);
+      document.getElementById('usdcad').textContent = rates.cad.toFixed(5);
+    } catch (error) {
+      console.error('Error fetching currency prices:', error);
+      document.getElementById('eurusd').textContent = 'N/A';
+      document.getElementById('gbpusd').textContent = 'N/A';
+      document.getElementById('usdjpy').textContent = 'N/A';
+      document.getElementById('audusd').textContent = 'N/A';
+      document.getElementById('usdcad').textContent = 'N/A';
     }
   }
+  fetchCurrencyPrices();
+  setInterval(fetchCurrencyPrices, 5 * 60 * 1000); // update every 5 minutes
 
-  // Fake volatility data - Replace with real API if you want
-  function updateVolatility() {
-    const volElem = document.getElementById('volatilitySummary');
-    const sampleData = [
-      {pair: "EUR/USD", volatility: "0.75%"},
-      {pair: "GBP/USD", volatility: "0.92%"},
-      {pair: "USD/JPY", volatility: "0.68%"},
-      {pair: "AUD/USD", volatility: "0.83%"},
-      {pair: "USD/CAD", volatility: "0.77%"}
-    ];
-
-    let html = '<ul style="padding-left: 1rem;">';
-    sampleData.forEach(item => {
-      html += `<li><strong>${item.pair}</strong>: ${item.volatility} (24h)</li>`;
-    });
-    html += '</ul>';
-
-    volElem.innerHTML = html;
+  // Fetch economic news from RSS using a public proxy (CORS-enabled)
+  async function fetchEconomicNews() {
+    const rssUrl = 'https://www.investing.com/rss/news_25.rss';
+    const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
+    try {
+      const response = await fetch(proxy);
+      const data = await response.json();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(data.contents, "application/xml");
+      const items = xmlDoc.querySelectorAll('item');
+      const newsList = document.getElementById('newsList');
+      newsList.innerHTML = '';
+      for(let i = 0; i < Math.min(5, items.length); i++) {
+        const item = items[i];
+        const title = item.querySelector('title').textContent;
+        const link = item.querySelector('link').textContent;
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+        newsList.appendChild(li);
+      }
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      document.getElementById('newsList').innerHTML = '<li>Failed to load news.</li>';
+    }
   }
-
-  // Initialize everything
-  function init() {
-    updateTimes();
-    fetchNews();
-    updateVolatility();
-    setInterval(() => {
-      updateTimes();
-    }, 1000);
-
-    // Refresh news every 5 minutes
-    setInterval(fetchNews, 300000);
-  }
-
-  init();
-
+  fetchEconomicNews();
+  setInterval(fetchEconomicNews, 10 * 60 * 1000); // update every 10 minutes
 </script>
+
 </body>
 </html>
