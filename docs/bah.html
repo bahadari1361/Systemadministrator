@@ -1093,16 +1093,246 @@
                     </div>
                 </div>
                 
-                <div class="tab-content" id="monthly-report-tab" style="display: none;">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="report-month">Month</label>
-                            <input type="month" id="report-month">
+                                   <div class="table-container" id="monthly-report-results" style="display: none;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="main-content" id="settings-section" style="display: none;">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-cog"></i> Application Settings</h2>
+                </div>
+                
+                <div class="settings-panel">
+                    <div>
+                        <div class="settings-group">
+                            <h3 class="settings-title">General Settings</h3>
+                            <div class="form-group">
+                                <label for="defaultRisk">Default Risk per Trade (%)</label>
+                                <input type="number" step="0.1" id="defaultRisk" min="0" max="100" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="defaultLotSize">Default Lot Size</label>
+                                <input type="number" step="0.01" id="defaultLotSize" min="0.01" value="0.10">
+                            </div>
+                            <div class="form-group">
+                                <label for="theme">Theme</label>
+                                <select id="theme">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="system">System Default</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <button class="btn btn-block" id="generateMonthlyReport">
-                                <i class="fas fa-file-pdf"></i> Generate Monthly Report
-                            </button>
+                        
+                        <div class="settings-group">
+                            <h3 class="settings-title">Notifications</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="tradeAlerts" checked>
+                                    Trade alerts
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="dailySummary" checked>
+                                    Daily summary
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="weeklyReport">
+                                    Weekly report
+                                </label>
+                            </div>
                         </div>
-                    </div
+                    </div>
+                    
+                    <div>
+                        <div class="settings-group">
+                            <h3 class="settings-title">Data Management</h3>
+                            <div class="form-group">
+                                <label>Backup & Restore</label>
+                                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                                    <button class="btn btn-sm" id="exportDataBtn">
+                                        <i class="fas fa-file-export"></i> Export Data
+                                    </button>
+                                    <button class="btn btn-sm btn-edit" id="importDataBtn">
+                                        <i class="fas fa-file-import"></i> Import Data
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reset Application</label>
+                                <button class="btn btn-sm btn-danger" id="resetAppBtn">
+                                    <i class="fas fa-trash-alt"></i> Reset All Data
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h3 class="settings-title">About</h3>
+                            <p style="margin-bottom: 12px;">ProTrade Journal v1.0.0</p>
+                            <p style="margin-bottom: 12px;">A professional trading journal for forex traders.</p>
+                            <div style="display: flex; gap: 12px;">
+                                <a href="#" class="btn btn-sm"><i class="fas fa-question-circle"></i> Help</a>
+                                <a href="#" class="btn btn-sm"><i class="fas fa-bug"></i> Report Bug</a>
+                                <a href="#" class="btn btn-sm"><i class="fas fa-star"></i> Rate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
+    
+    <!-- Main Application Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.main-content');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active nav item
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show the selected section
+                    const sectionId = this.getAttribute('data-section') + '-section';
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    document.getElementById(sectionId).style.display = 'block';
+                });
+            });
+            
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show the selected tab content
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    tabContents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    document.getElementById(tabId).style.display = 'block';
+                });
+            });
+            
+            // Initialize charts (placeholder - actual data would come from your application)
+            const ctx = document.getElementById('equityChart').getContext('2d');
+            const equityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Account Equity',
+                        data: [10000, 10500, 11000, 10750, 11500, 12000],
+                        borderColor: '#4361ee',
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+            
+            // Add other chart initializations here...
+            
+            // Trade form submission
+            const tradeForm = document.getElementById('tradeForm');
+            if (tradeForm) {
+                tradeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Handle trade submission logic here
+                    alert('Trade saved successfully!');
+                    this.reset();
+                });
+            }
+            
+            // Capital adjustment buttons
+            const depositBtn = document.getElementById('depositBtn');
+            const withdrawBtn = document.getElementById('withdrawBtn');
+            const resetCapitalBtn = document.getElementById('resetCapitalBtn');
+            
+            if (depositBtn) {
+                depositBtn.addEventListener('click', function() {
+                    const amount = parseFloat(document.getElementById('capitalAmount').value);
+                    if (amount && amount > 0) {
+                        // Handle deposit logic
+                        alert(`Deposited $${amount.toFixed(2)}`);
+                    }
+                });
+            }
+            
+            if (withdrawBtn) {
+                withdrawBtn.addEventListener('click', function() {
+                    const amount = parseFloat(document.getElementById('capitalAmount').value);
+                    if (amount && amount > 0) {
+                        // Handle withdrawal logic
+                        alert(`Withdrew $${amount.toFixed(2)}`);
+                    }
+                });
+            }
+            
+            if (resetCapitalBtn) {
+                resetCapitalBtn.addEventListener('click', function() {
+                    // Handle reset logic
+                    alert('Capital reset to initial value');
+                });
+            }
+            
+            // Report generation buttons
+            const generateDailyReport = document.getElementById('generateDailyReport');
+            if (generateDailyReport) {
+                generateDailyReport.addEventListener('click', function() {
+                    // Handle daily report generation
+                    document.getElementById('daily-report-results').style.display = 'block';
+                });
+            }
+            
+            // Add other event listeners and functionality here...
+        });
+    </script>
+</body>
+</html>
