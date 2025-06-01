@@ -1,202 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Professional Trading Dashboard | Market Session Times</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Trader's Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-bg: #0f172a;
-            --secondary-bg: #1e293b;
-            --card-bg: #334155;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-blue: #3b82f6;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-radius: 12px;
-            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --dark-bg: #0a0e17;
+            --card-bg: #1a2035;
+            --accent-blue: #3a86ff;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --border-radius: 10px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         body {
-            background-color: var(--primary-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
             color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .last-updated {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
 
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .card {
-            background-color: var(--secondary-bg);
+            background: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 20px;
             box-shadow: var(--box-shadow);
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .timezone {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            background-color: var(--card-bg);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-        }
-
-        .time-display {
-            font-size: 2.5rem;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
-
-        .date-display {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
         }
 
         .market-status {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .status-open {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
+        .status-open { background: var(--accent-green); color: white; }
+        .status-closed { background: var(--accent-red); color: white; }
+        .status-pre { background: #f39c12; color: white; }
+        .status-post { background: #9b59b6; color: white; }
+
+        .time-display {
+            font-size: 2.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            margin: 10px 0;
+            letter-spacing: 2px;
         }
 
-        .status-closed {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--accent-red);
-        }
-
-        .session-info {
-            background-color: var(--secondary-bg);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .session-info h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .session-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .session-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-        }
-
-        .session-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .session-name::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-blue);
-        }
-
-        .session-times {
-            font-size: 0.875rem;
+        .date-display {
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .session-local-time {
-            font-weight: 500;
-            color: var(--text-primary);
+            font-size: 0.9rem;
         }
 
         .progress-container {
-            height: 4px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin-top: 0.75rem;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 15px 0;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
-            background-color: var(--accent-green);
-            border-radius: 2px;
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, var(--accent-blue), #00cec9);
+        }
+
+        .news-container {
+            height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .news-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .news-item p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .news-source {
+            display: inline-block;
+            background: rgba(58, 134, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid var(--accent-blue);
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -204,81 +149,130 @@
                 grid-template-columns: 1fr;
             }
             
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
+            .time-display {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Market Session Dashboard</h1>
-            <div class="last-updated" id="lastUpdated">Updating...</div>
-        </header>
-
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Frankfurt</div>
-                    <div class="timezone">CET/CEST</div>
-                </div>
+    <div class="dashboard">
+        <!-- Market Clocks Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-clock"></i> Market Hours</h2>
+                <div id="lastUpdated">Loading...</div>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="changeTab('stocks')">Stocks</div>
+                <div class="tab" onclick="changeTab('forex')">Forex</div>
+                <div class="tab" onclick="changeTab('crypto')">Crypto</div>
+            </div>
+            
+            <div id="stocks-clocks">
+                <!-- Frankfurt -->
+                <h3><i class="fas fa-landmark"></i> Frankfurt</h3>
                 <div class="time-display" id="frankfurtTime">--:--:--</div>
                 <div class="date-display" id="frankfurtDate">Loading...</div>
                 <div class="market-status status-closed" id="frankfurtStatus">Closed</div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">London</div>
-                    <div class="timezone">GMT/BST</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="frankfurtProgress" style="width: 0%"></div>
                 </div>
+                
+                <!-- London -->
+                <h3 style="margin-top: 20px;"><i class="fas fa-pound-sign"></i> London</h3>
                 <div class="time-display" id="londonTime">--:--:--</div>
                 <div class="date-display" id="londonDate">Loading...</div>
                 <div class="market-status status-closed" id="londonStatus">Closed</div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">New York</div>
-                    <div class="timezone">EST/EDT</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="londonProgress" style="width: 0%"></div>
                 </div>
+                
+                <!-- New York -->
+                <h3 style="margin-top: 20px;"><i class="fas fa-dollar-sign"></i> New York</h3>
                 <div class="time-display" id="newyorkTime">--:--:--</div>
                 <div class="date-display" id="newyorkDate">Loading...</div>
                 <div class="market-status status-closed" id="newyorkStatus">Closed</div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="newyorkProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div id="forex-clocks" style="display: none;">
+                <h3><i class="fas fa-globe"></i> Forex Market</h3>
+                <div class="time-display">24/5</div>
+                <div class="market-status status-open">Open</div>
+                <p style="color: var(--text-secondary); margin-top: 10px;">Closes Friday 5PM EST | Opens Sunday 5PM EST</p>
+            </div>
+            
+            <div id="crypto-clocks" style="display: none;">
+                <h3><i class="fas fa-coins"></i> Crypto Market</h3>
+                <div class="time-display">24/7</div>
+                <div class="market-status status-open">Open</div>
+                <p style="color: var(--text-secondary); margin-top: 10px;">No market closures</p>
             </div>
         </div>
 
-        <div class="session-info">
-            <h2>Trading Sessions</h2>
-            <div class="session-grid">
-                <div class="session-card">
-                    <div class="session-name">Asian Session</div>
-                    <div class="session-times">Tokyo: 00:00 - 09:00 GMT</div>
-                    <div class="session-local-time" id="asianLocalTime">Bremen: --:-- - --:--</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="asianProgress" style="width: 0%"></div>
-                    </div>
+        <!-- Financial News Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-newspaper"></i> Financial News</h2>
+                <div><i class="fas fa-sync-alt" onclick="fetchNews()" style="cursor: pointer;"></i></div>
+            </div>
+            <div class="news-container" id="newsContainer">
+                <div class="news-item">
+                    <h4>Loading financial news...</h4>
+                    <p>Fetching latest market updates</p>
                 </div>
+            </div>
+        </div>
 
-                <div class="session-card">
-                    <div class="session-name">European Session</div>
-                    <div class="session-times">London: 08:00 - 16:30 GMT</div>
-                    <div class="session-local-time" id="europeanLocalTime">Bremen: --:-- - --:--</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="europeanProgress" style="width: 0%"></div>
+        <!-- Trading Tools Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-tools"></i> Trading Tools</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
+                <a href="https://www.tradingview.com/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="background: rgba(58, 134, 255, 0.1); padding: 15px; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-chart-line" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div>TradingView</div>
                     </div>
+                </a>
+                <a href="https://www.investing.com/economic-calendar/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="background: rgba(46, 204, 113, 0.1); padding: 15px; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-calendar-alt" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div>Economic Calendar</div>
+                    </div>
+                </a>
+                <a href="https://www.bloomberg.com/markets" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-chart-bar" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div>Market Data</div>
+                    </div>
+                </a>
+                <a href="https://www.finviz.com/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div style="background: rgba(231, 76, 60, 0.1); padding: 15px; border-radius: 8px; text-align: center;">
+                        <i class="fas fa-search-dollar" style="font-size: 1.5rem; margin-bottom: 5px;"></i>
+                        <div>Screener</div>
+                    </div>
+                </a>
+            </div>
+            
+            <h3 style="margin-top: 20px;"><i class="fas fa-exchange-alt"></i> Market Sessions</h3>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; margin-top: 10px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>Asian Session</span>
+                    <span id="asianSessionTime">00:00-09:00 GMT</span>
                 </div>
-
-                <div class="session-card">
-                    <div class="session-name">US Session</div>
-                    <div class="session-times">New York: 13:30 - 22:00 GMT</div>
-                    <div class="session-local-time" id="usLocalTime">Bremen: --:-- - --:--</div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="usProgress" style="width: 0%"></div>
-                    </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>London Session</span>
+                    <span id="londonSessionTime">08:00-16:30 GMT</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span>New York Session</span>
+                    <span id="nySessionTime">13:30-22:00 GMT</span>
                 </div>
             </div>
         </div>
@@ -287,23 +281,12 @@
     <script>
         // Configuration
         const config = {
-            updateInterval: 1000, // Update every second
-            sessions: {
-                asian: {
-                    startHourGMT: 0,
-                    endHourGMT: 9,
-                    name: 'Asian'
-                },
-                european: {
-                    startHourGMT: 8,
-                    endHourGMT: 16.5,
-                    name: 'European'
-                },
-                us: {
-                    startHourGMT: 13.5,
-                    endHourGMT: 22,
-                    name: 'US'
-                }
+            updateInterval: 1000,
+            newsApiKey: 'YOUR_NEWSAPI_KEY', // Replace with your NewsAPI key
+            marketHours: {
+                frankfurt: { open: 8, close: 22, days: [1,2,3,4,5] }, // Mon-Fri 8AM-10PM CET
+                london: { open: 8, close: 16.5, days: [1,2,3,4,5] }, // Mon-Fri 8AM-4:30PM GMT
+                newyork: { open: 9.5, close: 16, days: [1,2,3,4,5] }  // Mon-Fri 9:30AM-4PM EST
             }
         };
 
@@ -314,169 +297,198 @@
             frankfurtTime: document.getElementById('frankfurtTime'),
             frankfurtDate: document.getElementById('frankfurtDate'),
             frankfurtStatus: document.getElementById('frankfurtStatus'),
+            frankfurtProgress: document.getElementById('frankfurtProgress'),
             // London
             londonTime: document.getElementById('londonTime'),
             londonDate: document.getElementById('londonDate'),
             londonStatus: document.getElementById('londonStatus'),
+            londonProgress: document.getElementById('londonProgress'),
             // New York
             newyorkTime: document.getElementById('newyorkTime'),
             newyorkDate: document.getElementById('newyorkDate'),
             newyorkStatus: document.getElementById('newyorkStatus'),
+            newyorkProgress: document.getElementById('newyorkProgress'),
             // Session times
-            asianLocalTime: document.getElementById('asianLocalTime'),
-            europeanLocalTime: document.getElementById('europeanLocalTime'),
-            usLocalTime: document.getElementById('usLocalTime'),
-            // Progress bars
-            asianProgress: document.getElementById('asianProgress'),
-            europeanProgress: document.getElementById('europeanProgress'),
-            usProgress: document.getElementById('usProgress')
+            asianSessionTime: document.getElementById('asianSessionTime'),
+            londonSessionTime: document.getElementById('londonSessionTime'),
+            nySessionTime: document.getElementById('nySessionTime'),
+            // News
+            newsContainer: document.getElementById('newsContainer'),
+            // Tabs
+            stocksClocks: document.getElementById('stocks-clocks'),
+            forexClocks: document.getElementById('forex-clocks'),
+            cryptoClocks: document.getElementById('crypto-clocks')
         };
 
-        // Format time for display
+        // Format time
         function formatTime(date, timeZone) {
-            return new Intl.DateTimeFormat('en-US', {
+            return date.toLocaleTimeString('en-US', {
                 timeZone,
                 hour12: false,
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit'
-            }).format(date).replace(',', '');
+            }).replace(/^24:/, '00:');
         }
 
-        // Format date for display
+        // Format date
         function formatDate(date, timeZone) {
-            return new Intl.DateTimeFormat('en-US', {
+            return date.toLocaleDateString('en-US', {
                 timeZone,
                 weekday: 'short',
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric'
-            }).format(date);
-        }
-
-        // Convert GMT time to local Bremen time
-        function gmtToLocalTime(gmtHour, gmtMinute = 0) {
-            const now = new Date();
-            const gmtDate = new Date(now.toLocaleString('en-US', { timeZone: 'GMT' }));
-            
-            // Set the GMT time
-            gmtDate.setHours(gmtHour);
-            gmtDate.setMinutes(gmtMinute);
-            gmtDate.setSeconds(0);
-            
-            // Convert to Bremen time
-            return new Date(gmtDate.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
-        }
-
-        // Format time without seconds
-        function formatShortTime(date) {
-            return date.toLocaleTimeString('en-US', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit'
             });
         }
 
-        // Calculate session progress percentage
-        function calculateSessionProgress(nowGMT, startHourGMT, endHourGMT) {
-            const sessionStart = new Date(nowGMT);
-            sessionStart.setHours(startHourGMT, 0, 0, 0);
+        // Check if market is open
+        function isMarketOpen(market, now) {
+            const localTime = new Date(now.toLocaleString('en-US', { 
+                timeZone: market === 'newyork' ? 'America/New_York' : 
+                         market === 'london' ? 'Europe/London' : 'Europe/Berlin'
+            }));
             
-            const sessionEnd = new Date(nowGMT);
-            sessionEnd.setHours(endHourGMT, 0, 0, 0);
+            const day = localTime.getDay(); // 0 (Sun) to 6 (Sat)
+            const hour = localTime.getHours() + (localTime.getMinutes() / 60);
             
-            // If session hasn't started yet
-            if (nowGMT < sessionStart) return 0;
-            
-            // If session has ended
-            if (nowGMT > sessionEnd) return 100;
-            
-            // Calculate progress percentage
-            const sessionDuration = sessionEnd - sessionStart;
-            const elapsedTime = nowGMT - sessionStart;
-            return (elapsedTime / sessionDuration) * 100;
+            // Check if weekday and within hours
+            return config.marketHours[market].days.includes(day) && 
+                   hour >= config.marketHours[market].open && 
+                   hour < config.marketHours[market].close;
         }
 
-        // Check if market is open (simplified logic)
-        function isMarketOpen(city, nowGMT) {
-            const localTime = new Date(nowGMT.toLocaleString('en-US', { timeZone: city === 'newyork' ? 'America/New_York' : 
-                                                                      city === 'london' ? 'Europe/London' : 'Europe/Berlin' }));
+        // Calculate market progress
+        function calculateMarketProgress(market, now) {
+            const localTime = new Date(now.toLocaleString('en-US', { 
+                timeZone: market === 'newyork' ? 'America/New_York' : 
+                         market === 'london' ? 'Europe/London' : 'Europe/Berlin'
+            }));
             
-            const hour = localTime.getHours();
+            const day = localTime.getDay();
+            const hour = localTime.getHours() + (localTime.getMinutes() / 60);
             
-            switch(city) {
-                case 'frankfurt':
-                    // Frankfurt market hours: 8:00 - 22:00 local time
-                    return hour >= 8 && hour < 22;
-                case 'london':
-                    // London market hours: 8:00 - 16:30 local time
-                    return (hour >= 8 && hour < 16) || (hour === 16 && localTime.getMinutes() < 30);
-                case 'newyork':
-                    // NY market hours: 9:30 - 16:00 local time
-                    return (hour >= 9 && hour < 16) || (hour === 9 && localTime.getMinutes() >= 30);
-                default:
-                    return false;
+            if (!config.marketHours[market].days.includes(day) return 0;
+            if (hour < config.marketHours[market].open) return 0;
+            if (hour >= config.marketHours[market].close) return 100;
+            
+            const sessionLength = config.marketHours[market].close - config.marketHours[market].open;
+            const progress = ((hour - config.marketHours[market].open) / sessionLength) * 100;
+            
+            return Math.min(100, Math.max(0, progress));
+        }
+
+        // Update all market clocks
+        function updateClocks() {
+            const now = new Date();
+            
+            // Update timestamp
+            elements.lastUpdated.textContent = `Updated: ${formatTime(now, 'GMT')} GMT`;
+            
+            // Frankfurt
+            elements.frankfurtTime.textContent = formatTime(now, 'Europe/Berlin');
+            elements.frankfurtDate.textContent = formatDate(now, 'Europe/Berlin');
+            const frankfurtOpen = isMarketOpen('frankfurt', now);
+            elements.frankfurtStatus.textContent = frankfurtOpen ? 'Open' : 'Closed';
+            elements.frankfurtStatus.className = frankfurtOpen ? 'market-status status-open' : 'market-status status-closed';
+            elements.frankfurtProgress.style.width = `${calculateMarketProgress('frankfurt', now)}%`;
+            
+            // London
+            elements.londonTime.textContent = formatTime(now, 'Europe/London');
+            elements.londonDate.textContent = formatDate(now, 'Europe/London');
+            const londonOpen = isMarketOpen('london', now);
+            elements.londonStatus.textContent = londonOpen ? 'Open' : 'Closed';
+            elements.londonStatus.className = londonOpen ? 'market-status status-open' : 'market-status status-closed';
+            elements.londonProgress.style.width = `${calculateMarketProgress('london', now)}%`;
+            
+            // New York
+            elements.newyorkTime.textContent = formatTime(now, 'America/New_York');
+            elements.newyorkDate.textContent = formatDate(now, 'America/New_York');
+            const newyorkOpen = isMarketOpen('newyork', now);
+            elements.newyorkStatus.textContent = newyorkOpen ? 'Open' : 'Closed';
+            elements.newyorkStatus.className = newyorkOpen ? 'market-status status-open' : 'market-status status-closed';
+            elements.newyorkProgress.style.width = `${calculateMarketProgress('newyork', now)}%`;
+        }
+
+        // Fetch financial news
+        async function fetchNews() {
+            try {
+                elements.newsContainer.innerHTML = '<div class="news-item"><h4>Loading latest news...</h4><p>Please wait</p></div>';
+                
+                // Note: In a real implementation, you would use the NewsAPI
+                // const response = await fetch(`https://newsapi.org/v2/top-headlines?category=business&apiKey=${config.newsApiKey}`);
+                // const data = await response.json();
+                
+                // Mock data for demonstration
+                const mockNews = [
+                    {
+                        title: "Fed Signals Potential Rate Cuts Amid Economic Slowdown",
+                        description: "Federal Reserve officials indicate possible rate reductions in Q3 as inflation cools.",
+                        source: "Bloomberg"
+                    },
+                    {
+                        title: "Tech Stocks Rally After Strong Earnings Reports",
+                        description: "Major tech companies beat earnings expectations, driving NASDAQ to record highs.",
+                        source: "CNBC"
+                    },
+                    {
+                        title: "Oil Prices Surge Following Middle East Tensions",
+                        description: "Brent crude jumps 3% after reports of supply disruptions in the region.",
+                        source: "Reuters"
+                    },
+                    {
+                        title: "ECB Maintains Rates Despite Growth Concerns",
+                        description: "European Central Bank holds steady on interest rates amid mixed economic signals.",
+                        source: "Financial Times"
+                    },
+                    {
+                        title: "Bitcoin Volatility Increases Ahead of Halving Event",
+                        description: "Cryptocurrency markets show heightened activity as halving date approaches.",
+                        source: "CoinDesk"
+                    }
+                ];
+                
+                elements.newsContainer.innerHTML = '';
+                mockNews.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                        <span class="news-source">${item.source}</span>
+                    `;
+                    elements.newsContainer.appendChild(newsItem);
+                });
+                
+            } catch (error) {
+                elements.newsContainer.innerHTML = '<div class="news-item"><h4>Error loading news</h4><p>Please try again later</p></div>';
+                console.error('Error fetching news:', error);
             }
         }
 
-        // Update all clocks and session info
-        function updateDashboard() {
-            const now = new Date();
-            const nowGMT = new Date(now.toLocaleString('en-US', { timeZone: 'GMT' }));
+        // Change between market tabs
+        function changeTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
             
-            // Update last updated time
-            elements.lastUpdated.textContent = `Last updated: ${formatTime(now, 'GMT')} GMT`;
+            elements.stocksClocks.style.display = 'none';
+            elements.forexClocks.style.display = 'none';
+            elements.cryptoClocks.style.display = 'none';
             
-            // Update Frankfurt time
-            elements.frankfurtTime.textContent = formatTime(now, 'Europe/Berlin');
-            elements.frankfurtDate.textContent = formatDate(now, 'Europe/Berlin');
-            elements.frankfurtStatus.textContent = isMarketOpen('frankfurt', nowGMT) ? 'Open' : 'Closed';
-            elements.frankfurtStatus.className = isMarketOpen('frankfurt', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
-            
-            // Update London time
-            elements.londonTime.textContent = formatTime(now, 'Europe/London');
-            elements.londonDate.textContent = formatDate(now, 'Europe/London');
-            elements.londonStatus.textContent = isMarketOpen('london', nowGMT) ? 'Open' : 'Closed';
-            elements.londonStatus.className = isMarketOpen('london', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
-            
-            // Update New York time
-            elements.newyorkTime.textContent = formatTime(now, 'America/New_York');
-            elements.newyorkDate.textContent = formatDate(now, 'America/New_York');
-            elements.newyorkStatus.textContent = isMarketOpen('newyork', nowGMT) ? 'Open' : 'Closed';
-            elements.newyorkStatus.className = isMarketOpen('newyork', nowGMT) ? 'market-status status-open' : 'market-status status-closed';
-            
-            // Update session times in local time (Bremen)
-            const asianStartLocal = gmtToLocalTime(config.sessions.asian.startHourGMT);
-            const asianEndLocal = gmtToLocalTime(config.sessions.asian.endHourGMT);
-            elements.asianLocalTime.textContent = `Bremen: ${formatShortTime(asianStartLocal)} - ${formatShortTime(asianEndLocal)}`;
-            
-            const europeanStartLocal = gmtToLocalTime(config.sessions.european.startHourGMT);
-            const europeanEndLocal = gmtToLocalTime(config.sessions.european.endHourGMT);
-            elements.europeanLocalTime.textContent = `Bremen: ${formatShortTime(europeanStartLocal)} - ${formatShortTime(europeanEndLocal)}`;
-            
-            const usStartLocal = gmtToLocalTime(config.sessions.us.startHourGMT);
-            const usEndLocal = gmtToLocalTime(config.sessions.us.endHourGMT);
-            elements.usLocalTime.textContent = `Bremen: ${formatShortTime(usStartLocal)} - ${formatShortTime(usEndLocal)}`;
-            
-            // Update progress bars
-            elements.asianProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.asian.startHourGMT, config.sessions.asian.endHourGMT)}%`;
-            elements.europeanProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.european.startHourGMT, config.sessions.european.endHourGMT)}%`;
-            elements.usProgress.style.width = `${calculateSessionProgress(nowGMT, config.sessions.us.startHourGMT, config.sessions.us.endHourGMT)}%`;
-            
-            // Change progress bar color based on session status
-            const asianProgress = calculateSessionProgress(nowGMT, config.sessions.asian.startHourGMT, config.sessions.asian.endHourGMT);
-            elements.asianProgress.style.backgroundColor = asianProgress > 0 && asianProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
-            
-            const europeanProgress = calculateSessionProgress(nowGMT, config.sessions.european.startHourGMT, config.sessions.european.endHourGMT);
-            elements.europeanProgress.style.backgroundColor = europeanProgress > 0 && europeanProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
-            
-            const usProgress = calculateSessionProgress(nowGMT, config.sessions.us.startHourGMT, config.sessions.us.endHourGMT);
-            elements.usProgress.style.backgroundColor = usProgress > 0 && usProgress < 100 ? 'var(--accent-green)' : 'var(--text-secondary)';
+            if (tab === 'stocks') elements.stocksClocks.style.display = 'block';
+            if (tab === 'forex') elements.forexClocks.style.display = 'block';
+            if (tab === 'crypto') elements.cryptoClocks.style.display = 'block';
         }
 
-        // Initialize and update dashboard
-        updateDashboard();
-        setInterval(updateDashboard, config.updateInterval);
+        // Initialize
+        updateClocks();
+        setInterval(updateClocks, config.updateInterval);
+        fetchNews();
+        
+        // Set session times
+        elements.asianSessionTime.textContent = '00:00-09:00 GMT';
+        elements.londonSessionTime.textContent = '08:00-16:30 GMT';
+        elements.nySessionTime.textContent = '13:30-22:00 GMT';
     </script>
 </body>
 </html>
