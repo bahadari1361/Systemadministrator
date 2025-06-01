@@ -3,220 +3,316 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Market Sessions & Timezone Dashboard</title>
+<title>Pro Trading Dashboard | BahadariTech</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
 <style>
-  /* Modern clean styling */
+  /* Reset + base */
+  * {
+    box-sizing: border-box;
+  }
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #f0f0f0;
-    margin: 0; padding: 20px;
+    margin: 0; padding: 0;
+    background: #0e1217;
+    color: #e1e6eb;
+    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-height: 100vh;
   }
-  h1 {
-    margin-bottom: 0.2em;
-    color: #00d8ff;
+  header {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(90deg, #005bea, #00c6fb);
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 198, 251, 0.3);
   }
-  .container {
+  main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 900px;
-    width: 100%;
+    gap: 2rem;
   }
   .card {
-    background: #222;
+    background: #1f2733;
     border-radius: 12px;
-    padding: 20px;
-    flex: 1 1 250px;
-    box-shadow: 0 4px 15px rgba(0, 216, 255, 0.3);
-    min-width: 260px;
+    box-shadow: 0 8px 16px rgb(0 198 251 / 0.15);
+    padding: 1.8rem 2rem;
+    flex: 1 1 320px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  h2 {
+    font-weight: 700;
+    margin: 0 0 0.8rem 0;
+    color: #00c6fb;
   }
   .time {
-    font-size: 2.4em;
+    font-size: 2.8rem;
     font-weight: 700;
-    margin: 0.2em 0 0.4em;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+  .date {
+    font-size: 1rem;
+    color: #8ca3b9;
+    margin-bottom: 1rem;
   }
   .status {
-    font-weight: 600;
-    color: #0f0;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 1.1rem;
   }
-  .status.closed {
-    color: #f33;
+  .open {
+    background: #00e676;
+    color: #003300;
+    box-shadow: 0 0 10px #00e676aa;
   }
-  small {
-    color: #bbb;
+  .closed {
+    background: #f44336;
+    color: #fff;
+    box-shadow: 0 0 12px #f44336aa;
   }
-  footer {
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #666;
+  /* News feed styling */
+  .news-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 400px;
+    overflow-y: auto;
   }
-  a {
-    color: #00d8ff;
+  .news-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #2c3643;
+  }
+  .news-item a {
     text-decoration: none;
+    color: #00c6fb;
+    font-weight: 600;
+    font-size: 1rem;
   }
-  a:hover {
+  .news-item a:hover {
     text-decoration: underline;
   }
+  .news-source {
+    font-size: 0.8rem;
+    color: #62718a;
+  }
+  /* Market summary */
+  .market-summary {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #62718a;
+  }
   /* Responsive */
-  @media (max-width: 600px) {
-    .container {
+  @media (max-width: 680px) {
+    .grid {
       flex-direction: column;
-      gap: 20px;
     }
   }
 </style>
 </head>
 <body>
 
-<h1>Market Time & Sessions Dashboard</h1>
+<header>
+  BahadariTech Professional Trading Dashboard
+</header>
 
-<div class="container">
+<main>
+  <section class="grid">
 
-  <div class="card" id="bremenCard">
-    <h2>Bremen (Germany) Local Time</h2>
-    <div class="time" id="bremenTime">--:--:--</div>
-    <div id="bremenDate"></div>
-  </div>
+    <article class="card" id="localTimeCard">
+      <h2>Bremen Local Time</h2>
+      <div class="time" id="bremenTime">--:--:--</div>
+      <div class="date" id="bremenDate">Loading date...</div>
+    </article>
 
-  <div class="card" id="londonCard">
-    <h2>London Time & Market Session</h2>
-    <div class="time" id="londonTime">--:--:--</div>
-    <div>
-      Status: <span id="londonStatus" class="status closed">Checking...</span>
-    </div>
-    <small>Trading Session Starts at: <span id="londonSessionStart">--:--</span> Bremen Time</small>
-  </div>
+    <article class="card" id="londonTimeCard">
+      <h2>London Time & Session</h2>
+      <div class="time" id="londonTime">--:--:--</div>
+      <div class="status closed" id="londonStatus">Checking...</div>
+      <div style="margin-top: 0.6rem; color: #8ca3b9; font-size: 0.9rem;">
+        Session Start: <span id="londonSessionStart">--:--</span> Bremen Time
+      </div>
+    </article>
 
-  <div class="card" id="nyCard">
-    <h2>New York Time & Market Session</h2>
-    <div class="time" id="nyTime">--:--:--</div>
-    <div>
-      Status: <span id="nyStatus" class="status closed">Checking...</span>
-    </div>
-    <small>Trading Session Starts at: <span id="nySessionStart">--:--</span> Bremen Time</small>
-  </div>
+    <article class="card" id="nyTimeCard">
+      <h2>New York Time & Session</h2>
+      <div class="time" id="nyTime">--:--:--</div>
+      <div class="status closed" id="nyStatus">Checking...</div>
+      <div style="margin-top: 0.6rem; color: #8ca3b9; font-size: 0.9rem;">
+        Session Start: <span id="nySessionStart">--:--</span> Bremen Time
+      </div>
+    </article>
 
-</div>
+  </section>
 
-<div class="card" style="max-width: 900px; margin-top: 40px;">
-  <h2>Economic News Feed</h2>
-  <!-- Using a free economic calendar widget from investing.com (adjusted for modern usage) -->
-  <iframe src="https://www.investing.com/economic-calendar/" 
-          style="width: 100%; height: 400px; border:none; border-radius: 12px;" 
-          title="Economic Calendar"></iframe>
-</div>
+  <section style="margin-top: 3rem;">
+    <h2>Latest Economic News</h2>
+    <ul class="news-list" id="newsList">
+      <li>Loading news...</li>
+    </ul>
+  </section>
+
+  <section style="margin-top: 3rem;">
+    <h2>Top Currency Volatility (24h)</h2>
+    <div id="volatilitySummary" class="market-summary">Loading...</div>
+  </section>
+
+  <section style="margin-top: 3rem; font-size: 0.9rem; color: #62718a;">
+    <p>For detailed Economic Calendar, visit: <a href="https://www.investing.com/economic-calendar/" target="_blank" rel="noopener noreferrer">Investing.com Economic Calendar</a></p>
+  </section>
+
+</main>
 
 <footer>
-  Created by BahadariTech | Data times are shown in 24h format
+  &copy; 2025 BahadariTech | Trading dashboard updated every minute
 </footer>
 
 <script>
-  function pad(num) {
-    return num.toString().padStart(2, '0');
-  }
+  const pad = (n) => n.toString().padStart(2, '0');
+  const formatTime = (d) => `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const formatDate = (d) => d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
 
-  // Return formatted time string HH:MM:SS
-  function formatTime(date) {
-    return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-  }
-
-  // Return formatted date string YYYY-MM-DD Weekday
-  function formatDate(date) {
-    return date.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-  }
-
+  // Convert Date to specific timezone date object
   function convertTZ(date, tzString) {
     return new Date(date.toLocaleString("en-US", { timeZone: tzString }));
   }
 
-  // Trading session times in London time (BST/GMT)
-  // London FX session approx: 08:00 - 16:30 London time
-  // NY FX session approx: 13:30 - 22:00 London time
-
-  // Helper: Check if market is open considering day of week and time range
-  function isMarketOpen(now, startHour, startMinute, durationHours, tz) {
-    const day = now.getDay(); // Sunday=0 ... Saturday=6
-    // Markets open Monday(1) to Friday(5)
-    if(day === 0 || day === 6) return false; // closed on weekends
-
+  // Market open logic (Mon-Fri)
+  function isMarketOpen(now, startHour, startMinute, durationHours) {
+    const day = now.getDay();
+    if(day === 0 || day === 6) return false; // weekend
     const openTime = new Date(now);
     openTime.setHours(startHour, startMinute, 0, 0);
     const closeTime = new Date(openTime.getTime() + durationHours * 60 * 60 * 1000);
-
     return now >= openTime && now <= closeTime;
   }
 
+  // Update clocks & sessions
   function updateTimes() {
     const nowUTC = new Date();
 
-    // Bremen Time (Europe/Berlin)
+    // Bremen
     const nowBremen = convertTZ(nowUTC, "Europe/Berlin");
     document.getElementById('bremenTime').textContent = formatTime(nowBremen);
     document.getElementById('bremenDate').textContent = formatDate(nowBremen);
 
-    // London Time (Europe/London)
+    // London
     const nowLondon = convertTZ(nowUTC, "Europe/London");
     document.getElementById('londonTime').textContent = formatTime(nowLondon);
 
-    // NY Time (America/New_York)
+    const londonOpen = isMarketOpen(nowLondon, 8, 0, 8.5);
+    const londonStatus = document.getElementById('londonStatus');
+    if(londonOpen) {
+      londonStatus.textContent = "Market Open";
+      londonStatus.className = "status open";
+    } else {
+      londonStatus.textContent = "Market Closed";
+      londonStatus.className = "status closed";
+    }
+    document.getElementById('londonSessionStart').textContent = "09:00";
+
+    // New York
     const nowNY = convertTZ(nowUTC, "America/New_York");
     document.getElementById('nyTime').textContent = formatTime(nowNY);
 
-    // Check if London Market Open
-    // London session: 08:00 to 16:30 London time (8.5 hours)
-    const londonOpen = isMarketOpen(nowLondon, 8, 0, 8.5, "Europe/London");
-    const londonStatusElem = document.getElementById('londonStatus');
-    if (londonOpen) {
-      londonStatusElem.textContent = "OPEN";
-      londonStatusElem.classList.remove('closed');
-      londonStatusElem.classList.add('status');
+    const nyOpen = isMarketOpen(nowNY, 8, 30, 8);
+    const nyStatus = document.getElementById('nyStatus');
+    if(nyOpen) {
+      nyStatus.textContent = "Market Open";
+      nyStatus.className = "status open";
     } else {
-      londonStatusElem.textContent = "CLOSED";
-      londonStatusElem.classList.remove('status');
-      londonStatusElem.classList.add('closed');
+      nyStatus.textContent = "Market Closed";
+      nyStatus.className = "status closed";
     }
-
-    // Check if NY Market Open
-    // NY session: 13:30 to 22:00 London time (8.5 hours)
-    // We'll compare NY session converted to London time to handle correctly
-    // But for simpler: check NY market in NY time 08:30 - 17:00 approx (8.5 hours)
-    const nyOpen = isMarketOpen(nowNY, 8, 30, 8.5, "America/New_York");
-    const nyStatusElem = document.getElementById('nyStatus');
-    if (nyOpen) {
-      nyStatusElem.textContent = "OPEN";
-      nyStatusElem.classList.remove('closed');
-      nyStatusElem.classList.add('status');
-    } else {
-      nyStatusElem.textContent = "CLOSED";
-      nyStatusElem.classList.remove('status');
-      nyStatusElem.classList.add('closed');
-    }
-
-    // Show session start times converted to Bremen time (Europe/Berlin)
-    // London session starts at 08:00 London time
-    let londonStart = new Date(nowLondon);
-    londonStart.setHours(8, 0, 0, 0);
-    const londonStartBremen = convertTZ(londonStart, "Europe/Berlin");
-    document.getElementById('londonSessionStart').textContent = `${pad(londonStartBremen.getHours())}:${pad(londonStartBremen.getMinutes())}`;
-
-    // NY session starts at 08:30 NY time
-    let nyStart = new Date(nowNY);
-    nyStart.setHours(8, 30, 0, 0);
-    const nyStartBremen = convertTZ(nyStart, "Europe/Berlin");
-    document.getElementById('nySessionStart').textContent = `${pad(nyStartBremen.getHours())}:${pad(nyStartBremen.getMinutes())}`;
+    document.getElementById('nySessionStart').textContent = "14:30";
   }
 
-  // Update every second
-  setInterval(updateTimes, 1000);
-  updateTimes();
-</script>
+  // News API fetch - Using Finnhub.io free plan demo token (replace with your own key)
+  async function fetchNews() {
+    const newsList = document.getElementById('newsList');
+    newsList.innerHTML = "<li>Loading news...</li>";
 
+    try {
+      // Using Finnhub Crypto/Forex news endpoint - You need to replace with your own API key for production
+      const apiKey = 'sandbox_c0v3knqad3if8q3nfi80'; // demo sandbox key (limited)
+      const url = `https://finnhub.io/api/v1/news?category=forex&token=${apiKey}`;
+
+      const res = await fetch(url);
+      if(!res.ok) throw new Error('Failed to fetch news');
+
+      const newsData = await res.json();
+
+      newsList.innerHTML = ''; // clear loading
+
+      newsData.slice(0, 8).forEach(item => {
+        const li = document.createElement('li');
+        li.classList.add('news-item');
+        li.innerHTML = `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.headline}</a><div class="news-source">${item.source} - ${new Date(item.datetime * 1000).toLocaleString()}</div>`;
+        newsList.appendChild(li);
+      });
+    } catch(err) {
+      newsList.innerHTML = `<li>Unable to load news. Please try again later.</li>`;
+      console.error('News fetch error:', err);
+    }
+  }
+
+  // Fake volatility data - Replace with real API if you want
+  function updateVolatility() {
+    const volElem = document.getElementById('volatilitySummary');
+    const sampleData = [
+      {pair: "EUR/USD", volatility: "0.75%"},
+      {pair: "GBP/USD", volatility: "0.92%"},
+      {pair: "USD/JPY", volatility: "0.68%"},
+      {pair: "AUD/USD", volatility: "0.83%"},
+      {pair: "USD/CAD", volatility: "0.77%"}
+    ];
+
+    let html = '<ul style="padding-left: 1rem;">';
+    sampleData.forEach(item => {
+      html += `<li><strong>${item.pair}</strong>: ${item.volatility} (24h)</li>`;
+    });
+    html += '</ul>';
+
+    volElem.innerHTML = html;
+  }
+
+  // Initialize everything
+  function init() {
+    updateTimes();
+    fetchNews();
+    updateVolatility();
+    setInterval(() => {
+      updateTimes();
+    }, 1000);
+
+    // Refresh news every 5 minutes
+    setInterval(fetchNews, 300000);
+  }
+
+  init();
+
+</script>
 </body>
 </html>
