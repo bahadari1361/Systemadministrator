@@ -1,3 +1,12 @@
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const password = prompt("Enter password to access the trading journal:");
+        if (password !== "YourSecretPassword") {
+            alert("Incorrect password. Access denied.");
+            document.body.innerHTML = "";
+            return;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
