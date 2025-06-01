@@ -947,5 +947,307 @@
             newyorkCloseTime: document.getElementById('newyorkCloseTime'),
             newyorkHours: document.getElementById('newyorkHours'),
             newyorkNext: document.getElementById('newyorkNext'),
-            // Session times
-            asianSessionTime: document.getElementById('
+                        // Session times
+            asianSessionTime: document.getElementById('asianSessionTime'),
+            londonSessionTime: document.getElementById('londonSessionTime'),
+            overlapSessionTime: document.getElementById('overlapSessionTime'),
+            nySessionTime: document.getElementById('nySessionTime'),
+            // News
+            newsContainer: document.getElementById('newsContainer'),
+            refreshNews: document.getElementById('refreshNews'),
+            newsUpdated: document.getElementById('newsUpdated'),
+            // Tabs
+            tabs: document.querySelectorAll('.tab'),
+            tabContents: document.querySelectorAll('.tab-content'),
+            // Dark mode toggle
+            darkModeToggle: document.getElementById('darkModeToggle')
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up market clocks
+            updateAllMarkets();
+            setInterval(updateAllMarkets, config.updateInterval);
+            
+            // Load initial news
+            loadNews();
+            
+            // Set up tab switching
+            setupTabs();
+            
+            // Set up dark mode toggle
+            setupDarkModeToggle();
+            
+            // Set up news refresh button
+            elements.refreshNews.addEventListener('click', function() {
+                this.classList.add('refreshing');
+                loadNews();
+                setTimeout(() => {
+                    this.classList.remove('refreshing');
+                }, 1000);
+            });
+        });
+
+        // Market clock functions
+        function updateAllMarkets() {
+            updateMarketClock('frankfurt');
+            updateMarketClock('london');
+            updateMarketClock('newyork');
+            updateForexStatus();
+            updateLastUpdated();
+        }
+
+        function updateMarketClock(market) {
+            const marketConfig = config.marketHours[market];
+            const now = new Date();
+            const options = { timeZone: marketConfig.timezone };
+            
+            // Format time and date
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                ...options, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            const dateStr = now.toLocaleDateString('en-US', { 
+                ...options, 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+            
+            // Update time and date displays
+            elements[`${market}Time`].textContent = timeStr;
+            elements[`${market}Date`].textContent = dateStr;
+            
+            // Get local time in market timezone
+            const localTime = new Date(now.toLocaleString('en-US', options));
+            const day = localTime.getDay();
+            const hours = localTime.getHours() + (localTime.getMinutes() / 60);
+            
+            // Check if market is open
+            const isMarketDay = marketConfig.days.includes(day);
+            const isOpen = isMarketDay && hours >= marketConfig.open && hours < marketConfig.close;
+            
+            // Update status and progress bar
+            if (isOpen) {
+                // Market is open
+                const sessionLength = marketConfig.close - marketConfig.open;
+                const hoursOpen = hours - marketConfig.open;
+                const progressPercent = (hoursOpen / sessionLength) * 100;
+                
+                elements[`${market}Status`].className = 'status status-open';
+                elements[`${market}Status`].querySelector('span:last-child').textContent = 'Open';
+                elements[`${market}Progress`].style.width = `${progressPercent}%`;
+                elements[`${market}Countdown`].innerHTML = `<i class="far fa-clock"></i> <span>Market closes in ${formatCountdown(marketConfig.close - hours)}</span>`;
+            } else {
+                // Market is closed
+                elements[`${market}Status`].className = 'status status-closed';
+                elements[`${market}Status`].querySelector('span:last-child').textContent = 'Closed';
+                elements[`${market}Progress`].style.width = '0%';
+                
+                // Calculate time until next open
+                let nextOpenDay = day;
+                let nextOpenHours = marketConfig.open;
+                
+                if (!isMarketDay || hours >= marketConfig.close) {
+                    // Find next market day
+                    let daysToAdd = 1;
+                    while (daysToAdd < 7) {
+                        const nextDay = (day + daysToAdd) % 7;
+                        if (marketConfig.days.includes(nextDay)) {
+                            nextOpenDay = nextDay;
+                            break;
+                        }
+                        daysToAdd++;
+                    }
+                } else if (hours < marketConfig.open) {
+                    // Market opens later today
+                    nextOpenHours = marketConfig.open;
+                }
+                
+                const timeUntilOpen = ((nextOpenDay - day) * 24) + (nextOpenHours - hours);
+                elements[`${market}Countdown`].innerHTML = `<i class="far fa-clock"></i> <span>Market opens in ${formatCountdown(timeUntilOpen)}</span>`;
+                
+                // Format next open time
+                const nextOpenDate = new Date(localTime);
+                if (nextOpenDay !== day) {
+                    const dayDiff = (nextOpenDay - day + 7) % 7;
+                    nextOpenDate.setDate(nextOpenDate.getDate() + dayDiff);
+                }
+                nextOpenDate.setHours(Math.floor(marketConfig.open), nextOpenDate.setMinutes((marketConfig.open % 1) * 60, 0, 0);
+                
+                const nextOpenStr = nextOpenDate.toLocaleDateString('en-US', { 
+                    ...options,
+                    weekday: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true 
+                });
+                elements[`${market}Next`].textContent = `Next open: ${nextOpenStr}`;
+            }
+            
+            // Update static displays
+            elements[`${market}OpenTime`].textContent = marketConfig.openDisplay;
+            elements[`${market}CloseTime`].textContent = marketConfig.closeDisplay;
+            elements[`${market}Hours`].textContent = marketConfig.hoursDisplay;
+        }
+
+        function updateForexStatus() {
+            const now = new Date();
+            const estOptions = { timeZone: 'America/New_York' };
+            const estTime = new Date(now.toLocaleString('en-US', estOptions));
+            const day = estTime.getDay();
+            const hours = estTime.getHours() + (estTime.getMinutes() / 60);
+            
+            // Forex market is open Sunday 5PM to Friday 5PM EST
+            const isForexOpen = (day > config.forexOpenDay && day < config.forexCloseDay) || 
+                               (day === config.forexOpenDay && hours >= config.forexOpenHour) || 
+                               (day === config.forexCloseDay && hours < config.forexCloseHour);
+            
+            // Update session statuses
+            updateForexSession('asianSessionTime', 0, 9, 'GMT');
+            updateForexSession('londonSessionTime', 8, 16.5, 'GMT');
+            updateForexSession('overlapSessionTime', 13.5, 16.5, 'GMT');
+            updateForexSession('nySessionTime', 13.5, 22, 'GMT');
+        }
+
+        function updateForexSession(elementId, openHour, closeHour, timezone) {
+            const now = new Date();
+            const gmtHours = now.getUTCHours() + (now.getUTCMinutes() / 60);
+            const isOpen = gmtHours >= openHour && gmtHours < closeHour;
+            
+            const sessionElement = document.getElementById(elementId);
+            sessionElement.textContent = `${formatHour(openHour)}-${formatHour(closeHour)} ${timezone}`;
+            
+            const statusElements = sessionElement.parentElement.querySelectorAll('.session-status');
+            statusElements.forEach(el => {
+                el.className = isOpen ? 'session-status status-open' : 'session-status status-closed';
+                el.textContent = isOpen ? 'Open' : 'Closed';
+            });
+        }
+
+        function formatHour(hour) {
+            const hours = Math.floor(hour);
+            const minutes = Math.floor((hour % 1) * 60);
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+
+        function formatCountdown(hours) {
+            const totalMinutes = hours * 60;
+            const countdownHours = Math.floor(totalMinutes / 60);
+            const countdownMinutes = Math.floor(totalMinutes % 60);
+            return `${countdownHours}h ${countdownMinutes}m`;
+        }
+
+        // News functions
+        async function loadNews() {
+            try {
+                // In a real app, you would fetch from a news API
+                // This is a mock implementation with sample data
+                const mockNews = [
+                    {
+                        title: "Fed Holds Rates Steady, Signals Possible Cuts Later This Year",
+                        summary: "The Federal Reserve left interest rates unchanged but indicated that rate cuts could come as soon as September if inflation continues to moderate.",
+                        source: "Bloomberg",
+                        time: "2 hours ago"
+                    },
+                    {
+                        title: "Tech Stocks Rally After Strong Earnings Reports",
+                        summary: "Major tech companies reported better-than-expected earnings, driving the NASDAQ up 2.3% in afternoon trading.",
+                        source: "CNBC",
+                        time: "4 hours ago"
+                    },
+                    {
+                        title: "Eurozone Inflation Falls to 2.5%, ECB Rate Decision Looms",
+                        summary: "Annual inflation in the Eurozone declined more than expected, raising questions about the ECB's next policy move.",
+                        source: "Financial Times",
+                        time: "6 hours ago"
+                    },
+                    {
+                        title: "Oil Prices Jump After Middle East Tensions Escalate",
+                        summary: "Brent crude rose 3.5% after reports of renewed conflict in the Persian Gulf region threatened supply disruptions.",
+                        source: "Reuters",
+                        time: "8 hours ago"
+                    },
+                    {
+                        title: "Bitcoin Surges Past $60,000 as ETF Inflows Continue",
+                        summary: "Cryptocurrency markets rallied as institutional investors poured money into spot Bitcoin ETFs for the third straight week.",
+                        source: "CoinDesk",
+                        time: "10 hours ago"
+                    }
+                ];
+                
+                // Clear existing news
+                elements.newsContainer.innerHTML = '';
+                
+                // Add new news items
+                mockNews.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <h4>${item.title}</h4>
+                        <p>${item.summary}</p>
+                        <span class="news-source">${item.source}</span>
+                        <span class="news-time">${item.time}</span>
+                    `;
+                    elements.newsContainer.appendChild(newsItem);
+                });
+                
+                // Update last updated time
+                const now = new Date();
+                elements.newsUpdated.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            } catch (error) {
+                console.error('Error loading news:', error);
+                elements.newsContainer.innerHTML = `
+                    <div class="news-item">
+                        <h4>Error loading news</h4>
+                        <p>Could not fetch the latest financial news. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Tab functions
+        function setupTabs() {
+            elements.tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    elements.tabs.forEach(t => t.classList.remove('active'));
+                    elements.tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+        }
+
+        // Dark mode functions
+        function setupDarkModeToggle() {
+            // Check for saved user preference or use system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            let darkMode = localStorage.getItem('darkMode') !== 'false' && prefersDark;
+            
+            // Apply initial state
+            elements.darkModeToggle.checked = darkMode;
+            document.body.classList.toggle('dark-mode', darkMode);
+            
+            // Listen for toggle changes
+            elements.darkModeToggle.addEventListener('change', (e) => {
+                darkMode = e.target.checked;
+                document.body.classList.toggle('dark-mode', darkMode);
+                localStorage.setItem('darkMode', darkMode);
+            });
+        }
+
+        // Utility functions
+        function updateLastUpdated() {
+            const now = new Date();
+            elements.lastUpdated.textContent = `Last updated: ${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+        }
+    </script>
+</body>
+</html>
