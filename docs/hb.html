@@ -875,146 +875,303 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const form = document.getElementById('tradeForm');
-            const tableBody = document.querySelector('#tradeTable tbody');
-            const totalTradesEl = document.getElementById('totalTrades');
-            const winRateEl = document.getElementById('winRate');
-            const profitFactorEl = document.getElementById('profitFactor');
-            const avgWinEl = document.getElementById('avgWin');
-            const avgLossEl = document.getElementById('avgLoss');
-            const accountBalanceEl = document.getElementById('accountBalance');
-            const startingCapitalEl = document.getElementById('startingCapital');
-            const currentBalanceEl = document.getElementById('currentBalance');
-            const balanceChangeEl = document.getElementById('balanceChange');
-            const netProfitLossEl = document.getElementById('netProfitLoss');
-            const profitLossChangeEl = document.getElementById('profitLossChange');
-            const roiValueEl = document.getElementById('roiValue');
-            const roiChangeEl = document.getElementById('roiChange');
-            const winningTradesEl = document.getElementById('winningTrades');
-            const losingTradesEl = document.getElementById('losingTrades');
-            const winningPercentageEl = document.getElementById('winningPercentage');
-            const losingPercentageEl = document.getElementById('losingPercentage');
-            const riskRewardRatioEl = document.getElementById('riskRewardRatio');
-            const riskRewardInfoEl = document.getElementById('riskRewardInfo');
-            const maxDrawdownEl = document.getElementById('maxDrawdown');
-            const drawdownValueEl = document.getElementById('drawdownValue');
-            const filterPairEl = document.getElementById('filterPair');
-            const filterPositionEl = document.getElementById('filterPosition');
-            const filterOutcomeEl = document.getElementById('filterOutcome');
-            const resetFiltersEl = document.getElementById('resetFilters');
-            const exportBtn = document.getElementById('exportBtn');
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const form = document.getElementById('tradeForm');
+        const tableBody = document.querySelector('#tradeTable tbody');
+        const symbolInput = document.getElementById('symbol');
+        const currencyDropdown = document.getElementById('currencyDropdown');
+        const totalTradesEl = document.getElementById('totalTrades');
+        const winRateEl = document.getElementById('winRate');
+        const avgWinEl = document.getElementById('avgWin');
+        const avgLossEl = document.getElementById('avgLoss');
+        const totalProfitEl = document.getElementById('totalProfit');
+        const profitFactorEl = document.getElementById('profitFactor');
+        const bestTradeEl = document.getElementById('bestTrade');
+        const worstTradeEl = document.getElementById('worstTrade');
+        const exportBtn = document.getElementById('exportBtn');
+        const importBtn = document.getElementById('importBtn');
+        const importFile = document.getElementById('importFile');
+        const submitBtnText = document.getElementById('submitBtnText');
+        const emptyState = document.getElementById('emptyState');
 
-            // Chart instances
-            let profitChart, winRateChart, pairDistributionChart, timeframeDistributionChart;
+        // Load trades from localStorage
+        let trades = JSON.parse(localStorage.getItem('trades')) || [];
+        let editIndex = null;
 
-            // Load data from localStorage
-            let trades = JSON.parse(localStorage.getItem('trades')) || [];
-            let capital = JSON.parse(localStorage.getItem('capital')) || {
-                starting: 10000,
-                current: 10000,
-                adjustments: [],
-                history: [{ date: new Date().toISOString().split('T')[0], balance: 10000 }]
+        // Initialize the app
+        init();
+
+        function init() {
+            renderTrades();
+            updateStats();
+            setupEventListeners();
+            checkEmptyState();
+        }
+
+        function setupEventListeners() {
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleFormSubmit(e);
+            });
+            
+            // Currency selector
+            symbolInput.addEventListener('click', function() {
+                currencyDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.currency-selector') && !e.target.closest('.currency-dropdown')) {
+                    currencyDropdown.classList.remove('show');
+                }
+            });
+            
+            // Currency selection
+            currencyDropdown.querySelectorAll('.currency-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    symbolInput.value = this.getAttribute('data-value');
+                    currencyDropdown.classList.remove('show');
+                });
+            });
+
+            // Export/Import functionality
+            exportBtn.addEventListener('click', exportTrades);
+            importBtn.addEventListener('click', () => importFile.click());
+            importFile.addEventListener('change', importTrades);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            if (!form.date.value || !symbolInput.value || !form.position.value || 
+                !form.entry.value || !form.exit.value || !form.lot.value) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const trade = {
+                date: form.date.value,
+                symbol: symbolInput.value.toUpperCase(),
+                position: form.position.value,
+                entry: parseFloat(form.entry.value),
+                exit: parseFloat(form.exit.value),
+                lot: parseFloat(form.lot.value),
+                risk: parseFloat(form.risk.value) || null,
+                notes: form.notes.value,
+                image: form.image.value || null,
+                createdAt: new Date().toISOString()
             };
-            let editIndex = null;
+            
+            if (editIndex !== null) {
+                // Update existing trade
+                trades[editIndex] = trade;
+                editIndex = null;
+                submitBtnText.textContent = 'Add Trade';
+            } else {
+                // Add new trade
+                trades.push(trade);
+            }
+            
+            saveTrades();
+            renderTrades();
+            updateStats();
+            form.reset();
+            checkEmptyState();
+            
+            // Scroll to top to see the new trade
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            // Initialize the app
-            init();
+        function saveTrades() {
+            localStorage.setItem('trades', JSON.stringify(trades));
+        }
 
-            function init() {
+        function renderTrades() {
+            tableBody.innerHTML = '';
+            
+            if (trades.length === 0) {
+                emptyState.style.display = '';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            // Sort trades by date (newest first)
+            trades.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            trades.forEach((trade, index) => {
+                const profitLoss = calculateProfitLoss(trade);
+                const profitClass = profitLoss > 0 ? 'profit' : profitLoss < 0 ? 'loss' : 'neutral';
+                const rMultiple = trade.risk ? (profitLoss / (trade.risk * 100)).toFixed(1) : '-';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDateTime(trade.date)}</td>
+                    <td>${trade.symbol}</td>
+                    <td><span class="badge ${trade.position === 'Long' ? 'badge-long' : 'badge-short'}">${trade.position}</span></td>
+                    <td>${trade.entry.toFixed(5)}</td>
+                    <td>${trade.exit.toFixed(5)}</td>
+                    <td>${trade.lot.toFixed(2)}</td>
+                    <td>${trade.risk ? trade.risk + '%' : '-'}</td>
+                    <td class="${profitClass}">${profitLoss > 0 ? '+' : ''}${profitLoss.toFixed(2)}</td>
+                    <td>${rMultiple}</td>
+                    <td>
+                        ${trade.notes || '-'}
+                        ${trade.image ? `<br><a href="${trade.image}" target="_blank" style="font-size:12px;color:var(--primary);">View Image</a>` : ''}
+                    </td>
+                    <td class="action-btns">
+                        <button class="btn btn-sm btn-edit" data-index="${index}">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editTrade(parseInt(this.getAttribute('data-index')));
+                });
+            });
+            
+            document.querySelectorAll('.btn-danger').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteTrade(parseInt(this.getAttribute('data-index')));
+                });
+            });
+        }
+
+        function editTrade(index) {
+            const trade = trades[index];
+            form.date.value = trade.date;
+            symbolInput.value = trade.symbol;
+            form.position.value = trade.position;
+            form.entry.value = trade.entry;
+            form.exit.value = trade.exit;
+            form.lot.value = trade.lot;
+            form.risk.value = trade.risk || '';
+            form.notes.value = trade.notes || '';
+            form.image.value = trade.image || '';
+            
+            editIndex = index;
+            submitBtnText.textContent = 'Update Trade';
+            
+            // Scroll to form
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function deleteTrade(index) {
+            if (confirm('Are you sure you want to delete this trade?')) {
+                trades.splice(index, 1);
+                saveTrades();
                 renderTrades();
                 updateStats();
-                updateCapitalDisplay();
-                setupEventListeners();
-                initCharts();
-                populatePairFilter();
+                checkEmptyState();
             }
+        }
 
-            function setupEventListeners() {
-                // Form submission
-                form.addEventListener('submit', handleFormSubmit);
-                
-                // Tab switching
-                tabs.forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        tabs.forEach(t => t.classList.remove('active'));
-                        tabContents.forEach(c => c.classList.remove('active'));
-                        
-                        tab.classList.add('active');
-                        document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-                    });
-                });
-                
-                // Trade filters
-                filterPairEl.addEventListener('change', applyFilters);
-                filterPositionEl.addEventListener('change', applyFilters);
-                filterOutcomeEl.addEventListener('change', applyFilters);
-                resetFiltersEl.addEventListener('click', resetFilters);
-                exportBtn.addEventListener('click', exportTrades);
-                
-                // Input calculations
-                document.getElementById('entry').addEventListener('change', calculateRiskReward);
-                document.getElementById('exit').addEventListener('change', calculateRiskReward);
-                document.getElementById('stopLoss').addEventListener('change', calculateRiskReward);
-                document.getElementById('takeProfit').addEventListener('change', calculateRiskReward);
-                document.getElementById('riskPercent').addEventListener('change', calculateRiskAmount);
-                document.getElementById('lot').addEventListener('change', calculateRiskAmount);
+        function calculateProfitLoss(trade) {
+            // Simplified P/L calculation (for majors where USD is quote currency)
+            const isUsdQuote = trade.symbol.endsWith('/USD');
+            const isUsdBase = trade.symbol.startsWith('USD/');
+            
+            let pipValue = 10; // Default for XXX/USD pairs
+            
+            if (!isUsdQuote && !isUsdBase) {
+                // For cross pairs like EUR/GBP, we'd need more complex calculation
+                // This is a simplified version
+                pipValue = 10; // Adjust based on your needs
             }
+            
+            const pips = (trade.exit - trade.entry) * (trade.position === 'Long' ? 1 : -1);
+            const multiplier = trade.symbol.includes('JPY') ? 0.01 : 0.0001;
+            
+            return (pips / multiplier) * trade.lot * pipValue;
+        }
 
-            function initCharts() {
-                const ctxProfit = document.getElementById('profitChart').getContext('2d');
-                const ctxWinRate = document.getElementById('winRateChart').getContext('2d');
-                const ctxPairDist = document.getElementById('pairDistributionChart').getContext('2d');
-                const ctxTimeframeDist = document.getElementById('timeframeDistributionChart').getContext('2d');
+        function updateStats() {
+            totalTradesEl.textContent = trades.length;
+            
+            if (trades.length > 0) {
+                const profitableTrades = trades.filter(trade => {
+                    const pnl = calculateProfitLoss(trade);
+                    return pnl > 0;
+                }).length;
                 
-                profitChart = new Chart(ctxProfit, {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: 'Account Balance',
-                            data: [],
-                            borderColor: '#3a5f85',
-                            backgroundColor: 'rgba(58, 95, 133, 0.1)',
-                            tension: 0.3,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Account Growth',
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return `Balance: $${context.raw.toFixed(2)}`;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                ticks: {
-                                    callback: function(value) {
-                                        return '$' + value.toFixed(2);
-                                    }
-                                }
-                            }
-                        }
-                    }
-            const exportFileDefaultName = 'fx-trades-export.json';
+                const winRate = (profitableTrades / trades.length) * 100;
+                winRateEl.textContent = `${winRate.toFixed(1)}%`;
+                
+                // Calculate average win/loss
+                const winningTrades = trades.filter(trade => calculateProfitLoss(trade) > 0);
+                const losingTrades = trades.filter(trade => calculateProfitLoss(trade) < 0);
+                
+                const avgWin = winningTrades.length > 0 ? 
+                    winningTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0) / winningTrades.length : 0;
+                
+                const avgLoss = losingTrades.length > 0 ? 
+                    losingTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0) / losingTrades.length : 0;
+                
+                avgWinEl.textContent = `$${avgWin.toFixed(2)}`;
+                avgLossEl.textContent = `$${Math.abs(avgLoss).toFixed(2)}`;
+                
+                // Calculate total profit
+                const totalProfit = trades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
+                totalProfitEl.textContent = `${totalProfit >= 0 ? '+' : ''}$${totalProfit.toFixed(2)}`;
+                
+                // Calculate profit factor
+                const grossProfit = winningTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
+                const grossLoss = Math.abs(losingTrades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0));
+                const profitFactor = grossLoss > 0 ? (grossProfit / grossLoss) : grossProfit > 0 ? '∞' : '0';
+                profitFactorEl.textContent = typeof profitFactor === 'number' ? profitFactor.toFixed(2) : profitFactor;
+                
+                // Find best and worst trades
+                const pnls = trades.map(trade => calculateProfitLoss(trade));
+                const bestTrade = Math.max(...pnls);
+                const worstTrade = Math.min(...pnls);
+                
+                bestTradeEl.textContent = `$${bestTrade.toFixed(2)}`;
+                worstTradeEl.textContent = `$${worstTrade.toFixed(2)}`;
+            } else {
+                winRateEl.textContent = '0%';
+                avgWinEl.textContent = '$0.00';
+                avgLossEl.textContent = '$0.00';
+                totalProfitEl.textContent = '$0.00';
+                profitFactorEl.textContent = '1.00';
+                bestTradeEl.textContent = '$0.00';
+                worstTradeEl.textContent = '$0.00';
+            }
+        }
+
+        function checkEmptyState() {
+            emptyState.style.display = trades.length === 0 ? '' : 'none';
+        }
+
+        function formatDateTime(dateTimeStr) {
+            if (!dateTimeStr) return '';
+            const date = new Date(dateTimeStr);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+        function exportTrades() {
+            if (trades.length === 0) {
+                alert('No trades to export');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(trades, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `trading-journal-${new Date().toISOString().slice(0,10)}.json`;
             
             const linkElement = document.createElement('a');
             linkElement.setAttribute('href', dataUri);
@@ -1030,8 +1187,8 @@
             reader.onload = function(e) {
                 try {
                     const importedTrades = JSON.parse(e.target.result);
-                    if (Array.isArray(importedTrades) && importedTrades.length > 0) {
-                        if (confirm(`Import ${importedTrades.length} trades? This will replace your current trade history.`)) {
+                    if (Array.isArray(importedTrades)) {
+                        if (confirm(`Import ${importedTrades.length} trades? This will replace your current trades.`)) {
                             trades = importedTrades;
                             saveTrades();
                             renderTrades();
@@ -1039,14 +1196,15 @@
                             checkEmptyState();
                         }
                     } else {
-                        alert('Invalid trade data format');
+                        alert('Invalid file format. Please import a valid JSON file.');
                     }
                 } catch (error) {
                     alert('Error parsing file: ' + error.message);
                 }
+                // Reset file input
+                importFile.value = '';
             };
             reader.readAsText(file);
-            e.target.value = ''; // Reset file input
         }
     });
 </script>
