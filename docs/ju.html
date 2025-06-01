@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Trading Journal</title>
+    <title>Professional Trading Journal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #3f37c9;
-            --success: #4cc9f0;
-            --danger: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #1e40af;
+            --success: #10b981;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --border-radius: 6px;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s ease;
         }
 
         * {
@@ -31,8 +32,8 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background-color: #f5f7fa;
-            padding: 20px;
+            background-color: #f1f5f9;
+            min-height: 100vh;
         }
 
         .container {
@@ -41,38 +42,100 @@
             padding: 20px;
         }
 
-        header {
+        /* Professional Header */
+        .app-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 18px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--light-gray);
         }
 
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
+        .logo-icon {
+            font-size: 22px;
+            color: var(--primary-light);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            opacity: 0.8;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Styles */
         .card {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             padding: 25px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            border: 1px solid var(--light-gray);
         }
 
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Form Styles */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 18px;
             margin-bottom: 20px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         label {
@@ -80,23 +143,24 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--gray);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 11px 14px;
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
             font-family: inherit;
             font-size: 14px;
             transition: var(--transition);
+            background-color: white;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         textarea {
@@ -104,9 +168,10 @@
             resize: vertical;
         }
 
+        /* Professional Button Styles */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 11px 22px;
             background-color: var(--primary);
             color: white;
             border: none;
@@ -115,12 +180,18 @@
             font-weight: 500;
             text-align: center;
             transition: var(--transition);
-            font-size: 16px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            border: 1px solid var(--primary-dark);
         }
 
         .btn:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .btn-block {
@@ -128,6 +199,30 @@
             width: 100%;
         }
 
+        .btn-sm {
+            padding: 7px 12px;
+            font-size: 12px;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            border-color: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-edit {
+            background-color: var(--gray);
+            border-color: #475569;
+        }
+
+        .btn-edit:hover {
+            background-color: #475569;
+        }
+
+        /* Currency Selector */
         .currency-selector {
             position: relative;
         }
@@ -152,23 +247,26 @@
         }
 
         .currency-item {
-            padding: 10px 15px;
+            padding: 10px 14px;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 14px;
         }
 
         .currency-item:hover {
             background-color: var(--light);
         }
 
+        /* Table Styles */
         .table-container {
             overflow-x: auto;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-gray);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
             font-size: 14px;
         }
 
@@ -179,7 +277,7 @@
         }
 
         th {
-            background-color: var(--light);
+            background-color: #f8fafc;
             font-weight: 600;
             color: var(--gray);
             text-transform: uppercase;
@@ -187,12 +285,16 @@
             letter-spacing: 0.5px;
         }
 
+        tr:not(:last-child) {
+            border-bottom: 1px solid var(--light-gray);
+        }
+
         tr:hover {
-            background-color: rgba(67, 97, 238, 0.05);
+            background-color: rgba(241, 245, 249, 0.5);
         }
 
         .profit {
-            color: #2ecc71;
+            color: var(--success);
             font-weight: 500;
         }
 
@@ -203,28 +305,7 @@
 
         .action-btns {
             display: flex;
-            gap: 10px;
-        }
-
-        .btn-sm {
-            padding: 6px 12px;
-            font-size: 13px;
-        }
-
-        .btn-danger {
-            background-color: var(--danger);
-        }
-
-        .btn-danger:hover {
-            background-color: #e5177e;
-        }
-
-        .btn-edit {
-            background-color: var(--gray);
-        }
-
-        .btn-edit:hover {
-            background-color: #5a6268;
+            gap: 8px;
         }
 
         @media (max-width: 768px) {
@@ -233,23 +314,56 @@
             }
             
             .container {
-                padding: 10px;
+                padding: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-stats {
+                width: 100%;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+            
+            .card {
+                padding: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Advanced Trading Journal</h1>
-            <div class="stats">
-                <span id="totalTrades">0 trades</span>
-                <span id="winRate">0% win rate</span>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">💹</span>
+                <span class="logo-text">FX Trading Journal</span>
             </div>
-        </header>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalTrades">0</div>
+                    <div class="stat-label">Total Trades</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalProfit">$0.00</div>
+                    <div class="stat-label">Net Profit</div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <div class="container">
         <div class="card">
-            <h2>New Trade Entry</h2>
+            <div class="card-header">
+                <h2 class="card-title">New Trade Entry</h2>
+            </div>
             <form id="tradeForm">
                 <div class="form-grid">
                     <div class="form-group">
@@ -259,7 +373,7 @@
                     
                     <div class="form-group currency-selector">
                         <label for="symbol">Currency Pair</label>
-                        <input type="text" id="symbol" placeholder="Select or type currency pair" required readonly>
+                        <input type="text" id="symbol" placeholder="Select currency pair" required readonly>
                         <div class="currency-dropdown" id="currencyDropdown">
                             <div class="currency-item" data-value="EUR/USD">EUR/USD</div>
                             <div class="currency-item" data-value="GBP/USD">GBP/USD</div>
@@ -301,7 +415,7 @@
                 
                 <div class="form-group">
                     <label for="notes">Trade Notes</label>
-                    <textarea id="notes" placeholder="Enter your trade analysis, strategy, or lessons learned..."></textarea>
+                    <textarea id="notes" placeholder="Enter trade analysis, strategy, or lessons learned..."></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-block">Add Trade</button>
@@ -309,7 +423,9 @@
         </div>
 
         <div class="card">
-            <h2>Trade History</h2>
+            <div class="card-header">
+                <h2 class="card-title">Trade History</h2>
+            </div>
             <div class="table-container">
                 <table id="tradeTable">
                     <thead>
@@ -340,6 +456,7 @@
             const currencyDropdown = document.getElementById('currencyDropdown');
             const totalTradesEl = document.getElementById('totalTrades');
             const winRateEl = document.getElementById('winRate');
+            const totalProfitEl = document.getElementById('totalProfit');
 
             // Currency pairs from FTMO
             const currencyPairs = [
@@ -403,6 +520,7 @@
                     // Update existing trade
                     trades[editIndex] = trade;
                     editIndex = null;
+                    document.querySelector('button[type="submit"]').textContent = 'Add Trade';
                 } else {
                     // Add new trade
                     trades.push(trade);
@@ -433,7 +551,7 @@
                         <td>${trade.entry.toFixed(5)}</td>
                         <td>${trade.exit.toFixed(5)}</td>
                         <td>${trade.lot.toFixed(2)}</td>
-                        <td class="${profitClass}">${profitLoss.toFixed(2)}</td>
+                        <td class="${profitClass}">${profitLoss >= 0 ? '+' : ''}${profitLoss.toFixed(2)}</td>
                         <td>${trade.notes || '-'}</td>
                         <td class="action-btns">
                             <button class="btn btn-sm btn-edit" data-index="${index}">Edit</button>
@@ -504,7 +622,7 @@
             }
 
             function updateStats() {
-                totalTradesEl.textContent = `${trades.length} ${trades.length === 1 ? 'trade' : 'trades'}`;
+                totalTradesEl.textContent = trades.length;
                 
                 if (trades.length > 0) {
                     const profitableTrades = trades.filter(trade => {
@@ -513,9 +631,13 @@
                     }).length;
                     
                     const winRate = (profitableTrades / trades.length) * 100;
-                    winRateEl.textContent = `${winRate.toFixed(1)}% win rate`;
+                    winRateEl.textContent = `${winRate.toFixed(1)}%`;
+                    
+                    const totalProfit = trades.reduce((sum, trade) => sum + calculateProfitLoss(trade), 0);
+                    totalProfitEl.textContent = `${totalProfit >= 0 ? '+' : ''}${totalProfit.toFixed(2)}`;
                 } else {
-                    winRateEl.textContent = '0% win rate';
+                    winRateEl.textContent = '0%';
+                    totalProfitEl.textContent = '$0.00';
                 }
             }
         });
