@@ -1162,6 +1162,92 @@
             form.notes.value = trade.notes || '';
             form.screenshot.value = trade.screenshot || '';
             
-            editIndex = index;
+                      editIndex = index;
             const submitBtn = document.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = '<
+            submitBtn.innerHTML = '<span>✏️</span> Update Trade';
+            
+            // Scroll to form
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function deleteTrade(index) {
+            if (confirm('Are you sure you want to delete this trade?')) {
+                // Revert this trade's P/L from current balance
+                capital.current -= calculateProfitLoss(trades[index]);
+                
+                // Remove the trade
+                trades.splice(index, 1);
+                
+                saveData();
+                renderTrades();
+                updateStats();
+                updateCapitalDisplay();
+            }
+        }
+
+        function calculateProfitLoss(trade) {
+            // For forex pairs, 1 lot = 100,000 units
+            // Profit = (exit - entry) * position * lotSize * contractSize
+            // For long positions, profit increases when exit > entry
+            // For short positions, profit increases when exit < entry
+            const lotSize = 100000; // Standard lot size in forex
+            const positionMultiplier = trade.position === 'Long' ? 1 : -1;
+            const priceDifference = trade.exit - trade.entry;
+            
+            return priceDifference * positionMultiplier * trade.lot * lotSize;
+        }
+
+        function updateStats() {
+            // Update header stats
+            totalTradesEl.textContent = trades.length;
+            
+            // Calculate win rate
+            const winningTrades = trades.filter(trade => {
+                const profitLoss = calculateProfitLoss(trade);
+                return profitLoss >= 0;
+            }).length;
+            
+            const winRate = trades.length > 0 ? (winningTrades / trades.length) * 100 : 0;
+            winRateEl.textContent = `${winRate.toFixed(1)}%`;
+            
+            // Calculate total profit/loss
+            const totalProfitLoss = trades.reduce((sum, trade) => {
+                return sum + calculateProfitLoss(trade);
+            }, 0);
+            
+            totalProfitEl.textContent = `${totalProfitLoss >= 0 ? '+' : ''}$${totalProfitLoss.toFixed(2)}`;
+            accountBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+        }
+
+        function updateCapitalDisplay() {
+            // Update capital metrics
+            startingCapitalEl.textContent = `$${capital.starting.toFixed(2)}`;
+            currentBalanceEl.textContent = `$${capital.current.toFixed(2)}`;
+            
+            // Calculate balance change
+            const balanceChange = capital.current - capital.starting;
+            const balanceChangePercent = capital.starting > 0 ? 
+                (balanceChange / capital.starting) * 100 : 0;
+            
+            balanceChangeEl.textContent = 
+                `${balanceChange >= 0 ? '+' : ''}$${balanceChange.toFixed(2)} ` +
+                `(${balanceChangePercent >= 0 ? '+' : ''}${balanceChangePercent.toFixed(2)}%)`;
+            balanceChangeEl.className = `metric-change ${balanceChange >= 0 ? 'positive' : 'negative'}`;
+            
+            // Update net profit/loss
+            const netProfitLoss = capital.current - capital.starting;
+            netProfitLossEl.textContent = `$${netProfitLoss.toFixed(2)}`;
+            profitLossChangeEl.textContent = 'All time';
+            profitLossChangeEl.className = `metric-change ${netProfitLoss >= 0 ? 'positive' : 'negative'}`;
+            
+            // Update ROI
+            const roi = capital.starting > 0 ? 
+                ((capital.current - capital.starting) / capital.starting) * 100 : 0;
+            roiValueEl.textContent = `${roi >= 0 ? '+' : ''}${roi.toFixed(2)}%`;
+            roiChangeEl.textContent = 'Return on investment';
+            roiChangeEl.className = `metric-change ${roi >= 0 ? 'positive' : 'negative'}`;
+        }
+    });
+</script>
+</body>
+</html>
