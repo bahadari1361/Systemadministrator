@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTrader Journal | Advanced Trading Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3a5f85;
+            --primary-dark: #2c4a6b;
+            --primary-light: #4a7cad;
+            --secondary: #4e7c8a;
+            --success: #4caf50;
+            --danger: #f44336;
+            --warning: #ff9800;
+            --info: #2196f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --border-radius: 6px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 16px 0;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 22px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 24px;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 90px;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 24px;
+            margin-bottom: 24px;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 18px;
+            box-shadow: var(--box-shadow);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card.success {
+            border-left-color: var(--success);
+        }
+
+        .metric-card.danger {
+            border-left-color: var(--danger);
+        }
+
+        .metric-card.warning {
+            border-left-color: var(--warning);
+        }
+
+        .metric-card.info {
+            border-left-color: var(--info);
+        }
+
+        .metric-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .metric-change {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .metric-trend {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            opacity: 0.1;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        .neutral {
+            color: var(--gray);
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 14px;
+            transition: var(--transition);
+            background-color: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 95, 133, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #388e3c;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+        }
+
+        .btn-warning:hover {
+            background-color: #f57c00;
+        }
+
+        .btn-info {
+            background-color: var(--info);
+        }
+
+        .btn-info:hover {
+            background-color: #1976d2;
+        }
+
+        .btn-edit {
+            background-color: var(--gray);
+        }
+
+        .btn-edit:hover {
+            background-color: #5a6268;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-gray);
+            margin-top: 20px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: rgba(233, 236, 239, 0.5);
+        }
+
+        .profit {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .loss {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--dark);
+            border-bottom-color: var(--light-gray);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            height: 300px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Tag Styles */
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .tag-long {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .tag-short {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .form-grid, .dashboard-grid, .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid, .dashboard-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+
+            .header-stats {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .action-btns {
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .btn-sm {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-chart-line"></i></span>
+                <span class="logo-text">ProTrader Journal</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalTrades">0</div>
+                    <div class="stat-label">Total Trades</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="profitFactor">0.00</div>
+                    <div class="stat-label">Profit Factor</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgWin">$0.00</div>
+                    <div class="stat-label">Avg. Win</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avgLoss">$0.00</div>
+                    <div class="stat-label">Avg. Loss</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="accountBalance">$10,000.00</div>
+                    <div class="stat-label">Balance</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Dashboard Metrics -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Performance Dashboard</h2>
+            </div>
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <div class="metric-title">
+                        <i class="fas fa-wallet"></i> Starting Capital
+                    </div>
+                    <div class="metric-value" id="startingCapital">$10,000.00</div>
+                    <div class="metric-change neutral">Initial investment</div>
+                    <i class="fas fa-coins metric-trend"></i>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">
+                        <i class="fas fa-piggy-bank"></i> Current Balance
+                    </div>
+                    <div class="metric-value" id="currentBalance">$10,000.00</div>
+                    <div class="metric-change" id="balanceChange">+$0.00 (0%)</div>
+                    <i class="fas fa-chart-line metric-trend"></i>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">
+                        <i class="fas fa-money-bill-wave"></i> Net Profit/Loss
+                    </div>
+                    <div class="metric-value" id="netProfitLoss">$0.00</div>
+                    <div class="metric-change" id="profitLossChange">All time</div>
+                    <i class="fas fa-balance-scale metric-trend"></i>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">
+                        <i class="fas fa-percentage"></i> ROI
+                    </div>
+                    <div class="metric-value" id="roiValue">0%</div>
+                    <div class="metric-change" id="roiChange">Return on investment</div>
+                    <i class="fas fa-chart-pie metric-trend"></i>
+                </div>
+                <div class="metric-card success">
+                    <div class="metric-title">
+                        <i class="fas fa-trophy"></i> Winning Trades
+                    </div>
+                    <div class="metric-value" id="winningTrades">0</div>
+                    <div class="metric-change" id="winningPercentage">0% of total</div>
+                    <i class="fas fa-thumbs-up metric-trend"></i>
+                </div>
+                <div class="metric-card danger">
+                    <div class="metric-title">
+                        <i class="fas fa-times-circle"></i> Losing Trades
+                    </div>
+                    <div class="metric-value" id="losingTrades">0</div>
+                    <div class="metric-change" id="losingPercentage">0% of total</div>
+                    <i class="fas fa-thumbs-down metric-trend"></i>
+                </div>
+                <div class="metric-card info">
+                    <div class="metric-title">
+                        <i class="fas fa-ruler-combined"></i> Risk/Reward
+                    </div>
+                    <div class="metric-value" id="riskRewardRatio">0.00</div>
+                    <div class="metric-change" id="riskRewardInfo">Average ratio</div>
+                    <i class="fas fa-exchange-alt metric-trend"></i>
+                </div>
+                <div class="metric-card warning">
+                    <div class="metric-title">
+                        <i class="fas fa-exclamation-triangle"></i> Max Drawdown
+                    </div>
+                    <div class="metric-value" id="maxDrawdown">0%</div>
+                    <div class="metric-change" id="drawdownValue">$0.00</div>
+                    <i class="fas fa-arrow-down metric-trend"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade Entry Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Trade Entry</h2>
+            </div>
+            <form id="tradeForm">
+                <div class="tabs">
+                    <div class="tab active" data-tab="basic">Basic Info</div>
+                    <div class="tab" data-tab="advanced">Advanced</div>
+                    <div class="tab" data-tab="analysis">Analysis</div>
+                </div>
+                
+                <div class="tab-content active" id="basic-tab">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="date"><i class="far fa-calendar-alt"></i> Date & Time</label>
+                            <input type="datetime-local" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="symbol"><i class="fas fa-exchange-alt"></i> Instrument</label>
+                            <select id="symbol" required>
+                                <option value="">Select instrument</option>
+                                <optgroup label="Forex">
+                                    <option value="EUR/USD">EUR/USD</option>
+                                    <option value="GBP/USD">GBP/USD</option>
+                                    <option value="USD/JPY">USD/JPY</option>
+                                    <option value="AUD/USD">AUD/USD</option>
+                                    <option value="USD/CAD">USD/CAD</option>
+                                    <option value="USD/CHF">USD/CHF</option>
+                                    <option value="NZD/USD">NZD/USD</option>
+                                    <option value="EUR/GBP">EUR/GBP</option>
+                                    <option value="EUR/JPY">EUR/JPY</option>
+                                    <option value="GBP/JPY">GBP/JPY</option>
+                                </optgroup>
+                                <optgroup label="Indices">
+                                    <option value="SPX500">S&P 500</option>
+                                    <option value="NAS100">NASDAQ 100</option>
+                                    <option value="US30">Dow Jones 30</option>
+                                    <option value="DAX40">DAX 40</option>
+                                    <option value="FTSE100">FTSE 100</option>
+                                </optgroup>
+                                <optgroup label="Commodities">
+                                    <option value="XAU/USD">Gold (XAU/USD)</option>
+                                    <option value="XAG/USD">Silver (XAG/USD)</option>
+                                    <option value="CL-OIL">Crude Oil</option>
+                                    <option value="NGAS">Natural Gas</option>
+                                </optgroup>
+                                <optgroup label="Cryptocurrencies">
+                                    <option value="BTC/USD">Bitcoin (BTC/USD)</option>
+                                    <option value="ETH/USD">Ethereum (ETH/USD)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="position"><i class="fas fa-arrows-alt-v"></i> Position</label>
+                            <select id="position" required>
+                                <option value="">Select position</option>
+                                <option value="Long">Long</option>
+                                <option value="Short">Short</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="entry"><i class="fas fa-sign-in-alt"></i> Entry Price</label>
+                            <input type="number" step="0.00001" id="entry" placeholder="0.00000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exit"><i class="fas fa-sign-out-alt"></i> Exit Price</label>
+                            <input type="number" step="0.00001" id="exit" placeholder="0.00000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lot"><i class="fas fa-weight-hanging"></i> Position Size</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" step="0.01" id="lot" placeholder="0.00" required style="flex: 1;">
+                                <select id="sizeType" style="width: 80px;">
+                                    <option value="lots">Lots</option>
+                                    <option value="units">Units</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="riskPercent"><i class="fas fa-shield-alt"></i> Risk %</label>
+                            <input type="number" step="0.01" id="riskPercent" placeholder="1.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="rewardPercent"><i class="fas fa-bullseye"></i> Reward %</label>
+                            <input type="number" step="0.01" id="rewardPercent" placeholder="2.00">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="advanced-tab">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="stopLoss"><i class="fas fa-stop-circle"></i> Stop Loss</label>
+                            <input type="number" step="0.00001" id="stopLoss" placeholder="0.00000">
+                        </div>
+                        <div class="form-group">
+                            <label for="takeProfit"><i class="fas fa-bullseye"></i> Take Profit</label>
+                            <input type="number" step="0.00001" id="takeProfit" placeholder="0.00000">
+                        </div>
+                        <div class="form-group">
+                            <label for="commission"><i class="fas fa-hand-holding-usd"></i> Commission</label>
+                            <input type="number" step="0.01" id="commission" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="swap"><i class="fas fa-money-bill-wave"></i> Swap</label>
+                            <input type="number" step="0.01" id="swap" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="strategy"><i class="fas fa-chess"></i> Strategy</label>
+                            <select id="strategy">
+                                <option value="">Select strategy</option>
+                                <option value="Breakout">Breakout</option>
+                                <option value="Pullback">Pullback</option>
+                                <option value="Trend Following">Trend Following</option>
+                                <option value="Mean Reversion">Mean Reversion</option>
+                                <option value="Scalping">Scalping</option>
+                                <option value="Swing">Swing</option>
+                                <option value="Position">Position</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeframe"><i class="fas fa-clock"></i> Timeframe</label>
+                            <select id="timeframe">
+                                <option value="">Select timeframe</option>
+                                <option value="1m">1 Minute</option>
+                                <option value="5m">5 Minutes</option>
+                                <option value="15m">15 Minutes</option>
+                                <option value="30m">30 Minutes</option>
+                                <option value="1h">1 Hour</option>
+                                <option value="4h">4 Hours</option>
+                                <option value="1d">Daily</option>
+                                <option value="1w">Weekly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="analysis-tab">
+                    <div class="form-group">
+                        <label for="setup"><i class="fas fa-lightbulb"></i> Trade Setup</label>
+                        <textarea id="setup" placeholder="What was the setup? Why did you take this trade?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistakes"><i class="fas fa-exclamation-circle"></i> Mistakes Made</label>
+                        <textarea id="mistakes" placeholder="What mistakes did you make in this trade?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lessons"><i class="fas fa-graduation-cap"></i> Lessons Learned</label>
+                        <textarea id="lessons" placeholder="What did you learn from this trade?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="emotions"><i class="fas fa-brain"></i> Emotional State</label>
+                        <select id="emotions">
+                            <option value="">Select emotional state</option>
+                            <option value="Confident">Confident</option>
+                            <option value="Neutral">Neutral</option>
+                            <option value="Anxious">Anxious</option>
+                            <option value="Frustrated">Frustrated</option>
+                            <option value="Greedy">Greedy</option>
+                            <option value="Fearful">Fearful</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating"><i class="fas fa-star"></i> Trade Rating (1-5)</label>
+                        <select id="rating">
+                            <option value="">Select rating</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success btn-block">
+                    <i class="fas fa-save"></i> Save Trade
+                </button>
+            </form>
+        </div>
+
+        <!-- Trade Analysis Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Trade Analysis</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="chart-container">
+                    <canvas id="profitChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="winRateChart"></canvas>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="chart-container">
+                    <canvas id="pairDistributionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="timeframeDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade History -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Trade History</h2>
+                <div style="display: flex; gap: 10px;">
+                    <select id="filterPair" style="width: 120px;">
+                        <option value="">All Pairs</option>
+                    </select>
+                    <select id="filterPosition" style="width: 100px;">
+                        <option value="">All Positions</option>
+                        <option value="Long">Long</option>
+                        <option value="Short">Short</option>
+                    </select>
+                    <select id="filterOutcome" style="width: 100px;">
+                        <option value="">All Outcomes</option>
+                        <option value="win">Winning</option>
+                        <option value="loss">Losing</option>
+                    </select>
+                    <button id="resetFilters" class="btn btn-sm btn-info">
+                        <i class="fas fa-sync-alt"></i> Reset
+                    </button>
+                    <button id="exportBtn" class="btn btn-sm btn-success">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="tradeTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Pair</th>
+                            <th>Position</th>
+                            <th>Entry</th>
+                            <th>Exit</th>
+                            <th>Size</th>
+                            <th>P/L</th>
+                            <th>%</th>
+                            <th>R/R</th>
+                            <th>Rating</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const form = document.getElementById('tradeForm');
+            const tableBody = document.querySelector('#tradeTable tbody');
+            const totalTradesEl = document.getElementById('totalTrades');
+            const winRateEl = document.getElementById('winRate');
+            const profitFactorEl = document.getElementById('profitFactor');
+            const avgWinEl = document.getElementById('avgWin');
+            const avgLossEl = document.getElementById('avgLoss');
+            const accountBalanceEl = document.getElementById('accountBalance');
+            const startingCapitalEl = document.getElementById('startingCapital');
+            const currentBalanceEl = document.getElementById('currentBalance');
+            const balanceChangeEl = document.getElementById('balanceChange');
+            const netProfitLossEl = document.getElementById('netProfitLoss');
+            const profitLossChangeEl = document.getElementById('profitLossChange');
+            const roiValueEl = document.getElementById('roiValue');
+            const roiChangeEl = document.getElementById('roiChange');
+            const winningTradesEl = document.getElementById('winningTrades');
+            const losingTradesEl = document.getElementById('losingTrades');
+            const winningPercentageEl = document.getElementById('winningPercentage');
+            const losingPercentageEl = document.getElementById('losingPercentage');
+            const riskRewardRatioEl = document.getElementById('riskRewardRatio');
+            const riskRewardInfoEl = document.getElementById('riskRewardInfo');
+            const maxDrawdownEl = document.getElementById('maxDrawdown');
+            const drawdownValueEl = document.getElementById('drawdownValue');
+            const filterPairEl = document.getElementById('filterPair');
+            const filterPositionEl = document.getElementById('filterPosition');
+            const filterOutcomeEl = document.getElementById('filterOutcome');
+            const resetFiltersEl = document.getElementById('resetFilters');
+            const exportBtn = document.getElementById('exportBtn');
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Chart instances
+            let profitChart, winRateChart, pairDistributionChart, timeframeDistributionChart;
+
+            // Load data from localStorage
+            let trades = JSON.parse(localStorage.getItem('trades')) || [];
+            let capital = JSON.parse(localStorage.getItem('capital')) || {
+                starting: 10000,
+                current: 10000,
+                adjustments: [],
+                history: [{ date: new Date().toISOString().split('T')[0], balance: 10000 }]
+            };
+            let editIndex = null;
+
+            // Initialize the app
+            init();
+
+            function init() {
+                renderTrades();
+                updateStats();
+                updateCapitalDisplay();
+                setupEventListeners();
+                initCharts();
+                populatePairFilter();
+            }
+
+            function setupEventListeners() {
+                // Form submission
+                form.addEventListener('submit', handleFormSubmit);
+                
+                // Tab switching
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tabContents.forEach(c => c.classList.remove('active'));
+                        
+                        tab.classList.add('active');
+                        document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+                    });
+                });
+                
+                // Trade filters
+                filterPairEl.addEventListener('change', applyFilters);
+                filterPositionEl.addEventListener('change', applyFilters);
+                filterOutcomeEl.addEventListener('change', applyFilters);
+                resetFiltersEl.addEventListener('click', resetFilters);
+                exportBtn.addEventListener('click', exportTrades);
+                
+                // Input calculations
+                document.getElementById('entry').addEventListener('change', calculateRiskReward);
+                document.getElementById('exit').addEventListener('change', calculateRiskReward);
+                document.getElementById('stopLoss').addEventListener('change', calculateRiskReward);
+                document.getElementById('takeProfit').addEventListener('change', calculateRiskReward);
+                document.getElementById('riskPercent').addEventListener('change', calculateRiskAmount);
+                document.getElementById('lot').addEventListener('change', calculateRiskAmount);
+            }
+
+            function initCharts() {
+                const ctxProfit = document.getElementById('profitChart').getContext('2d');
+                const ctxWinRate = document.getElementById('winRateChart').getContext('2d');
+                const ctxPairDist = document.getElementById('pairDistributionChart').getContext('2d');
+                const ctxTimeframeDist = document.getElementById('timeframeDistributionChart').getContext('2d');
+                
+                profitChart = new Chart(ctxProfit, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Account Balance',
+                            data: [],
+                            borderColor: '#3a5f85',
+                            backgroundColor: 'rgba(58, 95, 133, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Account Growth',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Balance: $${context.raw.toFixed(2)}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toFixed(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
