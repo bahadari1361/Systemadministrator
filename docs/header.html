@@ -45,13 +45,11 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      height: 250px;
+      height: 150px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      color: white;
-      text-align: center;
+      padding: 0 40px;
       position: relative;
     }
 
@@ -63,10 +61,16 @@
       z-index: 0;
     }
 
+    .logo {
+      z-index: 1;
+      height: 60px;
+    }
+
     header p {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 600;
       z-index: 1;
+      color: white;
     }
 
     .nav-container {
@@ -234,7 +238,7 @@
 
     @media (max-width: 900px) {
       header p {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
     }
 
@@ -257,6 +261,7 @@
 <body>
   <div class="content-wrapper">
     <header>
+      <img src="logo.png" alt="Logo" class="logo">
       <p>Senior System Administrator</p>
     </header>
 
