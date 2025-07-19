@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bahadari Hashmat - Senior System Administrator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <style>
     :root {
       --primary: #2c3e50;
@@ -59,7 +59,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.5); /* dark overlay for better text contrast */
+      background-color: rgba(0, 0, 0, 0.5);
       z-index: 0;
     }
 
@@ -72,15 +72,11 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .nav-buttons {
+      padding: 1rem 20px;
       display: flex;
       justify-content: center;
+      gap: 20px;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 1.5rem;
     }
 
     .dropdown {
@@ -121,11 +117,6 @@
       border-radius: 6px;
       overflow: hidden;
       animation: fadeIn 0.3s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .dropdown:hover .dropdown-content {
@@ -263,43 +254,63 @@
     }
   </style>
 </head>
-
 <body>
   <div class="content-wrapper">
     <header>
       <p>Senior System Administrator</p>
     </header>
 
-    <!-- Keep the dropdown navigation and rest of the page the same as before -->
+    <div class="nav-container">
+      <div class="dropdown">
+        <button class="dropdown-button">Profile</button>
+        <div class="dropdown-content">
+          <a href="#about"><i class="fas fa-user"></i> About Me</a>
+          <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+          <a href="#skills"><i class="fas fa-cogs"></i> Skills</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">Projects</button>
+        <div class="dropdown-content">
+          <a href="#projects"><i class="fas fa-tasks"></i> Project Portfolio</a>
+          <a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">Contact</button>
+        <div class="dropdown-content">
+          <a href="#contact"><i class="fas fa-envelope"></i> Contact Info</a>
+          <a href="mailto:hashmat.bahadari@icloud.com"><i class="fas fa-paper-plane"></i> Send Email</a>
+        </div>
+      </div>
+    </div>
+
     <div class="main-container">
       <section class="profile-section">
         <div class="profile-about">
           <h2>Professional Profile</h2>
           <div class="profile-text">
             <p>
-              As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security. My expertise encompasses the full spectrum of modern IT infrastructure, from on-premises solutions to cloud-native environments.
+              As a highly skilled IT professional with over a decade of experience, I specialize in designing and implementing robust system architectures that bridge the gap between operational efficiency and enterprise security.
             </p>
             <p>
-              Holding prestigious certifications including ISO/IEC 27001 Lead Auditor, Microsoft Azure Security Engineer, and CompTIA Security+, I bring a standards-based approach to every project. My methodology combines rigorous compliance frameworks with practical, business-aligned solutions that withstand evolving cyber threats.
+              Holding certifications like ISO/IEC 27001 Lead Auditor, Azure Security Engineer, and Security+, I bring a standards-based approach to every project.
             </p>
             <p>
-              What distinguishes my approach is a unique fusion of technical depth and strategic vision. I don't just implement systems—I architect resilient digital ecosystems that scale with organizational growth while maintaining stringent security postures.
+              I don’t just implement systems—I architect resilient digital ecosystems that scale with growth and withstand evolving threats.
             </p>
           </div>
-
           <div class="highlight-item">
             <h3><i class="fas fa-shield-alt"></i> Security Expertise</h3>
-            <p>Implemented enterprise-wide security measures that reduced vulnerabilities by 85% while maintaining operational efficiency across all departments.</p>
+            <p>Implemented enterprise-wide security measures reducing vulnerabilities by 85%.</p>
           </div>
-
           <div class="highlight-item">
             <h3><i class="fas fa-server"></i> Infrastructure Design</h3>
-            <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime across hybrid cloud and on-premises environments.</p>
+            <p>Architected scalable infrastructure solutions supporting 500+ users with 99.99% uptime.</p>
           </div>
-
           <div class="highlight-item">
             <h3><i class="fas fa-cloud"></i> Cloud Migration</h3>
-            <p>Led successful migration of critical business systems to Azure, reducing hardware costs by 40% while improving accessibility and disaster recovery capabilities.</p>
+            <p>Led Azure migration reducing costs by 40% and improving disaster recovery.</p>
           </div>
         </div>
       </section>
