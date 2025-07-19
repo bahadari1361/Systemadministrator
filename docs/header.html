@@ -3,123 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Senior System Administrator - Bahadari</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    rel="stylesheet"
-  />
+  <title>Bahadari Hashmat - Senior System Administrator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <style>
-    /* Root colors and reset */
-    :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --accent: #e74c3c;
-      --light: #ecf0f1;
-      --dark: #2c3e50;
-      --text: #34495e;
-      --header-bg-color: transparent;
-    }
-
+    /* Basic Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: var(--light);
-      color: var(--text);
+      background-color: #f8f9fa;
+      color: #34495e;
       line-height: 1.7;
-      background-image: url('photo.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
     }
-
     .content-wrapper {
       background-color: rgba(255, 255, 255, 0.9);
       min-height: 100vh;
     }
-
-    /* Updated header with background image */
+    /* Header Styling */
     header {
-      background-image: url('header.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 90px; /* Adjust height as needed */
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0 25px;
-      position: relative;
-      color: white;
+      justify-content: center;
+      padding: 10px 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    /* Logo - keep original size and positioning */
-    .logo {
-      height: 60px;
+    header img {
+      max-height: 80px;
       width: auto;
       display: block;
-      z-index: 2;
     }
-
-    /* Header text */
-    header p {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: white;
-      user-select: none;
-      z-index: 2;
-    }
-
-    /* Nav container and dropdowns */
+    /* Navigation */
     .nav-container {
       max-width: 1200px;
-      margin: 10px auto 20px auto;
+      margin: 20px auto;
       padding: 0 20px;
       display: flex;
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
     }
-
     .dropdown {
       position: relative;
     }
-
     .dropdown-button {
-      background: var(--secondary);
+      background: #3498db;
       color: white;
       padding: 12px 20px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-family: 'Montserrat', sans-serif;
-      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 8px;
-      white-space: nowrap;
+      transition: all 0.3s ease;
     }
-
-    .dropdown-button:hover,
-    .dropdown-button:focus {
+    .dropdown-button:hover {
       background: #2980b9;
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      outline: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -133,74 +83,40 @@
       overflow: hidden;
       animation: fadeIn 0.3s ease-out;
     }
-
-    .dropdown:hover .dropdown-content,
-    .dropdown:focus-within .dropdown-content {
+    .dropdown:hover .dropdown-content {
       display: block;
     }
-
     .dropdown-content a {
       display: block;
       padding: 12px 16px;
-      color: var(--text);
+      color: #34495e;
       text-decoration: none;
       transition: all 0.2s;
       border-bottom: 1px solid #f1f1f1;
-      font-size: 0.9rem;
     }
-
     .dropdown-content a:hover {
       background-color: #f8f9fa;
       padding-left: 20px;
-      color: var(--secondary);
+      color: #3498db;
     }
-
     .dropdown-content i {
       width: 20px;
       text-align: center;
       margin-right: 8px;
-      color: var(--secondary);
+      color: #3498db;
     }
-
-    /* FadeIn animation */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
-      header {
-        height: 70px;
-        padding: 0 15px;
-      }
-      .logo {
-        height: 45px;
-      }
-      header p {
-        font-size: 1rem;
+      header img {
+        max-height: 60px;
       }
       .nav-container {
         flex-direction: column;
         gap: 10px;
-        padding: 0 10px 20px;
       }
       .dropdown-button {
-        font-size: 0.85rem;
-        padding: 10px 16px;
-      }
-      .dropdown-content {
-        min-width: 180px;
-      }
-      .dropdown-content a {
-        font-size: 0.85rem;
-        padding: 10px 14px;
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
@@ -208,44 +124,34 @@
 <body>
   <div class="content-wrapper">
     <header>
-      <img src="logo.png" alt="Logo" class="logo" />
-      <p>Senior System Administrator</p>
+      <!-- Just the header image as an inline image -->
+      <img src="header.jpeg" alt="Header Image" />
     </header>
 
-    <nav class="nav-container">
+    <div class="nav-container">
       <div class="dropdown">
-        <button class="dropdown-button" aria-haspopup="true" aria-expanded="false">
-          Profile <i class="fas fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" role="menu" aria-label="Profile submenu">
-          <a href="#about" role="menuitem"><i class="fas fa-user"></i> About Me</a>
-          <a href="#experience" role="menuitem"><i class="fas fa-briefcase"></i> Experience</a>
-          <a href="#skills" role="menuitem"><i class="fas fa-cogs"></i> Skills</a>
+        <button class="dropdown-button">Profile</button>
+        <div class="dropdown-content">
+          <a href="#about"><i class="fas fa-user"></i> About Me</a>
+          <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+          <a href="#skills"><i class="fas fa-cogs"></i> Skills</a>
         </div>
       </div>
-
       <div class="dropdown">
-        <button class="dropdown-button" aria-haspopup="true" aria-expanded="false">
-          Projects <i class="fas fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" role="menu" aria-label="Projects submenu">
-          <a href="#projects" role="menuitem"><i class="fas fa-tasks"></i> Project Portfolio</a>
-          <a href="#certifications" role="menuitem"><i class="fas fa-certificate"></i> Certifications</a>
+        <button class="dropdown-button">Projects</button>
+        <div class="dropdown-content">
+          <a href="#projects"><i class="fas fa-tasks"></i> Project Portfolio</a>
+          <a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a>
         </div>
       </div>
-
       <div class="dropdown">
-        <button class="dropdown-button" aria-haspopup="true" aria-expanded="false">
-          Contact <i class="fas fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content" role="menu" aria-label="Contact submenu">
-          <a href="#contact" role="menuitem"><i class="fas fa-envelope"></i> Contact Info</a>
-          <a href="mailto:hashmat.bahadari@icloud.com" role="menuitem"
-            ><i class="fas fa-paper-plane"></i> Send Email</a
-          >
+        <button class="dropdown-button">Contact</button>
+        <div class="dropdown-content">
+          <a href="#contact"><i class="fas fa-envelope"></i> Contact Info</a>
+          <a href="mailto:hashmat.bahadari@icloud.com"><i class="fas fa-paper-plane"></i> Send Email</a>
         </div>
       </div>
-    </nav>
+    </div>
   </div>
 </body>
 </html>
