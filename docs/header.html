@@ -41,25 +41,32 @@
     }
 
     header {
-      background-color: var(--header-bg);
-      color: var(--primary);
-      padding: 2rem 1rem;
+      background-image: url('header.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
       text-align: center;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      position: relative;
     }
 
-    header img {
-      max-width: 220px;
-      height: auto;
-      margin-bottom: 1rem;
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* dark overlay for better text contrast */
+      z-index: 0;
     }
 
     header p {
-      font-size: 1.2rem;
-      font-weight: 300;
-      opacity: 0.9;
-      max-width: 800px;
-      margin: 0 auto;
+      font-size: 1.8rem;
+      font-weight: 600;
+      z-index: 1;
     }
 
     .nav-container {
@@ -236,7 +243,7 @@
 
     @media (max-width: 900px) {
       header p {
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
     }
 
@@ -260,17 +267,10 @@
 <body>
   <div class="content-wrapper">
     <header>
-      <img src="header.jpeg" alt="Logo" style="max-width: 220px; height: auto; margin-bottom: 1rem;">
       <p>Senior System Administrator</p>
-
-      <div class="nav-container">
-        <div class="nav-buttons">
-          <!-- All dropdown buttons remain unchanged -->
-          <!-- [Insert dropdowns here as in original code] -->
-        </div>
-      </div>
     </header>
 
+    <!-- Keep the dropdown navigation and rest of the page the same as before -->
     <div class="main-container">
       <section class="profile-section">
         <div class="profile-about">
@@ -312,4 +312,3 @@
   </div>
 </body>
 </html>
-
