@@ -1,287 +1,294 @@
-<section class="dns-portfolio">
-  <h2><i class="fas fa-network-wired"></i> Enterprise DNS Management</h2>
-  
-  <div class="case-study">
-    <div class="case-study-header">
-      <div class="icon-circle">
-        <i class="fas fa-building"></i>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hashmat Bahadari - Enterprise DNS Expertise</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* === PROFESSIONAL CSS === */
+    :root {
+      --primary: #2563eb;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f1f5f9;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1, h2, h3 {
+      color: var(--primary);
+    }
+    
+    h1 {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .icon-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    /* === DNS ARCHITECTURE DIAGRAM (Pure CSS) === */
+    .architecture {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px 0;
+    }
+    
+    .diagram-row {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .diagram-node {
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 120px;
+      margin: 10px;
+      position: relative;
+    }
+    
+    .node-primary {
+      background: #dbeafe;
+      border: 2px solid var(--primary);
+    }
+    
+    .node-secondary {
+      background: #e0f2fe;
+      border: 2px solid #0ea5e9;
+    }
+    
+    .node-siem {
+      background: #ecfdf5;
+      border: 2px solid var(--success);
+    }
+    
+    .node-firewall {
+      background: #fee2e2;
+      border: 2px solid var(--danger);
+    }
+    
+    .diagram-arrow {
+      width: 0; 
+      height: 0; 
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid var(--primary);
+      margin: 5px auto;
+    }
+    
+    /* === WIRESHARK EXAMPLE (Text-Based) === */
+    .packet-capture {
+      background: #1e293b;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+    
+    .packet-number {
+      color: #94a3b8;
+    }
+    
+    .packet-time {
+      color: #f59e0b;
+    }
+    
+    .packet-src {
+      color: #10b981;
+    }
+    
+    .packet-dst {
+      color: #ef4444;
+    }
+    
+    .packet-protocol {
+      color: #818cf8;
+    }
+    
+    .packet-info {
+      color: #e2e8f0;
+    }
+    
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 600px) {
+      .diagram-row {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-network-wired"></i> Enterprise DNS Management</h1>
+    <p>Hashmat Bahadari | Former Central Bank of Afghanistan IT Security Administrator</p>
+  </header>
+
+  <!-- DNS Architecture Section -->
+  <div class="card">
+    <div class="icon-title">
+      <i class="fas fa-project-diagram" style="color: var(--primary); font-size: 24px;"></i>
+      <h2>Banking-Grade DNS Architecture</h2>
+    </div>
+    
+    <p>Designed and implemented high-availability DNS infrastructure for 34 Central Bank branches:</p>
+    
+    <div class="architecture">
+      <!-- Row 1: Branches -->
+      <div class="diagram-row">
+        <div class="diagram-node node-firewall">
+          <i class="fas fa-building"></i><br>
+          Bank Branches (34)
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow"></div>
+      
+      <!-- Row 2: Firewall -->
+      <div class="diagram-row">
+        <div class="diagram-node node-firewall">
+          <i class="fas fa-fire"></i><br>
+          FortiGate Firewall
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow"></div>
+      
+      <!-- Row 3: Core -->
+      <div class="diagram-row">
+        <div class="diagram-node node-primary">
+          <i class="fas fa-server"></i><br>
+          Primary DNS<br>(Windows Server 2019)
+        </div>
+        
+        <div class="diagram-node node-secondary">
+          <i class="fas fa-server"></i><br>
+          Secondary DNS<br>(Hot Standby)
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow"></div>
+      
+      <!-- Row 4: Monitoring -->
+      <div class="diagram-row">
+        <div class="diagram-node node-siem">
+          <i class="fas fa-shield-alt"></i><br>
+          Splunk SIEM<br>(Log Analysis)
+        </div>
+      </div>
+    </div>
+    
+    <h3><i class="fas fa-cogs"></i> Key Features Implemented</h3>
+    <ul>
+      <li><strong>EDNS Client Subnet</strong>: Reduced query latency by 60% for branch offices</li>
+      <li><strong>DNSSEC</strong>: Implemented cryptographic zone signing</li>
+      <li><strong>Automated Zone Transfers</strong>: PowerShell scripts run nightly</li>
+    </ul>
+  </div>
+
+  <!-- Wireshark Example Section -->
+  <div class="card">
+    <div class="icon-title">
+      <i class="fas fa-traffic-light" style="color: var(--danger); font-size: 24px;"></i>
+      <h2>DNS Traffic Analysis</h2>
+    </div>
+    
+    <p>Example packet capture from troubleshooting session (simplified):</p>
+    
+    <div class="packet-capture">
+      <div>
+        <span class="packet-number">1</span> 
+        <span class="packet-time">0.000000</span> 
+        <span class="packet-src">192.168.1.100</span> → 
+        <span class="packet-dst">10.10.1.53</span> 
+        <span class="packet-protocol">DNS</span> 
+        <span class="packet-info">Standard query A centralbank.af</span>
       </div>
       <div>
-        <h3>Central Bank of Afghanistan</h3>
-        <p class="subtitle">DNS Infrastructure Optimization | 2018-2021</p>
+        <span class="packet-number">2</span> 
+        <span class="packet-time">0.023451</span> 
+        <span class="packet-src">10.10.1.53</span> → 
+        <span class="packet-dst">192.168.1.100</span> 
+        <span class="packet-protocol">DNS</span> 
+        <span class="packet-info">Standard query response A 192.168.10.5</span>
+      </div>
+      <div>
+        <span class="packet-number">3</span> 
+        <span class="packet-time">1.502341</span> 
+        <span class="packet-src">192.168.1.100</span> → 
+        <span class="packet-dst">10.10.1.53</span> 
+        <span class="packet-protocol">DNS</span> 
+        <span class="packet-info">Query for non-existent record - NXDOMAIN</span>
       </div>
     </div>
-
-    <div class="grid-2col">
-      <div class="problem-card">
-        <h4><i class="fas fa-exclamation-triangle"></i> Challenges</h4>
-        <ul>
-          <li>15% query timeouts during financial reporting hours</li>
-          <li>Manual zone transfers consuming 20+ staff hours/month</li>
-          <li>No DNSSEC implementation despite SWIFT requirements</li>
-        </ul>
-      </div>
-
-      <div class="solution-card">
-        <h4><i class="fas fa-check-circle"></i> My Solutions</h4>
-        <ul>
-          <li>Designed EDNS client-subnet deployment (60% latency reduction)</li>
-          <li>Automated transfers with PowerShell scripts (saved $15k/year)</li>
-          <li>Implemented DNSSEC compliance for 34 branches</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="tech-showcase">
-      <div class="code-block">
-        <div class="code-header">
-          <span class="red"></span>
-          <span class="yellow"></span>
-          <span class="green"></span>
-          <span>dns-automation.ps1</span>
-        </div>
-        <pre><code># PowerShell script I developed:
-$Servers = Get-Content "C:\dns_servers.txt"
-foreach ($Server in $Servers) {
-  Invoke-Command -ComputerName $Server -ScriptBlock {
-    Export-DnsServerZone -Name $args[0] -FileName "C:\backups\$($args[0]).dns"
-  } -ArgumentList $Zone.ZoneName
-}</code></pre>
-      </div>
-
-      <div class="architecture">
-        <div class="arch-node primary">
-          <i class="fas fa-server"></i>
-          <span>Primary DNS</span>
-        </div>
-        <div class="arch-arrow">→</div>
-        <div class="arch-node secondary">
-          <i class="fas fa-server"></i>
-          <span>Secondary DNS</span>
-        </div>
-        <div class="arch-arrow">→</div>
-        <div class="arch-node siem">
-          <i class="fas fa-shield-alt"></i>
-          <span>Splunk SIEM</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="results">
-      <h4><i class="fas fa-chart-line"></i> Key Results</h4>
-      <div class="metrics">
-        <div class="metric">
-          <div class="number">60%</div>
-          <div>Latency Reduction</div>
-        </div>
-        <div class="metric">
-          <div class="number">99.99%</div>
-          <div>Uptime</div>
-        </div>
-        <div class="metric">
-          <div class="number">20h</div>
-          <div>Monthly Savings</div>
-        </div>
-      </div>
-    </div>
+    
+    <h3><i class="fas fa-search"></i> Analysis Notes</h3>
+    <ol>
+      <li><strong>Packet 1-2</strong>: Normal DNS query/response (15ms latency is acceptable)</li>
+      <li><strong>Packet 3</strong>: Client requesting non-existent record - configured scavenging to clean these</li>
+      <li><strong>No DNSSEC</strong> visible - was later implemented per SWIFT requirements</li>
+    </ol>
   </div>
-</section>
 
-<style>
-/* === PROFESSIONAL CSS (100% VALID) === */
-.dns-portfolio {
-  max-width: 900px;
-  margin: 2rem auto;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-}
-
-.dns-portfolio h2 {
-  color: #2c3e50;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.case-study {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-  overflow: hidden;
-}
-
-.case-study-header {
-  background: #2563eb;
-  color: white;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.icon-circle {
-  width: 50px;
-  height: 50px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 1.2rem;
-}
-
-.subtitle {
-  opacity: 0.9;
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-}
-
-.grid-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 1.5rem;
-}
-
-.problem-card, .solution-card {
-  padding: 1.2rem;
-  border-radius: 8px;
-}
-
-.problem-card {
-  background: #fff5f5;
-  border-left: 4px solid #ef4444;
-}
-
-.solution-card {
-  background: #f0fdf4;
-  border-left: 4px solid #10b981;
-}
-
-.tech-showcase {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 0 1.5rem 1.5rem;
-}
-
-.code-block {
-  background: #1e293b;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.code-header {
-  background: #334155;
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.code-header span[class^="code-header"] {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.code-header .red { background: #ef4444; }
-.code-header .yellow { background: #f59e0b; }
-.code-header .green { background: #10b981; }
-
-.code-block pre {
-  color: #f8fafc;
-  padding: 1rem;
-  margin: 0;
-  overflow-x: auto;
-  font-family: 'Consolas', monospace;
-}
-
-.architecture {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.arch-node {
-  padding: 0.8rem;
-  border-radius: 8px;
-  text-align: center;
-  min-width: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.arch-node i {
-  font-size: 1.5rem;
-}
-
-.primary {
-  background: #dbeafe;
-  border: 1px solid #2563eb;
-  color: #2563eb;
-}
-
-.secondary {
-  background: #e0f2fe;
-  border: 1px solid #0ea5e9;
-  color: #0ea5e9;
-}
-
-.siem {
-  background: #ecfdf5;
-  border: 1px solid #10b981;
-  color: #10b981;
-}
-
-.arch-arrow {
-  color: #64748b;
-  font-size: 1.2rem;
-}
-
-.results {
-  padding: 1.5rem;
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-}
-
-.metrics {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 1rem;
-}
-
-.metric {
-  text-align: center;
-}
-
-.number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #2563eb;
-  margin-bottom: 0.3rem;
-}
-
-/* Font Awesome Icons (Standard Web Component) */
-.fas {
-  font-family: 'Font Awesome';
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .grid-2col, .tech-showcase {
-    grid-template-columns: 1fr;
-  }
-  
-  .metrics {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-</style>
-
-<!-- Load Font Awesome (Standard Web Font) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- PowerShell Automation Section -->
+  <div class="card">
+    <div class="icon-title">
+      <i class="fas fa-terminal" style="color: var(--success); font-size: 24px;"></i>
+      <h2>DNS Automation Scripts</h2>
+    </div>
+    
+    <pre style="background: #1e293b; color: white; padding: 15px; border-radius: 6px; overflow-x: auto;">
+# PowerShell: Automated DNS Zone Backup
+$Zones = Get-DnsServerZone | Where-Object {$_.ZoneType -eq "Primary"}
+foreach ($Zone in $Zones) {
+  $FileName = "C:\DNS_Backups\" + $Zone.ZoneName + "_" + (Get-Date -Format "yyyyMMdd") + ".bak"
+  Export-DnsServerZone -Name $Zone.ZoneName -FileName $FileName
+  Write-EventLog -LogName "DNS" -Source "Automation" -EventId 100 -Message "Backed up zone $($Zone.ZoneName)"
+}</pre>
+    
+    <h3><i class="fas fa-lightbulb"></i> Key Improvements</h3>
+    <ul>
+      <li><strong>Scheduled Daily</strong>: Ran via Task Scheduler at 2AM</li>
+      <li><strong>Error Handling</strong>: Added email alerts for failures</li>
+      <li><strong>Storage</strong>: Automatically purged backups older than 30 days</li>
+    </ul>
+  </div>
+</body>
+</html>
