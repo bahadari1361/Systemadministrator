@@ -3,212 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central Bank DNS Infrastructure | Hashmat Bahadari</title>
+  <title>Enterprise DNS Monitoring Architecture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --bank-blue: #0058a3;
-      --security-red: #cc0000;
-      --monitoring-green: #2e7d32;
-      --dark-bg: #1a1a1a;
+      --sophos-red: #CC0000;
+      --prtg-green: #00A779;
+      --splunk-blue: #86BBD8;
+      --ntopng-purple: #6A4C93;
+      --moltigo-orange: #F26419;
     }
     
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1200px;
+      background: #f8fafc;
+      color: #1e293b;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 20px;
     }
     
-    .project-header {
-      background: linear-gradient(135deg, var(--bank-blue), #003366);
-      color: white;
-      padding: 30px;
-      border-radius: 8px 8px 0 0;
-      border-bottom: 4px solid var(--security-red);
-    }
-    
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      margin: 25px 0;
-    }
-    
-    .tool-card {
-      background: rgba(255,255,255,0.15);
-      padding: 12px;
-      border-radius: 6px;
-      text-align: center;
-      font-weight: 500;
-    }
-    
     .architecture {
-      background: #f5f7fa;
-      padding: 30px;
-    }
-    
-    .diagram {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-    }
-    
-    .diagram-node {
-      padding: 15px;
-      margin: 10px;
-      border-radius: 6px;
-      text-align: center;
-      font-weight: 500;
       position: relative;
+      height: 500px;
+      margin: 40px 0;
     }
     
-    .sophos-node {
-      background: #fff1f1;
-      border-left: 4px solid var(--security-red);
-    }
-    
-    .dns-node {
-      background: #e1f0fa;
-      border-left: 4px solid var(--bank-blue);
-    }
-    
-    .monitoring-node {
-      background: #e8f5e9;
-      border-left: 4px solid var(--monitoring-green);
-    }
-    
-    .diagram-arrow {
-      height: 20px;
-      width: 2px;
-      background: #999;
-      margin: 5px auto;
-    }
-    
-    .config-block {
-      background: #1e293b;
-      color: #f8fafc;
+    .tool-node {
+      position: absolute;
+      width: 140px;
       padding: 15px;
-      border-radius: 6px;
-      font-family: 'Courier New', monospace;
-      overflow-x: auto;
-    }
-    
-    .config-comment {
-      color: #94a3b8;
-    }
-    
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      text-align: center;
-      margin: 30px 0;
-    }
-    
-    .result-card {
-      background: white;
-      padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-weight: 500;
     }
     
-    .result-value {
+    .sophos { 
+      top: 50px; left: 50px;
+      background: #ffebee;
+      border: 2px solid var(--sophos-red);
+    }
+    
+    .moltigo { 
+      top: 50px; left: 400px; 
+      background: #fff3e0;
+      border: 2px solid var(--moltigo-orange);
+    }
+    
+    .splunk { 
+      top: 300px; left: 200px; 
+      background: #e3f2fd;
+      border: 2px solid var(--splunk-blue);
+    }
+    
+    .prtg { 
+      top: 300px; left: 450px; 
+      background: #e8f5e9;
+      border: 2px solid var(--prtg-green);
+    }
+    
+    .ntopng { 
+      top: 300px; left: 700px; 
+      background: #f3e5f5;
+      border: 2px solid var(--ntopng-purple);
+    }
+    
+    /* Transmission Lines */
+    .data-flow {
+      position: absolute;
+      background: repeating-linear-gradient(
+        to right,
+        #2563eb,
+        #2563eb 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      height: 2px;
+      transform-origin: left center;
+      animation: flow 3s linear infinite;
+    }
+    
+    @keyframes flow {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 0; }
+    }
+    
+    /* Tool Icons */
+    .tool-icon {
       font-size: 32px;
-      font-weight: 700;
-      color: var(--bank-blue);
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      display: block;
     }
     
-    @media (max-width: 768px) {
-      .tool-grid, .results-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+    /* Connection Dots */
+    .connector {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #2563eb;
+      border-radius: 50%;
+    }
+    
+    /* Legend */
+    .legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
-
-  <div class="project-container">
-    <div class="project-header">
-      <h1>Central Bank DNS Security Overhaul</h1>
-      <p>Enterprise DNS infrastructure with real-time threat monitoring (2023-2024)</p>
-      
-      <div class="tool-grid">
-        <div class="tool-card">Sophos XG Firewall</div>
-        <div class="tool-card">PRTG Monitoring</div>
-        <div class="tool-card">Splunk SIEM</div>
-        <div class="tool-card">ntopng</div>
-        <div class="tool-card">Wireshark</div>
-        <div class="tool-card">Moltigo DNS</div>
-      </div>
+  <h1><i class="fas fa-project-diagram"></i> Central Bank DNS Monitoring Architecture</h1>
+  
+  <div class="architecture">
+    <!-- Tools -->
+    <div class="tool-node sophos">
+      <i class="fas fa-firewall tool-icon" style="color: var(--sophos-red);"></i>
+      <div>Sophos XG Firewall</div>
+      <small>DNS Filtering</small>
     </div>
     
-    <div class="architecture">
-      <h2>Security-First Architecture</h2>
-      
-      <div class="diagram">
-        <div class="diagram-node sophos-node">
-          <strong>Sophos XG Firewall</strong><br>
-          DNS Filtering + Threat Prevention
-        </div>
-        
-        <div class="diagram-arrow"></div>
-        
-        <div class="diagram-node dns-node">
-          <strong>Moltigo DNS Servers</strong><br>
-          Authoritative + Recursive
-        </div>
-        
-        <div class="diagram-arrow"></div>
-        
-        <div class="diagram-node monitoring-node">
-          <strong>Monitoring Layer</strong><br>
-          PRTG | Splunk | ntopng
-        </div>
-      </div>
-      
-      <h3>Key Configuration</h3>
-      <div class="config-block">
-        <span class="config-comment"># Sophos DNS Security Policy</span><br>
-        set security dns-filter profile "CBA_Strict"<br>
-        set block-dns-reply enable<br>
-        set log-level "all"<br>
-        <br>
-        <span class="config-comment"># PRTG Sensor Setup</span><br>
-        New-Sensor -Type "DNS" -Name "Moltigo_Health"<br>
-        -Url "https://prtg:port/api" -Interval 60s<br>
-      </div>
+    <div class="tool-node moltigo">
+      <i class="fas fa-server tool-icon" style="color: var(--moltigo-orange);"></i>
+      <div>Moltigo DNS</div>
+      <small>Authoritative</small>
     </div>
     
-    <div>
-      <h2>Threat Detection Workflow</h2>
-      <ol>
-        <li><strong>Sophos</strong> blocks malicious domains at perimeter</li>
-        <li><strong>Moltigo</strong> logs all queries to Splunk</li>
-        <li><strong>ntopng</strong> analyzes DNS traffic patterns</li>
-        <li><strong>PRTG</strong> alerts on server performance issues</li>
-        <li><strong>Wireshark</strong> used for deep packet analysis</li>
-      </ol>
-      
-      <div class="results-grid">
-        <div class="result-card">
-          <div class="result-value">142%</div>
-          <div>Faster threat detection</div>
-        </div>
-        <div class="result-card">
-          <div class="result-value">0</div>
-          <div>DNS breaches post-implementation</div>
-        </div>
-        <div class="result-card">
-          <div class="result-value">99.997%</div>
-          <div>DNS uptime</div>
-        </div>
-      </div>
+    <div class="tool-node splunk">
+      <i class="fas fa-chart-line tool-icon" style="color: var(--splunk-blue);"></i>
+      <div>Splunk</div>
+      <small>SIEM Analytics</small>
     </div>
+    
+    <div class="tool-node prtg">
+      <i class="fas fa-heartbeat tool-icon" style="color: var(--prtg-green);"></i>
+      <div>PRTG</div>
+      <small>Performance</small>
+    </div>
+    
+    <div class="tool-node ntopng">
+      <i class="fas fa-traffic-light tool-icon" style="color: var(--ntopng-purple);"></i>
+      <div>ntopng</div>
+      <small>Traffic Analysis</small>
+    </div>
+    
+    <!-- Data Flows -->
+    <div class="data-flow" style="width: 300px; top: 110px; left: 190px; transform: rotate(0deg);"></div>
+    <div class="connector" style="top: 110px; left: 190px;"></div>
+    
+    <div class="data-flow" style="width: 250px; top: 180px; left: 270px; transform: rotate(90deg);"></div>
+    <div class="connector" style="top: 180px; left: 270px;"></div>
+    
+    <div class="data-flow" style="width: 250px; top: 180px; left: 470px; transform: rotate(90deg);"></div>
+    <div class="connector" style="top: 180px; left: 470px;"></div>
+    
+    <div class="data-flow" style="width: 250px; top: 180px; left: 670px; transform: rotate(90deg);"></div>
+    <div class="connector" style="top: 180px; left: 670px;"></div>
+  </div>
+  
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color" style="background: var(--sophos-red);"></div>
+      <span>Sophos Firewall</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: var(--moltigo-orange);"></div>
+      <span>Moltigo DNS</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: var(--splunk-blue);"></div>
+      <span>Splunk SIEM</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: var(--prtg-green);"></div>
+      <span>PRTG Monitoring</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: var(--ntopng-purple);"></div>
+      <span>ntopng</span>
+    </div>
+  </div>
+  
+  <div class="data-flow-description">
+    <h3>Data Transmission Flow</h3>
+    <ol>
+      <li><strong>Sophos Firewall</strong> filters malicious DNS queries → Forwards clean traffic to Moltigo</li>
+      <li><strong>Moltigo DNS</strong> processes queries → Streams logs to:
+        <ul>
+          <li>Splunk (security events)</li>
+          <li>PRTG (performance metrics)</li>
+          <li>ntopng (traffic patterns)</li>
+        </ul>
+      </li>
+      <li><strong>Wireshark</strong> (ad-hoc) captures packets for deep analysis</li>
+    </ol>
   </div>
 </body>
 </html>
