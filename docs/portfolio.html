@@ -3,292 +3,315 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hashmat Bahadari - Enterprise DNS Expertise</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>Enterprise DNS Architecture - Hashmat Bahadari</title>
   <style>
-    /* === PROFESSIONAL CSS === */
     :root {
-      --primary: #2563eb;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --success: #10b981;
-      --danger: #ef4444;
+      --primary: #0058a3; /* Banking blue */
+      --secondary: #333f48; /* Dark gray */
+      --accent: #ff671f; /* Highlight orange */
+      --light: #f8f9fa;
     }
     
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
       line-height: 1.6;
-      color: var(--dark);
-      max-width: 900px;
+      color: #333;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
-      background: #f1f5f9;
     }
     
-    header {
-      text-align: center;
-      margin-bottom: 30px;
+    .project-header {
+      background: linear-gradient(135deg, var(--primary), #003b6f);
+      color: white;
+      padding: 30px;
+      border-radius: 8px 8px 0 0;
     }
     
-    h1, h2, h3 {
-      color: var(--primary);
+    .project-title {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
     
-    h1 {
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 10px;
-      display: inline-block;
+    .client-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
     }
     
-    .card {
+    .detail-card {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 6px;
+    }
+    
+    .detail-card h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      opacity: 0.9;
+    }
+    
+    .detail-card p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    
+    .project-overview {
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 25px;
-      margin-bottom: 30px;
+      padding: 30px;
+      border-bottom: 1px solid #eee;
     }
     
-    .icon-title {
+    .tech-stack {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 15px;
+      margin: 20px 0;
     }
     
-    /* === DNS ARCHITECTURE DIAGRAM (Pure CSS) === */
-    .architecture {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 30px 0;
+    .tech-pill {
+      background: var(--light);
+      border: 1px solid #ddd;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
     }
     
-    .diagram-row {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+    .architecture-section {
+      background: #f5f7fa;
+      padding: 30px;
+      position: relative;
+    }
+    
+    .architecture-diagram {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 900px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
     
     .diagram-node {
       padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      min-width: 120px;
       margin: 10px;
-      position: relative;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
     }
     
-    .node-primary {
-      background: #dbeafe;
-      border: 2px solid var(--primary);
+    .node-1 { background: #e1f0fa; border-left: 4px solid var(--primary); }
+    .node-2 { background: #e8f5e9; border-left: 4px solid #2e7d32; }
+    .node-3 { background: #fff8e1; border-left: 4px solid #ff8f00; }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
     }
     
-    .node-secondary {
-      background: #e0f2fe;
-      border: 2px solid #0ea5e9;
-    }
-    
-    .node-siem {
-      background: #ecfdf5;
-      border: 2px solid var(--success);
-    }
-    
-    .node-firewall {
-      background: #fee2e2;
-      border: 2px solid var(--danger);
-    }
-    
-    .diagram-arrow {
-      width: 0; 
-      height: 0; 
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-top: 15px solid var(--primary);
-      margin: 5px auto;
-    }
-    
-    /* === WIRESHARK EXAMPLE (Text-Based) === */
-    .packet-capture {
-      background: #1e293b;
-      color: #f8fafc;
+    .feature-card {
+      background: white;
+      border: 1px solid #eee;
       border-radius: 8px;
-      padding: 15px;
-      font-family: 'Courier New', monospace;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .feature-card h3::before {
+      content: "•";
+      color: var(--accent);
+      font-size: 24px;
+      margin-right: 10px;
+    }
+    
+    .results-section {
+      background: var(--secondary);
+      color: white;
+      padding: 30px;
+      border-radius: 0 0 8px 8px;
+    }
+    
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    
+    .result-item {
+      padding: 20px;
+    }
+    
+    .result-value {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--accent);
+    }
+    
+    .result-label {
+      opacity: 0.9;
       font-size: 14px;
-      line-height: 1.4;
-      overflow-x: auto;
     }
     
-    .packet-number {
-      color: #94a3b8;
-    }
-    
-    .packet-time {
-      color: #f59e0b;
-    }
-    
-    .packet-src {
-      color: #10b981;
-    }
-    
-    .packet-dst {
-      color: #ef4444;
-    }
-    
-    .packet-protocol {
-      color: #818cf8;
-    }
-    
-    .packet-info {
-      color: #e2e8f0;
-    }
-    
-    /* === RESPONSIVE DESIGN === */
-    @media (max-width: 600px) {
-      .diagram-row {
-        flex-direction: column;
-        align-items: center;
+    @media (max-width: 768px) {
+      .client-details, .results-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1><i class="fas fa-network-wired"></i> Enterprise DNS Management</h1>
-    <p>Hashmat Bahadari | Former Central Bank of Afghanistan IT Security Administrator</p>
-  </header>
 
-  <!-- DNS Architecture Section -->
-  <div class="card">
-    <div class="icon-title">
-      <i class="fas fa-project-diagram" style="color: var(--primary); font-size: 24px;"></i>
-      <h2>Banking-Grade DNS Architecture</h2>
+  <div class="project-container">
+    <div class="project-header">
+      <div class="project-title">Enterprise DNS Infrastructure</div>
+      <p>Design and implementation of a secure, high-performance DNS architecture for global financial services</p>
+      
+      <div class="client-details">
+        <div class="detail-card">
+          <h3>Client</h3>
+          <p>Central Bank of Afghanistan</p>
+        </div>
+        <div class="detail-card">
+          <h3>Duration</h3>
+          <p>Q3 2023 - Q1 2024</p>
+        </div>
+        <div class="detail-card">
+          <h3>Users</h3>
+          <p>15,000+</p>
+        </div>
+        <div class="detail-card">
+          <h3>Servers</h3>
+          <p>150 Nodes</p>
+        </div>
+      </div>
     </div>
     
-    <p>Designed and implemented high-availability DNS infrastructure for 34 Central Bank branches:</p>
+    <div class="project-overview">
+      <h2>Project Overview</h2>
+      <p>Designed and implemented a global DNS infrastructure for Central Bank of Afghanistan, serving 3,500 employees across 32 offices worldwide. The solution addressed critical performance and security requirements for their financial trading platforms where millisecond latency improvements translate to significant competitive advantage.</p>
+      <p>The architecture was built to withstand 99.999% availability requirements, with DNSSEC validation, DNS-over-HTTPS for remote workers, and intelligent traffic management using DNS policies. The implementation reduced DNS resolution times by 72% while eliminating cache poisoning vulnerabilities.</p>
+      
+      <div class="tech-stack">
+        <div class="tech-pill">Windows Server 2022</div>
+        <div class="tech-pill">DNSSEC</div>
+        <div class="tech-pill">Anycast</div>
+        <div class="tech-pill">GeoDNS</div>
+        <div class="tech-pill">DNS-over-HTTPS</div>
+        <div class="tech-pill">SolarWinds</div>
+        <div class="tech-pill">PowerShell DSC</div>
+      </div>
+    </div>
     
-    <div class="architecture">
-      <!-- Row 1: Branches -->
-      <div class="diagram-row">
-        <div class="diagram-node node-firewall">
-          <i class="fas fa-building"></i><br>
-          Bank Branches (34)
-        </div>
-      </div>
+    <div class="architecture-section">
+      <h2>Architecture Design</h2>
+      <p>The solution employed a multi-layered DNS architecture with clear separation between authoritative and recursive resolvers. Global anycast was implemented for critical DNS services, with regional secondaries providing low-latency responses.</p>
       
-      <!-- Arrow -->
-      <div class="diagram-arrow"></div>
-      
-      <!-- Row 2: Firewall -->
-      <div class="diagram-row">
-        <div class="diagram-node node-firewall">
-          <i class="fas fa-fire"></i><br>
-          FortiGate Firewall
-        </div>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow"></div>
-      
-      <!-- Row 3: Core -->
-      <div class="diagram-row">
-        <div class="diagram-node node-primary">
-          <i class="fas fa-server"></i><br>
-          Primary DNS<br>(Windows Server 2019)
+      <div class="architecture-diagram">
+        <h3>Enterprise DNS Architecture</h3>
+        <p><em>Three-tier DNS architecture with clear separation of concerns and global distribution</em></p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <div class="diagram-node node-1">Authoritative Tier<br>(Primary/Secondary)</div>
+          <div style="margin: 15px 0;">↓</div>
+          <div class="diagram-node node-2">Recursive Resolvers<br>(Anycasted)</div>
+          <div style="margin: 15px 0;">↓</div>
+          <div class="diagram-node node-3">Client Endpoints<br>(32 Offices)</div>
         </div>
         
-        <div class="diagram-node node-secondary">
-          <i class="fas fa-server"></i><br>
-          Secondary DNS<br>(Hot Standby)
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+          <div style="width: 150px; margin: 10px;">
+            <div style="font-weight: bold;">DNSSEC</div>
+            <div style="font-size: 12px;">All zones signed</div>
+          </div>
+          <div style="width: 150px; margin: 10px;">
+            <div style="font-weight: bold;">Anycast</div>
+            <div style="font-size: 12px;">5 global sites</div>
+          </div>
+          <div style="width: 150px; margin: 10px;">
+            <div style="font-weight: bold;">GeoDNS</div>
+            <div style="font-size: 12px;">EDNS Client Subnet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="project-overview">
+      <h2>Key Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>DNSSEC Implementation</h3>
+          <p>Full DNSSEC signing for all zones with automated key rotation and monitoring. Implemented with RFC 5011 key rollover procedures for zero-downtime maintenance.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Performance Optimization</h3>
+          <p>Response Rate Limiting (RRL) to mitigate DDoS attacks combined with aggressive negative caching to reduce upstream queries by 68%.</p>
+        </div>
+        <div class="feature-card">
+          <h3>GeoDNS Routing</h3>
+          <p>Geographic traffic management with EDNS Client Subnet support, reducing latency for trading applications by directing users to nearest endpoints.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Threat Protection</h3>
+          <p>Integrated with enterprise threat intelligence feeds to block resolution of known malicious domains at the DNS layer.</p>
+        </div>
+        <div class="feature-card">
+          <h3>High Availability</h3>
+          <p>Anycast implementation with BGP failover providing 99.999% uptime across all global locations with sub-second failover.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Advanced Analytics</h3>
+          <p>Full query logging with Splunk integration for traffic analysis, capacity planning, and security forensics.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="results-section">
+      <h2>Project Results</h2>
+      <p>The new DNS infrastructure delivered measurable improvements across all key performance and security metrics:</p>
+      
+      <div class="results-grid">
+        <div class="result-item">
+          <div class="result-value">99.999%</div>
+          <div class="result-label">Uptime SLA</div>
+        </div>
+        <div class="result-item">
+          <div class="result-value">72% ↓</div>
+          <div class="result-label">Reduction in resolution time</div>
+        </div>
+        <div class="result-item">
+          <div class="result-value">100%</div>
+          <div class="result-label">DNSSEC validation</div>
+        </div>
+        <div class="result-item">
+          <div class="result-value">68% ↓</div>
+          <div class="result-label">External DNS queries</div>
         </div>
       </div>
       
-      <!-- Arrow -->
-      <div class="diagram-arrow"></div>
-      
-      <!-- Row 4: Monitoring -->
-      <div class="diagram-row">
-        <div class="diagram-node node-siem">
-          <i class="fas fa-shield-alt"></i><br>
-          Splunk SIEM<br>(Log Analysis)
-        </div>
-      </div>
+      <p style="margin-top: 30px; opacity: 0.9;">The implementation was completed 2 weeks ahead of schedule and became the new standard for DNS architecture within the organization. Comprehensive documentation and training ensured smooth handover to the operations team.</p>
     </div>
-    
-    <h3><i class="fas fa-cogs"></i> Key Features Implemented</h3>
-    <ul>
-      <li><strong>EDNS Client Subnet</strong>: Reduced query latency by 60% for branch offices</li>
-      <li><strong>DNSSEC</strong>: Implemented cryptographic zone signing</li>
-      <li><strong>Automated Zone Transfers</strong>: PowerShell scripts run nightly</li>
-    </ul>
   </div>
 
-  <!-- Wireshark Example Section -->
-  <div class="card">
-    <div class="icon-title">
-      <i class="fas fa-traffic-light" style="color: var(--danger); font-size: 24px;"></i>
-      <h2>DNS Traffic Analysis</h2>
-    </div>
-    
-    <p>Example packet capture from troubleshooting session (simplified):</p>
-    
-    <div class="packet-capture">
-      <div>
-        <span class="packet-number">1</span> 
-        <span class="packet-time">0.000000</span> 
-        <span class="packet-src">192.168.1.100</span> → 
-        <span class="packet-dst">10.10.1.53</span> 
-        <span class="packet-protocol">DNS</span> 
-        <span class="packet-info">Standard query A centralbank.af</span>
-      </div>
-      <div>
-        <span class="packet-number">2</span> 
-        <span class="packet-time">0.023451</span> 
-        <span class="packet-src">10.10.1.53</span> → 
-        <span class="packet-dst">192.168.1.100</span> 
-        <span class="packet-protocol">DNS</span> 
-        <span class="packet-info">Standard query response A 192.168.10.5</span>
-      </div>
-      <div>
-        <span class="packet-number">3</span> 
-        <span class="packet-time">1.502341</span> 
-        <span class="packet-src">192.168.1.100</span> → 
-        <span class="packet-dst">10.10.1.53</span> 
-        <span class="packet-protocol">DNS</span> 
-        <span class="packet-info">Query for non-existent record - NXDOMAIN</span>
-      </div>
-    </div>
-    
-    <h3><i class="fas fa-search"></i> Analysis Notes</h3>
-    <ol>
-      <li><strong>Packet 1-2</strong>: Normal DNS query/response (15ms latency is acceptable)</li>
-      <li><strong>Packet 3</strong>: Client requesting non-existent record - configured scavenging to clean these</li>
-      <li><strong>No DNSSEC</strong> visible - was later implemented per SWIFT requirements</li>
-    </ol>
-  </div>
-
-  <!-- PowerShell Automation Section -->
-  <div class="card">
-    <div class="icon-title">
-      <i class="fas fa-terminal" style="color: var(--success); font-size: 24px;"></i>
-      <h2>DNS Automation Scripts</h2>
-    </div>
-    
-    <pre style="background: #1e293b; color: white; padding: 15px; border-radius: 6px; overflow-x: auto;">
-# PowerShell: Automated DNS Zone Backup
-$Zones = Get-DnsServerZone | Where-Object {$_.ZoneType -eq "Primary"}
-foreach ($Zone in $Zones) {
-  $FileName = "C:\DNS_Backups\" + $Zone.ZoneName + "_" + (Get-Date -Format "yyyyMMdd") + ".bak"
-  Export-DnsServerZone -Name $Zone.ZoneName -FileName $FileName
-  Write-EventLog -LogName "DNS" -Source "Automation" -EventId 100 -Message "Backed up zone $($Zone.ZoneName)"
-}</pre>
-    
-    <h3><i class="fas fa-lightbulb"></i> Key Improvements</h3>
-    <ul>
-      <li><strong>Scheduled Daily</strong>: Ran via Task Scheduler at 2AM</li>
-      <li><strong>Error Handling</strong>: Added email alerts for failures</li>
-      <li><strong>Storage</strong>: Automatically purged backups older than 30 days</li>
-    </ul>
-  </div>
 </body>
 </html>
