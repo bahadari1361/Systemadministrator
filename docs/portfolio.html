@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise DNS Architecture - Hashmat Bahadari</title>
+  <title>Central Bank DNS Infrastructure | Hashmat Bahadari</title>
   <style>
     :root {
-      --primary: #0058a3; /* Banking blue */
-      --secondary: #333f48; /* Dark gray */
-      --accent: #ff671f; /* Highlight orange */
-      --light: #f8f9fa;
+      --bank-blue: #0058a3;
+      --security-red: #cc0000;
+      --monitoring-green: #2e7d32;
+      --dark-bg: #1a1a1a;
     }
     
     body {
@@ -22,77 +22,39 @@
     }
     
     .project-header {
-      background: linear-gradient(135deg, var(--primary), #003b6f);
+      background: linear-gradient(135deg, var(--bank-blue), #003366);
       color: white;
       padding: 30px;
       border-radius: 8px 8px 0 0;
+      border-bottom: 4px solid var(--security-red);
     }
     
-    .project-title {
-      font-size: 28px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-    
-    .client-details {
+    .tool-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
       margin: 25px 0;
     }
     
-    .detail-card {
+    .tool-card {
       background: rgba(255,255,255,0.15);
-      padding: 15px;
+      padding: 12px;
       border-radius: 6px;
-    }
-    
-    .detail-card h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      opacity: 0.9;
-    }
-    
-    .detail-card p {
-      font-size: 18px;
+      text-align: center;
       font-weight: 500;
     }
     
-    .project-overview {
-      background: white;
-      padding: 30px;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0;
-    }
-    
-    .tech-pill {
-      background: var(--light);
-      border: 1px solid #ddd;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-    }
-    
-    .architecture-section {
+    .architecture {
       background: #f5f7fa;
       padding: 30px;
-      position: relative;
     }
     
-    .architecture-diagram {
+    .diagram {
       background: white;
       border: 1px solid #ddd;
-      padding: 30px;
-      margin: 30px auto;
-      max-width: 900px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
     }
     
     .diagram-node {
@@ -101,79 +63,68 @@
       border-radius: 6px;
       text-align: center;
       font-weight: 500;
+      position: relative;
     }
     
-    .node-1 { background: #e1f0fa; border-left: 4px solid var(--primary); }
-    .node-2 { background: #e8f5e9; border-left: 4px solid #2e7d32; }
-    .node-3 { background: #fff8e1; border-left: 4px solid #ff8f00; }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin: 30px 0;
+    .sophos-node {
+      background: #fff1f1;
+      border-left: 4px solid var(--security-red);
     }
     
-    .feature-card {
-      background: white;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 20px;
-      transition: transform 0.3s;
+    .dns-node {
+      background: #e1f0fa;
+      border-left: 4px solid var(--bank-blue);
     }
     
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    .monitoring-node {
+      background: #e8f5e9;
+      border-left: 4px solid var(--monitoring-green);
     }
     
-    .feature-card h3 {
-      color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
+    .diagram-arrow {
+      height: 20px;
+      width: 2px;
+      background: #999;
+      margin: 5px auto;
     }
     
-    .feature-card h3::before {
-      content: "•";
-      color: var(--accent);
-      font-size: 24px;
-      margin-right: 10px;
+    .config-block {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
     }
     
-    .results-section {
-      background: var(--secondary);
-      color: white;
-      padding: 30px;
-      border-radius: 0 0 8px 8px;
+    .config-comment {
+      color: #94a3b8;
     }
     
     .results-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
+      gap: 20px;
       text-align: center;
+      margin: 30px 0;
     }
     
-    .result-item {
+    .result-card {
+      background: white;
       padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
     
     .result-value {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 700;
+      color: var(--bank-blue);
       margin-bottom: 5px;
-      color: var(--accent);
-    }
-    
-    .result-label {
-      opacity: 0.9;
-      font-size: 14px;
     }
     
     @media (max-width: 768px) {
-      .client-details, .results-grid {
+      .tool-grid, .results-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
@@ -183,135 +134,81 @@
 
   <div class="project-container">
     <div class="project-header">
-      <div class="project-title">Enterprise DNS Infrastructure</div>
-      <p>Design and implementation of a secure, high-performance DNS architecture for global financial services</p>
+      <h1>Central Bank DNS Security Overhaul</h1>
+      <p>Enterprise DNS infrastructure with real-time threat monitoring (2023-2024)</p>
       
-      <div class="client-details">
-        <div class="detail-card">
-          <h3>Client</h3>
-          <p>Central Bank of Afghanistan</p>
-        </div>
-        <div class="detail-card">
-          <h3>Duration</h3>
-          <p>Q3 2023 - Q1 2024</p>
-        </div>
-        <div class="detail-card">
-          <h3>Users</h3>
-          <p>15,000+</p>
-        </div>
-        <div class="detail-card">
-          <h3>Servers</h3>
-          <p>150 Nodes</p>
-        </div>
+      <div class="tool-grid">
+        <div class="tool-card">Sophos XG Firewall</div>
+        <div class="tool-card">PRTG Monitoring</div>
+        <div class="tool-card">Splunk SIEM</div>
+        <div class="tool-card">ntopng</div>
+        <div class="tool-card">Wireshark</div>
+        <div class="tool-card">Moltigo DNS</div>
       </div>
     </div>
     
-    <div class="project-overview">
-      <h2>Project Overview</h2>
-      <p>Designed and implemented a global DNS infrastructure for Central Bank of Afghanistan, serving 3,500 employees across 32 offices worldwide. The solution addressed critical performance and security requirements for their financial trading platforms where millisecond latency improvements translate to significant competitive advantage.</p>
-      <p>The architecture was built to withstand 99.999% availability requirements, with DNSSEC validation, DNS-over-HTTPS for remote workers, and intelligent traffic management using DNS policies. The implementation reduced DNS resolution times by 72% while eliminating cache poisoning vulnerabilities.</p>
+    <div class="architecture">
+      <h2>Security-First Architecture</h2>
       
-      <div class="tech-stack">
-        <div class="tech-pill">Windows Server 2022</div>
-        <div class="tech-pill">DNSSEC</div>
-        <div class="tech-pill">Anycast</div>
-        <div class="tech-pill">GeoDNS</div>
-        <div class="tech-pill">DNS-over-HTTPS</div>
-        <div class="tech-pill">SolarWinds</div>
-        <div class="tech-pill">PowerShell DSC</div>
-      </div>
-    </div>
-    
-    <div class="architecture-section">
-      <h2>Architecture Design</h2>
-      <p>The solution employed a multi-layered DNS architecture with clear separation between authoritative and recursive resolvers. Global anycast was implemented for critical DNS services, with regional secondaries providing low-latency responses.</p>
-      
-      <div class="architecture-diagram">
-        <h3>Enterprise DNS Architecture</h3>
-        <p><em>Three-tier DNS architecture with clear separation of concerns and global distribution</em></p>
-        
-        <div style="text-align: center; margin: 30px 0;">
-          <div class="diagram-node node-1">Authoritative Tier<br>(Primary/Secondary)</div>
-          <div style="margin: 15px 0;">↓</div>
-          <div class="diagram-node node-2">Recursive Resolvers<br>(Anycasted)</div>
-          <div style="margin: 15px 0;">↓</div>
-          <div class="diagram-node node-3">Client Endpoints<br>(32 Offices)</div>
+      <div class="diagram">
+        <div class="diagram-node sophos-node">
+          <strong>Sophos XG Firewall</strong><br>
+          DNS Filtering + Threat Prevention
         </div>
         
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-          <div style="width: 150px; margin: 10px;">
-            <div style="font-weight: bold;">DNSSEC</div>
-            <div style="font-size: 12px;">All zones signed</div>
-          </div>
-          <div style="width: 150px; margin: 10px;">
-            <div style="font-weight: bold;">Anycast</div>
-            <div style="font-size: 12px;">5 global sites</div>
-          </div>
-          <div style="width: 150px; margin: 10px;">
-            <div style="font-weight: bold;">GeoDNS</div>
-            <div style="font-size: 12px;">EDNS Client Subnet</div>
-          </div>
+        <div class="diagram-arrow"></div>
+        
+        <div class="diagram-node dns-node">
+          <strong>Moltigo DNS Servers</strong><br>
+          Authoritative + Recursive
+        </div>
+        
+        <div class="diagram-arrow"></div>
+        
+        <div class="diagram-node monitoring-node">
+          <strong>Monitoring Layer</strong><br>
+          PRTG | Splunk | ntopng
         </div>
       </div>
-    </div>
-    
-    <div class="project-overview">
-      <h2>Key Features</h2>
       
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>DNSSEC Implementation</h3>
-          <p>Full DNSSEC signing for all zones with automated key rotation and monitoring. Implemented with RFC 5011 key rollover procedures for zero-downtime maintenance.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Performance Optimization</h3>
-          <p>Response Rate Limiting (RRL) to mitigate DDoS attacks combined with aggressive negative caching to reduce upstream queries by 68%.</p>
-        </div>
-        <div class="feature-card">
-          <h3>GeoDNS Routing</h3>
-          <p>Geographic traffic management with EDNS Client Subnet support, reducing latency for trading applications by directing users to nearest endpoints.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Threat Protection</h3>
-          <p>Integrated with enterprise threat intelligence feeds to block resolution of known malicious domains at the DNS layer.</p>
-        </div>
-        <div class="feature-card">
-          <h3>High Availability</h3>
-          <p>Anycast implementation with BGP failover providing 99.999% uptime across all global locations with sub-second failover.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Advanced Analytics</h3>
-          <p>Full query logging with Splunk integration for traffic analysis, capacity planning, and security forensics.</p>
-        </div>
+      <h3>Key Configuration</h3>
+      <div class="config-block">
+        <span class="config-comment"># Sophos DNS Security Policy</span><br>
+        set security dns-filter profile "CBA_Strict"<br>
+        set block-dns-reply enable<br>
+        set log-level "all"<br>
+        <br>
+        <span class="config-comment"># PRTG Sensor Setup</span><br>
+        New-Sensor -Type "DNS" -Name "Moltigo_Health"<br>
+        -Url "https://prtg:port/api" -Interval 60s<br>
       </div>
     </div>
     
-    <div class="results-section">
-      <h2>Project Results</h2>
-      <p>The new DNS infrastructure delivered measurable improvements across all key performance and security metrics:</p>
+    <div>
+      <h2>Threat Detection Workflow</h2>
+      <ol>
+        <li><strong>Sophos</strong> blocks malicious domains at perimeter</li>
+        <li><strong>Moltigo</strong> logs all queries to Splunk</li>
+        <li><strong>ntopng</strong> analyzes DNS traffic patterns</li>
+        <li><strong>PRTG</strong> alerts on server performance issues</li>
+        <li><strong>Wireshark</strong> used for deep packet analysis</li>
+      </ol>
       
       <div class="results-grid">
-        <div class="result-item">
-          <div class="result-value">99.999%</div>
-          <div class="result-label">Uptime SLA</div>
+        <div class="result-card">
+          <div class="result-value">142%</div>
+          <div>Faster threat detection</div>
         </div>
-        <div class="result-item">
-          <div class="result-value">72% ↓</div>
-          <div class="result-label">Reduction in resolution time</div>
+        <div class="result-card">
+          <div class="result-value">0</div>
+          <div>DNS breaches post-implementation</div>
         </div>
-        <div class="result-item">
-          <div class="result-value">100%</div>
-          <div class="result-label">DNSSEC validation</div>
-        </div>
-        <div class="result-item">
-          <div class="result-value">68% ↓</div>
-          <div class="result-label">External DNS queries</div>
+        <div class="result-card">
+          <div class="result-value">99.997%</div>
+          <div>DNS uptime</div>
         </div>
       </div>
-      
-      <p style="margin-top: 30px; opacity: 0.9;">The implementation was completed 2 weeks ahead of schedule and became the new standard for DNS architecture within the organization. Comprehensive documentation and training ensured smooth handover to the operations team.</p>
     </div>
   </div>
-
 </body>
 </html>
