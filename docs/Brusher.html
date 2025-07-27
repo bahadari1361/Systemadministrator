@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Support Services - Hashmat Bahadari</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern CSS Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        
+        /* Brochure Layout */
+        .brochure {
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto 1fr auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Panels */
+        .panel {
+            padding: 20px;
+            border-right: 1px solid #e1e1e1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Front Cover */
+        .cover {
+            background: linear-gradient(135deg, #2A5CAA 0%, #1E3A8A 100%);
+            color: white;
+            grid-column: 1 / 4;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .cover img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin: 0 auto 20px;
+        }
+        
+        /* Services Section */
+        .service {
+            margin-bottom: 20px;
+        }
+        
+        .service-icon {
+            font-size: 2rem;
+            color: #2A5CAA;
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: #f8f9fa;
+            grid-column: 1 / 4;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+            background: #fff;
+            padding: 5px;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            color: #2A5CAA;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2A5CAA;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            list-style-position: inside;
+            margin-bottom: 15px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: #2A5CAA;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #1E3A8A;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media print {
+            .brochure {
+                box-shadow: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .brochure {
+                grid-template-columns: 1fr;
+                width: 100%;
+                height: auto;
+            }
+            
+            .panel {
+                border-right: none;
+                border-bottom: 1px solid #e1e1e1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="brochure">
+        <!-- Front Cover -->
+        <div class="cover">
+            <!-- Replace with your photo -->
+            <img src="https://via.placeholder.com/120" alt="Hashmat Bahadari">
+            <h1>Hashmat Bahadari</h1>
+            <p>IT Support Specialist</p>
+            <p><i class="fas fa-map-marker-alt"></i> Bremen, Germany</p>
+        </div>
+        
+        <!-- Panel 1: Hardware Services -->
+        <div class="panel">
+            <h2><i class="fas fa-tools service-icon"></i> Hardware Support</h2>
+            <div class="service">
+                <h3><i class="fas fa-print"></i> Printer Solutions</h3>
+                <ul>
+                    <li>Installation & Configuration</li>
+                    <li>Network Printer Setup</li>
+                    <li>Error Troubleshooting</li>
+                </ul>
+            </div>
+            
+            <div class="service">
+                <h3><i class="fas fa-wifi"></i> WiFi Optimization</h3>
+                <ul>
+                    <li>Router Configuration</li>
+                    <li>Signal Strength Analysis</li>
+                    <li>Security Hardening</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Panel 2: Network & Security -->
+        <div class="panel">
+            <h2><i class="fas fa-shield-alt service-icon"></i> Network Security</h2>
+            <div class="service">
+                <h3><i class="fas fa-network-wired"></i> Infrastructure</h3>
+                <ul>
+                    <li>DNS/DHCP Configuration</li>
+                    <li>Firewall Setup</li>
+                    <li>VPN Installation</li>
+                </ul>
+            </div>
+            
+            <div class="service">
+                <h3><i class="fas fa-video"></i> CCTV Installation</h3>
+                <ul>
+                    <li>Hikvision/Dahua Systems</li>
+                    <li>Remote View Setup</li>
+                    <li>Motion Detection</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Panel 3: System Admin -->
+        <div class="panel">
+            <h2><i class="fas fa-server service-icon"></i> System Administration</h2>
+            <div class="service">
+                <h3><i class="fas fa-user-shield"></i> Active Directory</h3>
+                <ul>
+                    <li>User Access Management</li>
+                    <li>Group Policy Configuration</li>
+                    <li>Domain Controller Issues</li>
+                </ul>
+            </div>
+            
+            <div class="service">
+                <h3><i class="fas fa-bug"></i> Security</h3>
+                <ul>
+                    <li>Kaspersky Deployment</li>
+                    <li>Vulnerability Scans</li>
+                    <li>ISO 27001 Compliance</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Contact Panel -->
+        <div class="contact">
+            <h2>Get Instant Help!</h2>
+            <p>Former Central Bank IT Administrator with 6+ years experience</p>
+            
+            <div style="margin: 20px 0;">
+                <a href="tel:+4917626636133" class="btn">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+                <a href="https://wa.me/4917626636133" class="btn" style="background: #25D366;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://www.fiverr.com/hbahadari" class="btn" style="background: #1DBF73;">
+                    <i class="fas fa-globe"></i> Fiverr
+                </a>
+            </div>
+            
+            <div class="qr-code">
+                <!-- Replace with your actual QR code -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.fiverr.com/hbahadari" alt="QR Code">
+            </div>
+            
+            <p><strong>Special Offer:</strong> First 3 clients get 20% discount!</p>
+            <p>Available for remote support worldwide and on-site in Bremen</p>
+        </div>
+    </div>
+</body>
+</html>
