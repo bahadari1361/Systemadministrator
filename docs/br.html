@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMY Tech - IT Support Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+
+        .brochure {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto 1fr auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .panel {
+            padding: 20px;
+            border-right: 1px solid #e1e1e1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #2A5CAA, #1E3A8A);
+            color: white;
+            grid-column: 1 / 4;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cover img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin-bottom: 20px;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: #2A5CAA;
+            margin-bottom: 10px;
+        }
+
+        .contact {
+            background: #f8f9fa;
+            grid-column: 1 / 4;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            margin: 15px auto;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #2A5CAA;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2A5CAA;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2A5CAA;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1E3A8A;
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            .brochure { box-shadow: none; }
+        }
+
+        @media (max-width: 768px) {
+            .brochure {
+                grid-template-columns: 1fr;
+                width: 100%;
+                height: auto;
+            }
+            .panel { border-right: none; border-bottom: 1px solid #e1e1e1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="brochure">
+        <div class="cover">
+            <img src="https://via.placeholder.com/120" alt="Hashmat Bahadari">
+            <h1>AMY Tech</h1>
+            <p>IT & Security Support Services</p>
+            <p><i class="fas fa-map-marker-alt"></i> Bremen, Germany</p>
+        </div>
+
+        <div class="panel">
+            <h2><i class="fas fa-tools service-icon"></i> Hardware Support</h2>
+            <div class="service">
+                <h3><i class="fas fa-print"></i> Printer Issues</h3>
+                <ul>
+                    <li>Installation & Troubleshooting</li>
+                    <li>Network Printing</li>
+                    <li>Driver Conflicts</li>
+                </ul>
+            </div>
+            <div class="service">
+                <h3><i class="fas fa-wifi"></i> WiFi Problems</h3>
+                <ul>
+                    <li>Router Setup</li>
+                    <li>Signal Drop Fixes</li>
+                    <li>WiFi Security Setup</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2><i class="fas fa-shield-alt service-icon"></i> Network & Security</h2>
+            <div class="service">
+                <h3><i class="fas fa-network-wired"></i> Home & Office Network</h3>
+                <ul>
+                    <li>LAN/WLAN Installation</li>
+                    <li>Firewall & VPN</li>
+                    <li>Remote Access Configuration</li>
+                </ul>
+            </div>
+            <div class="service">
+                <h3><i class="fas fa-video"></i> CCTV Solutions</h3>
+                <ul>
+                    <li>Home Surveillance</li>
+                    <li>Mobile Access</li>
+                    <li>Security Camera Troubleshooting</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2><i class="fas fa-server service-icon"></i> System & Software</h2>
+            <div class="service">
+                <h3><i class="fas fa-user-shield"></i> User & Access Control</h3>
+                <ul>
+                    <li>Windows Account Fix</li>
+                    <li>Password Reset</li>
+                    <li>Access Rights Management</li>
+                </ul>
+            </div>
+            <div class="service">
+                <h3><i class="fas fa-bug"></i> Virus & System Errors</h3>
+                <ul>
+                    <li>Antivirus Setup</li>
+                    <li>System Cleanup</li>
+                    <li>Error Code Troubleshooting</li>
+                </ul>
+            </div>
+            <div class="service">
+                <h3><i class="fas fa-laptop-code"></i> Daily Tech Problems</h3>
+                <ul>
+                    <li>Computer not starting?</li>
+                    <li>Programs crashing?</li>
+                    <li>Slow performance?</li>
+                    <li>We solve them all!</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>Need Help? Call Anytime</h2>
+            <p>Experienced IT Expert | Remote & On-site Services</p>
+            <div style="margin: 20px 0;">
+                <a href="tel:+4917626636133" class="btn"><i class="fas fa-phone"></i> Call</a>
+                <a href="https://wa.me/4917626636133" class="btn" style="background: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://www.fiverr.com/hbahadari" class="btn" style="background: #1DBF73;"><i class="fas fa-globe"></i> Fiverr</a>
+            </div>
+            <div class="qr-code">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.fiverr.com/hbahadari" alt="QR Code">
+            </div>
+            <p><strong>First 3 clients get 20% OFF!</strong></p>
+            <p>Serving Bremen & Global Clients Remotely</p>
+        </div>
+    </div>
+</body>
+</html>
