@@ -1,478 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMY IT-Support | Professional IT Services</title>
+    <title>AMY-IT Service | Ihr Technikhelfer für Zuhause</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #0056b3;
-            --secondary: #003366;
-            --accent: #00a0e9;
-            --light: #f8f9fa;
-            --dark: #212529;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f5f5;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
-        .brochure {
-            width: 210mm;
-            height: 297mm;
+        .container {
+            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 120px 1fr auto;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
-            background: white;
+        }
+        
+        /* Header with glass effect */
+        .glass-header {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        /* Header Section */
-        .header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            grid-column: 1 / 4;
-            display: flex;
-            align-items: center;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
+        .glass-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(66, 153, 225, 0.2) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 2.2rem;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #60a5fa, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            position: relative;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
         
         .tagline {
-            margin-left: auto;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #cbd5e1;
             font-weight: 300;
+            position: relative;
+        }
+        
+        .contact-info {
+            display: inline-block;
+            padding: 15px 25px;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
             font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* Decorative Elements */
-        .corner-ribbon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 150px;
-            height: 150px;
-            overflow: hidden;
-        }
-        
-        .corner-ribbon::before {
-            content: "ISO 27001";
-            position: absolute;
-            display: block;
-            width: 225px;
-            padding: 8px 0;
-            background-color: var(--accent);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            color: white;
-            font-size: 0.9rem;
-            text-align: center;
-            right: -25px;
-            top: 30px;
-            transform: rotate(45deg);
-            font-weight: 600;
-        }
-        
-        /* Service Panels */
-        .panel {
-            padding: 30px;
-            border-right: 1px solid #eaeaea;
             position: relative;
-            overflow: hidden;
         }
         
-        .panel:last-child {
-            border-right: none;
-        }
-        
-        .panel-icon {
-            position: absolute;
-            font-size: 6rem;
-            opacity: 0.05;
-            right: 20px;
-            top: 20px;
-            z-index: 0;
-            color: var(--primary);
-        }
-        
-        .service-category {
+        /* Main content sections */
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
             margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
         }
         
-        .service-category h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--accent);
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #60a5fa;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
             display: flex;
             align-items: center;
         }
         
-        .service-category h2 i {
-            margin-right: 10px;
+        .section-title i {
+            margin-right: 12px;
             font-size: 1.5rem;
-            color: var(--accent);
+        }
+        
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
         
         .service-item {
-            margin-bottom: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
         
-        .service-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.3);
         }
         
-        .service-item h3 i {
-            margin-right: 8px;
-            font-size: 1rem;
-            color: var(--accent);
-        }
-        
-        .service-item ul {
-            list-style-type: none;
-            margin-left: 26px;
-        }
-        
-        .service-item li {
-            margin-bottom: 5px;
-            position: relative;
-            font-size: 0.95rem;
-        }
-        
-        .service-item li::before {
-            content: "•";
-            color: var(--accent);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            grid-column: 1 / 4;
-            padding: 30px 40px;
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #60a5fa;
             text-align: center;
         }
         
-        .contact h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+        .service-title {
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            color: #e2e8f0;
+            text-align: center;
         }
         
-        .contact p {
-            margin-bottom: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .service-list {
+            list-style-type: none;
         }
         
-        .credentials {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .credential-badge {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .service-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
         }
         
-        .credential-badge i {
-            margin-right: 5px;
+        .service-list li:last-child {
+            border-bottom: none;
         }
         
-        .cta-buttons {
+        .service-list li:before {
+            content: "•";
+            color: #60a5fa;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Benefits section */
+        .benefits {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .benefits-list {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .benefits-list li {
+            padding: 15px;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 12px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-            flex-wrap: wrap;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        .btn {
-            display: inline-flex;
+        .benefits-list li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            background: rgba(16, 185, 129, 0.1);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: white;
-            color: var(--primary);
-            padding: 12px 25px;
-            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .content-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .glass-header, .glass-card, .service-item {
+                padding: 20px;
+            }
+        }
+        
+        /* Crystalline effects */
+        .crystal {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes shimmer {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        .crystal-1 {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+        }
+        
+        .crystal-2 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 10%;
+        }
+        
+        .crystal-3 {
+            width: 40px;
+            height: 40px;
+            bottom: 20%;
+            left: 20%;
+        }
+        
+        /* Button style */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #3b82f6, #6366f1);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
         
-        .btn:hover {
+        .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn i {
-            margin-right: 8px;
-        }
-        
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .qr-container {
-            display: inline-block;
-            background: white;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 15px;
-        }
-        
-        .qr-code {
-            width: 100px;
-            height: 100px;
-        }
-        
-        .offer-badge {
-            background: #ffc107;
-            color: var(--dark);
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 15px;
-        }
-        
-        /* Responsive Design */
-        @media print {
-            .brochure {
-                box-shadow: none;
-            }
-            
-            .btn {
-                border: 1px solid var(--primary);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .brochure {
-                grid-template-columns: 1fr;
-                width: 100%;
-                height: auto;
-            }
-            
-            .panel {
-                border-right: none;
-                border-bottom: 1px solid #eaeaea;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 250px;
-            }
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
         }
     </style>
 </head>
 <body>
-    <div class="brochure">
-        <!-- Header with Ribbon -->
-        <div class="header">
-            <div class="logo">AMY IT-SUPPORT</div>
-            <div class="tagline">Enterprise-Grade Solutions for Your Business</div>
-            <div class="corner-ribbon"></div>
-        </div>
+    <div class="crystal crystal-1"></div>
+    <div class="crystal crystal-2"></div>
+    <div class="crystal crystal-3"></div>
+    
+    <div class="container">
+        <header class="glass-header">
+            <h1 class="logo">AMY-IT SERVICE</h1>
+            <p class="tagline">Ihr Technikhelfer für Zuhause</p>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> Schönebecker Str. 28759 Bremen</p>
+                <p><i class="fas fa-phone"></i> (+49) 17626836133</p>
+            </div>
+            <a href="#" class="cta-button">Kostenlose Beratung anfordern</a>
+        </header>
         
-        <!-- Panel 1: Hardware Services -->
-        <div class="panel">
-            <i class="fas fa-desktop panel-icon"></i>
-            
-            <div class="service-category">
-                <h2><i class="fas fa-tools"></i> Hardware Support</h2>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-print"></i> Printer Solutions</h3>
-                    <ul>
-                        <li>Professional installation & configuration</li>
-                        <li>Network printer deployment</li>
-                        <li>Advanced troubleshooting</li>
-                        <li>Driver compatibility resolution</li>
-                    </ul>
-                </div>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-wifi"></i> Network Infrastructure</h3>
-                    <ul>
-                        <li>WiFi optimization & security</li>
-                        <li>Router/switch configuration</li>
-                        <li>Signal strength analysis</li>
-                        <li>Guest network setup</li>
-                    </ul>
-                </div>
+        <div class="content-section">
+            <div class="glass-card">
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Über AMY-IT SERVICE</h2>
+                <p>AMY steht für Angenehme Moderne Your-Technologie. Unser Service bringt zertifizierte IT-Expertise direkt zu Ihnen nach Hause. Wir machen Technik einfach und sorgen für Ihren entspannten Alltag.</p>
             </div>
             
-            <div class="service-category">
-                <h2><i class="fas fa-user-tie"></i> End-User Support</h2>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-laptop"></i> Workstation Support</h3>
-                    <ul>
-                        <li>OS installation & migration</li>
-                        <li>Performance optimization</li>
-                        <li>Hardware diagnostics</li>
-                    </ul>
-                </div>
+            <div class="glass-card">
+                <h2 class="section-title"><i class="fas fa-star"></i> Warum AMY-IT wählen?</h2>
+                <p>Wir bieten persönlichen, zuverlässigen IT-Service direkt bei Ihnen vor Ort. Mit transparenten Preisen und flexiblen Terminen sind wir Ihr idealer Technikpartner.</p>
             </div>
         </div>
         
-        <!-- Panel 2: Network & Security -->
-        <div class="panel">
-            <i class="fas fa-shield-alt panel-icon"></i>
+        <h2 class="section-title" style="justify-content: center; margin: 40px 0 30px;"><i class="fas fa-concierge-bell"></i> Meine Leistungen</h2>
+        
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Computer- & Laptop-Hilfe</h3>
+                <ul class="service-list">
+                    <li>Langsame oder defekte PCs reparieren</li>
+                    <li>Viren- & Malware-Entfernung</li>
+                    <li>Software-Installation & Updates</li>
+                </ul>
+            </div>
             
-            <div class="service-category">
-                <h2><i class="fas fa-network-wired"></i> Network Services</h2>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-server"></i> Core Infrastructure</h3>
-                    <ul>
-                        <li>DNS/DHCP configuration</li>
-                        <li>IP address management</li>
-                        <li>Firewall policy management</li>
-                        <li>VPN setup & maintenance</li>
-                    </ul>
-                </div>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-video"></i> Surveillance Systems</h3>
-                    <ul>
-                        <li>Hikvision/Dahua installation</li>
-                        <li>NVR configuration</li>
-                        <li>Remote monitoring setup</li>
-                        <li>Motion detection tuning</li>
-                    </ul>
-                </div>
+            <div class="service-item">
+                <div class="service-icon">🌐</div>
+                <h3 class="service-title">Internet- & WLAN-Einrichtung</h3>
+                <ul class="service-list">
+                    <li>Router einrichten & konfigurieren</li>
+                    <li>Schwaches WLAN-Signal verbessern</li>
+                    <li>Smart-Home-Geräte einbinden</li>
+                </ul>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">🖨️</div>
+                <h3 class="service-title">Geräte & Drucker</h3>
+                <ul class="service-list">
+                    <li>Drucker einrichten & Probleme beheben</li>
+                    <li>Smartphones, Tablets & Fernseher anschließen</li>
+                    <li>Datenübertragung zwischen Geräten</li>
+                </ul>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">🛡️</div>
+                <h3 class="service-title">Sicherheit & Datensicherung</h3>
+                <ul class="service-list">
+                    <li>Schutz Ihrer persönlichen Daten</li>
+                    <li>Backup- & Wiederherstellungslösungen</li>
+                    <li>Internetschutz für Kinder</li>
+                </ul>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">📱</div>
+                <h3 class="service-title">Kinderschutz auf Smartphones</h3>
+                <ul class="service-list">
+                    <li>Kindersicherung auf Handys & Tablets einrichten</li>
+                    <li>Bildschirmzeit & App-Nutzung begrenzen</li>
+                    <li>Kinder sicher im Internet begleiten</li>
+                </ul>
+            </div>
+            
+            <div class="service-item">
+                <div class="service-icon">📹</div>
+                <h3 class="service-title">CCTV-Installation & Support</h3>
+                <ul class="service-list">
+                    <li>Überwachungskameras für Zuhause</li>
+                    <li>Fernzugriff über Smartphone</li>
+                    <li>Wartung & Problemlösung</li>
+                </ul>
             </div>
         </div>
         
-        <!-- Panel 3: System Administration -->
-        <div class="panel">
-            <i class="fas fa-server panel-icon"></i>
-            
-            <div class="service-category">
-                <h2><i class="fas fa-users-cog"></i> System Administration</h2>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-user-shield"></i> Active Directory</h3>
-                    <ul>
-                        <li>User & group management</li>
-                        <li>Group Policy implementation</li>
-                        <li>Domain controller maintenance</li>
-                        <li>LDAP/Kerberos troubleshooting</li>
-                    </ul>
-                </div>
-                
-                <div class="service-item">
-                    <h3><i class="fas fa-lock"></i> Security Solutions</h3>
-                    <ul>
-                        <li>Kaspersky Security Center</li>
-                        <li>Endpoint protection deployment</li>
-                        <li>Vulnerability assessments</li>
-                        <li>Security policy development</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="service-category">
-                <h2><i class="fas fa-cloud"></i> Cloud Services</h2>
-                
-                <div class="service-item">
-                    <h3><i class="fab fa-microsoft"></i> Microsoft 365</h3>
-                    <ul>
-                        <li>Azure AD configuration</li>
-                        <li>Exchange Online setup</li>
-                        <li>Security & compliance</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Contact Section -->
-        <div class="contact">
-            <h2>Ready to Optimize Your IT Infrastructure?</h2>
-            <p>With 6+ years of enterprise experience including Afghanistan's Central Bank, I deliver bank-grade solutions for businesses of all sizes.</p>
-            
-            <div class="credentials">
-                <div class="credential-badge">
-                    <i class="fas fa-certificate"></i> ISO 27001 Certified
-                </div>
-                <div class="credential-badge">
-                    <i class="fab fa-microsoft"></i> Azure Security Engineer
-                </div>
-                <div class="credential-badge">
-                    <i class="fas fa-shield-alt"></i> Fortinet NSE Certified
-                </div>
-            </div>
-            
-            <div class="cta-buttons">
-                <a href="tel:+4917626636133" class="btn btn-primary">
-                    <i class="fas fa-phone"></i> +49 176 266 36133
-                </a>
-                <a href="mailto:hashmat.bahadari@gmail.com" class="btn">
-                    <i class="fas fa-envelope"></i> Email Me
-                </a>
-                <a href="https://wa.me/4917626636133" class="btn" style="background: #25D366; color: white;">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-            </div>
-            
-            <div class="qr-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.fiverr.com/hbahadari" alt="Scan to visit my Fiverr profile" class="qr-code">
-            </div>
-            
-            <div class="offer-badge">
-                <i class="fas fa-gift"></i> First 3 clients receive 20% discount!
-            </div>
+        <div class="benefits">
+            <h2 class="section-title"><i class="fas fa-medal"></i> Ihre Vorteile</h2>
+            <ul class="benefits-list">
+                <li>Persönlicher und zuverlässiger IT-Service direkt bei Ihnen zu Hause</li>
+                <li>Flexible Terminvereinbarung nach Ihren Bedürfnissen</li>
+                <li>Transparente und faire Preisgestaltung ohne versteckte Kosten</li>
+                <li>Schnelle und kompetente Unterstützung auch in Notfällen</li>
+                <li>Zertifizierte Expertise für maximale Sicherheit</li>
+                <li>Modernste Technologien für Ihr Zuhause</li>
+            </ul>
         </div>
     </div>
+    
+    <footer>
+        <p>© 2023 AMY-IT Service | Ihr Technikhelfer für Zuhause | Schönebecker Str. 28759 Bremen</p>
+        <p>Kontakt: (+49) 17626836133</p>
+    </footer>
+
+    <script>
+        // Add subtle animation to service items on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceItems = document.querySelectorAll('.service-item');
+            
+            serviceItems.forEach((item, index) => {
+                // Add delay for staggered animation
+                item.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Add crystalline elements dynamically
+            for (let i = 0; i < 5; i++) {
+                const crystal = document.createElement('div');
+                crystal.classList.add('crystal');
+                crystal.style.width = `${20 + Math.random() * 60}px`;
+                crystal.style.height = `${20 + Math.random() * 60}px`;
+                crystal.style.top = `${Math.random() * 100}%`;
+                crystal.style.left = `${Math.random() * 100}%`;
+                crystal.style.animationDelay = `${Math.random() * 3}s`;
+                document.body.appendChild(crystal);
+            }
+        });
+    </script>
 </body>
 </html>
