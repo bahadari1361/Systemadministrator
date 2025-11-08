@@ -17,9 +17,9 @@
       --section-bg: #f8fafc;
       --border: #e5e7eb;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
-      --glass-bg: rgba(255, 255, 255, 0.9);
-      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+      --paper-bg: #ffffff;
+      --paper-border: #e5e7eb;
     }
     
     * {
@@ -30,22 +30,26 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+        url('it.png') center/cover fixed;
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     
-    /* Professional Header */
+    /* Professional Header with Contact Info */
     .main-header {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid var(--border);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
     
     .header-container {
@@ -88,13 +92,34 @@
       color: var(--text-light);
     }
     
-    /* Navigation - Clean and Professional */
+    .header-contact {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    
+    .header-contact a {
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    
+    .header-contact a:hover {
+      color: var(--primary);
+    }
+    
+    /* Navigation */
     .nav-section {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 1.5rem 0;
+      background: rgba(248, 250, 252, 0.9);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
       margin-top: 80px;
+      backdrop-filter: blur(10px);
     }
     
     .nav-container {
@@ -106,7 +131,7 @@
     .nav-buttons {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
+      gap: 0.75rem;
       justify-items: center;
     }
     
@@ -119,12 +144,12 @@
     .dropdown-button {
       background: var(--background);
       color: var(--text);
-      padding: 1rem 1.25rem;
+      padding: 0.875rem 1rem;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
@@ -148,10 +173,10 @@
       top: 100%;
       left: 0;
       background: var(--background);
-      min-width: 250px;
+      min-width: 220px;
       box-shadow: var(--shadow-hover);
       z-index: 1001;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       animation: fadeIn 0.3s ease-out;
       border: 1px solid var(--border);
@@ -169,12 +194,12 @@
     
     .dropdown-content a {
       display: block;
-      padding: 0.875rem 1rem;
+      padding: 0.75rem 1rem;
       color: var(--text);
       text-decoration: none;
       transition: all 0.2s;
       border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     
     .dropdown-content a:hover {
@@ -187,103 +212,123 @@
       text-align: center;
       margin-right: 0.5rem;
       color: var(--primary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     
-    /* Main Content */
+    /* Main Content - Two Column Layout */
     .main-content {
       max-width: 1200px;
-      margin: 180px auto 0;
-      padding: 2rem 2rem 4rem;
+      margin: 2rem auto;
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
     }
     
-    /* Professional Glass Summary Section */
-    .glass-summary {
-      background: var(--glass-bg);
-      backdrop-filter: blur(30px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 3rem;
-      margin-bottom: 3rem;
+    /* Left Column - Professional Summary */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    /* Professional Summary - Paper Style */
+    .paper-section {
+      background: var(--paper-bg);
+      border: 1px solid var(--paper-border);
+      border-radius: 12px;
+      padding: 2.5rem;
       box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
       position: relative;
-      overflow: hidden;
     }
     
-    .glass-summary::before {
+    .paper-section::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.8), 
-        transparent
-      );
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 12px 12px 0 0;
     }
     
     .section-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       color: var(--text);
       position: relative;
-      text-align: center;
+      padding-bottom: 0.5rem;
     }
     
     .section-title::after {
       content: '';
       position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
+      bottom: 0;
+      left: 0;
+      width: 40px;
       height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      background: var(--primary);
       border-radius: 2px;
     }
     
-    .summary-text {
-      font-size: 1.1rem;
+    .section-text {
+      font-size: 1rem;
       color: var(--text);
       line-height: 1.7;
-      text-align: justify;
-      max-width: 900px;
-      margin: 0 auto;
     }
     
-    .summary-text p {
-      margin-bottom: 1.5rem;
-      text-align: justify;
-      word-spacing: -0.5px;
-      letter-spacing: -0.2px;
+    .section-text p {
+      margin-bottom: 1rem;
     }
     
-    /* 3D Paper Cards */
-    .paper-cards {
+    /* Right Column - Content with Glass Effect */
+    .right-column {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .content-background {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      min-height: 600px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .content-background .section-title {
+      color: var(--text);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    
+    /* 3D Paper Cards - Three in one line */
+    .cards-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
     
     .paper-card {
-      background: var(--background);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
       box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.08),
-        0 1px 0 rgba(255, 255, 255, 0.8) inset,
-        0 -1px 0 rgba(0, 0, 0, 0.05) inset;
-      border: 1px solid rgba(255, 255, 255, 0.8);
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       position: relative;
-      transform-style: preserve-3d;
-      perspective: 1000px;
+      overflow: hidden;
+      backdrop-filter: blur(15px);
     }
     
     .paper-card::before {
@@ -292,135 +337,80 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
+      height: 3px;
       background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      border-radius: 16px 16px 0 0;
     }
     
     .paper-card:hover {
-      transform: translateY(-8px) rotateX(5deg);
+      transform: translateY(-5px);
       box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.15),
-        0 1px 0 rgba(255, 255, 255, 0.8) inset,
-        0 -1px 0 rgba(0, 0, 0, 0.05) inset;
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        0 16px 32px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.6);
     }
     
     .card-icon {
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 16px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.75rem;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
     }
     
     .paper-card h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 600;
       margin-bottom: 1rem;
       color: var(--text);
-      text-align: center;
+      line-height: 1.4;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     
     .paper-card p {
-      color: var(--text-light);
+      color: var(--text);
       line-height: 1.6;
-      text-align: justify;
-      font-size: 0.95rem;
-    }
-    
-    /* Stats Section at Bottom */
-    .stats-section {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      margin: 4rem 0 2rem;
-      color: white;
-      text-align: center;
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .stats-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      opacity: 0.9;
-    }
-    
-    .stats-subtitle {
-      font-size: 1rem;
-      margin-bottom: 3rem;
-      opacity: 0.8;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.5;
-    }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .stat-item {
-      text-align: center;
-    }
-    
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      line-height: 1;
-    }
-    
-    .stat-label {
       font-size: 0.9rem;
-      opacity: 0.9;
-      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     
     /* Simple CTA */
     .simple-cta {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border-radius: 16px;
-      padding: 2.5rem;
+      background: var(--section-bg);
+      border-radius: 10px;
+      padding: 2rem;
       text-align: center;
-      margin: 3rem 0;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
+      margin: 2rem 0 0 0;
+      border: 1px solid var(--border);
     }
     
     .simple-cta p {
       color: var(--text-light);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
     }
     
     .simple-buttons {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
     
     .simple-button {
       background: var(--primary);
       color: white;
-      padding: 0.875rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
@@ -443,13 +433,14 @@
       color: white;
     }
     
-    /* Footer */
+    /* Footer - Clean */
     footer {
-      background: var(--text);
+      background: rgba(31, 41, 55, 0.9);
       color: white;
       text-align: center;
-      padding: 2.5rem 2rem;
-      margin-top: 4rem;
+      padding: 2rem;
+      margin-top: 3rem;
+      backdrop-filter: blur(10px);
     }
     
     .footer-content {
@@ -458,43 +449,40 @@
     }
     
     .footer-logo {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: white;
     }
     
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
-      flex-wrap: wrap;
-    }
-    
-    .footer-links a {
-      color: #d1d5db;
-      text-decoration: none;
-      transition: color 0.3s;
-      font-size: 0.9rem;
-    }
-    
-    .footer-links a:hover {
-      color: white;
-    }
-    
     .footer-bottom {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
       border-top: 1px solid #374151;
       color: #9ca3af;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
     
     /* Responsive Design */
     @media (max-width: 1024px) {
       .nav-buttons {
         grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .cards-section {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .left-column {
+        order: 2;
+      }
+      
+      .right-column {
+        order: 1;
       }
     }
     
@@ -506,14 +494,18 @@
         text-align: center;
       }
       
+      .header-contact {
+        gap: 1rem;
+      }
+      
       .nav-section {
         margin-top: 140px;
-        padding: 1rem 0;
+        padding: 0.75rem 0;
       }
       
       .nav-buttons {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.5rem;
       }
       
       .dropdown {
@@ -521,32 +513,26 @@
       }
       
       .main-content {
-        margin-top: 200px;
-        padding: 1rem 1rem 2rem;
+        padding: 1.5rem 1rem 2rem;
       }
       
-      .glass-summary {
+      .paper-section {
         padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
       }
       
-      .paper-cards {
+      .cards-section {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
       }
       
-      .stats-section {
-        padding: 2rem 1.5rem;
-        margin: 3rem 0 2rem;
-      }
-      
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+      .content-background {
+        padding: 1.5rem;
       }
       
       .simple-cta {
-        padding: 2rem 1.5rem;
-        margin: 2rem 0;
+        padding: 1.5rem;
+        margin: 1.5rem 0 0 0;
       }
       
       .simple-buttons {
@@ -556,7 +542,7 @@
       
       .simple-button {
         width: 100%;
-        max-width: 250px;
+        max-width: 200px;
         justify-content: center;
       }
       
@@ -567,24 +553,20 @@
     }
     
     @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .stat-number {
-        font-size: 2rem;
-      }
-      
-      .footer-links {
+      .header-contact {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.5rem;
+      }
+      
+      .header-contact a {
+        font-size: 0.85rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Professional Header -->
+  <!-- Header with Contact Info -->
   <header class="main-header">
     <div class="header-container">
       <div class="logo-section">
@@ -594,10 +576,21 @@
           <p>IT Support Specialist & System Administrator</p>
         </div>
       </div>
+      <div class="header-contact">
+        <a href="tel:+4917626836133">
+          <i class="fas fa-phone"></i>+49 176 26836133
+        </a>
+        <a href="https://linkedin.com/in/bahadari" target="_blank">
+          <i class="fab fa-linkedin"></i>LinkedIn
+        </a>
+        <a href="mailto:hashmat.bahadari@gmail.com">
+          <i class="fas fa-envelope"></i>Email
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- Clean Navigation -->
+  <!-- Navigation -->
   <nav class="nav-section">
     <div class="nav-container">
       <div class="nav-buttons">
@@ -703,88 +696,98 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Main Content - Two Column Layout -->
   <div class="main-content">
-    <!-- Professional Glass Summary Section -->
-    <section class="glass-summary">
-      <h2 class="section-title">Professional Summary</h2>
-      <div class="summary-text">
-        <p>
-          Certified IT Support Specialist and System Administrator with over 6 years of comprehensive experience managing enterprise IT infrastructure at the Central Bank of Afghanistan. Specialized in providing exceptional user support while maintaining robust system administration and security protocols.
-        </p>
-        <p>
-          Managed IT operations for 2,500+ users across 34 nationwide branches, delivering first and second-level support while ensuring 99.9% uptime for critical banking systems. Expertise spans Windows Server environments, Active Directory, network security, and enterprise support solutions.
-        </p>
-      </div>
+    <!-- Left Column - Professional Summary -->
+    <div class="left-column">
+      <section class="paper-section">
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="section-text">
+          <p>
+            Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure at the Central Bank of Afghanistan. Specialized in providing exceptional user support while maintaining robust system administration and security protocols.
+          </p>
+          <p>
+            Managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while ensuring 99.9% uptime for critical banking systems. Expertise spans Windows Server environments, Active Directory, network security, and enterprise support solutions.
+          </p>
+        </div>
+      </section>
 
-      <!-- 3D Paper Cards -->
-      <div class="paper-cards">
-        <div class="paper-card">
-          <div class="card-icon">
-            <i class="fas fa-headset"></i>
+      <!-- Simple CTA -->
+      <section class="simple-cta">
+        <p>Open to new opportunities as an IT Support Specialist or System Administrator</p>
+        <div class="simple-buttons">
+          <a href="mailto:hashmat.bahadari@gmail.com" class="simple-button">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+          <a href="tel:+4917626836133" class="simple-button secondary">
+            <i class="fas fa-phone"></i> Call
+          </a>
+          <a href="Bahadari Hashmat-Lebenslauf.pdf" class="simple-button secondary" download>
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column - Content with Glass Effect -->
+    <div class="right-column">
+      <div class="content-background">
+        <h2 class="section-title">IT Expertise & Services</h2>
+        
+        <!-- 3D Paper Cards - Three in one line -->
+        <div class="cards-section">
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>IT Support Excellence</h3>
+            <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
           </div>
-          <h3>IT Support Excellence</h3>
-          <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>System Administration</h3>
+            <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
+          </div>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Security & Compliance</h3>
+            <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
+          </div>
         </div>
         
-        <div class="paper-card">
-          <div class="card-icon">
-            <i class="fas fa-server"></i>
+        <div class="cards-section">
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <h3>Network Infrastructure</h3>
+            <p>Designed and maintained LAN/WAN networks, configured routers and switches, and implemented VPN solutions for secure remote access.</p>
           </div>
-          <h3>System Administration</h3>
-          <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
-        </div>
-        
-        <div class="paper-card">
-          <div class="card-icon">
-            <i class="fas fa-shield-alt"></i>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3>Backup & Recovery</h3>
+            <p>Implemented comprehensive backup strategies and disaster recovery plans to ensure business continuity and data protection.</p>
           </div>
-          <h3>Security & Compliance</h3>
-          <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud Solutions</h3>
+            <p>Deployed and managed cloud infrastructure, hybrid environments, and migration projects to improve scalability and reduce costs.</p>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- Simple CTA -->
-    <section class="simple-cta">
-      <p>Open to new opportunities as an IT Support Specialist or System Administrator</p>
-      <div class="simple-buttons">
-        <a href="mailto:hashmat.bahadari@gmail.com" class="simple-button">
-          <i class="fas fa-envelope"></i> Email
-        </a>
-        <a href="tel:+4917626836133" class="simple-button secondary">
-          <i class="fas fa-phone"></i> Call
-        </a>
-        <a href="Bahadari Hashmat-Lebenslauf.pdf" class="simple-button secondary" download>
-          <i class="fas fa-download"></i> Download CV
-        </a>
-      </div>
-    </section>
-
-    <!-- Stats Section at Bottom -->
-    <section class="stats-section">
-      <div class="stats-title">Enterprise IT Professional</div>
-      <div class="stats-subtitle">IT Support Specialist & System Administrator with 6+ years experience managing infrastructure for 2,500+ users across 34 branches</div>
-      
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">2,500+</div>
-          <div class="stat-label">Users Supported</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">34</div>
-          <div class="stat-label">Branches Managed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">6+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">Uptime Maintained</div>
-        </div>
-      </div>
-    </section>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -792,14 +795,6 @@
     <div class="footer-content">
       <div class="footer-logo">Hashmatullah Bahadari</div>
       <p>IT Support Specialist & System Administrator</p>
-      
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/bahadari1361" target="_blank">GitHub</a>
-        <a href="mailto:hashmat.bahadari@gmail.com">Email</a>
-        <a href="tel:+4917626836133">Phone</a>
-      </div>
-      
       <div class="footer-bottom">
         <p>Location: Bremen, Germany | Available for IT Support & System Administrator Roles</p>
       </div>
