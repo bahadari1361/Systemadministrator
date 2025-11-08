@@ -4,18 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hashmatullah Bahadari - IT Support Specialist & System Administrator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
     :root {
       --primary: #2563eb;
-      --primary-dark: #1e40af;
-      --secondary: #10b981;
-      --dark: #0f172a;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --glass: rgba(255, 255, 255, 0.1);
-      --glass-dark: rgba(15, 23, 42, 0.7);
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --text: #374151;
+      --text-light: #6b7280;
+      --background: #ffffff;
+      --glass: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.15);
     }
     
     * {
@@ -25,77 +27,71 @@
     }
     
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
-      color: var(--light);
-      line-height: 1.7;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: var(--text);
+      line-height: 1.6;
       min-height: 100vh;
     }
     
     .content-wrapper {
       min-height: 100vh;
+      position: relative;
     }
     
+    /* Header with glass effect */
     header {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(16px);
-      color: var(--light);
-      padding: 2rem 1rem;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1.5rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
       text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     header h1 {
-      font-family: 'Montserrat', sans-serif;
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #60a5fa, var(--primary), #6366f1);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     
     header p {
       font-size: 1.2rem;
-      font-weight: 300;
-      opacity: 0.9;
-      max-width: 800px;
-      margin: 0 auto;
-      color: #cbd5e1;
+      color: var(--text-light);
+      font-weight: 400;
     }
     
-    .contact-bar {
-      background: rgba(15, 23, 42, 0.9);
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .contact-bar a {
-      color: #cbd5e1;
-      text-decoration: none;
-      margin: 0 15px;
-      transition: color 0.3s;
-    }
-    
-    .contact-bar a:hover {
-      color: #60a5fa;
-    }
-    
-    .nav-container {
+    /* Main content with spacing for fixed header */
+    .main-content {
       max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+      margin: 120px auto 0;
+      padding: 0 2rem 4rem;
+    }
+    
+    /* Navigation */
+    .nav-container {
+      margin-top: 2rem;
     }
     
     .nav-buttons {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 1.5rem;
+      gap: 1rem;
     }
     
     .dropdown {
@@ -103,26 +99,26 @@
     }
     
     .dropdown-button {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      padding: 14px 24px;
-      border: none;
-      border-radius: 8px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
       font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      gap: 0.75rem;
+      box-shadow: var(--shadow);
     }
     
     .dropdown-button:hover {
-      background: linear-gradient(135deg, var(--primary-dark), #1e3a8a);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary-light);
     }
     
     .dropdown-content {
@@ -130,19 +126,20 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(16px);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
       min-width: 280px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      z-index: 100;
-      border-radius: 8px;
+      box-shadow: var(--shadow-hover);
+      z-index: 1001;
+      border-radius: 12px;
       overflow: hidden;
       animation: fadeIn 0.3s ease-out;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
+      margin-top: 0.5rem;
     }
     
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     
@@ -152,51 +149,42 @@
     
     .dropdown-content a {
       display: block;
-      padding: 14px 20px;
-      color: #cbd5e1;
+      padding: 1rem 1.5rem;
+      color: var(--text);
       text-decoration: none;
       transition: all 0.2s;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     
     .dropdown-content a:hover {
-      background: rgba(96, 165, 250, 0.1);
-      padding-left: 25px;
-      color: #60a5fa;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      padding-left: 1.75rem;
     }
     
     .dropdown-content i {
       width: 20px;
       text-align: center;
-      margin-right: 12px;
+      margin-right: 0.75rem;
       color: var(--primary);
     }
     
-    .main-container {
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 20px;
-    }
-    
+    /* Profile Section */
     .profile-section {
-      background: var(--glass-dark);
-      backdrop-filter: blur(16px);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .profile-content {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
       padding: 3rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--glass-border);
     }
     
     .profile-about h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
-      color: #60a5fa;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2rem;
       position: relative;
     }
     
@@ -207,58 +195,72 @@
       left: 0;
       width: 60px;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
       border-radius: 4px;
     }
     
     .profile-text {
       font-size: 1.1rem;
-      color: #cbd5e1;
+      color: var(--text);
       margin-bottom: 2rem;
     }
     
     .profile-text p {
       margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
     }
     
     .highlight-item {
-      margin-bottom: 2rem;
-      background: rgba(96, 165, 250, 0.1);
-      padding: 1.5rem;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 2rem;
+      border-radius: 12px;
       border-left: 4px solid var(--primary);
+      transition: transform 0.3s ease;
+    }
+    
+    .highlight-item:hover {
+      transform: translateY(-5px);
     }
     
     .highlight-item h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: #60a5fa;
+      gap: 0.75rem;
+      color: var(--text);
     }
     
     .highlight-item h3 i {
-      color: var(--secondary);
+      color: var(--primary);
+      font-size: 1.5rem;
     }
     
     .highlight-item p {
-      color: #cbd5e1;
-      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.6;
     }
     
+    /* Professional Summary */
     .professional-summary {
       margin-top: 3rem;
       padding-top: 3rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
     
     .professional-summary h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
-      color: #60a5fa;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2rem;
       position: relative;
     }
     
@@ -269,188 +271,164 @@
       left: 0;
       width: 60px;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
       border-radius: 4px;
     }
     
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
     }
     
     .stat-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1.5rem;
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 2rem;
+      border-radius: 12px;
       text-align: center;
-      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-5px);
     }
     
     .stat-number {
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
-      color: #60a5fa;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
-    .skills-section {
-      margin-top: 3rem;
-    }
-    
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .skill-category {
-      background: rgba(30, 41, 59, 0.5);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .skill-category h4 {
-      font-family: 'Montserrat', sans-serif;
-      color: #60a5fa;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-    
-    .skill-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .skill-item {
-      background: var(--primary);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-    
+    /* CTA Section */
     .cta-section {
       text-align: center;
       padding: 4rem 2rem;
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: white;
-      border-radius: 16px;
-      margin-top: 3rem;
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      margin: 3rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--glass-border);
     }
     
     .cta-section h3 {
-      font-family: 'Montserrat', sans-serif;
       font-size: 2rem;
+      font-weight: 700;
       margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .cta-section p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
     }
     
     .cta-buttons {
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-top: 2rem;
       flex-wrap: wrap;
     }
     
     .cta-button {
-      background: var(--secondary);
+      background: var(--primary);
       color: white;
       padding: 1rem 2rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
-      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
       transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
     
     .cta-button:hover {
-      background: #059669;
+      background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
     }
     
     .cta-button.secondary {
       background: transparent;
-      border: 2px solid white;
+      border: 2px solid var(--primary);
+      color: var(--primary);
     }
     
     .cta-button.secondary:hover {
-      background: white;
-      color: var(--primary-dark);
+      background: var(--primary);
+      color: white;
     }
     
+    /* Footer */
     footer {
-      background: rgba(15, 23, 42, 0.9);
-      color: white;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      color: var(--text);
       text-align: center;
       padding: 2rem;
-      margin-top: 3rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 4rem;
+      border-top: 1px solid var(--glass-border);
     }
     
     footer a {
-      color: #cbd5e1;
+      color: var(--primary);
       text-decoration: none;
+      margin: 0 1rem;
       transition: color 0.3s;
-      margin: 0 10px;
     }
     
     footer a:hover {
-      color: #60a5fa;
+      color: var(--primary-dark);
     }
     
-    @media (max-width: 900px) {
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+      
+      .main-content {
+        padding: 0 1rem 2rem;
+        margin-top: 140px;
+      }
+      
       header h1 {
         font-size: 2rem;
       }
       
       header p {
-        font-size: 1rem;
-      }
-      
-      .profile-content {
-        padding: 2rem 1.5rem;
+        font-size: 1.1rem;
       }
       
       .nav-buttons {
-        gap: 10px;
+        gap: 0.75rem;
       }
       
       .dropdown-button {
-        padding: 12px 18px;
+        padding: 0.875rem 1.25rem;
         font-size: 0.9rem;
       }
-    }
-    
-    @media (max-width: 600px) {
+      
       .profile-section {
-        padding: 0;
+        padding: 2rem;
+        margin: 2rem 0;
       }
       
-      .profile-about h2 {
-        font-size: 1.8rem;
-      }
-      
-      .dropdown-button {
-        padding: 10px 15px;
-        font-size: 0.8rem;
+      .highlight-grid {
+        grid-template-columns: 1fr;
       }
       
       .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
       
       .cta-buttons {
@@ -460,13 +438,22 @@
       
       .cta-button {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px;
         justify-content: center;
       }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
       
-      .contact-bar a {
-        display: block;
-        margin: 5px 0;
+      .profile-section {
+        padding: 1.5rem;
+      }
+      
+      .dropdown-content {
+        min-width: 250px;
       }
     }
   </style>
@@ -474,110 +461,171 @@
 
 <body>
   <div class="content-wrapper">
-    <div class="contact-bar">
-      <a href="tel:+4917626836133"><i class="fas fa-phone"></i> +49 176 26836133</a>
-      <a href="mailto:hashmat.bahadari@gmail.com"><i class="fas fa-envelope"></i> hashmat.bahadari@gmail.com</a>
-      <a href="https://linkedin.com/in/bahadari" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      <a href="https://github.com/bahadari1361" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-    </div>
-
+    <!-- Header -->
     <header>
-      <h1>Hashmatullah Bahadari</h1>
-      <p>IT Support Specialist & System Administrator</p>
-
-      <div class="nav-container">
-        <div class="nav-buttons">
-          <!-- Button 1: Certifications -->
-          <div class="dropdown">
-            <button class="dropdown-button"><i class="fas fa-certificate"></i> Certifications</button>
-            <div class="dropdown-content">
-              <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank"><i class="fas fa-shield-alt"></i> Fortinet NSE 1 & 2</a>
-              <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank"><i class="fas fa-network-wired"></i> CompTIA Network+</a>
-              <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank"><i class="fas fa-lock"></i> CompTIA Security+</a>
-              <a href="https://www.pecb.com/en/verify-certificate" target="_blank"><i class="fas fa-certificate"></i> ISO 27001 Lead Auditor</a>
-              <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank"><i class="fab fa-microsoft"></i> Azure Fundamentals</a>
-              <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank"><i class="fab fa-microsoft"></i> Azure Security Engineer</a>
-              <a href="https://learn.microsoft.com/en-us/users/hashmatullahbahadari-2949/certifications" target="_blank"><i class="fas fa-graduation-cap"></i> All Microsoft Certifications</a>
+      <div class="header-content">
+        <h1>Hashmatullah Bahadari</h1>
+        <p>IT Support Specialist & System Administrator</p>
+        
+        <div class="nav-container">
+          <div class="nav-buttons">
+            <!-- Button 1: Certifications -->
+            <div class="dropdown">
+              <button class="dropdown-button">
+                <i class="fas fa-certificate"></i>
+                Certifications
+              </button>
+              <div class="dropdown-content">
+                <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank">
+                  <i class="fas fa-shield-alt"></i>Fortinet NSE 1 & 2
+                </a>
+                <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank">
+                  <i class="fas fa-network-wired"></i>CompTIA Network+
+                </a>
+                <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank">
+                  <i class="fas fa-lock"></i>CompTIA Security+
+                </a>
+                <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
+                  <i class="fas fa-certificate"></i>ISO 27001 Lead Auditor
+                </a>
+                <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
+                  <i class="fab fa-microsoft"></i>Azure Fundamentals
+                </a>
+                <a href="https://learn.microsoft.com/en-us/users/hashmatullahbahadari-2949/certifications" target="_blank">
+                  <i class="fas fa-graduation-cap"></i>All Microsoft Certifications
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Button 2: Microsoft -->
-          <div class="dropdown">
-            <button class="dropdown-button"><i class="fab fa-microsoft"></i> Microsoft</button>
-            <div class="dropdown-content">
-              <a href="windows-server-installation.html"><i class="fas fa-server"></i> Server Installation</a>
-              <a href="active-directory-configuration.html"><i class="fas fa-network-wired"></i> AD Configuration</a>
-              <a href="dns-configuration.html"><i class="fas fa-globe"></i> DNS Configuration</a>
-              <a href="dhcp-configuration.html"><i class="fas fa-plug"></i> DHCP Configuration</a>
-              <a href="hybrid-solutions.html"><i class="fas fa-cloud"></i> Hybrid Solutions</a>
-              <a href="azure-administration.html"><i class="fab fa-microsoft"></i> Azure Administration</a>
+            <!-- Button 2: Microsoft -->
+            <div class="dropdown">
+              <button class="dropdown-button">
+                <i class="fab fa-microsoft"></i>
+                Microsoft
+              </button>
+              <div class="dropdown-content">
+                <a href="windows-server-installation.html">
+                  <i class="fas fa-server"></i>Server Installation
+                </a>
+                <a href="active-directory-configuration.html">
+                  <i class="fas fa-network-wired"></i>AD Configuration
+                </a>
+                <a href="dns-configuration.html">
+                  <i class="fas fa-globe"></i>DNS Configuration
+                </a>
+                <a href="dhcp-configuration.html">
+                  <i class="fas fa-plug"></i>DHCP Configuration
+                </a>
+                <a href="hybrid-solutions.html">
+                  <i class="fas fa-cloud"></i>Hybrid Solutions
+                </a>
+                <a href="azure-administration.html">
+                  <i class="fab fa-microsoft"></i>Azure Administration
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Button 3: IT Support -->
-          <div class="dropdown">
-            <button class="dropdown-button"><i class="fas fa-headset"></i> IT Support</button>
-            <div class="dropdown-content">
-              <a href="helpdesk-support.html"><i class="fas fa-ticket-alt"></i> Helpdesk Support</a>
-              <a href="remote-assistance.html"><i class="fas fa-desktop"></i> Remote Assistance</a>
-              <a href="hardware-troubleshooting.html"><i class="fas fa-tools"></i> Hardware Troubleshooting</a>
-              <a href="software-installation.html"><i class="fas fa-download"></i> Software Installation</a>
-              <a href="user-training.html"><i class="fas fa-chalkboard-teacher"></i> User Training</a>
-              <a href="ticket-systems.html"><i class="fas fa-tasks"></i> Ticket Systems</a>
-              <a href="incident-management.html"><i class="fas fa-exclamation-triangle"></i> Incident Management</a>
-              <a href="documentation.html"><i class="fas fa-file-alt"></i> Documentation</a>
+            <!-- Button 3: IT Support -->
+            <div class="dropdown">
+              <button class="dropdown-button">
+                <i class="fas fa-headset"></i>
+                IT Support
+              </button>
+              <div class="dropdown-content">
+                <a href="helpdesk-support.html">
+                  <i class="fas fa-ticket-alt"></i>Helpdesk Support
+                </a>
+                <a href="remote-assistance.html">
+                  <i class="fas fa-desktop"></i>Remote Assistance
+                </a>
+                <a href="hardware-troubleshooting.html">
+                  <i class="fas fa-tools"></i>Hardware Troubleshooting
+                </a>
+                <a href="software-installation.html">
+                  <i class="fas fa-download"></i>Software Installation
+                </a>
+                <a href="user-training.html">
+                  <i class="fas fa-chalkboard-teacher"></i>User Training
+                </a>
+                <a href="ticket-systems.html">
+                  <i class="fas fa-tasks"></i>Ticket Systems
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Button 4: Security -->
-          <div class="dropdown">
-            <button class="dropdown-button"><i class="fas fa-lock"></i> Security</button>
-            <div class="dropdown-content">
-              <a href="endpoint-protection.html"><i class="fas fa-shield-alt"></i> Endpoint Protection</a>
-              <a href="firewall-configuration.html"><i class="fas fa-fire"></i> Firewall Configuration</a>
-              <a href="user-access-management.html"><i class="fas fa-user-shield"></i> User Access Management</a>
-              <a href="security-policies.html"><i class="fas fa-clipboard-list"></i> Security Policies</a>
-              <a href="backup-recovery.html"><i class="fas fa-life-ring"></i> Backup & Recovery</a>
-              <a href="patch-management.html"><i class="fas fa-download"></i> Patch Management</a>
-              <a href="security-auditing.html"><i class="fas fa-search"></i> Security Auditing</a>
+            <!-- Button 4: Security -->
+            <div class="dropdown">
+              <button class="dropdown-button">
+                <i class="fas fa-lock"></i>
+                Security
+              </button>
+              <div class="dropdown-content">
+                <a href="endpoint-protection.html">
+                  <i class="fas fa-shield-alt"></i>Endpoint Protection
+                </a>
+                <a href="firewall-configuration.html">
+                  <i class="fas fa-fire"></i>Firewall Configuration
+                </a>
+                <a href="user-access-management.html">
+                  <i class="fas fa-user-shield"></i>User Access Management
+                </a>
+                <a href="security-policies.html">
+                  <i class="fas fa-clipboard-list"></i>Security Policies
+                </a>
+                <a href="backup-recovery.html">
+                  <i class="fas fa-life-ring"></i>Backup & Recovery
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Button 5: Networking -->
-          <div class="dropdown">
-            <button class="dropdown-button"><i class="fas fa-network-wired"></i> Networking</button>
-            <div class="dropdown-content">
-              <a href="lan-wan-configuration.html"><i class="fas fa-sitemap"></i> LAN/WAN Configuration</a>
-              <a href="router-switch-config.html"><i class="fas fa-route"></i> Router/Switch Config</a>
-              <a href="wireless-networking.html"><i class="fas fa-wifi"></i> Wireless Networking</a>
-              <a href="vpn-configuration.html"><i class="fas fa-user-secret"></i> VPN Configuration</a>
-              <a href="network-monitoring.html"><i class="fas fa-chart-line"></i> Network Monitoring</a>
-              <a href="troubleshooting.html"><i class="fas fa-bug"></i> Network Troubleshooting</a>
-              <a href="cable-management.html"><i class="fas fa-plug"></i> Cable Management</a>
+            <!-- Button 5: Networking -->
+            <div class="dropdown">
+              <button class="dropdown-button">
+                <i class="fas fa-network-wired"></i>
+                Networking
+              </button>
+              <div class="dropdown-content">
+                <a href="lan-wan-configuration.html">
+                  <i class="fas fa-sitemap"></i>LAN/WAN Configuration
+                </a>
+                <a href="router-switch-config.html">
+                  <i class="fas fa-route"></i>Router/Switch Config
+                </a>
+                <a href="wireless-networking.html">
+                  <i class="fas fa-wifi"></i>Wireless Networking
+                </a>
+                <a href="vpn-configuration.html">
+                  <i class="fas fa-user-secret"></i>VPN Configuration
+                </a>
+                <a href="network-monitoring.html">
+                  <i class="fas fa-chart-line"></i>Network Monitoring
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <div class="main-container">
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- About Me Section -->
       <section class="profile-section">
-        <div class="profile-content">
-          <!-- About Me Section - Now First -->
-          <div class="profile-about">
-            <h2>About Me</h2>
-            <div class="profile-text">
-              <p>
-                Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure and providing exceptional user support. Specialized in Windows Server environments, Active Directory, network security, and cloud technologies.
-              </p>
-              <p>
-                At the Central Bank of Afghanistan, I managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while maintaining critical banking systems with 99.9% uptime. My expertise spans the complete IT lifecycle from user support to system administration and security implementation.
-              </p>
-              <p>
-                Currently enhancing my German language skills (B1 level) and seeking opportunities to contribute my technical expertise and user-focused approach to German IT teams as an IT Support Specialist or System Administrator.
-              </p>
-            </div>
+        <div class="profile-about">
+          <h2>About Me</h2>
+          <div class="profile-text">
+            <p>
+              Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure and providing exceptional user support. Specialized in Windows Server environments, Active Directory, network security, and cloud technologies.
+            </p>
+            <p>
+              At the Central Bank of Afghanistan, I managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while maintaining critical banking systems with 99.9% uptime. My expertise spans the complete IT lifecycle from user support to system administration and security implementation.
+            </p>
+            <p>
+              Currently enhancing my German language skills (B1 level) and seeking opportunities to contribute my technical expertise and user-focused approach to German IT teams as an IT Support Specialist or System Administrator.
+            </p>
+          </div>
 
+          <div class="highlight-grid">
             <div class="highlight-item">
               <h3><i class="fas fa-headset"></i> IT Support Excellence</h3>
               <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees across 34 branches.</p>
@@ -592,81 +640,40 @@
               <h3><i class="fas fa-shield-alt"></i> Security & Compliance</h3>
               <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents while maintaining regulatory compliance.</p>
             </div>
+          </div>
 
-            <!-- Skills Section -->
-            <div class="skills-section">
-              <h2>Core Competencies</h2>
-              <div class="skills-grid">
-                <div class="skill-category">
-                  <h4>IT Support</h4>
-                  <div class="skill-items">
-                    <span class="skill-item">Helpdesk Support</span>
-                    <span class="skill-item">Remote Assistance</span>
-                    <span class="skill-item">Hardware Repair</span>
-                    <span class="skill-item">Software Installation</span>
-                    <span class="skill-item">User Training</span>
-                    <span class="skill-item">Ticket Management</span>
-                  </div>
-                </div>
-                
-                <div class="skill-category">
-                  <h4>System Administration</h4>
-                  <div class="skill-items">
-                    <span class="skill-item">Windows Server</span>
-                    <span class="skill-item">Active Directory</span>
-                    <span class="skill-item">DNS/DHCP</span>
-                    <span class="skill-item">Group Policy</span>
-                    <span class="skill-item">VMware</span>
-                    <span class="skill-item">Backup/Recovery</span>
-                  </div>
-                </div>
-                
-                <div class="skill-category">
-                  <h4>Security & Networking</h4>
-                  <div class="skill-items">
-                    <span class="skill-item">Endpoint Protection</span>
-                    <span class="skill-item">Firewall Management</span>
-                    <span class="skill-item">Network Monitoring</span>
-                    <span class="skill-item">VPN Configuration</span>
-                    <span class="skill-item">Security Policies</span>
-                    <span class="skill-item">Patch Management</span>
-                  </div>
-                </div>
-              </div>
+          <!-- Professional Summary Section -->
+          <div class="professional-summary">
+            <h2>Professional Summary</h2>
+            <div class="profile-text">
+              <p>
+                IT Support Specialist & System Administrator with 6+ years of enterprise experience managing complex IT infrastructure and providing exceptional user support. Proven track record in maintaining high-availability systems, implementing security measures, and delivering comprehensive IT support services.
+              </p>
             </div>
-
-            <!-- Professional Summary Section - Now at the End -->
-            <div class="professional-summary">
-              <h2>Professional Summary</h2>
-              <div class="profile-text">
-                <p>
-                  IT Support Specialist & System Administrator with 6+ years of enterprise experience managing complex IT infrastructure and providing exceptional user support. Proven track record in maintaining high-availability systems, implementing security measures, and delivering comprehensive IT support services.
-                </p>
+            
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-number">2,500+</div>
+                <div>Users Supported</div>
               </div>
-              
-              <div class="stats-grid">
-                <div class="stat-item">
-                  <div class="stat-number">2,500+</div>
-                  <div>Users Supported</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">34</div>
-                  <div>Branches Managed</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">6+</div>
-                  <div>Years Experience</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">99.9%</div>
-                  <div>Uptime Maintained</div>
-                </div>
+              <div class="stat-item">
+                <div class="stat-number">34</div>
+                <div>Branches Managed</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">6+</div>
+                <div>Years Experience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div>Uptime Maintained</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- CTA Section -->
       <section class="cta-section">
         <h3>Ready to Discuss IT Opportunities?</h3>
         <p>I'm actively seeking roles as an IT Support Specialist or System Administrator in Germany</p>
@@ -684,15 +691,16 @@
       </section>
     </div>
 
+    <!-- Footer -->
     <footer>
       <p>&copy; 2024 Hashmatullah Bahadari | IT Support Specialist & System Administrator</p>
-      <p>
+      <p style="margin-top: 1rem;">
         <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a> | 
         <a href="https://github.com/bahadari1361" target="_blank">GitHub</a> | 
         <a href="mailto:hashmat.bahadari@gmail.com">Email</a> |
         <a href="tel:+4917626836133">Phone</a>
       </p>
-      <p>Location: Bremen, Germany | Available for IT Support & System Administrator Roles</p>
+      <p style="margin-top: 0.5rem; color: var(--text-light);">Location: Bremen, Germany | Available for IT Support & System Administrator Roles</p>
     </footer>
   </div>
 </body>
