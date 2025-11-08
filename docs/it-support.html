@@ -14,8 +14,8 @@
       --text: #374151;
       --text-light: #6b7280;
       --background: #ffffff;
-      --glass: rgba(255, 255, 255, 0.8);
-      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.3);
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.15);
     }
@@ -28,7 +28,7 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -39,13 +39,12 @@
       position: relative;
     }
     
-    /* Header with glass effect */
-    header {
+    /* Enhanced Header */
+    .main-header {
       background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       border-bottom: 1px solid var(--glass-border);
-      padding: 1.5rem 0;
       position: fixed;
       top: 0;
       width: 100%;
@@ -53,15 +52,41 @@
       box-shadow: var(--shadow);
     }
     
-    .header-content {
+    .header-top {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 2rem 2rem 1rem;
       text-align: center;
     }
     
-    header h1 {
+    .profile-intro {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       font-size: 2.5rem;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+    
+    .profile-text {
+      text-align: left;
+    }
+    
+    .header-top h1 {
+      font-size: 2.75rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -69,22 +94,61 @@
       -webkit-text-fill-color: transparent;
     }
     
-    header p {
-      font-size: 1.2rem;
+    .header-top .tagline {
+      font-size: 1.4rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .header-top .subtagline {
+      font-size: 1.1rem;
       color: var(--text-light);
       font-weight: 400;
     }
     
-    /* Main content with spacing for fixed header */
-    .main-content {
-      max-width: 1200px;
-      margin: 120px auto 0;
-      padding: 0 2rem 4rem;
+    .contact-bar {
+      background: rgba(37, 99, 235, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.1);
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      margin: 1rem auto 0;
+      max-width: 600px;
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .contact-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-links a:hover {
+      color: var(--primary-dark);
+      transform: translateY(-2px);
     }
     
     /* Navigation */
+    .nav-section {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid var(--glass-border);
+    }
+    
     .nav-container {
-      margin-top: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
     }
     
     .nav-buttons {
@@ -138,13 +202,13 @@
       margin-top: 0.5rem;
     }
     
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
     }
     
     .dropdown-content a {
@@ -167,6 +231,13 @@
       text-align: center;
       margin-right: 0.75rem;
       color: var(--primary);
+    }
+    
+    /* Main content with spacing for fixed header */
+    .main-content {
+      max-width: 1200px;
+      margin: 380px auto 0;
+      padding: 0 2rem 4rem;
     }
     
     /* Profile Section */
@@ -249,14 +320,14 @@
       line-height: 1.6;
     }
     
-    /* Professional Summary */
-    .professional-summary {
+    /* Stats Section */
+    .stats-section {
       margin-top: 3rem;
       padding-top: 3rem;
       border-top: 1px solid rgba(0,0,0,0.1);
     }
     
-    .professional-summary h2 {
+    .stats-section h2 {
       font-size: 2rem;
       font-weight: 700;
       color: var(--text);
@@ -264,7 +335,7 @@
       position: relative;
     }
     
-    .professional-summary h2::after {
+    .stats-section h2::after {
       content: '';
       position: absolute;
       bottom: -10px;
@@ -392,21 +463,35 @@
     
     /* Responsive Design */
     @media (max-width: 768px) {
-      .header-content {
-        padding: 0 1rem;
+      .header-top {
+        padding: 1.5rem 1rem 1rem;
       }
       
       .main-content {
         padding: 0 1rem 2rem;
-        margin-top: 140px;
+        margin-top: 420px;
       }
       
-      header h1 {
-        font-size: 2rem;
+      .profile-intro {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
       }
       
-      header p {
-        font-size: 1.1rem;
+      .profile-text {
+        text-align: center;
+      }
+      
+      .header-top h1 {
+        font-size: 2.25rem;
+      }
+      
+      .header-top .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .contact-links {
+        gap: 1rem;
       }
       
       .nav-buttons {
@@ -455,22 +540,50 @@
       .dropdown-content {
         min-width: 250px;
       }
+      
+      .contact-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="content-wrapper">
-    <!-- Header -->
-    <header>
-      <div class="header-content">
-        <h1>Hashmatullah Bahadari</h1>
-        <p>IT Support Specialist & System Administrator</p>
+    <!-- Enhanced Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <div class="profile-intro">
+          <div class="profile-avatar">HB</div>
+          <div class="profile-text">
+            <h1>Hashmatullah Bahadari</h1>
+            <p class="tagline">IT Support Specialist & System Administrator</p>
+            <p class="subtagline">6+ Years Enterprise Experience | Central Bank Infrastructure</p>
+          </div>
+        </div>
         
+        <div class="contact-bar">
+          <div class="contact-links">
+            <a href="tel:+4917626836133">
+              <i class="fas fa-phone"></i>+49 176 26836133
+            </a>
+            <a href="mailto:hashmat.bahadari@gmail.com">
+              <i class="fas fa-envelope"></i>hashmat.bahadari@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/bahadari" target="_blank">
+              <i class="fab fa-linkedin"></i>LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="nav-section">
         <div class="nav-container">
           <div class="nav-buttons">
             <!-- Button 1: Certifications -->
-            <div class="dropdown">
+            <div class="dropdown" id="certifications-dropdown">
               <button class="dropdown-button">
                 <i class="fas fa-certificate"></i>
                 Certifications
@@ -491,14 +604,11 @@
                 <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
                   <i class="fab fa-microsoft"></i>Azure Fundamentals
                 </a>
-                <a href="https://learn.microsoft.com/en-us/users/hashmatullahbahadari-2949/certifications" target="_blank">
-                  <i class="fas fa-graduation-cap"></i>All Microsoft Certifications
-                </a>
               </div>
             </div>
 
             <!-- Button 2: Microsoft -->
-            <div class="dropdown">
+            <div class="dropdown" id="microsoft-dropdown">
               <button class="dropdown-button">
                 <i class="fab fa-microsoft"></i>
                 Microsoft
@@ -516,9 +626,6 @@
                 <a href="dhcp-configuration.html">
                   <i class="fas fa-plug"></i>DHCP Configuration
                 </a>
-                <a href="hybrid-solutions.html">
-                  <i class="fas fa-cloud"></i>Hybrid Solutions
-                </a>
                 <a href="azure-administration.html">
                   <i class="fab fa-microsoft"></i>Azure Administration
                 </a>
@@ -526,7 +633,7 @@
             </div>
 
             <!-- Button 3: IT Support -->
-            <div class="dropdown">
+            <div class="dropdown" id="support-dropdown">
               <button class="dropdown-button">
                 <i class="fas fa-headset"></i>
                 IT Support
@@ -547,14 +654,11 @@
                 <a href="user-training.html">
                   <i class="fas fa-chalkboard-teacher"></i>User Training
                 </a>
-                <a href="ticket-systems.html">
-                  <i class="fas fa-tasks"></i>Ticket Systems
-                </a>
               </div>
             </div>
 
             <!-- Button 4: Security -->
-            <div class="dropdown">
+            <div class="dropdown" id="security-dropdown">
               <button class="dropdown-button">
                 <i class="fas fa-lock"></i>
                 Security
@@ -569,9 +673,6 @@
                 <a href="user-access-management.html">
                   <i class="fas fa-user-shield"></i>User Access Management
                 </a>
-                <a href="security-policies.html">
-                  <i class="fas fa-clipboard-list"></i>Security Policies
-                </a>
                 <a href="backup-recovery.html">
                   <i class="fas fa-life-ring"></i>Backup & Recovery
                 </a>
@@ -579,7 +680,7 @@
             </div>
 
             <!-- Button 5: Networking -->
-            <div class="dropdown">
+            <div class="dropdown" id="networking-dropdown">
               <button class="dropdown-button">
                 <i class="fas fa-network-wired"></i>
                 Networking
@@ -597,9 +698,6 @@
                 <a href="vpn-configuration.html">
                   <i class="fas fa-user-secret"></i>VPN Configuration
                 </a>
-                <a href="network-monitoring.html">
-                  <i class="fas fa-chart-line"></i>Network Monitoring
-                </a>
               </div>
             </div>
           </div>
@@ -612,7 +710,7 @@
       <!-- About Me Section -->
       <section class="profile-section">
         <div class="profile-about">
-          <h2>About Me</h2>
+          <h2>Professional Summary</h2>
           <div class="profile-text">
             <p>
               Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure and providing exceptional user support. Specialized in Windows Server environments, Active Directory, network security, and cloud technologies.
@@ -642,15 +740,9 @@
             </div>
           </div>
 
-          <!-- Professional Summary Section -->
-          <div class="professional-summary">
-            <h2>Professional Summary</h2>
-            <div class="profile-text">
-              <p>
-                IT Support Specialist & System Administrator with 6+ years of enterprise experience managing complex IT infrastructure and providing exceptional user support. Proven track record in maintaining high-availability systems, implementing security measures, and delivering comprehensive IT support services.
-              </p>
-            </div>
-            
+          <!-- Stats Section -->
+          <div class="stats-section">
+            <h2>Key Achievements</h2>
             <div class="stats-grid">
               <div class="stat-item">
                 <div class="stat-number">2,500+</div>
@@ -703,5 +795,44 @@
       <p style="margin-top: 0.5rem; color: var(--text-light);">Location: Bremen, Germany | Available for IT Support & System Administrator Roles</p>
     </footer>
   </div>
+
+  <script>
+    // Fixed dropdown functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        const button = dropdown.querySelector('.dropdown-button');
+        
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          // Close all other dropdowns
+          dropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+            }
+          });
+          
+          // Toggle current dropdown
+          dropdown.classList.toggle('active');
+        });
+      });
+      
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      });
+      
+      // Prevent dropdown from closing when clicking inside
+      document.querySelectorAll('.dropdown-content').forEach(content => {
+        content.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      });
+    });
+  </script>
 </body>
 </html>
