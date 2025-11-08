@@ -8,13 +8,14 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
   <style>
     :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --accent: #e74c3c;
-      --light: #ecf0f1;
-      --dark: #2c3e50;
-      --text: #34495e;
-      --header-bg: #f8f9fa;
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #10b981;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --glass: rgba(255, 255, 255, 0.1);
+      --glass-dark: rgba(15, 23, 42, 0.7);
     }
     
     * {
@@ -25,7 +26,7 @@
     
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
       color: var(--light);
       line-height: 1.7;
       min-height: 100vh;
@@ -49,7 +50,7 @@
       font-size: 2.5rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, #60a5fa, #3498db, #6366f1);
+      background: linear-gradient(90deg, #60a5fa, var(--primary), #6366f1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -102,7 +103,7 @@
     }
     
     .dropdown-button {
-      background: linear-gradient(135deg, #3498db, #2980b9);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
       padding: 14px 24px;
       border: none;
@@ -115,13 +116,13 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
     
     .dropdown-button:hover {
-      background: linear-gradient(135deg, #2980b9, #1f618d);
+      background: linear-gradient(135deg, var(--primary-dark), #1e3a8a);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
     }
     
     .dropdown-content {
@@ -168,7 +169,7 @@
       width: 20px;
       text-align: center;
       margin-right: 12px;
-      color: #3498db;
+      color: var(--primary);
     }
     
     .main-container {
@@ -178,7 +179,7 @@
     }
     
     .profile-section {
-      background: rgba(15, 23, 42, 0.7);
+      background: var(--glass-dark);
       backdrop-filter: blur(16px);
       border-radius: 16px;
       overflow: hidden;
@@ -187,67 +188,26 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
     
-    .profile-header {
-      background: linear-gradient(135deg, #1e40af, #3730a3);
-      color: white;
-      padding: 3rem 3rem 2rem 3rem;
-      text-align: center;
-    }
-    
-    .profile-header h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .profile-header .tagline {
-      font-size: 1.3rem;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-    }
-    
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    
-    .stat-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-    
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #60a5fa;
-    }
-    
     .profile-content {
       padding: 3rem;
     }
     
-    .profile-about h3 {
+    .profile-about h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       color: #60a5fa;
       margin-bottom: 1.5rem;
       position: relative;
     }
     
-    .profile-about h3::after {
+    .profile-about h2::after {
       content: '';
       position: absolute;
       bottom: -10px;
       left: 0;
       width: 60px;
       height: 4px;
-      background: linear-gradient(90deg, #3498db, #e74c3c);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 4px;
     }
     
@@ -266,10 +226,10 @@
       background: rgba(96, 165, 250, 0.1);
       padding: 1.5rem;
       border-radius: 8px;
-      border-left: 4px solid #3498db;
+      border-left: 4px solid var(--primary);
     }
     
-    .highlight-item h4 {
+    .highlight-item h3 {
       font-family: 'Montserrat', sans-serif;
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
@@ -279,13 +239,60 @@
       color: #60a5fa;
     }
     
-    .highlight-item h4 i {
-      color: #e74c3c;
+    .highlight-item h3 i {
+      color: var(--secondary);
     }
     
     .highlight-item p {
       color: #cbd5e1;
       font-size: 0.95rem;
+    }
+    
+    .professional-summary {
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .professional-summary h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      color: #60a5fa;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .professional-summary h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 4px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .stat-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #60a5fa;
     }
     
     .skills-section {
@@ -321,7 +328,7 @@
     }
     
     .skill-item {
-      background: #3498db;
+      background: var(--primary);
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 20px;
@@ -332,7 +339,7 @@
     .cta-section {
       text-align: center;
       padding: 4rem 2rem;
-      background: linear-gradient(135deg, #1e40af, #3730a3);
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: white;
       border-radius: 16px;
       margin-top: 3rem;
@@ -354,7 +361,7 @@
     }
     
     .cta-button {
-      background: #e74c3c;
+      background: var(--secondary);
       color: white;
       padding: 1rem 2rem;
       border: none;
@@ -366,13 +373,13 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
     
     .cta-button:hover {
-      background: #c0392b;
+      background: #059669;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
     }
     
     .cta-button.secondary {
@@ -382,7 +389,7 @@
     
     .cta-button.secondary:hover {
       background: white;
-      color: #1e40af;
+      color: var(--primary-dark);
     }
     
     footer {
@@ -414,10 +421,6 @@
         font-size: 1rem;
       }
       
-      .profile-header {
-        padding: 2rem 1.5rem;
-      }
-      
       .profile-content {
         padding: 2rem 1.5rem;
       }
@@ -437,8 +440,8 @@
         padding: 0;
       }
       
-      .profile-about h3 {
-        font-size: 1.5rem;
+      .profile-about h2 {
+        font-size: 1.8rem;
       }
       
       .dropdown-button {
@@ -559,33 +562,10 @@
 
     <div class="main-container">
       <section class="profile-section">
-        <div class="profile-header">
-          <h2>Professional Summary</h2>
-          <p class="tagline">IT Support Specialist & System Administrator with 6+ Years Enterprise Experience</p>
-          
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-number">2,500+</div>
-              <div>Users Supported</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">34</div>
-              <div>Branches Managed</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">6+</div>
-              <div>Years Experience</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">99.9%</div>
-              <div>Uptime Maintained</div>
-            </div>
-          </div>
-        </div>
-
         <div class="profile-content">
+          <!-- About Me Section - Now First -->
           <div class="profile-about">
-            <h3>About Me</h3>
+            <h2>About Me</h2>
             <div class="profile-text">
               <p>
                 Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure and providing exceptional user support. Specialized in Windows Server environments, Active Directory, network security, and cloud technologies.
@@ -599,22 +579,23 @@
             </div>
 
             <div class="highlight-item">
-              <h4><i class="fas fa-headset"></i> IT Support Excellence</h4>
+              <h3><i class="fas fa-headset"></i> IT Support Excellence</h3>
               <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees across 34 branches.</p>
             </div>
             
             <div class="highlight-item">
-              <h4><i class="fas fa-server"></i> System Administration</h4>
+              <h3><i class="fas fa-server"></i> System Administration</h3>
               <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability and performance for critical banking operations.</p>
             </div>
             
             <div class="highlight-item">
-              <h4><i class="fas fa-shield-alt"></i> Security & Compliance</h4>
+              <h3><i class="fas fa-shield-alt"></i> Security & Compliance</h3>
               <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents while maintaining regulatory compliance.</p>
             </div>
 
+            <!-- Skills Section -->
             <div class="skills-section">
-              <h3>Core Competencies</h3>
+              <h2>Core Competencies</h2>
               <div class="skills-grid">
                 <div class="skill-category">
                   <h4>IT Support</h4>
@@ -650,6 +631,35 @@
                     <span class="skill-item">Security Policies</span>
                     <span class="skill-item">Patch Management</span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Professional Summary Section - Now at the End -->
+            <div class="professional-summary">
+              <h2>Professional Summary</h2>
+              <div class="profile-text">
+                <p>
+                  IT Support Specialist & System Administrator with 6+ years of enterprise experience managing complex IT infrastructure and providing exceptional user support. Proven track record in maintaining high-availability systems, implementing security measures, and delivering comprehensive IT support services.
+                </p>
+              </div>
+              
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-number">2,500+</div>
+                  <div>Users Supported</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">34</div>
+                  <div>Branches Managed</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">6+</div>
+                  <div>Years Experience</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number">99.9%</div>
+                  <div>Uptime Maintained</div>
                 </div>
               </div>
             </div>
