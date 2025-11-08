@@ -30,7 +30,9 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background: #f0f4f8;
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+        url('it.png') center/cover fixed;
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -40,13 +42,14 @@
     
     /* Professional Header with Contact Info */
     .main-header {
-      background: var(--background);
+      background: rgba(255, 255, 255, 0.95);
       border-bottom: 1px solid var(--border);
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
     
     .header-container {
@@ -112,10 +115,11 @@
     
     /* Navigation */
     .nav-section {
-      background: var(--section-bg);
+      background: rgba(248, 250, 252, 0.95);
       border-bottom: 1px solid var(--border);
       padding: 1rem 0;
       margin-top: 80px;
+      backdrop-filter: blur(10px);
     }
     
     .nav-container {
@@ -281,7 +285,7 @@
       margin-bottom: 1rem;
     }
     
-    /* Right Column - Content with Very Light Background */
+    /* Right Column - Content with Background Image */
     .right-column {
       position: relative;
       border-radius: 12px;
@@ -291,7 +295,7 @@
     
     .content-background {
       background: 
-        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
         url('it.png') center/cover;
       min-height: 600px;
       padding: 2.5rem;
@@ -309,7 +313,7 @@
     }
     
     .paper-card {
-      background: rgba(255, 255, 255, 0.9);
+      background: var(--paper-bg);
       border: 1px solid var(--paper-border);
       border-radius: 10px;
       padding: 2rem 1.5rem;
@@ -320,7 +324,6 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(5px);
     }
     
     .paper-card::before {
@@ -339,7 +342,6 @@
         0 4px 8px rgba(0, 0, 0, 0.1),
         0 8px 16px rgba(0, 0, 0, 0.1),
         0 16px 32px rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.95);
     }
     
     .card-icon {
@@ -718,7 +720,7 @@
       </section>
     </div>
 
-    <!-- Right Column - Content with Very Light Background -->
+    <!-- Right Column - Content with Background Image -->
     <div class="right-column">
       <div class="content-background">
         <h2 class="section-title">IT Expertise & Services</h2>
