@@ -18,6 +18,8 @@
       --border: #e5e7eb;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+      --paper-bg: #ffffff;
+      --paper-border: #e5e7eb;
     }
     
     * {
@@ -28,13 +30,15 @@
     
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--section-bg);
+      background: 
+        linear-gradient(rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.9)),
+        url('it.png') center/cover fixed;
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
     }
     
-    /* Header with Contact Info */
+    /* Professional Header with Contact Info */
     .main-header {
       background: var(--background);
       border-bottom: 1px solid var(--border);
@@ -85,13 +89,13 @@
       color: var(--text-light);
     }
     
-    .contact-header {
+    .header-contact {
       display: flex;
       gap: 1.5rem;
       align-items: center;
     }
     
-    .contact-header a {
+    .header-contact a {
       color: var(--text);
       text-decoration: none;
       display: flex;
@@ -102,7 +106,7 @@
       transition: color 0.3s;
     }
     
-    .contact-header a:hover {
+    .header-contact a:hover {
       color: var(--primary);
     }
     
@@ -165,7 +169,7 @@
       top: 100%;
       left: 0;
       background: var(--background);
-      min-width: 240px;
+      min-width: 220px;
       box-shadow: var(--shadow-hover);
       z-index: 1001;
       border-radius: 8px;
@@ -207,27 +211,35 @@
       font-size: 0.85rem;
     }
     
-    /* Main Content - Split Layout */
+    /* Main Content - No gap from navigation */
     .main-content {
       max-width: 1200px;
-      margin: 160px auto 0;
-      padding: 2rem;
+      margin: 0 auto;
+      padding: 2rem 2rem 3rem;
     }
     
-    .content-split {
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 3rem;
-      align-items: start;
-    }
-    
-    /* Left Side - Professional Summary */
-    .summary-section {
-      background: var(--background);
-      border: 1px solid var(--border);
+    /* Professional Summary - Paper Style */
+    .paper-section {
+      background: var(--paper-bg);
+      border: 1px solid var(--paper-border);
       border-radius: 12px;
       padding: 2.5rem;
-      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .paper-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 12px 12px 0 0;
     }
     
     .section-title {
@@ -251,30 +263,56 @@
     }
     
     .section-text {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      line-height: 1.7;
     }
     
     .section-text p {
       margin-bottom: 1rem;
     }
     
-    /* Three Points in One Line */
-    .points-grid {
+    /* 3D Paper Cards - Three in one line */
+    .cards-section {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin: 2rem 0;
     }
     
-    .point-item {
-      text-align: center;
-      padding: 1.5rem 1rem;
+    .paper-card {
+      background: var(--paper-bg);
+      border: 1px solid var(--paper-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
-    .point-icon {
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        0 16px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-icon {
       width: 50px;
       height: 50px;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -284,109 +322,52 @@
       justify-content: center;
       color: white;
       font-size: 1.25rem;
-      margin: 0 auto 1rem;
+      margin-bottom: 1.25rem;
     }
     
-    .point-item h4 {
-      font-size: 0.9rem;
+    .paper-card h3 {
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-    
-    .point-item p {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      line-height: 1.5;
-    }
-    
-    /* Right Side - Glass Technology Image */
-    .image-section {
-      position: relative;
-      height: 500px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .tech-image {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1rem;
-      position: relative;
-    }
-    
-    .tech-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    
-    .image-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 2rem;
-    }
-    
-    .image-content i {
-      font-size: 3rem;
       margin-bottom: 1rem;
-      opacity: 0.9;
+      color: var(--text);
+      line-height: 1.4;
     }
     
-    .image-content h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    
-    .image-content p {
+    .paper-card p {
+      color: var(--text-light);
+      line-height: 1.6;
       font-size: 0.9rem;
-      opacity: 0.8;
     }
     
     /* Simple CTA */
     .simple-cta {
-      background: var(--background);
-      border-radius: 12px;
+      background: var(--section-bg);
+      border-radius: 10px;
       padding: 2rem;
       text-align: center;
-      margin: 3rem 0 2rem;
+      margin: 2rem 0 0 0;
       border: 1px solid var(--border);
-      box-shadow: var(--shadow);
     }
     
     .simple-cta p {
       color: var(--text-light);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
     }
     
     .simple-buttons {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
     
     .simple-button {
       background: var(--primary);
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.75rem 1.25rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.9rem;
@@ -412,7 +393,7 @@
       color: white;
     }
     
-    /* Footer */
+    /* Footer - Clean */
     footer {
       background: var(--text);
       color: white;
@@ -447,14 +428,8 @@
         grid-template-columns: repeat(2, 1fr);
       }
       
-      .content-split {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      
-      .image-section {
-        height: 300px;
-        order: -1;
+      .cards-section {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
     
@@ -466,15 +441,13 @@
         text-align: center;
       }
       
-      .contact-header {
+      .header-contact {
         gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
       }
       
       .nav-section {
         margin-top: 140px;
-        padding: 1rem 0;
+        padding: 0.75rem 0;
       }
       
       .nav-buttons {
@@ -487,22 +460,22 @@
       }
       
       .main-content {
-        margin: 180px auto 0;
-        padding: 1rem;
+        padding: 1.5rem 1rem 2rem;
       }
       
-      .summary-section {
+      .paper-section {
         padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
       }
       
-      .points-grid {
+      .cards-section {
         grid-template-columns: 1fr;
         gap: 1rem;
       }
       
       .simple-cta {
         padding: 1.5rem;
-        margin: 2rem 0;
+        margin: 1.5rem 0 0 0;
       }
       
       .simple-buttons {
@@ -523,12 +496,12 @@
     }
     
     @media (max-width: 480px) {
-      .contact-header {
+      .header-contact {
         flex-direction: column;
         gap: 0.5rem;
       }
       
-      .contact-header a {
+      .header-contact a {
         font-size: 0.85rem;
       }
     }
@@ -546,7 +519,7 @@
           <p>IT Support Specialist & System Administrator</p>
         </div>
       </div>
-      <div class="contact-header">
+      <div class="header-contact">
         <a href="tel:+4917626836133">
           <i class="fas fa-phone"></i>+49 176 26836133
         </a>
@@ -554,7 +527,7 @@
           <i class="fab fa-linkedin"></i>LinkedIn
         </a>
         <a href="mailto:hashmat.bahadari@gmail.com">
-          <i class="fas fa-envelope"></i>Send Email
+          <i class="fas fa-envelope"></i>Email
         </a>
       </div>
     </div>
@@ -666,60 +639,47 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
+  <!-- Main Content - No gap from navigation -->
   <div class="main-content">
-    <div class="content-split">
-      <!-- Left Side - Professional Summary -->
-      <div class="summary-section">
-        <h2 class="section-title">Professional Summary</h2>
-        <div class="section-text">
-          <p>
-            Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure at the Central Bank of Afghanistan. Specialized in providing exceptional user support while maintaining robust system administration and security protocols.
-          </p>
-          <p>
-            Managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while ensuring 99.9% uptime for critical banking systems. Expertise spans Windows Server environments, Active Directory, network security, and enterprise support solutions.
-          </p>
-        </div>
-
-        <!-- Three Points in One Line -->
-        <div class="points-grid">
-          <div class="point-item">
-            <div class="point-icon">
-              <i class="fas fa-headset"></i>
-            </div>
-            <h4>IT Support Excellence</h4>
-            <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
-          </div>
-          
-          <div class="point-item">
-            <div class="point-icon">
-              <i class="fas fa-server"></i>
-            </div>
-            <h4>System Administration</h4>
-            <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
-          </div>
-          
-          <div class="point-item">
-            <div class="point-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h4>Security & Compliance</h4>
-            <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
-          </div>
-        </div>
+    <!-- Professional Summary -->
+    <section class="paper-section">
+      <h2 class="section-title">Professional Summary</h2>
+      <div class="section-text">
+        <p>
+          Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure at the Central Bank of Afghanistan. Specialized in providing exceptional user support while maintaining robust system administration and security protocols.
+        </p>
+        <p>
+          Managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while ensuring 99.9% uptime for critical banking systems. Expertise spans Windows Server environments, Active Directory, network security, and enterprise support solutions.
+        </p>
       </div>
 
-      <!-- Right Side - Glass Technology Image -->
-      <div class="image-section">
-        <div class="tech-image">
-          <div class="image-content">
-            <i class="fas fa-laptop-code"></i>
-            <h3>Enterprise IT Solutions</h3>
-            <p>Specialized in infrastructure management and user support</p>
+      <!-- 3D Paper Cards - Three in one line -->
+      <div class="cards-section">
+        <div class="paper-card">
+          <div class="card-icon">
+            <i class="fas fa-headset"></i>
           </div>
+          <h3>IT Support Excellence</h3>
+          <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
+        </div>
+        
+        <div class="paper-card">
+          <div class="card-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>System Administration</h3>
+          <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
+        </div>
+        
+        <div class="paper-card">
+          <div class="card-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Security & Compliance</h3>
+          <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Simple CTA -->
     <section class="simple-cta">
