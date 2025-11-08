@@ -17,7 +17,7 @@
       --section-bg: #f8fafc;
       --border: #e5e7eb;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      --shadow-hover: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
     
     * {
@@ -48,7 +48,7 @@
     .header-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -105,48 +105,65 @@
       color: var(--primary);
     }
     
-    /* Navigation */
+    /* Enhanced Navigation - ALL BUTTONS INCLUDED */
     .nav-section {
       background: var(--section-bg);
       border-bottom: 1px solid var(--border);
+      padding: 2rem 0;
+      margin-top: 80px;
     }
     
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 0 2rem;
+    }
+    
+    .nav-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 600;
     }
     
     .nav-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      justify-items: center;
     }
     
     .dropdown {
       position: relative;
+      width: 100%;
+      max-width: 250px;
     }
     
     .dropdown-button {
       background: var(--background);
       color: var(--text);
-      padding: 0.75rem 1.25rem;
+      padding: 1rem 1.5rem;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 1rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      box-shadow: var(--shadow);
     }
     
     .dropdown-button:hover {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
     }
     
     .dropdown-content {
@@ -155,10 +172,10 @@
       top: 100%;
       left: 0;
       background: var(--background);
-      min-width: 250px;
+      min-width: 280px;
       box-shadow: var(--shadow-hover);
       z-index: 1001;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
       animation: fadeIn 0.3s ease-out;
       border: 1px solid var(--border);
@@ -176,7 +193,7 @@
     
     .dropdown-content a {
       display: block;
-      padding: 0.75rem 1rem;
+      padding: 1rem 1.25rem;
       color: var(--text);
       text-decoration: none;
       transition: all 0.2s;
@@ -186,20 +203,20 @@
     .dropdown-content a:hover {
       background: var(--section-bg);
       color: var(--primary);
+      padding-left: 1.5rem;
     }
     
     .dropdown-content i {
-      width: 16px;
+      width: 18px;
       text-align: center;
-      margin-right: 0.5rem;
+      margin-right: 0.75rem;
       color: var(--primary);
     }
     
     /* Hero Section */
     .hero-section {
       background: linear-gradient(135deg, var(--section-bg) 0%, var(--background) 100%);
-      padding: 120px 0 80px;
-      margin-top: 120px;
+      padding: 100px 0 60px;
     }
     
     .hero-container {
@@ -221,7 +238,7 @@
     .hero-subtitle {
       font-size: 1.25rem;
       color: var(--text-light);
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -239,6 +256,16 @@
     
     .hero-stat {
       text-align: center;
+      padding: 2rem 1rem;
+      background: var(--background);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .hero-stat:hover {
+      transform: translateY(-5px);
     }
     
     .hero-stat-number {
@@ -301,16 +328,17 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin: 2rem 0;
+      margin: 3rem 0;
     }
     
     .highlight-card {
       background: var(--background);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
+      padding: 2.5rem 2rem;
       transition: all 0.3s ease;
       box-shadow: var(--shadow);
+      text-align: center;
     }
     
     .highlight-card:hover {
@@ -320,16 +348,16 @@
     }
     
     .highlight-icon {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 12px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+      margin: 0 auto 1.5rem;
     }
     
     .highlight-card h3 {
@@ -455,6 +483,12 @@
     }
     
     /* Responsive Design */
+    @media (max-width: 1024px) {
+      .nav-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
     @media (max-width: 768px) {
       .header-container {
         padding: 1rem;
@@ -466,9 +500,21 @@
         gap: 1rem;
       }
       
+      .nav-section {
+        margin-top: 140px;
+        padding: 1.5rem 0;
+      }
+      
+      .nav-buttons {
+        grid-template-columns: 1fr;
+      }
+      
+      .dropdown {
+        max-width: 100%;
+      }
+      
       .hero-section {
-        padding: 100px 0 60px;
-        margin-top: 180px;
+        padding: 80px 0 40px;
       }
       
       .hero-title {
@@ -481,19 +527,6 @@
       
       .main-content {
         padding: 2rem 1rem;
-      }
-      
-      .nav-container {
-        padding: 1rem;
-      }
-      
-      .nav-buttons {
-        gap: 0.25rem;
-      }
-      
-      .dropdown-button {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
       }
       
       .highlights-grid {
@@ -527,7 +560,9 @@
       }
       
       .dropdown-content {
-        min-width: 200px;
+        min-width: 250px;
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
   </style>
@@ -558,10 +593,12 @@
     </div>
   </header>
 
-  <!-- Navigation -->
+  <!-- Enhanced Navigation - ALL 5 BUTTONS INCLUDED -->
   <nav class="nav-section">
     <div class="nav-container">
+      <div class="nav-title">Technical Documentation & Expertise</div>
       <div class="nav-buttons">
+        <!-- Button 1: Certifications -->
         <div class="dropdown" id="certifications-dropdown">
           <button class="dropdown-button">
             <i class="fas fa-certificate"></i>
@@ -580,9 +617,16 @@
             <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
               <i class="fas fa-certificate"></i>ISO 27001 Lead Auditor
             </a>
+            <a href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank">
+              <i class="fab fa-microsoft"></i>Azure Fundamentals
+            </a>
+            <a href="https://learn.microsoft.com/en-us/users/hashmatullahbahadari-2949/certifications" target="_blank">
+              <i class="fas fa-graduation-cap"></i>All Microsoft Certifications
+            </a>
           </div>
         </div>
 
+        <!-- Button 2: Microsoft -->
         <div class="dropdown" id="microsoft-dropdown">
           <button class="dropdown-button">
             <i class="fab fa-microsoft"></i>
@@ -601,9 +645,16 @@
             <a href="dhcp-configuration.html">
               <i class="fas fa-plug"></i>DHCP Configuration
             </a>
+            <a href="hybrid-solutions.html">
+              <i class="fas fa-cloud"></i>Hybrid Solutions
+            </a>
+            <a href="azure-administration.html">
+              <i class="fab fa-microsoft"></i>Azure Administration
+            </a>
           </div>
         </div>
 
+        <!-- Button 3: IT Support -->
         <div class="dropdown" id="support-dropdown">
           <button class="dropdown-button">
             <i class="fas fa-headset"></i>
@@ -617,14 +668,27 @@
               <i class="fas fa-desktop"></i>Remote Assistance
             </a>
             <a href="hardware-troubleshooting.html">
-              <i class="fas fa-tools"></i>Hardware Support
+              <i class="fas fa-tools"></i>Hardware Troubleshooting
+            </a>
+            <a href="software-installation.html">
+              <i class="fas fa-download"></i>Software Installation
             </a>
             <a href="user-training.html">
               <i class="fas fa-chalkboard-teacher"></i>User Training
             </a>
+            <a href="ticket-systems.html">
+              <i class="fas fa-tasks"></i>Ticket Systems
+            </a>
+            <a href="incident-management.html">
+              <i class="fas fa-exclamation-triangle"></i>Incident Management
+            </a>
+            <a href="documentation.html">
+              <i class="fas fa-file-alt"></i>Documentation
+            </a>
           </div>
         </div>
 
+        <!-- Button 4: Security -->
         <div class="dropdown" id="security-dropdown">
           <button class="dropdown-button">
             <i class="fas fa-lock"></i>
@@ -635,14 +699,27 @@
               <i class="fas fa-shield-alt"></i>Endpoint Protection
             </a>
             <a href="firewall-configuration.html">
-              <i class="fas fa-fire"></i>Firewall Setup
+              <i class="fas fa-fire"></i>Firewall Configuration
+            </a>
+            <a href="user-access-management.html">
+              <i class="fas fa-user-shield"></i>User Access Management
+            </a>
+            <a href="security-policies.html">
+              <i class="fas fa-clipboard-list"></i>Security Policies
             </a>
             <a href="backup-recovery.html">
               <i class="fas fa-life-ring"></i>Backup & Recovery
             </a>
+            <a href="patch-management.html">
+              <i class="fas fa-download"></i>Patch Management
+            </a>
+            <a href="security-auditing.html">
+              <i class="fas fa-search"></i>Security Auditing
+            </a>
           </div>
         </div>
 
+        <!-- Button 5: Networking -->
         <div class="dropdown" id="networking-dropdown">
           <button class="dropdown-button">
             <i class="fas fa-network-wired"></i>
@@ -650,13 +727,25 @@
           </button>
           <div class="dropdown-content">
             <a href="lan-wan-configuration.html">
-              <i class="fas fa-sitemap"></i>LAN/WAN Setup
+              <i class="fas fa-sitemap"></i>LAN/WAN Configuration
             </a>
             <a href="router-switch-config.html">
-              <i class="fas fa-route"></i>Router Config
+              <i class="fas fa-route"></i>Router/Switch Config
+            </a>
+            <a href="wireless-networking.html">
+              <i class="fas fa-wifi"></i>Wireless Networking
             </a>
             <a href="vpn-configuration.html">
-              <i class="fas fa-user-secret"></i>VPN Setup
+              <i class="fas fa-user-secret"></i>VPN Configuration
+            </a>
+            <a href="network-monitoring.html">
+              <i class="fas fa-chart-line"></i>Network Monitoring
+            </a>
+            <a href="troubleshooting.html">
+              <i class="fas fa-bug"></i>Network Troubleshooting
+            </a>
+            <a href="cable-management.html">
+              <i class="fas fa-plug"></i>Cable Management
             </a>
           </div>
         </div>
@@ -716,7 +805,7 @@
             <i class="fas fa-headset"></i>
           </div>
           <h3>IT Support Excellence</h3>
-          <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
+          <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees across 34 branches.</p>
         </div>
         
         <div class="highlight-card">
@@ -724,7 +813,7 @@
             <i class="fas fa-server"></i>
           </div>
           <h3>System Administration</h3>
-          <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
+          <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability and performance for critical banking operations.</p>
         </div>
         
         <div class="highlight-card">
@@ -732,7 +821,7 @@
             <i class="fas fa-shield-alt"></i>
           </div>
           <h3>Security & Compliance</h3>
-          <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
+          <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents while maintaining regulatory compliance.</p>
         </div>
       </div>
     </section>
