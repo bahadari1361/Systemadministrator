@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hashmatullah Bahadari - IT Support Specialist & System Administrator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f8fafc;
+      --border: #e5e7eb;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+      --paper-bg: #ffffff;
+      --paper-border: #e5e7eb;
+    }
+    
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Professional Header with Contact Info */
+    .main-header {
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    
+    .logo-text p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    
+    .header-contact {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    
+    .header-contact a {
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    
+    .header-contact a:hover {
+      color: var(--primary);
+    }
+    
+    /* Navigation */
+    .nav-section {
+      background: var(--section-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      margin-top: 80px;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      justify-items: center;
+    }
+    
+    .dropdown {
+      position: relative;
+      width: 100%;
+      max-width: 200px;
+    }
+    
+    .dropdown-button {
+      background: var(--background);
+      color: var(--text);
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      box-shadow: var(--shadow);
+    }
+    
+    .dropdown-button:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--background);
+      min-width: 220px;
+      box-shadow: var(--shadow-hover);
+      z-index: 1001;
+      border-radius: 8px;
+      overflow: hidden;
+      animation: fadeIn 0.3s ease-out;
+      border: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .dropdown-content a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    
+    .dropdown-content a:hover {
+      background: var(--section-bg);
+      color: var(--primary);
+    }
+    
+    .dropdown-content i {
+      width: 16px;
+      text-align: center;
+      margin-right: 0.5rem;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+    
+    /* Main Content - Two Column Layout */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+    }
+    
+    /* Left Column - Professional Summary */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    /* Professional Summary - Paper Style */
+    .paper-section {
+      background: var(--paper-bg);
+      border: 1px solid var(--paper-border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .paper-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .section-text {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    
+    .section-text p {
+      margin-bottom: 1rem;
+    }
+    
+    /* Right Column - Content with Very Light Background */
+    .right-column {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .content-background {
+      background: 
+        linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        url('it.png') center/cover;
+      min-height: 600px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    /* 3D Paper Cards - Three in one line */
+    .cards-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .paper-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--paper-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+    }
+    
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        0 16px 32px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .paper-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    
+    .paper-card p {
+      color: var(--text-light);
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    
+    /* Simple CTA */
+    .simple-cta {
+      background: var(--section-bg);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0 0 0;
+      border: 1px solid var(--border);
+    }
+    
+    .simple-cta p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    .simple-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .simple-button {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .simple-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .simple-button.secondary {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .simple-button.secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Footer - Clean */
+    footer {
+      background: var(--text);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+    
+    .footer-bottom {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #374151;
+      color: #9ca3af;
+      font-size: 0.8rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .nav-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .cards-section {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .left-column {
+        order: 2;
+      }
+      
+      .right-column {
+        order: 1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .header-contact {
+        gap: 1rem;
+      }
+      
+      .nav-section {
+        margin-top: 140px;
+        padding: 0.75rem 0;
+      }
+      
+      .nav-buttons {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      
+      .dropdown {
+        max-width: 100%;
+      }
+      
+      .main-content {
+        padding: 1.5rem 1rem 2rem;
+      }
+      
+      .paper-section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .cards-section {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .content-background {
+        padding: 1.5rem;
+      }
+      
+      .simple-cta {
+        padding: 1.5rem;
+        margin: 1.5rem 0 0 0;
+      }
+      
+      .simple-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .simple-button {
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+      }
+      
+      .dropdown-content {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-contact {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .header-contact a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header with Contact Info -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <div class="logo">HB</div>
+        <div class="logo-text">
+          <h1>Hashmatullah Bahadari</h1>
+          <p>IT Support Specialist & System Administrator</p>
+        </div>
+      </div>
+      <div class="header-contact">
+        <a href="tel:+4917626836133">
+          <i class="fas fa-phone"></i>+49 176 26836133
+        </a>
+        <a href="https://linkedin.com/in/bahadari" target="_blank">
+          <i class="fab fa-linkedin"></i>LinkedIn
+        </a>
+        <a href="mailto:hashmat.bahadari@gmail.com">
+          <i class="fas fa-envelope"></i>Email
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav-section">
+    <div class="nav-container">
+      <div class="nav-buttons">
+        <div class="dropdown" id="certifications-dropdown">
+          <button class="dropdown-button">
+            <i class="fas fa-certificate"></i>
+            Certifications
+          </button>
+          <div class="dropdown-content">
+            <a href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank">
+              <i class="fas fa-shield-alt"></i>Fortinet NSE 1 & 2
+            </a>
+            <a href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank">
+              <i class="fas fa-network-wired"></i>CompTIA Network+
+            </a>
+            <a href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank">
+              <i class="fas fa-lock"></i>CompTIA Security+
+            </a>
+            <a href="https://www.pecb.com/en/verify-certificate" target="_blank">
+              <i class="fas fa-certificate"></i>ISO 27001 Lead Auditor
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown" id="microsoft-dropdown">
+          <button class="dropdown-button">
+            <i class="fab fa-microsoft"></i>
+            Microsoft
+          </button>
+          <div class="dropdown-content">
+            <a href="windows-server-installation.html">
+              <i class="fas fa-server"></i>Server Installation
+            </a>
+            <a href="active-directory-configuration.html">
+              <i class="fas fa-network-wired"></i>AD Configuration
+            </a>
+            <a href="dns-configuration.html">
+              <i class="fas fa-globe"></i>DNS Configuration
+            </a>
+            <a href="dhcp-configuration.html">
+              <i class="fas fa-plug"></i>DHCP Configuration
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown" id="support-dropdown">
+          <button class="dropdown-button">
+            <i class="fas fa-headset"></i>
+            IT Support
+          </button>
+          <div class="dropdown-content">
+            <a href="helpdesk-support.html">
+              <i class="fas fa-ticket-alt"></i>Helpdesk Support
+            </a>
+            <a href="remote-assistance.html">
+              <i class="fas fa-desktop"></i>Remote Assistance
+            </a>
+            <a href="hardware-troubleshooting.html">
+              <i class="fas fa-tools"></i>Hardware Support
+            </a>
+            <a href="user-training.html">
+              <i class="fas fa-chalkboard-teacher"></i>User Training
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown" id="security-dropdown">
+          <button class="dropdown-button">
+            <i class="fas fa-lock"></i>
+            Security
+          </button>
+          <div class="dropdown-content">
+            <a href="endpoint-protection.html">
+              <i class="fas fa-shield-alt"></i>Endpoint Protection
+            </a>
+            <a href="firewall-configuration.html">
+              <i class="fas fa-fire"></i>Firewall Setup
+            </a>
+            <a href="backup-recovery.html">
+              <i class="fas fa-life-ring"></i>Backup & Recovery
+            </a>
+          </div>
+        </div>
+
+        <div class="dropdown" id="networking-dropdown">
+          <button class="dropdown-button">
+            <i class="fas fa-network-wired"></i>
+            Networking
+          </button>
+          <div class="dropdown-content">
+            <a href="lan-wan-configuration.html">
+              <i class="fas fa-sitemap"></i>LAN/WAN Setup
+            </a>
+            <a href="router-switch-config.html">
+              <i class="fas fa-route"></i>Router Config
+            </a>
+            <a href="vpn-configuration.html">
+              <i class="fas fa-user-secret"></i>VPN Setup
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content - Two Column Layout -->
+  <div class="main-content">
+    <!-- Left Column - Professional Summary -->
+    <div class="left-column">
+      <section class="paper-section">
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="section-text">
+          <p>
+            Certified <strong>IT Support Specialist</strong> and <strong>System Administrator</strong> with over 6 years of comprehensive experience managing enterprise IT infrastructure at the Central Bank of Afghanistan. Specialized in providing exceptional user support while maintaining robust system administration and security protocols.
+          </p>
+          <p>
+            Managed IT operations for <strong>2,500+ users across 34 nationwide branches</strong>, delivering first and second-level support while ensuring 99.9% uptime for critical banking systems. Expertise spans Windows Server environments, Active Directory, network security, and enterprise support solutions.
+          </p>
+        </div>
+      </section>
+
+      <!-- Simple CTA -->
+      <section class="simple-cta">
+        <p>Open to new opportunities as an IT Support Specialist or System Administrator</p>
+        <div class="simple-buttons">
+          <a href="mailto:hashmat.bahadari@gmail.com" class="simple-button">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+          <a href="tel:+4917626836133" class="simple-button secondary">
+            <i class="fas fa-phone"></i> Call
+          </a>
+          <a href="Bahadari Hashmat-Lebenslauf.pdf" class="simple-button secondary" download>
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column - Content with Very Light Background -->
+    <div class="right-column">
+      <div class="content-background">
+        <h2 class="section-title">IT Expertise & Services</h2>
+        
+        <!-- 3D Paper Cards - Three in one line -->
+        <div class="cards-section">
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>IT Support Excellence</h3>
+            <p>Provided comprehensive IT support including helpdesk, remote assistance, hardware troubleshooting, and user training for 2,500+ banking employees.</p>
+          </div>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>System Administration</h3>
+            <p>Managed Windows Server infrastructure, Active Directory, DNS, DHCP, and VMware environments ensuring high availability for critical operations.</p>
+          </div>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Security & Compliance</h3>
+            <p>Implemented ISO 27001 security controls, endpoint protection, and security policies that significantly reduced security incidents.</p>
+          </div>
+        </div>
+        
+        <div class="cards-section">
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <h3>Network Infrastructure</h3>
+            <p>Designed and maintained LAN/WAN networks, configured routers and switches, and implemented VPN solutions for secure remote access.</p>
+          </div>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3>Backup & Recovery</h3>
+            <p>Implemented comprehensive backup strategies and disaster recovery plans to ensure business continuity and data protection.</p>
+          </div>
+          
+          <div class="paper-card">
+            <div class="card-icon">
+              <i class="fas fa-cloud"></i>
+            </div>
+            <h3>Cloud Solutions</h3>
+            <p>Deployed and managed cloud infrastructure, hybrid environments, and migration projects to improve scalability and reduce costs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">Hashmatullah Bahadari</div>
+      <p>IT Support Specialist & System Administrator</p>
+      <div class="footer-bottom">
+        <p>Location: Bremen, Germany | Available for IT Support & System Administrator Roles</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Professional dropdown functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        const button = dropdown.querySelector('.dropdown-button');
+        
+        button.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          // Close all other dropdowns
+          dropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+            }
+          });
+          
+          // Toggle current dropdown
+          dropdown.classList.toggle('active');
+        });
+      });
+      
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function() {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('active');
+        });
+      });
+      
+      // Prevent dropdown from closing when clicking inside
+      document.querySelectorAll('.dropdown-content').forEach(content => {
+        content.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
