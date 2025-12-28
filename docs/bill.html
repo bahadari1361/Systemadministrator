@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Support Receipt</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        color: #333;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    .receipt {
+        border: 2px solid #333;
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .section {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        display: inline-block;
+        width: 150px;
+    }
+    input, textarea {
+        width: calc(100% - 160px);
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+    textarea {
+        resize: none;
+        height: 60px;
+    }
+    .print-btn {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .print-btn:hover {
+        background-color: #555;
+    }
+</style>
+</head>
+<body>
+
+<h1>IT Support Receipt / Quittung</h1>
+
+<div class="receipt">
+    <div class="section">
+        <label for="serviceProvider">Service Provider:</label>
+        <input type="text" id="serviceProvider" value="Max Mustermann"><br>
+
+        <label for="addressProvider">Address:</label>
+        <input type="text" id="addressProvider" value="Musterstraße 1, 12345 Musterstadt"><br>
+
+        <label for="taxNumber">Steuernummer:</label>
+        <input type="text" id="taxNumber" value="12/345/67890 (optional)">
+    </div>
+
+    <div class="section">
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName"><br>
+
+        <label for="clientAddress">Client Address:</label>
+        <input type="text" id="clientAddress" placeholder="optional">
+    </div>
+
+    <div class="section">
+        <label for="date">Date of Service:</label>
+        <input type="date" id="date"><br>
+
+        <label for="serviceDesc">Service Provided:</label>
+        <textarea id="serviceDesc" placeholder="e.g., Computer & Wi-Fi support, Software setup"></textarea>
+    </div>
+
+    <div class="section">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" placeholder="€ ... cash received">
+    </div>
+
+    <div class="section">
+        <label>Signature:</label>
+        <input type="text" placeholder="Service Provider Signature">
+    </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">Print as PDF</button>
+
+</body>
+</html>
