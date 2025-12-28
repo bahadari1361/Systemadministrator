@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IT Support Receipt</title>
+<title>IT-Support Quittung</title>
 
 <style>
     body {
@@ -80,7 +80,6 @@
 
     .row {
         display: flex;
-        justify-content: space-between;
         gap: 20px;
     }
 
@@ -146,64 +145,64 @@
 
     <!-- HEADER -->
     <div class="header">
-        <h1>IT Support Receipt</h1>
-        <p>Computer • Wi-Fi • Smartphone Support</p>
+        <h1>IT-Support Quittung</h1>
+        <p>Computer • WLAN • Smartphone-Hilfe</p>
     </div>
 
     <!-- CONTENT -->
     <div class="content">
 
         <div class="section">
-            <div class="section-title">Service Provider</div>
+            <div class="section-title">Dienstleister</div>
 
             <label>Name</label>
             <input type="text" value="Hashmatullah Bahadari">
 
-            <label>Address</label>
+            <label>Adresse</label>
             <input type="text" value="Schonbecker Straße 38">
         </div>
 
         <div class="section">
-            <div class="section-title">Client Information</div>
+            <div class="section-title">Kundendaten</div>
 
-            <label>Client Name</label>
+            <label>Name des Kunden</label>
             <input type="text">
 
-            <label>Client Address (optional)</label>
+            <label>Adresse des Kunden (optional)</label>
             <input type="text">
         </div>
 
         <div class="section">
-            <div class="section-title">Service Details</div>
+            <div class="section-title">Leistungsdetails</div>
 
             <div class="row">
                 <div class="half">
-                    <label>Date of Service</label>
+                    <label>Datum der Leistung</label>
                     <input type="date">
                 </div>
             </div>
 
-            <label>Description of Service</label>
-            <textarea placeholder="e.g. Computer repair, Wi-Fi setup, software installation"></textarea>
+            <label>Beschreibung der Leistung</label>
+            <textarea placeholder="z. B. Computer-Reparatur, WLAN-Einrichtung, Software-Installation"></textarea>
         </div>
 
         <div class="section">
-            <div class="section-title">Payment</div>
+            <div class="section-title">Zahlung</div>
 
             <div class="amount-box">
-                Amount Received: € <input type="text" placeholder="cash">
+                Betrag erhalten: € <input type="text" placeholder="Barzahlung">
             </div>
         </div>
 
         <div class="signature">
-            Signature
+            Unterschrift
             <div class="signature-line"></div>
         </div>
 
     </div>
 </div>
 
-<button class="print-btn" onclick="window.print()">Print as PDF</button>
+<button class="print-btn" onclick="window.print()">Als PDF drucken</button>
 
 </body>
 </html>
