@@ -4,47 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT Support Receipt</title>
+
 <style>
     body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        background-color: #f2f4f7;
         margin: 0;
         padding: 0;
     }
 
     .receipt {
-        max-width: 600px;
-        margin: 50px auto;
-        background: #fff;
-        padding: 30px;
-        border: 1px solid #ccc;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        max-width: 650px;
+        margin: 40px auto;
+        background: #ffffff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    h1 {
+    /* HEADER */
+    .header {
+        background-color: #1f4fd8;
+        color: #ffffff;
+        padding: 20px;
         text-align: center;
+    }
+
+    .header h1 {
+        margin: 0;
         font-size: 26px;
-        margin-bottom: 20px;
         letter-spacing: 1px;
     }
 
-    .section {
-        margin-bottom: 20px;
+    .header p {
+        margin: 5px 0 0;
+        font-size: 14px;
     }
 
-    .section label {
+    /* CONTENT */
+    .content {
+        padding: 30px;
+    }
+
+    .section {
+        margin-bottom: 25px;
+    }
+
+    .section-title {
+        font-weight: bold;
+        color: #1f4fd8;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    label {
         display: block;
         font-weight: bold;
         margin-bottom: 5px;
     }
 
-    .section input, .section textarea {
+    input, textarea {
         width: 100%;
         padding: 8px;
         font-size: 14px;
-        margin-bottom: 10px;
-        border: 1px solid #aaa;
+        border: 1px solid #bbb;
         border-radius: 4px;
+        margin-bottom: 10px;
         box-sizing: border-box;
     }
 
@@ -56,23 +81,24 @@
     .row {
         display: flex;
         justify-content: space-between;
+        gap: 20px;
     }
 
     .row .half {
-        width: 48%;
+        width: 50%;
     }
 
-    .amount {
+    .amount-box {
+        background-color: #f5f7ff;
+        padding: 15px;
+        border: 1px solid #c7d2ff;
         font-size: 18px;
         font-weight: bold;
         text-align: right;
-        margin-top: 10px;
-        margin-bottom: 20px;
     }
 
     .signature {
         margin-top: 40px;
-        text-align: left;
     }
 
     .signature-line {
@@ -83,11 +109,11 @@
 
     .print-btn {
         display: block;
-        width: 200px;
-        margin: 20px auto 0;
+        width: 220px;
+        margin: 20px auto 30px;
         padding: 12px;
         font-size: 16px;
-        background-color: #4CAF50;
+        background-color: #1f4fd8;
         color: white;
         border: none;
         border-radius: 4px;
@@ -95,52 +121,85 @@
     }
 
     .print-btn:hover {
-        background-color: #45a049;
+        background-color: #163bb0;
     }
 
     @media print {
-        .print-btn { display: none; }
-        body { background: none; margin: 0; }
-        .receipt { box-shadow: none; border: none; margin: 0; }
+        body {
+            background: none;
+        }
+        .print-btn {
+            display: none;
+        }
+        .receipt {
+            box-shadow: none;
+            border: none;
+            margin: 0;
+        }
     }
 </style>
 </head>
+
 <body>
 
 <div class="receipt">
-    <h1>IT Support Receipt / Quittung</h1>
 
-    <div class="section">
-        <label for="providerName">Your Name</label>
-        <input type="text" id="providerName" value="Max Mustermann">
-
-        <label for="providerAddress">Address</label>
-        <input type="text" id="providerAddress" value="Musterstraße 1, 12345 Musterstadt">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>IT Support Receipt</h1>
+        <p>Computer • Wi-Fi • Smartphone Support</p>
     </div>
 
-    <div class="section">
-        <label for="clientName">Client Name</label>
-        <input type="text" id="clientName">
+    <!-- CONTENT -->
+    <div class="content">
 
-        <label for="clientAddress">Client Address (optional)</label>
-        <input type="text" id="clientAddress">
-    </div>
+        <div class="section">
+            <div class="section-title">Service Provider</div>
 
-    <div class="section">
-        <label for="serviceDate">Date of Service</label>
-        <input type="date" id="serviceDate">
+            <label>Name</label>
+            <input type="text" value="Hashmatullah Bahadari">
 
-        <label for="serviceDesc">Service Provided</label>
-        <textarea id="serviceDesc" placeholder="e.g., Computer & Wi-Fi support, software setup"></textarea>
-    </div>
+            <label>Address</label>
+            <input type="text" value="Schonbecker Straße 38">
+        </div>
 
-    <div class="amount">
-        Amount Received: € <input type="text" id="amount" placeholder="... cash received">
-    </div>
+        <div class="section">
+            <div class="section-title">Client Information</div>
 
-    <div class="signature">
-        Signature
-        <div class="signature-line"></div>
+            <label>Client Name</label>
+            <input type="text">
+
+            <label>Client Address (optional)</label>
+            <input type="text">
+        </div>
+
+        <div class="section">
+            <div class="section-title">Service Details</div>
+
+            <div class="row">
+                <div class="half">
+                    <label>Date of Service</label>
+                    <input type="date">
+                </div>
+            </div>
+
+            <label>Description of Service</label>
+            <textarea placeholder="e.g. Computer repair, Wi-Fi setup, software installation"></textarea>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Payment</div>
+
+            <div class="amount-box">
+                Amount Received: € <input type="text" placeholder="cash">
+            </div>
+        </div>
+
+        <div class="signature">
+            Signature
+            <div class="signature-line"></div>
+        </div>
+
     </div>
 </div>
 
