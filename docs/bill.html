@@ -7,43 +7,45 @@
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        margin: 40px;
-        color: #333;
         background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
     }
 
-    .receipt-container {
+    .receipt {
         max-width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        border: 1px solid #ccc;
+        margin: 50px auto;
+        background: #fff;
         padding: 30px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     h1 {
         text-align: center;
-        font-size: 24px;
+        font-size: 26px;
         margin-bottom: 20px;
+        letter-spacing: 1px;
     }
 
     .section {
         margin-bottom: 20px;
     }
 
-    label {
-        font-weight: bold;
+    .section label {
         display: block;
+        font-weight: bold;
         margin-bottom: 5px;
     }
 
-    input, textarea {
+    .section input, .section textarea {
         width: 100%;
         padding: 8px;
         font-size: 14px;
         margin-bottom: 10px;
-        border: 1px solid #ccc;
+        border: 1px solid #aaa;
         border-radius: 4px;
+        box-sizing: border-box;
     }
 
     textarea {
@@ -51,9 +53,38 @@
         height: 80px;
     }
 
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .row .half {
+        width: 48%;
+    }
+
+    .amount {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .signature {
+        margin-top: 40px;
+        text-align: left;
+    }
+
+    .signature-line {
+        border-top: 1px solid #333;
+        width: 250px;
+        margin-top: 10px;
+    }
+
     .print-btn {
         display: block;
-        width: 100%;
+        width: 200px;
+        margin: 20px auto 0;
         padding: 12px;
         font-size: 16px;
         background-color: #4CAF50;
@@ -61,69 +92,59 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-top: 20px;
     }
 
     .print-btn:hover {
         background-color: #45a049;
     }
 
-    .footer {
-        text-align: center;
-        font-size: 12px;
-        color: #666;
-        margin-top: 30px;
+    @media print {
+        .print-btn { display: none; }
+        body { background: none; margin: 0; }
+        .receipt { box-shadow: none; border: none; margin: 0; }
     }
 </style>
 </head>
 <body>
 
-<div class="receipt-container">
+<div class="receipt">
     <h1>IT Support Receipt / Quittung</h1>
 
     <div class="section">
-        <label for="providerName">Name:</label>
+        <label for="providerName">Your Name</label>
         <input type="text" id="providerName" value="Max Mustermann">
 
-        <label for="providerAddress">Address:</label>
+        <label for="providerAddress">Address</label>
         <input type="text" id="providerAddress" value="Musterstraße 1, 12345 Musterstadt">
-
-        <label for="taxNumber">Tax Number (optional):</label>
-        <input type="text" id="taxNumber" value="12/345/67890">
     </div>
 
     <div class="section">
-        <label for="clientName">Client Name:</label>
+        <label for="clientName">Client Name</label>
         <input type="text" id="clientName">
 
-        <label for="clientAddress">Client Address (optional):</label>
+        <label for="clientAddress">Client Address (optional)</label>
         <input type="text" id="clientAddress">
     </div>
 
     <div class="section">
-        <label for="serviceDate">Date of Service:</label>
+        <label for="serviceDate">Date of Service</label>
         <input type="date" id="serviceDate">
 
-        <label for="serviceDesc">Service Provided:</label>
+        <label for="serviceDesc">Service Provided</label>
         <textarea id="serviceDesc" placeholder="e.g., Computer & Wi-Fi support, software setup"></textarea>
     </div>
 
-    <div class="section">
-        <label for="amount">Amount Received:</label>
-        <input type="text" id="amount" placeholder="€ ... cash received">
+    <div class="amount">
+        Amount Received: € <input type="text" id="amount" placeholder="... cash received">
     </div>
 
-    <div class="section">
-        <label>Signature:</label>
-        <input type="text" placeholder="Signature">
-    </div>
-
-    <button class="print-btn" onclick="window.print()">Print as PDF</button>
-
-    <div class="footer">
-        BahadariTech – IT Support Services
+    <div class="signature">
+        Signature
+        <div class="signature-line"></div>
     </div>
 </div>
+
+<button class="print-btn" onclick="window.print()">Print as PDF</button>
 
 </body>
 </html>
