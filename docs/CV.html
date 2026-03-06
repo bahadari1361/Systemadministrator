@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProCV Builder - Create Your Professional Resume</title>
+    <title>ProCV Builder - Multiple Templates</title>
     <style>
         * {
             margin: 0;
@@ -82,10 +82,54 @@
             color: #3B82F6;
         }
 
+        /* Template Selector */
+        .template-bar {
+            background: white;
+            padding: 16px 32px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            overflow-x: auto;
+        }
+
+        .template-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 14px;
+        }
+
+        .template-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .template-option {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .template-option:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .template-option.active {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+
         /* Main Layout */
         .builder-container {
             display: grid;
-            grid-template-columns: 380px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 24px;
             padding: 24px;
             max-width: 1600px;
@@ -97,10 +141,10 @@
             background: white;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            height: calc(100vh - 100px);
+            height: calc(100vh - 180px);
             overflow-y: auto;
             position: sticky;
-            top: 90px;
+            top: 100px;
         }
 
         .editor-header {
@@ -116,14 +160,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .editor-header h2 span {
-            background: #3B82F6;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 12px;
         }
 
         .editor-sections {
@@ -154,14 +190,6 @@
             color: white;
         }
 
-        .tab-btn:hover {
-            background: #e0e0e0;
-        }
-
-        .tab-btn.active:hover {
-            background: #2563eb;
-        }
-
         /* Form Styles */
         .form-section {
             display: none;
@@ -172,7 +200,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .form-label {
@@ -180,12 +208,12 @@
             font-size: 13px;
             font-weight: 600;
             color: #4a5568;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 14px;
@@ -198,7 +226,7 @@
         }
 
         textarea.form-control {
-            min-height: 100px;
+            min-height: 80px;
             resize: vertical;
         }
 
@@ -263,7 +291,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             padding: 40px;
-            min-height: calc(100vh - 100px);
+            min-height: calc(100vh - 180px);
             overflow-y: auto;
         }
 
@@ -272,16 +300,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid #f0f0f0;
         }
 
         .preview-header h3 {
-            font-size: 20px;
+            font-size: 18px;
             color: #1a1a1a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .preview-actions {
@@ -305,203 +328,113 @@
             background: #f8fafc;
         }
 
-        /* CV Preview Styles */
-        .cv-preview {
-            max-width: 800px;
-            margin: 0 auto;
-            font-family: 'Inter', sans-serif;
+        /* CV Preview Area */
+        #cvPreview {
+            transition: all 0.3s;
         }
 
-        .cv-header {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #f0f0f0;
-        }
-
-        .cv-photo {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Template 1 - Modern Blue (Default) */
+        .template1 .cv-header {
+            background: linear-gradient(135deg, #3B82F6, #1E40AF);
             color: white;
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .cv-header-info {
-            flex: 1;
-        }
-
-        .cv-name {
-            font-size: 32px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .cv-title {
-            font-size: 18px;
-            color: #3B82F6;
-            margin-bottom: 12px;
-        }
-
-        .cv-contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            font-size: 13px;
-            color: #4a5568;
-        }
-
-        .cv-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .cv-section {
-            margin-bottom: 24px;
-        }
-
-        .cv-section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1a1a1a;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #3B82F6;
-            padding-bottom: 6px;
-            margin-bottom: 16px;
-        }
-
-        .cv-job {
-            margin-bottom: 20px;
-        }
-
-        .cv-job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 4px;
-        }
-
-        .cv-job-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1a1a1a;
-        }
-
-        .cv-job-date {
-            font-size: 14px;
-            color: #4a5568;
-        }
-
-        .cv-job-company {
-            font-size: 14px;
-            font-weight: 600;
-            color: #3B82F6;
-            margin-bottom: 8px;
-        }
-
-        .cv-job-desc {
-            list-style: none;
-            font-size: 14px;
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .cv-job-desc li {
-            margin-bottom: 4px;
-            padding-left: 18px;
-            position: relative;
-        }
-
-        .cv-job-desc li:before {
-            content: "•";
-            color: #3B82F6;
-            font-weight: bold;
-            position: absolute;
-            left: 4px;
-        }
-
-        .cv-skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .cv-skill-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f8fafc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .cv-skill-name {
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        .cv-skill-stars {
-            color: #FFB800;
-            letter-spacing: 2px;
-        }
-
-        .cv-language-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed #e0e0e0;
-            font-size: 14px;
-        }
-
-        .cv-language-name {
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-
-        .cv-language-level {
-            color: #4a5568;
-        }
-
-        .cv-education-item {
-            margin-bottom: 16px;
-        }
-
-        .cv-education-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .cv-education-school {
-            font-size: 14px;
-            font-weight: 600;
-            color: #3B82F6;
-            margin-bottom: 2px;
-        }
-
-        .cv-education-date {
-            font-size: 13px;
-            color: #4a5568;
-            margin-bottom: 4px;
-        }
-
-        .integration-section {
-            background: #f8fafc;
-            padding: 16px;
+            padding: 30px;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .template1 .cv-name {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .template1 .cv-title {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .template1 .cv-section-title {
+            color: #1E40AF;
+            border-bottom: 3px solid #3B82F6;
+        }
+
+        /* Template 2 - Minimal Gray */
+        .template2 .cv-header {
+            border-left: 5px solid #2D3748;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .template2 .cv-name {
+            font-size: 32px;
+            color: #2D3748;
+        }
+
+        .template2 .cv-section-title {
+            color: #2D3748;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #CBD5E0;
+        }
+
+        /* Template 3 - Elegant Green */
+        .template3 .cv-header {
+            text-align: center;
+            border-bottom: 3px solid #059669;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .template3 .cv-name {
+            font-size: 40px;
+            color: #059669;
+        }
+
+        .template3 .cv-section-title {
+            color: #059669;
+            font-weight: 600;
+            background: #F0FDF4;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        /* Template 4 - Professional Purple */
+        .template4 .cv-header {
+            background: #F3E8FF;
+            padding: 30px;
+            border-radius: 0 50px 0 50px;
+        }
+
+        .template4 .cv-name {
+            color: #6B21A8;
+        }
+
+        .template4 .cv-section-title {
+            color: #6B21A8;
+            border-bottom: 2px dotted #6B21A8;
+        }
+
+        /* Template 5 - Dark Mode */
+        .template5 {
+            background: #1A202C;
+            color: #E2E8F0;
+        }
+
+        .template5 .cv-header {
+            background: #2D3748;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .template5 .cv-name {
+            color: #F7FAFC;
+        }
+
+        .template5 .cv-section-title {
+            color: #90CDF4;
+            border-bottom-color: #4A5568;
         }
 
         /* Toast Notification */
@@ -525,6 +458,47 @@
             transform: translateY(0);
             opacity: 1;
         }
+
+        /* Base CV Styles */
+        .cv-preview-base {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cv-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 15px;
+        }
+
+        .cv-job-desc {
+            list-style: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .cv-job-desc li {
+            margin-bottom: 4px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .cv-job-desc li:before {
+            content: "•";
+            position: absolute;
+            left: 4px;
+        }
+
+        .cv-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .cv-skill-stars {
+            color: #FFB800;
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
@@ -532,7 +506,7 @@
     <nav class="navbar">
         <div class="logo">
             📄 ProCV Builder
-            <span>BETA</span>
+            <span>5 Templates</span>
         </div>
         <div class="nav-buttons">
             <button class="btn btn-outline" onclick="resetToDefault()">
@@ -544,15 +518,24 @@
         </div>
     </nav>
 
+    <!-- Template Selector -->
+    <div class="template-bar">
+        <div class="template-label">🎨 Choose Template:</div>
+        <div class="template-options">
+            <div class="template-option active" onclick="switchTemplate(1)">Modern Blue</div>
+            <div class="template-option" onclick="switchTemplate(2)">Minimal Gray</div>
+            <div class="template-option" onclick="switchTemplate(3)">Elegant Green</div>
+            <div class="template-option" onclick="switchTemplate(4)">Professional Purple</div>
+            <div class="template-option" onclick="switchTemplate(5)">Dark Mode</div>
+        </div>
+    </div>
+
     <!-- Main Builder -->
     <div class="builder-container">
         <!-- Left Panel - Editor -->
         <div class="editor-panel">
             <div class="editor-header">
-                <h2>
-                    ✏️ Build Your CV
-                    <span>Live Preview</span>
-                </h2>
+                <h2>✏️ Edit Your Information</h2>
             </div>
             
             <div class="editor-sections">
@@ -565,7 +548,7 @@
                     <button class="tab-btn" onclick="switchTab('languages')">🌍 Languages</button>
                 </div>
 
-                <!-- Personal Information Tab -->
+                <!-- Personal Tab -->
                 <div id="personal-tab" class="form-section active">
                     <div class="form-group">
                         <label class="form-label">Full Name</label>
@@ -601,21 +584,6 @@
                         <label class="form-label">Profile Summary</label>
                         <textarea class="form-control" id="profileSummary" oninput="updatePreview()">IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Seit 2022 in Deutschland mit Fokus auf Deutschlernen (B1).</textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Birth Date</label>
-                        <input type="text" class="form-control" id="birthDate" value="2.11.1982" oninput="updatePreview()">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Nationality</label>
-                        <input type="text" class="form-control" id="nationality" value="afghanisch" oninput="updatePreview()">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Family Status</label>
-                        <input type="text" class="form-control" id="familyStatus" value="Verheiratet" oninput="updatePreview()">
-                    </div>
                 </div>
 
                 <!-- Experience Tab -->
@@ -645,9 +613,9 @@
         </div>
 
         <!-- Right Panel - Preview -->
-        <div class="preview-panel">
+        <div class="preview-panel" id="previewPanel">
             <div class="preview-header">
-                <h3>🔍 Live Preview</h3>
+                <h3>🔍 Live Preview - Template <span id="currentTemplateDisplay">1</span></h3>
                 <div class="preview-actions">
                     <button class="preview-btn" onclick="copyToClipboard()">
                         📋 Copy
@@ -658,8 +626,8 @@
                 </div>
             </div>
             
-            <div class="cv-preview" id="cvPreview">
-                <!-- Dynamic preview will be inserted here -->
+            <div id="cvPreview" class="template1">
+                <!-- Preview will be inserted here -->
             </div>
         </div>
     </div>
@@ -668,6 +636,9 @@
     <div id="toast" class="toast">✓ Copied to clipboard!</div>
 
     <script>
+        // Current template
+        let currentTemplate = 1;
+        
         // Data storage
         let experiences = [];
         let education = [];
@@ -676,7 +647,6 @@
 
         // Initialize with default data
         function initDefaultData() {
-            // Add default work experience
             experiences = [
                 {
                     title: "IT-SUPPORT ENGINEER",
@@ -696,7 +666,6 @@
                 }
             ];
 
-            // Add default education
             education = [
                 {
                     degree: "Bachelor of Science in Informatik",
@@ -708,7 +677,6 @@
                 }
             ];
 
-            // Add default skills
             skills = [
                 { name: "IT-SUPPORT", level: 5 },
                 { name: "HARDWARE-FEHLERBEHEBUNG", level: 5 },
@@ -722,7 +690,6 @@
                 { name: "LINUX", level: 4 }
             ];
 
-            // Add default languages
             languages = [
                 { name: "Persisch", level: "Muttersprache (C2)" },
                 { name: "Englisch", level: "Fließend (C1)" },
@@ -732,18 +699,40 @@
             renderAll();
         }
 
+        // Switch template
+        function switchTemplate(templateNumber) {
+            currentTemplate = templateNumber;
+            
+            // Update active class on template options
+            document.querySelectorAll('.template-option').forEach((opt, index) => {
+                if (index + 1 === templateNumber) {
+                    opt.classList.add('active');
+                } else {
+                    opt.classList.remove('active');
+                }
+            });
+
+            // Update preview panel class
+            const preview = document.getElementById('cvPreview');
+            preview.className = `template${templateNumber}`;
+            
+            // Update template display
+            document.getElementById('currentTemplateDisplay').textContent = templateNumber;
+            
+            // Re-render preview
+            updatePreview();
+        }
+
         // Switch tabs
         function switchTab(tabName) {
-            // Update tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Update sections
             document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
-        // Render all dynamic sections
+        // Render functions
         function renderExperiences() {
             const container = document.getElementById('experience-container');
             container.innerHTML = '';
@@ -963,103 +952,90 @@
             const email = document.getElementById('email').value;
             const linkedin = document.getElementById('linkedin').value;
             const profile = document.getElementById('profileSummary').value;
-            const birthDate = document.getElementById('birthDate').value;
-            const nationality = document.getElementById('nationality').value;
-            const familyStatus = document.getElementById('familyStatus').value;
 
             let preview = `
-                <div class="cv-header">
-                    <div class="cv-photo">${name.charAt(0)}</div>
-                    <div class="cv-header-info">
+                <div class="cv-preview-base">
+                    <div class="cv-header">
                         <div class="cv-name">${name}</div>
                         <div class="cv-title">${title}</div>
-                        <div class="cv-contact">
+                        <div class="cv-contact" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
                             <span class="cv-contact-item">📍 ${address}</span>
                             <span class="cv-contact-item">📞 ${phone}</span>
                             <span class="cv-contact-item">✉️ ${email}</span>
                             <span class="cv-contact-item">🔗 ${linkedin}</span>
                         </div>
                     </div>
-                </div>
 
-                <div class="cv-section">
-                    <div class="cv-section-title">Profile</div>
-                    <p style="font-size: 14px; line-height: 1.6; color: #4a5568;">${profile}</p>
-                </div>
+                    <div class="cv-section" style="margin-top: 25px;">
+                        <div class="cv-section-title">Profile</div>
+                        <p style="font-size: 14px; line-height: 1.6;">${profile}</p>
+                    </div>
 
-                <div class="cv-section">
-                    <div class="cv-section-title">Work Experience</div>
-                    ${experiences.map(exp => `
-                        <div class="cv-job">
-                            <div class="cv-job-header">
-                                <span class="cv-job-title">${exp.title}</span>
-                                <span class="cv-job-date">${exp.startDate} – ${exp.endDate}</span>
-                            </div>
-                            <div class="cv-job-company">${exp.company} | ${exp.location}</div>
-                            <ul class="cv-job-desc">
-                                ${exp.description.split('\n').map(line => `<li>${line}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Education</div>
-                    ${education.map(edu => `
-                        <div class="cv-education-item">
-                            <div class="cv-education-title">${edu.degree}</div>
-                            <div class="cv-education-school">${edu.school} | ${edu.location}</div>
-                            <div class="cv-education-date">${edu.startDate} – ${edu.endDate}</div>
-                            <p style="font-size: 13px; color: #4a5568; margin-top: 4px;">${edu.description}</p>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Skills</div>
-                    <div class="cv-skills-grid">
-                        ${skills.map(skill => `
-                            <div class="cv-skill-item">
-                                <span class="cv-skill-name">${skill.name}</span>
-                                <span class="cv-skill-stars">${'★'.repeat(skill.level)}${'☆'.repeat(5-skill.level)}</span>
+                    <div class="cv-section">
+                        <div class="cv-section-title">Work Experience</div>
+                        ${experiences.map(exp => `
+                            <div class="cv-job" style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                    <span style="font-weight: 700;">${exp.title}</span>
+                                    <span style="font-size: 14px; color: #666;">${exp.startDate} – ${exp.endDate}</span>
+                                </div>
+                                <div style="font-weight: 600; color: #3B82F6; margin: 4px 0;">${exp.company} | ${exp.location}</div>
+                                <ul class="cv-job-desc">
+                                    ${exp.description.split('\n').map(line => `<li>${line}</li>`).join('')}
+                                </ul>
                             </div>
                         `).join('')}
                     </div>
-                </div>
 
-                <div class="cv-section">
-                    <div class="cv-section-title">Languages</div>
-                    ${languages.map(lang => `
-                        <div class="cv-language-item">
-                            <span class="cv-language-name">${lang.name}</span>
-                            <span class="cv-language-level">${lang.level}</span>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="integration-section">
-                    <div class="cv-section-title">Integration & Berufliche Orientierung</div>
-                    <div class="cv-job">
-                        <div class="cv-job-header">
-                            <span class="cv-job-title">Integration in Deutschland</span>
-                            <span class="cv-job-date">Aug. 2021 – Sep. 2022</span>
-                        </div>
-                        <div class="cv-job-company">Bremen</div>
-                        <ul class="cv-job-desc">
-                            <li>Ankunft in Deutschland und Beginn des Integrationsprozesses</li>
-                            <li>Intensive Deutschkurse (A1–B1) mit Fokus auf Alltags- und Berufssprache</li>
-                            <li>Orientierung im deutschen Arbeitsmarkt und Anerkennung des Hochschulabschlusses (ZAB)</li>
-                            <li>Ab Oktober 2022: Selbstständige Tätigkeit als IT-Support Engineer</li>
-                        </ul>
+                    <div class="cv-section">
+                        <div class="cv-section-title">Education</div>
+                        ${education.map(edu => `
+                            <div style="margin-bottom: 15px;">
+                                <div style="font-weight: 700;">${edu.degree}</div>
+                                <div style="font-weight: 600; color: #3B82F6; margin: 4px 0;">${edu.school} | ${edu.location}</div>
+                                <div style="font-size: 13px; color: #666;">${edu.startDate} – ${edu.endDate}</div>
+                                <p style="font-size: 13px; margin-top: 4px;">${edu.description}</p>
+                            </div>
+                        `).join('')}
                     </div>
-                </div>
 
-                <div class="cv-section">
-                    <div class="cv-section-title">Personal Data</div>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px; color: #4a5568;">
-                        <div><strong>Birth Date:</strong> ${birthDate}</div>
-                        <div><strong>Nationality:</strong> ${nationality}</div>
-                        <div><strong>Family Status:</strong> ${familyStatus}</div>
+                    <div class="cv-section">
+                        <div class="cv-section-title">Skills</div>
+                        <div class="cv-skills-grid">
+                            ${skills.map(skill => `
+                                <div style="display: flex; justify-content: space-between; padding: 8px; background: #f8fafc; border-radius: 6px;">
+                                    <span style="font-weight: 600;">${skill.name}</span>
+                                    <span class="cv-skill-stars">${'★'.repeat(skill.level)}${'☆'.repeat(5-skill.level)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="cv-section">
+                        <div class="cv-section-title">Languages</div>
+                        ${languages.map(lang => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #e0e0e0;">
+                                <span style="font-weight: 600;">${lang.name}</span>
+                                <span style="color: #666;">${lang.level}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="cv-section">
+                        <div class="cv-section-title">Integration</div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="font-weight: 700;">Integration in Deutschland</span>
+                                <span style="font-size: 14px; color: #666;">Aug. 2021 – Sep. 2022</span>
+                            </div>
+                            <div style="font-weight: 600; color: #3B82F6; margin: 4px 0;">Bremen</div>
+                            <ul class="cv-job-desc">
+                                <li>Ankunft in Deutschland und Beginn des Integrationsprozesses</li>
+                                <li>Intensive Deutschkurse (A1–B1) mit Fokus auf Alltags- und Berufssprache</li>
+                                <li>Orientierung im deutschen Arbeitsmarkt und Anerkennung des Hochschulabschlusses (ZAB)</li>
+                                <li>Ab Oktober 2022: Selbstständige Tätigkeit als IT-Support Engineer</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             `;
