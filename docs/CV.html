@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashmat Bahadari - IT-Support Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .cv-container {
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            background-image: url('https://via.placeholder.com/120x120/3498db/ffffff?text=HB');
+            background-size: cover;
+        }
+
+        .header-text {
+            flex: 1;
+        }
+
+        .header-text h1 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .header-text h2 {
+            font-size: 20px;
+            font-weight: normal;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Grid Layout */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        /* Left Column */
+        .left-col {
+            border-right: 1px solid #e0e0e0;
+            padding-right: 25px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .skill-bar {
+            display: flex;
+            gap: 4px;
+        }
+
+        .star {
+            color: #f39c12;
+            font-size: 16px;
+        }
+
+        .star-gray {
+            color: #ddd;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .language-name {
+            font-weight: bold;
+        }
+
+        .language-level {
+            color: #555;
+        }
+
+        .cert-item {
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .cert-year {
+            color: #3498db;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* Right Column */
+        .right-col .section {
+            margin-bottom: 25px;
+        }
+
+        .job-item {
+            margin-bottom: 20px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .job-date {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .job-company {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .job-description {
+            list-style-type: none;
+        }
+
+        .job-description li {
+            font-size: 14px;
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .job-description li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 5px;
+        }
+
+        .profile-text {
+            font-size: 14px;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        .hobby-item {
+            display: inline-block;
+            background-color: #ecf0f1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 0 5px 8px 0;
+            font-size: 13px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 700px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+            }
+            .left-col {
+                border-right: none;
+                padding-right: 0;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Header with Photo -->
+        <div class="header">
+            <div class="profile-img">HB</div>
+            <div class="header-text">
+                <h1>Hashmat Bahadari</h1>
+                <h2>IT-Support Engineer</h2>
+                <div class="contact-info">
+                    <span>📞 +49 176 266 36 133</span>
+                    <span>✉️ hashmat.bahadari@icloud.com</span>
+                    <span>📍 Bremen, 28759</span>
+                    <span>🔗 linkedin.com/in/bahadari</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="cv-grid">
+            <!-- Left Column -->
+            <div class="left-col">
+                <!-- Profile -->
+                <div class="section">
+                    <div class="section-title">Profil</div>
+                    <div class="profile-text">
+                        IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Strukturierte, serviceorientierte Arbeitsweise mit ausgeprägter Eigenverantwortung.
+                        <br><br>
+                        Ich spreche Persisch als Muttersprache (C2), Englisch fließend (C1) und Deutsch (B1, in aktiver Weiterentwicklung). Seit 2022 in Bremen mit Fokus auf Integration und Vorbereitung auf den deutschen IT-Arbeitsmarkt.
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="section">
+                    <div class="section-title">Sprachen</div>
+                    <div class="language-item">
+                        <span class="language-name">Persisch</span>
+                        <span class="language-level">Muttersprache (C2)</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name">Englisch</span>
+                        <span class="language-level">Fließend (C1)</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name">Deutsch</span>
+                        <span class="language-level">Gute Grundkenntnisse (B1)</span>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="section">
+                    <div class="section-title">Fähigkeiten</div>
+                    <div class="skill-item">
+                        <div class="skill-name">IT-SUPPORT</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">HARDWARE-FEHLERBEHEBUNG</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">SOFTWARE-FEHLERBEHEBUNG</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">WINDOWS 10/11-ADMINISTRATION</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">MICROSOFT OFFICE 365</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">ACTIVE DIRECTORY</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">REMOTE DESKTOP-SUPPORT</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">TICKETING-SYSTEME</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">NETZWERK-FEHLERBEHEBUNG</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">SYSTEMINSTALLATION & -KONFIGURATION</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">LINUX-ADMINISTRATION</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">DRUCKER- & PERIPHERIE-SUPPORT</div>
+                        <div class="skill-bar">★★★★★</div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="section">
+                    <div class="section-title">Zertifizierungen</div>
+                    <div class="cert-item"><span class="cert-year">2023</span> Fortinet NSE 1 & 2 Network Security Associate</div>
+                    <div class="cert-item"><span class="cert-year">2022</span> Microsoft Certified: Azure Security Engineer Associate</div>
+                    <div class="cert-item"><span class="cert-year">2022</span> Microsoft Security, Compliance & Identity Fundamentals</div>
+                    <div class="cert-item"><span class="cert-year">2010</span> CompTIA Security+</div>
+                    <div class="cert-item"><span class="cert-year">2010</span> CompTIA Network+</div>
+                </div>
+
+                <!-- Hobbies -->
+                <div class="section">
+                    <div class="section-title">Hobbys</div>
+                    <div>
+                        <span class="hobby-item">Volleyball (Mannschaftssport)</span>
+                        <span class="hobby-item">Schach</span>
+                        <span class="hobby-item">Lesen (Fachliteratur)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col">
+                <!-- Experience -->
+                <div class="section">
+                    <div class="section-title">Berufserfahrung</div>
+                    
+                    <div class="job-item">
+                        <div class="job-header">
+                            <span class="job-title">IT-SUPPORT ENGINEER</span>
+                            <span class="job-date">Okt. 2022 – heute</span>
+                        </div>
+                        <div class="job-company">Selbstständig, Bremen</div>
+                        <ul class="job-description">
+                            <li>Beratung und Planung der IT-Infrastruktur für KMU in der Region Bremen</li>
+                            <li>Einführung und Migration zu Microsoft 365 inkl. Schulungen für Endanwender</li>
+                            <li>Aufbau von IT-Support-Prozessen und Dokumentation für Kunden ohne bestehende IT-Strukturen</li>
+                            <li>Direkte Kommunikation mit Kunden auf Deutsch und Englisch</li>
+                            <li>Remote-Support via TeamViewer und AnyDesk; Hardware- und Software-Fehlerbehebung</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-item">
+                        <div class="job-header">
+                            <span class="job-title">SYSTEMADMINISTRATOR</span>
+                            <span class="job-date">Nov. 2014 – Sep. 2021</span>
+                        </div>
+                        <div class="job-company">Zentralbank von Afghanistan, Kabul</div>
+                        <ul class="job-description">
+                            <li>First- und Second-Level-Support für über 2.500 Mitarbeiter in 34 Filialen</li>
+                            <li>Verwaltung von Benutzerkonten, Gruppen und Berechtigungen in Active Directory</li>
+                            <li>Helpdesk-Tickets mit einer Lösungsquote von über 92 % innerhalb der SLA</li>
+                            <li>Fehlerbehebung in Windows 10/11, Microsoft Office, Druckern und Netzwerkumgebungen</li>
+                            <li>Administration von Windows-Servern sowie LAN-, WLAN- und VPN-Infrastrukturen</li>
+                            <li>Konfiguration und Überwachung von Firewalls (Fortinet)</li>
+                            <li>IT-Sicherheitsschulungen für neue Mitarbeiter (Reduktion der Supportanfragen um ca. 25 %)</li>
+                            <li>Dokumentation von IT-Prozessen und Erstellung von Anwenderhandbüchern</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Integration -->
+                <div class="section">
+                    <div class="section-title">Integration & berufliche Orientierung</div>
+                    <div class="job-item">
+                        <div class="job-header">
+                            <span class="job-title">Integration in Deutschland</span>
+                            <span class="job-date">Aug. 2021 – Sep. 2022</span>
+                        </div>
+                        <div class="job-company">Bremen</div>
+                        <ul class="job-description">
+                            <li>Ankunft in Deutschland und Beginn des Integrationsprozesses</li>
+                            <li>Intensive Deutschkurse (A1–B1) mit Fokus auf Alltags- und Berufssprache</li>
+                            <li>Orientierung im deutschen Arbeitsmarkt und Anerkennung des Hochschulabschlusses (ZAB)</li>
+                            <li>Ab Oktober 2022: Selbstständige Tätigkeit als IT-Support Engineer (siehe oben)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section">
+                    <div class="section-title">Ausbildung</div>
+                    <div class="job-item">
+                        <div class="job-header">
+                            <span class="job-title">Bachelor of Science in Informatik</span>
+                            <span class="job-date">Sep. 2010 – Sep. 2014</span>
+                        </div>
+                        <div class="job-company">Maiwand University, Kabul, Afghanistan</div>
+                        <ul class="job-description">
+                            <li>Schwerpunkt: Netzwerke und IT-Infrastruktur</li>
+                            <li>Von der ZAB als einem deutschen Hochschulabschluss gleichwertig anerkannt (Anerkennungsbescheid liegt vor)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Personal Details -->
+                <div class="section">
+                    <div class="section-title">Persönliche Daten</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 14px;">
+                        <span><strong>Geburtsdatum:</strong> 2.11.1982</span>
+                        <span><strong>Geburtsort:</strong> Afghanistan</span>
+                        <span><strong>Nationalität:</strong> afghanisch</span>
+                        <span><strong>Familienstand:</strong> Verheiratet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
