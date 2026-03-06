@@ -3,228 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Builder - Create Your Resume</title>
+    <title>ProCV Builder - Create Your Professional Resume</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            background: linear-gradient(145deg, #0B1120 0%, #1A2332 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
+            background: #f0f2f5;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 16px 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-size: 48px;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
+            color: #1a1a1a;
         }
 
-        .header p {
-            color: #94A3B8;
-            font-size: 18px;
+        .logo span {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
-        /* Builder Layout */
-        .builder-wrapper {
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid #e0e0e0;
+            color: #1a1a1a;
+        }
+
+        .btn-outline:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        /* Main Layout */
+        .builder-container {
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 24px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 32px;
             padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
         /* Left Panel - Editor */
         .editor-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 24px;
-            height: fit-content;
-            max-height: 900px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            height: calc(100vh - 100px);
             overflow-y: auto;
+            position: sticky;
+            top: 90px;
         }
 
-        .panel-title {
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 24px;
+        .editor-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f8fafc;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .editor-header h2 {
+            font-size: 18px;
+            color: #1a1a1a;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .panel-title span {
+        .editor-header h2 span {
             background: #3B82F6;
-            padding: 4px 8px;
-            border-radius: 12px;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
             font-size: 12px;
+        }
+
+        .editor-sections {
+            padding: 20px;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: #f0f2f5;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #3B82F6;
             color: white;
         }
 
-        .section-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
+        .tab-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .tab-btn.active:hover {
+            background: #2563eb;
+        }
+
+        /* Form Styles */
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .section-icon {
-            width: 32px;
-            height: 32px;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #60A5FA;
-            font-size: 18px;
-        }
-
-        .section-title {
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        .input-label {
+        .form-label {
             display: block;
-            color: #94A3B8;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
             margin-bottom: 6px;
-            font-weight: 500;
         }
 
-        .input-field {
+        .form-control {
             width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: white;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .input-field:focus {
+        .form-control:focus {
             outline: none;
             border-color: #3B82F6;
-            background: rgba(59, 130, 246, 0.1);
         }
 
-        .input-field::placeholder {
-            color: #4A5568;
-        }
-
-        textarea.input-field {
-            min-height: 80px;
+        textarea.form-control {
+            min-height: 100px;
             resize: vertical;
         }
 
-        .skill-item {
+        /* Dynamic Items */
+        .dynamic-item {
+            background: #f8fafc;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .item-header {
             display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 12px;
         }
 
-        .skill-name {
-            flex: 2;
+        .item-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 14px;
         }
 
-        .skill-level {
-            flex: 1;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .btn-remove:hover {
+            background: #fee2e2;
         }
 
         .btn-add {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 14px;
+            background: #f0f2f5;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            color: #4a5568;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             margin-top: 8px;
         }
 
         .btn-add:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-remove {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #EF4444;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-remove:hover {
-            background: rgba(239, 68, 68, 0.3);
+            background: #e0e0e0;
+            border-color: #3B82F6;
+            color: #3B82F6;
         }
 
         /* Right Panel - Preview */
         .preview-panel {
             background: white;
-            border-radius: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             padding: 40px;
+            min-height: calc(100vh - 100px);
             overflow-y: auto;
-            max-height: 900px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .cv-preview {
-            max-width: 700px;
-            margin: 0 auto;
-            font-family: 'Inter', -apple-system, sans-serif;
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .preview-header h3 {
+            font-size: 20px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .preview-btn {
+            padding: 8px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .preview-btn:hover {
+            background: #f8fafc;
         }
 
         /* CV Preview Styles */
+        .cv-preview {
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+        }
+
         .cv-header {
             display: flex;
             align-items: center;
@@ -237,45 +324,49 @@
         .cv-photo {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
         }
 
-        .cv-header-info h1 {
+        .cv-header-info {
+            flex: 1;
+        }
+
+        .cv-name {
             font-size: 32px;
+            font-weight: 700;
             color: #1a1a1a;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .cv-title {
             font-size: 18px;
             color: #3B82F6;
-            font-weight: 500;
             margin-bottom: 12px;
         }
 
         .cv-contact {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            color: #666;
-            font-size: 14px;
+            gap: 16px;
+            font-size: 13px;
+            color: #4a5568;
         }
 
-        .cv-contact span {
+        .cv-contact-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .cv-section {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .cv-section-title {
@@ -285,7 +376,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             border-bottom: 2px solid #3B82F6;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             margin-bottom: 16px;
         }
 
@@ -297,7 +388,7 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .cv-job-title {
@@ -307,26 +398,26 @@
         }
 
         .cv-job-date {
-            color: #666;
             font-size: 14px;
+            color: #4a5568;
         }
 
         .cv-job-company {
-            color: #3B82F6;
-            font-weight: 600;
             font-size: 14px;
+            font-weight: 600;
+            color: #3B82F6;
             margin-bottom: 8px;
         }
 
         .cv-job-desc {
             list-style: none;
             font-size: 14px;
-            color: #444;
+            color: #4a5568;
             line-height: 1.6;
         }
 
         .cv-job-desc li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             padding-left: 18px;
             position: relative;
         }
@@ -336,13 +427,13 @@
             color: #3B82F6;
             font-weight: bold;
             position: absolute;
-            left: 5px;
+            left: 4px;
         }
 
         .cv-skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
 
         .cv-skill-item {
@@ -350,8 +441,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            background: #f8fafc;
+            border-radius: 6px;
             font-size: 14px;
         }
 
@@ -369,20 +460,21 @@
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
-            border-bottom: 1px dashed #eee;
+            border-bottom: 1px dashed #e0e0e0;
             font-size: 14px;
         }
 
         .cv-language-name {
             font-weight: 600;
+            color: #1a1a1a;
         }
 
         .cv-language-level {
-            color: #666;
+            color: #4a5568;
         }
 
         .cv-education-item {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .cv-education-title {
@@ -393,423 +485,422 @@
         }
 
         .cv-education-school {
-            color: #3B82F6;
-            font-weight: 600;
             font-size: 14px;
-            margin-bottom: 4px;
+            font-weight: 600;
+            color: #3B82F6;
+            margin-bottom: 2px;
         }
 
         .cv-education-date {
-            color: #666;
             font-size: 13px;
+            color: #4a5568;
+            margin-bottom: 4px;
         }
 
-        .export-btn {
+        .integration-section {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Toast Notification */
+        .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            background: #10b981;
             color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 50px;
-            font-size: 16px;
+            padding: 16px 24px;
+            border-radius: 8px;
             font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
             transition: all 0.3s;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .export-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 50px rgba(16, 185, 129, 0.4);
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>✨ Modern CV Builder</h1>
-            <p>Build your professional resume in minutes</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            📄 ProCV Builder
+            <span>BETA</span>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn btn-outline" onclick="resetToDefault()">
+                ↻ Reset
+            </button>
+            <button class="btn btn-primary" onclick="downloadPDF()">
+                ⬇️ Download PDF
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Builder -->
+    <div class="builder-container">
+        <!-- Left Panel - Editor -->
+        <div class="editor-panel">
+            <div class="editor-header">
+                <h2>
+                    ✏️ Build Your CV
+                    <span>Live Preview</span>
+                </h2>
+            </div>
+            
+            <div class="editor-sections">
+                <!-- Section Tabs -->
+                <div class="section-tabs">
+                    <button class="tab-btn active" onclick="switchTab('personal')">👤 Personal</button>
+                    <button class="tab-btn" onclick="switchTab('experience')">💼 Experience</button>
+                    <button class="tab-btn" onclick="switchTab('education')">🎓 Education</button>
+                    <button class="tab-btn" onclick="switchTab('skills')">⚡ Skills</button>
+                    <button class="tab-btn" onclick="switchTab('languages')">🌍 Languages</button>
+                </div>
+
+                <!-- Personal Information Tab -->
+                <div id="personal-tab" class="form-section active">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" value="Hashmat Bahadari" oninput="updatePreview()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Professional Title</label>
+                        <input type="text" class="form-control" id="professionalTitle" value="IT-Support Engineer" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address" value="Schönebecker Straße 38, 28759 Bremen" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" value="+49 176 266 36 133" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" value="hashmat.bahadari@icloud.com" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">LinkedIn</label>
+                        <input type="text" class="form-control" id="linkedin" value="linkedin.com/in/bahadari" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Profile Summary</label>
+                        <textarea class="form-control" id="profileSummary" oninput="updatePreview()">IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Seit 2022 in Deutschland mit Fokus auf Deutschlernen (B1).</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Birth Date</label>
+                        <input type="text" class="form-control" id="birthDate" value="2.11.1982" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nationality</label>
+                        <input type="text" class="form-control" id="nationality" value="afghanisch" oninput="updatePreview()">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Family Status</label>
+                        <input type="text" class="form-control" id="familyStatus" value="Verheiratet" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <!-- Experience Tab -->
+                <div id="experience-tab" class="form-section">
+                    <div id="experience-container"></div>
+                    <button class="btn-add" onclick="addExperience()">➕ Add Work Experience</button>
+                </div>
+
+                <!-- Education Tab -->
+                <div id="education-tab" class="form-section">
+                    <div id="education-container"></div>
+                    <button class="btn-add" onclick="addEducation()">➕ Add Education</button>
+                </div>
+
+                <!-- Skills Tab -->
+                <div id="skills-tab" class="form-section">
+                    <div id="skills-container"></div>
+                    <button class="btn-add" onclick="addSkill()">➕ Add Skill</button>
+                </div>
+
+                <!-- Languages Tab -->
+                <div id="languages-tab" class="form-section">
+                    <div id="languages-container"></div>
+                    <button class="btn-add" onclick="addLanguage()">➕ Add Language</button>
+                </div>
+            </div>
         </div>
 
-        <div class="builder-wrapper">
-            <!-- Left Panel - Editor -->
-            <div class="editor-panel">
-                <div class="panel-title">
-                    📝 Editor
-                    <span>Live Preview</span>
-                </div>
-
-                <!-- Personal Info -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">👤</div>
-                        <div class="section-title">Personal Information</div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label class="input-label">Full Name</label>
-                        <input type="text" class="input-field" id="nameInput" value="Hashmat Bahadari" placeholder="Your full name">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">Professional Title</label>
-                        <input type="text" class="input-field" id="titleInput" value="IT-Support Engineer" placeholder="e.g., IT Support Engineer">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">Address</label>
-                        <input type="text" class="input-field" id="addressInput" value="Schönebecker Straße 38, 28759 Bremen" placeholder="Your address">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">Phone</label>
-                        <input type="text" class="input-field" id="phoneInput" value="+49 176 266 36 133" placeholder="Phone number">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">Email</label>
-                        <input type="email" class="input-field" id="emailInput" value="hashmat.bahadari@icloud.com" placeholder="Email address">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">LinkedIn</label>
-                        <input type="text" class="input-field" id="linkedinInput" value="linkedin.com/in/bahadari" placeholder="LinkedIn URL">
-                    </div>
-                </div>
-
-                <!-- Profile -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">📋</div>
-                        <div class="section-title">Profile Summary</div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <textarea class="input-field" id="profileInput" rows="4">IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Seit 2022 in Deutschland mit Fokus auf Deutschlernen (B1).</textarea>
-                    </div>
-                </div>
-
-                <!-- Work Experience -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">💼</div>
-                        <div class="section-title">Work Experience</div>
-                    </div>
-                    
-                    <div id="jobsContainer">
-                        <!-- Jobs will be added here -->
-                    </div>
-                    
-                    <button class="btn-add" onclick="addJob()">
-                        ➕ Add Work Experience
+        <!-- Right Panel - Preview -->
+        <div class="preview-panel">
+            <div class="preview-header">
+                <h3>🔍 Live Preview</h3>
+                <div class="preview-actions">
+                    <button class="preview-btn" onclick="copyToClipboard()">
+                        📋 Copy
                     </button>
-                </div>
-
-                <!-- Education -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">🎓</div>
-                        <div class="section-title">Education</div>
-                    </div>
-                    
-                    <div id="educationContainer">
-                        <!-- Education will be added here -->
-                    </div>
-                    
-                    <button class="btn-add" onclick="addEducation()">
-                        ➕ Add Education
-                    </button>
-                </div>
-
-                <!-- Skills -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">⚡</div>
-                        <div class="section-title">Skills</div>
-                    </div>
-                    
-                    <div id="skillsContainer">
-                        <!-- Skills will be added here -->
-                    </div>
-                    
-                    <button class="btn-add" onclick="addSkill()">
-                        ➕ Add Skill
-                    </button>
-                </div>
-
-                <!-- Languages -->
-                <div class="section-card">
-                    <div class="section-header">
-                        <div class="section-icon">🌍</div>
-                        <div class="section-title">Languages</div>
-                    </div>
-                    
-                    <div id="languagesContainer">
-                        <!-- Languages will be added here -->
-                    </div>
-                    
-                    <button class="btn-add" onclick="addLanguage()">
-                        ➕ Add Language
+                    <button class="preview-btn" onclick="window.print()">
+                        🖨️ Print
                     </button>
                 </div>
             </div>
-
-            <!-- Right Panel - Preview -->
-            <div class="preview-panel">
-                <div class="cv-preview" id="cvPreview">
-                    <!-- CV Preview will be generated here -->
-                </div>
+            
+            <div class="cv-preview" id="cvPreview">
+                <!-- Dynamic preview will be inserted here -->
             </div>
         </div>
     </div>
 
-    <button class="export-btn" onclick="exportPDF()">
-        📥 Download CV as PDF
-    </button>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">✓ Copied to clipboard!</div>
 
     <script>
-        // Data arrays
-        let jobs = [];
+        // Data storage
+        let experiences = [];
         let education = [];
         let skills = [];
         let languages = [];
 
-        // Initialize with sample data
-        function initializeData() {
-            // Add sample job
-            jobs.push({
-                title: "IT-SUPPORT ENGINEER",
-                company: "Selbstständig",
-                location: "Bremen",
-                startDate: "Okt. 2022",
-                endDate: "Gegenwärtig",
-                description: "Beratung und Planung der IT-Infrastruktur für KMU\nEinführung und Migration zu Microsoft 365\nAufbau von IT-Support-Prozessen\nRemote-Support via TeamViewer und AnyDesk"
-            });
+        // Initialize with default data
+        function initDefaultData() {
+            // Add default work experience
+            experiences = [
+                {
+                    title: "IT-SUPPORT ENGINEER",
+                    company: "Selbstständig",
+                    location: "Bremen",
+                    startDate: "Okt. 2022",
+                    endDate: "Gegenwärtig",
+                    description: "Beratung und Planung der IT-Infrastruktur für KMU\nEinführung und Migration zu Microsoft 365\nAufbau von IT-Support-Prozessen\nRemote-Support via TeamViewer und AnyDesk\nDirekte Kommunikation mit Kunden auf Deutsch und Englisch"
+                },
+                {
+                    title: "SYSTEMADMINISTRATOR",
+                    company: "Zentralbank von Afghanistan",
+                    location: "Kabul",
+                    startDate: "Nov. 2014",
+                    endDate: "Sep. 2021",
+                    description: "First- und Second-Level-Support für 2.500+ Mitarbeiter\nVerwaltung von Active Directory\nHelpdesk-Tickets mit 92% Lösungsquote\nFehlerbehebung Windows 10/11, Office, Drucker\nFirewall-Konfiguration (Fortinet)\nIT-Sicherheitsschulungen (25% weniger Tickets)"
+                }
+            ];
 
-            jobs.push({
-                title: "SYSTEMADMINISTRATOR",
-                company: "Zentralbank von Afghanistan",
-                location: "Kabul",
-                startDate: "Nov. 2014",
-                endDate: "Sep. 2021",
-                description: "First- und Second-Level-Support für 2.500+ Mitarbeiter\nVerwaltung von Active Directory\nHelpdesk-Tickets mit 92% Lösungsquote\nFirewall-Konfiguration (Fortinet)"
-            });
+            // Add default education
+            education = [
+                {
+                    degree: "Bachelor of Science in Informatik",
+                    school: "Maiwand University",
+                    location: "Kabul, Afghanistan",
+                    startDate: "Sep. 2010",
+                    endDate: "Sep. 2014",
+                    description: "Schwerpunkt: Netzwerke und IT-Infrastruktur\nZAB-anerkannt als deutscher Hochschulabschluss"
+                }
+            ];
 
-            // Add sample education
-            education.push({
-                degree: "Bachelor of Science in Informatik",
-                school: "Maiwand University",
-                location: "Kabul, Afghanistan",
-                startDate: "Sep. 2010",
-                endDate: "Sep. 2014",
-                description: "Schwerpunkt: Netzwerke und IT-Infrastruktur\nZAB-anerkannt"
-            });
+            // Add default skills
+            skills = [
+                { name: "IT-SUPPORT", level: 5 },
+                { name: "HARDWARE-FEHLERBEHEBUNG", level: 5 },
+                { name: "SOFTWARE-FEHLERBEHEBUNG", level: 5 },
+                { name: "WINDOWS 10/11", level: 5 },
+                { name: "MICROSOFT 365", level: 5 },
+                { name: "ACTIVE DIRECTORY", level: 5 },
+                { name: "REMOTE DESKTOP", level: 5 },
+                { name: "TICKETING-SYSTEME", level: 5 },
+                { name: "NETZWERK-FEHLERBEHEBUNG", level: 5 },
+                { name: "LINUX", level: 4 }
+            ];
 
-            // Add sample skills
-            skills.push({ name: "IT-SUPPORT", level: 5 });
-            skills.push({ name: "HARDWARE-FEHLERBEHEBUNG", level: 5 });
-            skills.push({ name: "SOFTWARE-FEHLERBEHEBUNG", level: 5 });
-            skills.push({ name: "WINDOWS 10/11", level: 5 });
-            skills.push({ name: "MICROSOFT 365", level: 5 });
-            skills.push({ name: "ACTIVE DIRECTORY", level: 5 });
-
-            // Add sample languages
-            languages.push({ name: "Persisch", level: "Muttersprache (C2)" });
-            languages.push({ name: "Englisch", level: "Fließend (C1)" });
-            languages.push({ name: "Deutsch", level: "Gute Grundkenntnisse (B1)" });
+            // Add default languages
+            languages = [
+                { name: "Persisch", level: "Muttersprache (C2)" },
+                { name: "Englisch", level: "Fließend (C1)" },
+                { name: "Deutsch", level: "Gute Grundkenntnisse (B1)" }
+            ];
 
             renderAll();
         }
 
-        // Render functions
-        function renderJobs() {
-            const container = document.getElementById('jobsContainer');
+        // Switch tabs
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Render all dynamic sections
+        function renderExperiences() {
+            const container = document.getElementById('experience-container');
             container.innerHTML = '';
             
-            jobs.forEach((job, index) => {
+            experiences.forEach((exp, index) => {
                 container.innerHTML += `
-                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px;">
-                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <input type="text" class="input-field" style="flex:2;" value="${job.title}" placeholder="Job Title" onchange="updateJob(${index}, 'title', this.value)">
-                            <input type="text" class="input-field" style="flex:1;" value="${job.company}" placeholder="Company" onchange="updateJob(${index}, 'company', this.value)">
+                    <div class="dynamic-item">
+                        <div class="item-header">
+                            <span class="item-title">${exp.title || 'New Position'}</span>
+                            <button class="btn-remove" onclick="removeExperience(${index})">✕</button>
                         </div>
-                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <input type="text" class="input-field" value="${job.location}" placeholder="Location" onchange="updateJob(${index}, 'location', this.value)">
-                            <input type="text" class="input-field" value="${job.startDate}" placeholder="Start Date" onchange="updateJob(${index}, 'startDate', this.value)">
-                            <input type="text" class="input-field" value="${job.endDate}" placeholder="End Date" onchange="updateJob(${index}, 'endDate', this.value)">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Job Title" value="${exp.title || ''}" onchange="updateExperience(${index}, 'title', this.value)">
                         </div>
-                        <textarea class="input-field" rows="3" placeholder="Description (one per line)" onchange="updateJob(${index}, 'description', this.value)">${job.description}</textarea>
-                        <button class="btn-remove" style="margin-top: 10px;" onclick="removeJob(${index})">Remove</button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Company" value="${exp.company || ''}" onchange="updateExperience(${index}, 'company', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Location" value="${exp.location || ''}" onchange="updateExperience(${index}, 'location', this.value)">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Start Date" value="${exp.startDate || ''}" onchange="updateExperience(${index}, 'startDate', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="End Date" value="${exp.endDate || ''}" onchange="updateExperience(${index}, 'endDate', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Description (one per line)" rows="4" onchange="updateExperience(${index}, 'description', this.value)">${exp.description || ''}</textarea>
+                        </div>
                     </div>
                 `;
             });
         }
 
         function renderEducation() {
-            const container = document.getElementById('educationContainer');
+            const container = document.getElementById('education-container');
             container.innerHTML = '';
             
             education.forEach((edu, index) => {
                 container.innerHTML += `
-                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px;">
-                        <input type="text" class="input-field" style="margin-bottom: 10px;" value="${edu.degree}" placeholder="Degree" onchange="updateEducation(${index}, 'degree', this.value)">
-                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <input type="text" class="input-field" style="flex:2;" value="${edu.school}" placeholder="School" onchange="updateEducation(${index}, 'school', this.value)">
-                            <input type="text" class="input-field" style="flex:1;" value="${edu.location}" placeholder="Location" onchange="updateEducation(${index}, 'location', this.value)">
+                    <div class="dynamic-item">
+                        <div class="item-header">
+                            <span class="item-title">${edu.degree || 'New Education'}</span>
+                            <button class="btn-remove" onclick="removeEducation(${index})">✕</button>
                         </div>
-                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                            <input type="text" class="input-field" value="${edu.startDate}" placeholder="Start Date" onchange="updateEducation(${index}, 'startDate', this.value)">
-                            <input type="text" class="input-field" value="${edu.endDate}" placeholder="End Date" onchange="updateEducation(${index}, 'endDate', this.value)">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Degree" value="${edu.degree || ''}" onchange="updateEducation(${index}, 'degree', this.value)">
                         </div>
-                        <textarea class="input-field" rows="2" placeholder="Description" onchange="updateEducation(${index}, 'description', this.value)">${edu.description}</textarea>
-                        <button class="btn-remove" style="margin-top: 10px;" onclick="removeEducation(${index})">Remove</button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="School" value="${edu.school || ''}" onchange="updateEducation(${index}, 'school', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Location" value="${edu.location || ''}" onchange="updateEducation(${index}, 'location', this.value)">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Start Date" value="${edu.startDate || ''}" onchange="updateEducation(${index}, 'startDate', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="End Date" value="${edu.endDate || ''}" onchange="updateEducation(${index}, 'endDate', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Description" rows="2" onchange="updateEducation(${index}, 'description', this.value)">${edu.description || ''}</textarea>
+                        </div>
                     </div>
                 `;
             });
         }
 
         function renderSkills() {
-            const container = document.getElementById('skillsContainer');
+            const container = document.getElementById('skills-container');
             container.innerHTML = '';
             
             skills.forEach((skill, index) => {
                 container.innerHTML += `
-                    <div class="skill-item">
-                        <input type="text" class="input-field skill-name" value="${skill.name}" placeholder="Skill name" onchange="updateSkill(${index}, 'name', this.value)">
-                        <select class="skill-level" onchange="updateSkill(${index}, 'level', this.value)">
-                            <option value="1" ${skill.level == 1 ? 'selected' : ''}>★</option>
-                            <option value="2" ${skill.level == 2 ? 'selected' : ''}>★★</option>
-                            <option value="3" ${skill.level == 3 ? 'selected' : ''}>★★★</option>
-                            <option value="4" ${skill.level == 4 ? 'selected' : ''}>★★★★</option>
-                            <option value="5" ${skill.level == 5 ? 'selected' : ''}>★★★★★</option>
-                        </select>
-                        <button class="btn-remove" onclick="removeSkill(${index})">✕</button>
+                    <div class="dynamic-item">
+                        <div class="item-header">
+                            <span class="item-title">${skill.name || 'New Skill'}</span>
+                            <button class="btn-remove" onclick="removeSkill(${index})">✕</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Skill Name" value="${skill.name || ''}" onchange="updateSkill(${index}, 'name', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" onchange="updateSkill(${index}, 'level', this.value)">
+                                    <option value="1" ${skill.level == 1 ? 'selected' : ''}>★ Beginner</option>
+                                    <option value="2" ${skill.level == 2 ? 'selected' : ''}>★★ Basic</option>
+                                    <option value="3" ${skill.level == 3 ? 'selected' : ''}>★★★ Intermediate</option>
+                                    <option value="4" ${skill.level == 4 ? 'selected' : ''}>★★★★ Advanced</option>
+                                    <option value="5" ${skill.level == 5 ? 'selected' : ''}>★★★★★ Expert</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 `;
             });
         }
 
         function renderLanguages() {
-            const container = document.getElementById('languagesContainer');
+            const container = document.getElementById('languages-container');
             container.innerHTML = '';
             
             languages.forEach((lang, index) => {
                 container.innerHTML += `
-                    <div class="skill-item">
-                        <input type="text" class="input-field skill-name" value="${lang.name}" placeholder="Language" onchange="updateLanguage(${index}, 'name', this.value)">
-                        <input type="text" class="input-field skill-level" value="${lang.level}" placeholder="Level" onchange="updateLanguage(${index}, 'level', this.value)">
-                        <button class="btn-remove" onclick="removeLanguage(${index})">✕</button>
+                    <div class="dynamic-item">
+                        <div class="item-header">
+                            <span class="item-title">${lang.name || 'New Language'}</span>
+                            <button class="btn-remove" onclick="removeLanguage(${index})">✕</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Language" value="${lang.name || ''}" onchange="updateLanguage(${index}, 'name', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Level" value="${lang.level || ''}" onchange="updateLanguage(${index}, 'level', this.value)">
+                            </div>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        function renderCVPreview() {
-            const name = document.getElementById('nameInput').value || 'Your Name';
-            const title = document.getElementById('titleInput').value || 'Professional Title';
-            const address = document.getElementById('addressInput').value || '';
-            const phone = document.getElementById('phoneInput').value || '';
-            const email = document.getElementById('emailInput').value || '';
-            const linkedin = document.getElementById('linkedinInput').value || '';
-            const profile = document.getElementById('profileInput').value || '';
-
-            let preview = `
-                <div class="cv-header">
-                    <div class="cv-photo">${name.charAt(0)}</div>
-                    <div class="cv-header-info">
-                        <h1>${name}</h1>
-                        <div class="cv-title">${title}</div>
-                        <div class="cv-contact">
-                            <span>📍 ${address}</span>
-                            <span>📞 ${phone}</span>
-                            <span>✉️ ${email}</span>
-                            <span>🔗 ${linkedin}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Profile</div>
-                    <p style="font-size: 14px; line-height: 1.6; color: #444;">${profile}</p>
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Work Experience</div>
-                    ${jobs.map(job => `
-                        <div class="cv-job">
-                            <div class="cv-job-header">
-                                <span class="cv-job-title">${job.title}</span>
-                                <span class="cv-job-date">${job.startDate} – ${job.endDate}</span>
-                            </div>
-                            <div class="cv-job-company">${job.company} | ${job.location}</div>
-                            <ul class="cv-job-desc">
-                                ${job.description.split('\n').map(line => `<li>${line}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Education</div>
-                    ${education.map(edu => `
-                        <div class="cv-education-item">
-                            <div class="cv-education-title">${edu.degree}</div>
-                            <div class="cv-education-school">${edu.school} | ${edu.location}</div>
-                            <div class="cv-education-date">${edu.startDate} – ${edu.endDate}</div>
-                            <p style="font-size: 13px; color: #666; margin-top: 5px;">${edu.description}</p>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Skills</div>
-                    <div class="cv-skills-grid">
-                        ${skills.map(skill => `
-                            <div class="cv-skill-item">
-                                <span class="cv-skill-name">${skill.name}</span>
-                                <span class="cv-skill-stars">${'★'.repeat(skill.level)}${'☆'.repeat(5-skill.level)}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <div class="cv-section">
-                    <div class="cv-section-title">Languages</div>
-                    ${languages.map(lang => `
-                        <div class="cv-language-item">
-                            <span class="cv-language-name">${lang.name}</span>
-                            <span class="cv-language-level">${lang.level}</span>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-
-            document.getElementById('cvPreview').innerHTML = preview;
+        // Update functions
+        function updateExperience(index, field, value) {
+            experiences[index][field] = value;
+            updatePreview();
         }
 
-        function renderAll() {
-            renderJobs();
-            renderEducation();
-            renderSkills();
-            renderLanguages();
-            renderCVPreview();
+        function updateEducation(index, field, value) {
+            education[index][field] = value;
+            updatePreview();
+        }
+
+        function updateSkill(index, field, value) {
+            if (field === 'level') value = parseInt(value);
+            skills[index][field] = value;
+            updatePreview();
+        }
+
+        function updateLanguage(index, field, value) {
+            languages[index][field] = value;
+            updatePreview();
         }
 
         // Add functions
-        function addJob() {
-            jobs.push({
+        function addExperience() {
+            experiences.push({
                 title: "New Position",
                 company: "Company Name",
                 location: "Location",
                 startDate: "Start Date",
                 endDate: "End Date",
-                description: "Description line 1\nDescription line 2"
+                description: "Description"
             });
             renderAll();
         }
@@ -836,31 +927,9 @@
             renderAll();
         }
 
-        // Update functions
-        function updateJob(index, field, value) {
-            jobs[index][field] = value;
-            renderCVPreview();
-        }
-
-        function updateEducation(index, field, value) {
-            education[index][field] = value;
-            renderCVPreview();
-        }
-
-        function updateSkill(index, field, value) {
-            if (field === 'level') value = parseInt(value);
-            skills[index][field] = value;
-            renderCVPreview();
-        }
-
-        function updateLanguage(index, field, value) {
-            languages[index][field] = value;
-            renderCVPreview();
-        }
-
         // Remove functions
-        function removeJob(index) {
-            jobs.splice(index, 1);
+        function removeExperience(index) {
+            experiences.splice(index, 1);
             renderAll();
         }
 
@@ -879,25 +948,160 @@
             renderAll();
         }
 
-        // Export function
-        function exportPDF() {
-            alert('In a real app, this would download your CV as PDF. For GitHub Pages, you can use the browser Print function (Ctrl+P) and "Save as PDF".');
-            
-            // Alternative: Open print dialog for PDF
+        // Reset to default
+        function resetToDefault() {
+            initDefaultData();
+            showToast('CV reset to default!');
+        }
+
+        // Update CV preview
+        function updatePreview() {
+            const name = document.getElementById('fullName').value;
+            const title = document.getElementById('professionalTitle').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const profile = document.getElementById('profileSummary').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const nationality = document.getElementById('nationality').value;
+            const familyStatus = document.getElementById('familyStatus').value;
+
+            let preview = `
+                <div class="cv-header">
+                    <div class="cv-photo">${name.charAt(0)}</div>
+                    <div class="cv-header-info">
+                        <div class="cv-name">${name}</div>
+                        <div class="cv-title">${title}</div>
+                        <div class="cv-contact">
+                            <span class="cv-contact-item">📍 ${address}</span>
+                            <span class="cv-contact-item">📞 ${phone}</span>
+                            <span class="cv-contact-item">✉️ ${email}</span>
+                            <span class="cv-contact-item">🔗 ${linkedin}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Profile</div>
+                    <p style="font-size: 14px; line-height: 1.6; color: #4a5568;">${profile}</p>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Work Experience</div>
+                    ${experiences.map(exp => `
+                        <div class="cv-job">
+                            <div class="cv-job-header">
+                                <span class="cv-job-title">${exp.title}</span>
+                                <span class="cv-job-date">${exp.startDate} – ${exp.endDate}</span>
+                            </div>
+                            <div class="cv-job-company">${exp.company} | ${exp.location}</div>
+                            <ul class="cv-job-desc">
+                                ${exp.description.split('\n').map(line => `<li>${line}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Education</div>
+                    ${education.map(edu => `
+                        <div class="cv-education-item">
+                            <div class="cv-education-title">${edu.degree}</div>
+                            <div class="cv-education-school">${edu.school} | ${edu.location}</div>
+                            <div class="cv-education-date">${edu.startDate} – ${edu.endDate}</div>
+                            <p style="font-size: 13px; color: #4a5568; margin-top: 4px;">${edu.description}</p>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Skills</div>
+                    <div class="cv-skills-grid">
+                        ${skills.map(skill => `
+                            <div class="cv-skill-item">
+                                <span class="cv-skill-name">${skill.name}</span>
+                                <span class="cv-skill-stars">${'★'.repeat(skill.level)}${'☆'.repeat(5-skill.level)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Languages</div>
+                    ${languages.map(lang => `
+                        <div class="cv-language-item">
+                            <span class="cv-language-name">${lang.name}</span>
+                            <span class="cv-language-level">${lang.level}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="integration-section">
+                    <div class="cv-section-title">Integration & Berufliche Orientierung</div>
+                    <div class="cv-job">
+                        <div class="cv-job-header">
+                            <span class="cv-job-title">Integration in Deutschland</span>
+                            <span class="cv-job-date">Aug. 2021 – Sep. 2022</span>
+                        </div>
+                        <div class="cv-job-company">Bremen</div>
+                        <ul class="cv-job-desc">
+                            <li>Ankunft in Deutschland und Beginn des Integrationsprozesses</li>
+                            <li>Intensive Deutschkurse (A1–B1) mit Fokus auf Alltags- und Berufssprache</li>
+                            <li>Orientierung im deutschen Arbeitsmarkt und Anerkennung des Hochschulabschlusses (ZAB)</li>
+                            <li>Ab Oktober 2022: Selbstständige Tätigkeit als IT-Support Engineer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Personal Data</div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 14px; color: #4a5568;">
+                        <div><strong>Birth Date:</strong> ${birthDate}</div>
+                        <div><strong>Nationality:</strong> ${nationality}</div>
+                        <div><strong>Family Status:</strong> ${familyStatus}</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('cvPreview').innerHTML = preview;
+        }
+
+        // Render all sections
+        function renderAll() {
+            renderExperiences();
+            renderEducation();
+            renderSkills();
+            renderLanguages();
+            updatePreview();
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            const preview = document.getElementById('cvPreview').innerText;
+            navigator.clipboard.writeText(preview).then(() => {
+                showToast('✓ Copied to clipboard!');
+            });
+        }
+
+        // Download as PDF
+        function downloadPDF() {
+            showToast('🖨️ Use Print (Ctrl+P) and "Save as PDF"');
             window.print();
         }
 
         // Initialize
-        initializeData();
-
-        // Add input listeners for real-time preview
-        document.getElementById('nameInput').addEventListener('input', renderCVPreview);
-        document.getElementById('titleInput').addEventListener('input', renderCVPreview);
-        document.getElementById('addressInput').addEventListener('input', renderCVPreview);
-        document.getElementById('phoneInput').addEventListener('input', renderCVPreview);
-        document.getElementById('emailInput').addEventListener('input', renderCVPreview);
-        document.getElementById('linkedinInput').addEventListener('input', renderCVPreview);
-        document.getElementById('profileInput').addEventListener('input', renderCVPreview);
+        initDefaultData();
     </script>
 </body>
 </html>
