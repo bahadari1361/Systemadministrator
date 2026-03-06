@@ -1,467 +1,903 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hashmat Bahadari - IT-Support Engineer</title>
+    <title>CV Builder - Create Your Resume</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            padding: 30px 20px;
-            line-height: 1.5;
-            color: #333;
+            background: linear-gradient(145deg, #0B1120 0%, #1A2332 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .cv-container {
-            max-width: 900px;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px;
-            border-radius: 8px;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* Header Section */
+        /* Header */
         .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            color: #94A3B8;
+            font-size: 18px;
+        }
+
+        /* Builder Layout */
+        .builder-wrapper {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Left Panel - Editor */
+        .editor-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 24px;
+            height: fit-content;
+            max-height: 900px;
+            overflow-y: auto;
+        }
+
+        .panel-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-title span {
+            background: #3B82F6;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60A5FA;
+            font-size: 18px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            display: block;
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #3B82F6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: #4A5568;
+        }
+
+        textarea.input-field {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .skill-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .skill-name {
+            flex: 2;
+        }
+
+        .skill-level {
+            flex: 1;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-remove {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-remove:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Right Panel - Preview */
+        .preview-panel {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            overflow-y: auto;
+            max-height: 900px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .cv-preview {
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        /* CV Preview Styles */
+        .cv-header {
             display: flex;
             align-items: center;
             gap: 30px;
             margin-bottom: 30px;
-            border-bottom: 2px solid #2c3e50;
             padding-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
         }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            background-color: #3498db;
+        .cv-photo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
-            font-weight: bold;
-            background-image: url('https://via.placeholder.com/120x120/3498db/ffffff?text=HB');
-            background-size: cover;
-        }
-
-        .header-text {
-            flex: 1;
-        }
-
-        .header-text h1 {
             font-size: 32px;
-            color: #2c3e50;
-            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .header-text h2 {
-            font-size: 20px;
-            font-weight: normal;
-            color: #7f8c8d;
-            margin-bottom: 10px;
+        .cv-header-info h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
         }
 
-        .contact-info {
+        .cv-title {
+            font-size: 18px;
+            color: #3B82F6;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .cv-contact {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
+            color: #666;
             font-size: 14px;
-            color: #555;
         }
 
-        .contact-info span {
+        .cv-contact span {
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        /* Grid Layout */
-        .cv-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
-
-        /* Left Column */
-        .left-col {
-            border-right: 1px solid #e0e0e0;
-            padding-right: 25px;
-        }
-
-        .section {
+        .cv-section {
             margin-bottom: 25px;
         }
 
-        .section-title {
+        .cv-section-title {
             font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
+            font-weight: 700;
+            color: #1a1a1a;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+            border-bottom: 2px solid #3B82F6;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
         }
 
-        .skill-item {
-            margin-bottom: 10px;
-        }
-
-        .skill-name {
-            font-weight: bold;
-            margin-bottom: 3px;
-            font-size: 14px;
-        }
-
-        .skill-bar {
-            display: flex;
-            gap: 4px;
-        }
-
-        .star {
-            color: #f39c12;
-            font-size: 16px;
-        }
-
-        .star-gray {
-            color: #ddd;
-        }
-
-        .language-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .language-name {
-            font-weight: bold;
-        }
-
-        .language-level {
-            color: #555;
-        }
-
-        .cert-item {
-            font-size: 14px;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .cert-year {
-            color: #3498db;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        /* Right Column */
-        .right-col .section {
-            margin-bottom: 25px;
-        }
-
-        .job-item {
+        .cv-job {
             margin-bottom: 20px;
         }
 
-        .job-header {
+        .cv-job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             margin-bottom: 5px;
         }
 
-        .job-title {
+        .cv-job-title {
             font-size: 16px;
-            font-weight: bold;
-            color: #2c3e50;
+            font-weight: 700;
+            color: #1a1a1a;
         }
 
-        .job-date {
+        .cv-job-date {
+            color: #666;
             font-size: 14px;
-            color: #7f8c8d;
         }
 
-        .job-company {
+        .cv-job-company {
+            color: #3B82F6;
             font-weight: 600;
-            color: #3498db;
+            font-size: 14px;
             margin-bottom: 8px;
-            font-size: 14px;
         }
 
-        .job-description {
-            list-style-type: none;
+        .cv-job-desc {
+            list-style: none;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
         }
 
-        .job-description li {
-            font-size: 14px;
-            margin-bottom: 6px;
+        .cv-job-desc li {
+            margin-bottom: 5px;
             padding-left: 18px;
             position: relative;
         }
 
-        .job-description li::before {
+        .cv-job-desc li:before {
             content: "•";
-            color: #3498db;
+            color: #3B82F6;
             font-weight: bold;
             position: absolute;
             left: 5px;
         }
 
-        .profile-text {
+        .cv-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .cv-skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
             font-size: 14px;
-            text-align: justify;
+        }
+
+        .cv-skill-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .cv-skill-stars {
+            color: #FFB800;
+            letter-spacing: 2px;
+        }
+
+        .cv-language-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 14px;
+        }
+
+        .cv-language-name {
+            font-weight: 600;
+        }
+
+        .cv-language-level {
+            color: #666;
+        }
+
+        .cv-education-item {
             margin-bottom: 15px;
         }
 
-        .hobby-item {
-            display: inline-block;
-            background-color: #ecf0f1;
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin: 0 5px 8px 0;
+        .cv-education-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .cv-education-school {
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cv-education-date {
+            color: #666;
             font-size: 13px;
         }
 
-        hr {
+        .export-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
             border: none;
-            border-top: 1px solid #e0e0e0;
-            margin: 15px 0;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        @media (max-width: 700px) {
-            .cv-grid {
-                grid-template-columns: 1fr;
-            }
-            .left-col {
-                border-right: none;
-                padding-right: 0;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
+        .export-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px rgba(16, 185, 129, 0.4);
         }
     </style>
 </head>
 <body>
-    <div class="cv-container">
-        <!-- Header with Photo -->
+    <div class="container">
         <div class="header">
-            <div class="profile-img">HB</div>
-            <div class="header-text">
-                <h1>Hashmat Bahadari</h1>
-                <h2>IT-Support Engineer</h2>
-                <div class="contact-info">
-                    <span>📞 +49 176 266 36 133</span>
-                    <span>✉️ hashmat.bahadari@icloud.com</span>
-                    <span>📍 Bremen, 28759</span>
-                    <span>🔗 linkedin.com/in/bahadari</span>
-                </div>
-            </div>
+            <h1>✨ Modern CV Builder</h1>
+            <p>Build your professional resume in minutes</p>
         </div>
 
-        <!-- Main Grid -->
-        <div class="cv-grid">
-            <!-- Left Column -->
-            <div class="left-col">
-                <!-- Profile -->
-                <div class="section">
-                    <div class="section-title">Profil</div>
-                    <div class="profile-text">
-                        IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Strukturierte, serviceorientierte Arbeitsweise mit ausgeprägter Eigenverantwortung.
-                        <br><br>
-                        Ich spreche Persisch als Muttersprache (C2), Englisch fließend (C1) und Deutsch (B1, in aktiver Weiterentwicklung). Seit 2022 in Bremen mit Fokus auf Integration und Vorbereitung auf den deutschen IT-Arbeitsmarkt.
-                    </div>
+        <div class="builder-wrapper">
+            <!-- Left Panel - Editor -->
+            <div class="editor-panel">
+                <div class="panel-title">
+                    📝 Editor
+                    <span>Live Preview</span>
                 </div>
 
-                <!-- Languages -->
-                <div class="section">
-                    <div class="section-title">Sprachen</div>
-                    <div class="language-item">
-                        <span class="language-name">Persisch</span>
-                        <span class="language-level">Muttersprache (C2)</span>
+                <!-- Personal Info -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">👤</div>
+                        <div class="section-title">Personal Information</div>
                     </div>
-                    <div class="language-item">
-                        <span class="language-name">Englisch</span>
-                        <span class="language-level">Fließend (C1)</span>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-name">Deutsch</span>
-                        <span class="language-level">Gute Grundkenntnisse (B1)</span>
-                    </div>
-                </div>
-
-                <!-- Skills -->
-                <div class="section">
-                    <div class="section-title">Fähigkeiten</div>
-                    <div class="skill-item">
-                        <div class="skill-name">IT-SUPPORT</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">HARDWARE-FEHLERBEHEBUNG</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">SOFTWARE-FEHLERBEHEBUNG</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">WINDOWS 10/11-ADMINISTRATION</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">MICROSOFT OFFICE 365</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">ACTIVE DIRECTORY</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">REMOTE DESKTOP-SUPPORT</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">TICKETING-SYSTEME</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">NETZWERK-FEHLERBEHEBUNG</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">SYSTEMINSTALLATION & -KONFIGURATION</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">LINUX-ADMINISTRATION</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">DRUCKER- & PERIPHERIE-SUPPORT</div>
-                        <div class="skill-bar">★★★★★</div>
-                    </div>
-                </div>
-
-                <!-- Certifications -->
-                <div class="section">
-                    <div class="section-title">Zertifizierungen</div>
-                    <div class="cert-item"><span class="cert-year">2023</span> Fortinet NSE 1 & 2 Network Security Associate</div>
-                    <div class="cert-item"><span class="cert-year">2022</span> Microsoft Certified: Azure Security Engineer Associate</div>
-                    <div class="cert-item"><span class="cert-year">2022</span> Microsoft Security, Compliance & Identity Fundamentals</div>
-                    <div class="cert-item"><span class="cert-year">2010</span> CompTIA Security+</div>
-                    <div class="cert-item"><span class="cert-year">2010</span> CompTIA Network+</div>
-                </div>
-
-                <!-- Hobbies -->
-                <div class="section">
-                    <div class="section-title">Hobbys</div>
-                    <div>
-                        <span class="hobby-item">Volleyball (Mannschaftssport)</span>
-                        <span class="hobby-item">Schach</span>
-                        <span class="hobby-item">Lesen (Fachliteratur)</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="right-col">
-                <!-- Experience -->
-                <div class="section">
-                    <div class="section-title">Berufserfahrung</div>
                     
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="job-title">IT-SUPPORT ENGINEER</span>
-                            <span class="job-date">Okt. 2022 – heute</span>
-                        </div>
-                        <div class="job-company">Selbstständig, Bremen</div>
-                        <ul class="job-description">
-                            <li>Beratung und Planung der IT-Infrastruktur für KMU in der Region Bremen</li>
-                            <li>Einführung und Migration zu Microsoft 365 inkl. Schulungen für Endanwender</li>
-                            <li>Aufbau von IT-Support-Prozessen und Dokumentation für Kunden ohne bestehende IT-Strukturen</li>
-                            <li>Direkte Kommunikation mit Kunden auf Deutsch und Englisch</li>
-                            <li>Remote-Support via TeamViewer und AnyDesk; Hardware- und Software-Fehlerbehebung</li>
-                        </ul>
+                    <div class="input-group">
+                        <label class="input-label">Full Name</label>
+                        <input type="text" class="input-field" id="nameInput" value="Hashmat Bahadari" placeholder="Your full name">
                     </div>
 
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="job-title">SYSTEMADMINISTRATOR</span>
-                            <span class="job-date">Nov. 2014 – Sep. 2021</span>
-                        </div>
-                        <div class="job-company">Zentralbank von Afghanistan, Kabul</div>
-                        <ul class="job-description">
-                            <li>First- und Second-Level-Support für über 2.500 Mitarbeiter in 34 Filialen</li>
-                            <li>Verwaltung von Benutzerkonten, Gruppen und Berechtigungen in Active Directory</li>
-                            <li>Helpdesk-Tickets mit einer Lösungsquote von über 92 % innerhalb der SLA</li>
-                            <li>Fehlerbehebung in Windows 10/11, Microsoft Office, Druckern und Netzwerkumgebungen</li>
-                            <li>Administration von Windows-Servern sowie LAN-, WLAN- und VPN-Infrastrukturen</li>
-                            <li>Konfiguration und Überwachung von Firewalls (Fortinet)</li>
-                            <li>IT-Sicherheitsschulungen für neue Mitarbeiter (Reduktion der Supportanfragen um ca. 25 %)</li>
-                            <li>Dokumentation von IT-Prozessen und Erstellung von Anwenderhandbüchern</li>
-                        </ul>
+                    <div class="input-group">
+                        <label class="input-label">Professional Title</label>
+                        <input type="text" class="input-field" id="titleInput" value="IT-Support Engineer" placeholder="e.g., IT Support Engineer">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Address</label>
+                        <input type="text" class="input-field" id="addressInput" value="Schönebecker Straße 38, 28759 Bremen" placeholder="Your address">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Phone</label>
+                        <input type="text" class="input-field" id="phoneInput" value="+49 176 266 36 133" placeholder="Phone number">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Email</label>
+                        <input type="email" class="input-field" id="emailInput" value="hashmat.bahadari@icloud.com" placeholder="Email address">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">LinkedIn</label>
+                        <input type="text" class="input-field" id="linkedinInput" value="linkedin.com/in/bahadari" placeholder="LinkedIn URL">
                     </div>
                 </div>
 
-                <!-- Integration -->
-                <div class="section">
-                    <div class="section-title">Integration & berufliche Orientierung</div>
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="job-title">Integration in Deutschland</span>
-                            <span class="job-date">Aug. 2021 – Sep. 2022</span>
-                        </div>
-                        <div class="job-company">Bremen</div>
-                        <ul class="job-description">
-                            <li>Ankunft in Deutschland und Beginn des Integrationsprozesses</li>
-                            <li>Intensive Deutschkurse (A1–B1) mit Fokus auf Alltags- und Berufssprache</li>
-                            <li>Orientierung im deutschen Arbeitsmarkt und Anerkennung des Hochschulabschlusses (ZAB)</li>
-                            <li>Ab Oktober 2022: Selbstständige Tätigkeit als IT-Support Engineer (siehe oben)</li>
-                        </ul>
+                <!-- Profile -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">📋</div>
+                        <div class="section-title">Profile Summary</div>
                     </div>
+                    
+                    <div class="input-group">
+                        <textarea class="input-field" id="profileInput" rows="4">IT-Support Engineer mit über 6 Jahren Erfahrung im First- und Second-Level-Support sowie in der Systemadministration. Sehr gute Kenntnisse in Windows-Umgebungen, Active Directory und Microsoft 365. Seit 2022 in Deutschland mit Fokus auf Deutschlernen (B1).</textarea>
+                    </div>
+                </div>
+
+                <!-- Work Experience -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">💼</div>
+                        <div class="section-title">Work Experience</div>
+                    </div>
+                    
+                    <div id="jobsContainer">
+                        <!-- Jobs will be added here -->
+                    </div>
+                    
+                    <button class="btn-add" onclick="addJob()">
+                        ➕ Add Work Experience
+                    </button>
                 </div>
 
                 <!-- Education -->
-                <div class="section">
-                    <div class="section-title">Ausbildung</div>
-                    <div class="job-item">
-                        <div class="job-header">
-                            <span class="job-title">Bachelor of Science in Informatik</span>
-                            <span class="job-date">Sep. 2010 – Sep. 2014</span>
-                        </div>
-                        <div class="job-company">Maiwand University, Kabul, Afghanistan</div>
-                        <ul class="job-description">
-                            <li>Schwerpunkt: Netzwerke und IT-Infrastruktur</li>
-                            <li>Von der ZAB als einem deutschen Hochschulabschluss gleichwertig anerkannt (Anerkennungsbescheid liegt vor)</li>
-                        </ul>
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🎓</div>
+                        <div class="section-title">Education</div>
                     </div>
+                    
+                    <div id="educationContainer">
+                        <!-- Education will be added here -->
+                    </div>
+                    
+                    <button class="btn-add" onclick="addEducation()">
+                        ➕ Add Education
+                    </button>
                 </div>
 
-                <!-- Personal Details -->
-                <div class="section">
-                    <div class="section-title">Persönliche Daten</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 14px;">
-                        <span><strong>Geburtsdatum:</strong> 2.11.1982</span>
-                        <span><strong>Geburtsort:</strong> Afghanistan</span>
-                        <span><strong>Nationalität:</strong> afghanisch</span>
-                        <span><strong>Familienstand:</strong> Verheiratet</span>
+                <!-- Skills -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">⚡</div>
+                        <div class="section-title">Skills</div>
                     </div>
+                    
+                    <div id="skillsContainer">
+                        <!-- Skills will be added here -->
+                    </div>
+                    
+                    <button class="btn-add" onclick="addSkill()">
+                        ➕ Add Skill
+                    </button>
+                </div>
+
+                <!-- Languages -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="section-icon">🌍</div>
+                        <div class="section-title">Languages</div>
+                    </div>
+                    
+                    <div id="languagesContainer">
+                        <!-- Languages will be added here -->
+                    </div>
+                    
+                    <button class="btn-add" onclick="addLanguage()">
+                        ➕ Add Language
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Panel - Preview -->
+            <div class="preview-panel">
+                <div class="cv-preview" id="cvPreview">
+                    <!-- CV Preview will be generated here -->
                 </div>
             </div>
         </div>
     </div>
+
+    <button class="export-btn" onclick="exportPDF()">
+        📥 Download CV as PDF
+    </button>
+
+    <script>
+        // Data arrays
+        let jobs = [];
+        let education = [];
+        let skills = [];
+        let languages = [];
+
+        // Initialize with sample data
+        function initializeData() {
+            // Add sample job
+            jobs.push({
+                title: "IT-SUPPORT ENGINEER",
+                company: "Selbstständig",
+                location: "Bremen",
+                startDate: "Okt. 2022",
+                endDate: "Gegenwärtig",
+                description: "Beratung und Planung der IT-Infrastruktur für KMU\nEinführung und Migration zu Microsoft 365\nAufbau von IT-Support-Prozessen\nRemote-Support via TeamViewer und AnyDesk"
+            });
+
+            jobs.push({
+                title: "SYSTEMADMINISTRATOR",
+                company: "Zentralbank von Afghanistan",
+                location: "Kabul",
+                startDate: "Nov. 2014",
+                endDate: "Sep. 2021",
+                description: "First- und Second-Level-Support für 2.500+ Mitarbeiter\nVerwaltung von Active Directory\nHelpdesk-Tickets mit 92% Lösungsquote\nFirewall-Konfiguration (Fortinet)"
+            });
+
+            // Add sample education
+            education.push({
+                degree: "Bachelor of Science in Informatik",
+                school: "Maiwand University",
+                location: "Kabul, Afghanistan",
+                startDate: "Sep. 2010",
+                endDate: "Sep. 2014",
+                description: "Schwerpunkt: Netzwerke und IT-Infrastruktur\nZAB-anerkannt"
+            });
+
+            // Add sample skills
+            skills.push({ name: "IT-SUPPORT", level: 5 });
+            skills.push({ name: "HARDWARE-FEHLERBEHEBUNG", level: 5 });
+            skills.push({ name: "SOFTWARE-FEHLERBEHEBUNG", level: 5 });
+            skills.push({ name: "WINDOWS 10/11", level: 5 });
+            skills.push({ name: "MICROSOFT 365", level: 5 });
+            skills.push({ name: "ACTIVE DIRECTORY", level: 5 });
+
+            // Add sample languages
+            languages.push({ name: "Persisch", level: "Muttersprache (C2)" });
+            languages.push({ name: "Englisch", level: "Fließend (C1)" });
+            languages.push({ name: "Deutsch", level: "Gute Grundkenntnisse (B1)" });
+
+            renderAll();
+        }
+
+        // Render functions
+        function renderJobs() {
+            const container = document.getElementById('jobsContainer');
+            container.innerHTML = '';
+            
+            jobs.forEach((job, index) => {
+                container.innerHTML += `
+                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" class="input-field" style="flex:2;" value="${job.title}" placeholder="Job Title" onchange="updateJob(${index}, 'title', this.value)">
+                            <input type="text" class="input-field" style="flex:1;" value="${job.company}" placeholder="Company" onchange="updateJob(${index}, 'company', this.value)">
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" class="input-field" value="${job.location}" placeholder="Location" onchange="updateJob(${index}, 'location', this.value)">
+                            <input type="text" class="input-field" value="${job.startDate}" placeholder="Start Date" onchange="updateJob(${index}, 'startDate', this.value)">
+                            <input type="text" class="input-field" value="${job.endDate}" placeholder="End Date" onchange="updateJob(${index}, 'endDate', this.value)">
+                        </div>
+                        <textarea class="input-field" rows="3" placeholder="Description (one per line)" onchange="updateJob(${index}, 'description', this.value)">${job.description}</textarea>
+                        <button class="btn-remove" style="margin-top: 10px;" onclick="removeJob(${index})">Remove</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderEducation() {
+            const container = document.getElementById('educationContainer');
+            container.innerHTML = '';
+            
+            education.forEach((edu, index) => {
+                container.innerHTML += `
+                    <div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px;">
+                        <input type="text" class="input-field" style="margin-bottom: 10px;" value="${edu.degree}" placeholder="Degree" onchange="updateEducation(${index}, 'degree', this.value)">
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" class="input-field" style="flex:2;" value="${edu.school}" placeholder="School" onchange="updateEducation(${index}, 'school', this.value)">
+                            <input type="text" class="input-field" style="flex:1;" value="${edu.location}" placeholder="Location" onchange="updateEducation(${index}, 'location', this.value)">
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" class="input-field" value="${edu.startDate}" placeholder="Start Date" onchange="updateEducation(${index}, 'startDate', this.value)">
+                            <input type="text" class="input-field" value="${edu.endDate}" placeholder="End Date" onchange="updateEducation(${index}, 'endDate', this.value)">
+                        </div>
+                        <textarea class="input-field" rows="2" placeholder="Description" onchange="updateEducation(${index}, 'description', this.value)">${edu.description}</textarea>
+                        <button class="btn-remove" style="margin-top: 10px;" onclick="removeEducation(${index})">Remove</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            container.innerHTML = '';
+            
+            skills.forEach((skill, index) => {
+                container.innerHTML += `
+                    <div class="skill-item">
+                        <input type="text" class="input-field skill-name" value="${skill.name}" placeholder="Skill name" onchange="updateSkill(${index}, 'name', this.value)">
+                        <select class="skill-level" onchange="updateSkill(${index}, 'level', this.value)">
+                            <option value="1" ${skill.level == 1 ? 'selected' : ''}>★</option>
+                            <option value="2" ${skill.level == 2 ? 'selected' : ''}>★★</option>
+                            <option value="3" ${skill.level == 3 ? 'selected' : ''}>★★★</option>
+                            <option value="4" ${skill.level == 4 ? 'selected' : ''}>★★★★</option>
+                            <option value="5" ${skill.level == 5 ? 'selected' : ''}>★★★★★</option>
+                        </select>
+                        <button class="btn-remove" onclick="removeSkill(${index})">✕</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderLanguages() {
+            const container = document.getElementById('languagesContainer');
+            container.innerHTML = '';
+            
+            languages.forEach((lang, index) => {
+                container.innerHTML += `
+                    <div class="skill-item">
+                        <input type="text" class="input-field skill-name" value="${lang.name}" placeholder="Language" onchange="updateLanguage(${index}, 'name', this.value)">
+                        <input type="text" class="input-field skill-level" value="${lang.level}" placeholder="Level" onchange="updateLanguage(${index}, 'level', this.value)">
+                        <button class="btn-remove" onclick="removeLanguage(${index})">✕</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderCVPreview() {
+            const name = document.getElementById('nameInput').value || 'Your Name';
+            const title = document.getElementById('titleInput').value || 'Professional Title';
+            const address = document.getElementById('addressInput').value || '';
+            const phone = document.getElementById('phoneInput').value || '';
+            const email = document.getElementById('emailInput').value || '';
+            const linkedin = document.getElementById('linkedinInput').value || '';
+            const profile = document.getElementById('profileInput').value || '';
+
+            let preview = `
+                <div class="cv-header">
+                    <div class="cv-photo">${name.charAt(0)}</div>
+                    <div class="cv-header-info">
+                        <h1>${name}</h1>
+                        <div class="cv-title">${title}</div>
+                        <div class="cv-contact">
+                            <span>📍 ${address}</span>
+                            <span>📞 ${phone}</span>
+                            <span>✉️ ${email}</span>
+                            <span>🔗 ${linkedin}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Profile</div>
+                    <p style="font-size: 14px; line-height: 1.6; color: #444;">${profile}</p>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Work Experience</div>
+                    ${jobs.map(job => `
+                        <div class="cv-job">
+                            <div class="cv-job-header">
+                                <span class="cv-job-title">${job.title}</span>
+                                <span class="cv-job-date">${job.startDate} – ${job.endDate}</span>
+                            </div>
+                            <div class="cv-job-company">${job.company} | ${job.location}</div>
+                            <ul class="cv-job-desc">
+                                ${job.description.split('\n').map(line => `<li>${line}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Education</div>
+                    ${education.map(edu => `
+                        <div class="cv-education-item">
+                            <div class="cv-education-title">${edu.degree}</div>
+                            <div class="cv-education-school">${edu.school} | ${edu.location}</div>
+                            <div class="cv-education-date">${edu.startDate} – ${edu.endDate}</div>
+                            <p style="font-size: 13px; color: #666; margin-top: 5px;">${edu.description}</p>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Skills</div>
+                    <div class="cv-skills-grid">
+                        ${skills.map(skill => `
+                            <div class="cv-skill-item">
+                                <span class="cv-skill-name">${skill.name}</span>
+                                <span class="cv-skill-stars">${'★'.repeat(skill.level)}${'☆'.repeat(5-skill.level)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <div class="cv-section-title">Languages</div>
+                    ${languages.map(lang => `
+                        <div class="cv-language-item">
+                            <span class="cv-language-name">${lang.name}</span>
+                            <span class="cv-language-level">${lang.level}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            document.getElementById('cvPreview').innerHTML = preview;
+        }
+
+        function renderAll() {
+            renderJobs();
+            renderEducation();
+            renderSkills();
+            renderLanguages();
+            renderCVPreview();
+        }
+
+        // Add functions
+        function addJob() {
+            jobs.push({
+                title: "New Position",
+                company: "Company Name",
+                location: "Location",
+                startDate: "Start Date",
+                endDate: "End Date",
+                description: "Description line 1\nDescription line 2"
+            });
+            renderAll();
+        }
+
+        function addEducation() {
+            education.push({
+                degree: "New Degree",
+                school: "School Name",
+                location: "Location",
+                startDate: "Start Date",
+                endDate: "End Date",
+                description: "Description"
+            });
+            renderAll();
+        }
+
+        function addSkill() {
+            skills.push({ name: "New Skill", level: 3 });
+            renderAll();
+        }
+
+        function addLanguage() {
+            languages.push({ name: "New Language", level: "Level" });
+            renderAll();
+        }
+
+        // Update functions
+        function updateJob(index, field, value) {
+            jobs[index][field] = value;
+            renderCVPreview();
+        }
+
+        function updateEducation(index, field, value) {
+            education[index][field] = value;
+            renderCVPreview();
+        }
+
+        function updateSkill(index, field, value) {
+            if (field === 'level') value = parseInt(value);
+            skills[index][field] = value;
+            renderCVPreview();
+        }
+
+        function updateLanguage(index, field, value) {
+            languages[index][field] = value;
+            renderCVPreview();
+        }
+
+        // Remove functions
+        function removeJob(index) {
+            jobs.splice(index, 1);
+            renderAll();
+        }
+
+        function removeEducation(index) {
+            education.splice(index, 1);
+            renderAll();
+        }
+
+        function removeSkill(index) {
+            skills.splice(index, 1);
+            renderAll();
+        }
+
+        function removeLanguage(index) {
+            languages.splice(index, 1);
+            renderAll();
+        }
+
+        // Export function
+        function exportPDF() {
+            alert('In a real app, this would download your CV as PDF. For GitHub Pages, you can use the browser Print function (Ctrl+P) and "Save as PDF".');
+            
+            // Alternative: Open print dialog for PDF
+            window.print();
+        }
+
+        // Initialize
+        initializeData();
+
+        // Add input listeners for real-time preview
+        document.getElementById('nameInput').addEventListener('input', renderCVPreview);
+        document.getElementById('titleInput').addEventListener('input', renderCVPreview);
+        document.getElementById('addressInput').addEventListener('input', renderCVPreview);
+        document.getElementById('phoneInput').addEventListener('input', renderCVPreview);
+        document.getElementById('emailInput').addEventListener('input', renderCVPreview);
+        document.getElementById('linkedinInput').addEventListener('input', renderCVPreview);
+        document.getElementById('profileInput').addEventListener('input', renderCVPreview);
+    </script>
 </body>
 </html>
