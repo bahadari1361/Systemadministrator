@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Bahadari — IT Infrastructure & Security Specialist. Microsoft 365, Cybersecurity, Cloud Architecture. Bremen, Germany."/>
+<title>Bahadari · IT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#04070F;--bg2:#080D1A;
+  --card:#0D1424;--card2:#101829;
+  --border:rgba(99,179,237,0.16);--blo:rgba(255,255,255,0.055);
+  --cyan:#63B3ED;--cb:#4299E1;--teal:#38BDF8;
+  --clo:rgba(99,179,237,0.10);--cgl:rgba(99,179,237,0.05);
+  --green:#4ADE80;--glo:rgba(74,222,128,0.11);
+  --amber:#FBBF24;--alo:rgba(251,191,36,0.11);
+  --purple:#A78BFA;--plo:rgba(167,139,250,0.11);
+  --w:#EFF6FF;--w2:#CBD5E1;--mu:#64748B;--dim:#334155;
+  --fd:'Space Grotesk',sans-serif;
+  --fb:'Inter',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--w);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(99,179,237,0.18);color:var(--cyan)}
+a{color:inherit;text-decoration:none}
+
+/* BG */
+.gl{position:fixed;inset:0;background-image:linear-gradient(rgba(99,179,237,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0}
+.o1{position:fixed;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.06) 0%,transparent 65%);top:-300px;left:-220px;pointer-events:none;z-index:0}
+.o2{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(99,179,237,.045) 0%,transparent 65%);bottom:5%;right:-150px;pointer-events:none;z-index:0}
+
+/* LAYOUT */
+.w{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+section{padding:112px 0}
+.hr{height:1px;background:linear-gradient(90deg,transparent,var(--blo),transparent)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:18px 0;transition:all .35s}
+nav.on{background:rgba(4,7,15,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--blo);padding:12px 0}
+.ni{display:flex;align-items:center;justify-content:space-between}
+
+/* LOGO */
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
+.lm svg{display:block}
+.lt{font-family:var(--fd);font-size:.9rem;font-weight:700;letter-spacing:-.02em;color:var(--w);line-height:1.1}
+.lt small{display:block;font-family:var(--fm);font-size:.55rem;font-weight:400;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;margin-top:1px}
+
+.nl{display:flex;align-items:center;gap:30px;list-style:none}
+.nl a{font-size:.76rem;font-weight:500;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nl a:hover{color:var(--w)}
+.ncta{padding:6px 17px;border-radius:6px;border:1px solid rgba(99,179,237,.3);color:var(--cyan) !important}
+.ncta:hover{background:var(--cgl);border-color:var(--cyan) !important}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 80px}
+.hi{display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center}
+
+.hpre{font-family:var(--fm);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:9px;margin-bottom:20px}
+.hpd{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);animation:bl 2.4s infinite;flex-shrink:0}
+@keyframes bl{0%,100%{opacity:1;box-shadow:0 0 9px var(--green)}50%{opacity:.3;box-shadow:none}}
+
+/* hero name — controlled size, left-aligned */
+.hname{font-family:var(--fd);font-size:clamp(2.6rem,4.2vw,3.8rem);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:10px;color:var(--w)}
+
+.hrole{font-family:var(--fd);font-size:clamp(.95rem,1.6vw,1.15rem);font-weight:400;color:var(--w2);margin-bottom:20px}
+.hrole strong{color:var(--w);font-weight:600}
+
+.hdesc{font-size:.91rem;color:var(--mu);line-height:1.85;margin-bottom:34px;max-width:460px}
+
+.hbtns{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:42px}
+.bp{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--cyan),var(--teal));color:#04070F;font-family:var(--fd);font-weight:700;font-size:.84rem;padding:12px 24px;border-radius:8px;border:none;cursor:pointer;transition:all .25s;letter-spacing:-.01em}
+.bp:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,179,237,.3)}
+.bg{display:inline-flex;align-items:center;gap:7px;background:transparent;color:var(--w2);font-family:var(--fd);font-weight:500;font-size:.84rem;padding:12px 24px;border-radius:8px;border:1px solid var(--border);transition:all .25s;cursor:pointer}
+.bg:hover{border-color:var(--cyan);color:var(--w);background:var(--cgl)}
+
+.hstats{display:flex;gap:24px;flex-wrap:wrap}
+.hst{display:flex;flex-direction:column;gap:2px}
+.hsv{font-family:var(--fd);font-size:1.5rem;font-weight:700;letter-spacing:-.04em;background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hsl{font-family:var(--fm);font-size:.6rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.hss{width:1px;background:var(--blo);align-self:stretch}
+
+/* PANEL */
+.hpanel{background:var(--card);border:1px solid var(--blo);border-radius:18px;overflow:hidden;position:relative}
+.hpanel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.65}
+.ptbar{display:flex;align-items:center;gap:6px;padding:12px 17px;border-bottom:1px solid var(--blo);background:rgba(255,255,255,.018)}
+.pd{width:9px;height:9px;border-radius:50%}
+.pdr{background:#FF5F57}.pdy{background:#FFBD2E}.pdg{background:#28C840}
+.ptt{font-family:var(--fm);font-size:.62rem;color:var(--dim);margin:0 auto;letter-spacing:.05em}
+.pbody{padding:20px 18px}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--blo)}
+.prow:last-of-type{border-bottom:none}
+.prl{display:flex;align-items:center;gap:9px;font-family:var(--fm);font-size:.71rem;color:var(--mu)}
+.pico{width:27px;height:27px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;background:var(--clo);color:var(--cyan)}
+.bdg{font-family:var(--fm);font-size:.63rem;padding:3px 9px;border-radius:20px;font-weight:500}
+.bc{background:var(--clo);color:var(--cyan)}
+.bgg{background:var(--glo);color:var(--green)}
+.ba{background:var(--alo);color:var(--amber)}
+.pbars{margin-top:16px;display:flex;flex-direction:column;gap:13px}
+.pbr-lbl{display:flex;justify-content:space-between;font-family:var(--fm);font-size:.62rem;color:var(--mu);margin-bottom:5px}
+.pbr-t{height:3px;background:rgba(255,255,255,.055);border-radius:3px;overflow:hidden}
+.pbr-f{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--cb),var(--teal))}
+
+/* SECTION HDR */
+.seye{font-family:var(--fm);font-size:.66rem;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.seye::after{content:'';width:28px;height:1px;background:var(--cyan);opacity:.4}
+.stitle{font-family:var(--fd);font-size:clamp(1.7rem,3vw,2.35rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:11px}
+.ssub{font-size:.88rem;color:var(--mu);max-width:500px;line-height:1.75}
+
+/* ── BENTO ── */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.bcard{background:var(--card);border:1px solid var(--blo);border-radius:15px;padding:24px;position:relative;overflow:hidden;transition:all .3s}
+.bcard:hover{border-color:var(--border);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.42)}
+.bcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,179,237,.45),transparent);opacity:0;transition:opacity .3s}
+.bcard:hover::before{opacity:1}
+.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.bico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:15px}
+.ic{background:var(--clo)}.ig{background:var(--glo)}.ia{background:var(--alo)}.ip{background:var(--plo)}
+.btitle{font-family:var(--fd);font-size:.98rem;font-weight:600;margin-bottom:7px;color:var(--w)}
+.bdesc{font-size:.83rem;color:var(--mu);line-height:1.65}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+.tag{font-family:var(--fm);font-size:.61rem;padding:3px 9px;border-radius:4px}
+.tc{color:var(--cyan);background:var(--clo)}
+.tg{color:var(--green);background:var(--glo)}
+.ta{color:var(--amber);background:var(--alo)}
+.tp{color:var(--purple);background:var(--plo)}
+.split{display:flex;align-items:center;gap:28px}
+.split>div:first-child{flex:1}
+.bnum{font-family:var(--fd);font-size:3.8rem;font-weight:700;letter-spacing:-.05em;line-height:1;background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bnl{font-size:.76rem;color:var(--mu);margin-top:5px;line-height:1.45}
+
+/* ── CERTS ── */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:11px}
+.cc{background:var(--card);border:1px solid var(--blo);border-radius:13px;padding:19px;position:relative;overflow:hidden;transition:all .3s;cursor:pointer;display:block}
+.cc:hover{border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 14px 34px rgba(99,179,237,.1)}
+.carrow{position:absolute;top:13px;right:13px;font-size:.7rem;color:var(--dim);transition:all .2s}
+.cc:hover .carrow{color:var(--cyan);transform:translate(2px,-2px)}
+.cico{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.88rem;margin-bottom:12px}
+.ciss{font-family:var(--fm);font-size:.59rem;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.cname{font-family:var(--fd);font-size:.85rem;font-weight:600;color:var(--w);line-height:1.32;margin-bottom:6px}
+.cyr{font-family:var(--fm);font-size:.63rem;color:var(--dim)}
+.cprog{background:linear-gradient(135deg,rgba(99,179,237,.06),rgba(56,189,248,.05));border:1px dashed rgba(99,179,237,.2);cursor:default !important}
+
+/* ── TIMELINE ── */
+.tl{position:relative;padding-left:32px}
+.tl::before{content:'';position:absolute;left:0;top:10px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--cyan),rgba(99,179,237,.05))}
+.tli{position:relative;padding-bottom:48px}
+.tli:last-child{padding-bottom:0}
+.tld{position:absolute;left:-38px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid rgba(99,179,237,.4)}
+.tld.now{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 13px rgba(99,179,237,.5)}
+.tlp{font-family:var(--fm);font-size:.65rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:6px}
+.tlr{font-family:var(--fd);font-size:1.06rem;font-weight:600;color:var(--w);margin-bottom:3px}
+.tlc{font-size:.83rem;color:var(--mu);margin-bottom:12px}
+.tlc strong{color:var(--w2);font-weight:500}
+.tlpts{list-style:none;display:flex;flex-direction:column;gap:7px}
+.tlpts li{font-size:.83rem;color:var(--mu);padding-left:16px;position:relative;line-height:1.65}
+.tlpts li::before{content:'›';position:absolute;left:0;color:var(--cyan);font-weight:700;line-height:1.25;font-size:.9rem}
+
+/* ── SKILLS ── */
+.skgrid{display:grid;grid-template-columns:1fr 1fr;gap:46px}
+.skgt{font-family:var(--fd);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:19px;padding-bottom:8px;border-bottom:1px solid var(--blo)}
+.ski{margin-bottom:17px}
+.skt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.skn{font-size:.85rem;color:var(--w2);font-weight:500}
+.skp{font-family:var(--fm);font-size:.67rem;color:var(--mu)}
+.sktr{height:2px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+.skf{height:100%;border-radius:2px;width:0;transition:width 1.3s cubic-bezier(.25,.46,.45,.94)}
+.skf.c{background:linear-gradient(90deg,var(--cb),var(--teal))}
+.skf.g{background:linear-gradient(90deg,#22C55E,#4ADE80)}
+
+/* ── CONTACT ── */
+.ctgrid{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:start}
+.cttitle{font-family:var(--fd);font-size:clamp(1.65rem,2.8vw,2.1rem);font-weight:700;letter-spacing:-.03em;line-height:1.18;margin-bottom:11px}
+.cttitle em{font-style:normal;background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ctsub{font-size:.87rem;color:var(--mu);line-height:1.8;margin-bottom:28px}
+.ctlinks{display:flex;flex-direction:column;gap:10px}
+.ctlink{display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--card);border:1px solid var(--blo);border-radius:10px;transition:all .2s}
+.ctlink:hover{border-color:var(--border);transform:translateX(4px);background:var(--card2)}
+.ctli{width:33px;height:33px;border-radius:7px;background:var(--clo);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--cyan);flex-shrink:0}
+.ctlbl{font-family:var(--fm);font-size:.59rem;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1px}
+.ctval{font-size:.83rem;color:var(--w);font-weight:500}
+.fpanel{background:var(--card);border:1px solid var(--blo);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.fpanel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.55}
+.fpt{font-family:var(--fd);font-size:.98rem;font-weight:600;margin-bottom:4px}
+.fps{font-size:.79rem;color:var(--mu);margin-bottom:20px}
+.fg{margin-bottom:13px}
+.fl{display:block;font-family:var(--fm);font-size:.6rem;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.fi,.fta{width:100%;background:var(--bg2);border:1px solid var(--blo);border-radius:7px;padding:10px 12px;color:var(--w);font-family:var(--fb);font-size:.85rem;transition:border-color .2s;outline:none}
+.fi:focus,.fta:focus{border-color:rgba(99,179,237,.45);box-shadow:0 0 0 3px rgba(99,179,237,.06)}
+.fta{resize:vertical;min-height:88px}
+.fsub{width:100%;background:linear-gradient(135deg,var(--cyan),var(--teal));color:#04070F;font-family:var(--fd);font-weight:700;font-size:.87rem;padding:12px;border-radius:7px;border:none;cursor:pointer;transition:all .25s;margin-top:4px}
+.fsub:hover{transform:translateY(-1px);box-shadow:0 9px 24px rgba(99,179,237,.26)}
+.fok{display:none;margin-top:9px;padding:10px;background:var(--glo);color:var(--green);border-radius:7px;font-size:.79rem;text-align:center;font-family:var(--fm)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--blo);padding:36px 0}
+.ftin{display:flex;align-items:center;justify-content:space-between}
+.ftlogo{display:flex;align-items:center;gap:8px}
+.ftlt{font-family:var(--fd);font-size:.88rem;font-weight:700;letter-spacing:-.02em}
+.ftlt em{color:var(--cyan);font-style:normal}
+.ftcopy{font-size:.74rem;color:var(--dim)}
+.ftlinks{display:flex;gap:18px}
+.ftlinks a{font-size:.74rem;color:var(--dim);transition:color .2s}
+.ftlinks a:hover{color:var(--cyan)}
+
+/* ANIM */
+.fu{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fu.in{opacity:1;transform:translateY(0)}
+.fu.d1{transition-delay:.08s}.fu.d2{transition-delay:.16s}
+
+/* MOBILE */
+@media(max-width:960px){
+  .hi{grid-template-columns:1fr}.hpanel{display:none}
+  .c4,.c6,.c8{grid-column:span 6}.c12{grid-column:span 12}
+  .split{flex-direction:column;gap:16px}
+  .ctgrid{grid-template-columns:1fr;gap:38px}
+  .skgrid{grid-template-columns:1fr;gap:34px}
+  .nl{display:none}
+}
+@media(max-width:600px){
+  .c4,.c6,.c8,.c12{grid-column:span 12}
+  .cgrid{grid-template-columns:1fr 1fr}
+  .ftin{flex-direction:column;gap:14px;text-align:center}
+  .ftlinks{justify-content:center}
+  section{padding:80px 0}
+  .hstats{gap:16px}
+}
+</style>
+</head>
+<body>
+<div class="gl"></div>
+<div class="o1"></div>
+<div class="o2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="w">
+    <div class="ni">
+
+      <!-- LOGO: shield with B circuit mark -->
+      <a class="logo" href="#top">
+        <div class="lm">
+          <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- shield body -->
+            <path d="M20 3L35 10V22C35 30 28 36 20 38C12 36 5 30 5 22V10L20 3Z"
+              fill="rgba(99,179,237,0.09)" stroke="rgba(99,179,237,0.55)" stroke-width="1.3"/>
+            <!-- horizontal bar -->
+            <line x1="13" y1="20" x2="27" y2="20" stroke="#63B3ED" stroke-width="1.3" stroke-linecap="round"/>
+            <!-- top arm -->
+            <line x1="20" y1="13" x2="20" y2="27" stroke="#63B3ED" stroke-width="1.3" stroke-linecap="round"/>
+            <!-- corner nodes — circuit feel -->
+            <circle cx="13" cy="20" r="2" fill="#38BDF8"/>
+            <circle cx="27" cy="20" r="2" fill="#38BDF8"/>
+            <circle cx="20" cy="13" r="2" fill="#63B3ED"/>
+            <circle cx="20" cy="27" r="2" fill="#63B3ED"/>
+            <!-- diagonal accent lines -->
+            <line x1="13" y1="20" x2="20" y2="13" stroke="rgba(99,179,237,0.3)" stroke-width="0.9" stroke-linecap="round"/>
+            <line x1="27" y1="20" x2="20" y2="13" stroke="rgba(99,179,237,0.3)" stroke-width="0.9" stroke-linecap="round"/>
+            <line x1="13" y1="20" x2="20" y2="27" stroke="rgba(56,189,248,0.3)" stroke-width="0.9" stroke-linecap="round"/>
+            <line x1="27" y1="20" x2="20" y2="27" stroke="rgba(56,189,248,0.3)" stroke-width="0.9" stroke-linecap="round"/>
+            <!-- centre node — glowing -->
+            <circle cx="20" cy="20" r="2.8" fill="#63B3ED" opacity=".92"/>
+            <circle cx="20" cy="20" r="4.5" fill="rgba(99,179,237,0.15)"/>
+          </svg>
+        </div>
+        <div class="lt">
+          Bahadari
+          <small>IT Solutions</small>
+        </div>
+      </a>
+
+      <ul class="nl">
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#certs">Certifications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact" class="ncta">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="w">
+    <div class="hi">
+
+      <!-- LEFT: text -->
+      <div>
+        <div class="hpre">
+          <span class="hpd"></span>
+          Available for projects · Bremen, Germany
+        </div>
+
+        <h1 class="hname">Bahadari</h1>
+
+        <p class="hrole">
+          <strong>IT Infrastructure &amp; Security Specialist</strong><br>
+          Microsoft 365 · Cloud · Cybersecurity
+        </p>
+
+        <p class="hdesc">
+          6+ years building and securing enterprise environments — from a 2,500-user national central bank infrastructure to cloud-native Microsoft 365 automation in the German Mittelstand. Standards-based. Reliable. Results-driven.
+        </p>
+
+        <div class="hbtns">
+          <a class="bp" href="#contact">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Start a project
+          </a>
+          <a class="bg" href="#experience">
+            View experience
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <div class="hstats">
+          <div class="hst"><div class="hsv">6+</div><div class="hsl">Years</div></div>
+          <div class="hss"></div>
+          <div class="hst"><div class="hsv">2,500+</div><div class="hsl">Users managed</div></div>
+          <div class="hss"></div>
+          <div class="hst"><div class="hsv">7</div><div class="hsl">Certifications</div></div>
+          <div class="hss"></div>
+          <div class="hst"><div class="hsv">99.99%</div><div class="hsl">Uptime SLA</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: status panel -->
+      <div class="hpanel">
+        <div class="ptbar">
+          <div class="pd pdr"></div>
+          <div class="pd pdy"></div>
+          <div class="pd pdg"></div>
+          <span class="ptt">system.status · bahadari.de</span>
+        </div>
+        <div class="pbody">
+          <div class="prow">
+            <div class="prl"><div class="pico">🔐</div>Security+</div>
+            <span class="bdg bgg">Certified</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">☁️</div>AZ-900 Azure Fund.</div>
+            <span class="bdg bgg">Certified</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">🔒</div>AZ-500 Azure Sec.</div>
+            <span class="bdg bgg">Certified</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">🛡</div>SC-900 Security</div>
+            <span class="bdg bgg">Certified</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">📋</div>ISO 27001</div>
+            <span class="bdg ba">Lead Auditor</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">🌐</div>Network+</div>
+            <span class="bdg bgg">Certified</span>
+          </div>
+          <div class="prow">
+            <div class="prl"><div class="pico">📍</div>Location</div>
+            <span style="font-family:var(--fm);font-size:.66rem;color:var(--mu)">Bremen, DE</span>
+          </div>
+          <div class="pbars">
+            <div>
+              <div class="pbr-lbl"><span>Microsoft 365</span><span>95%</span></div>
+              <div class="pbr-t"><div class="pbr-f" style="width:95%"></div></div>
+            </div>
+            <div>
+              <div class="pbr-lbl"><span>Cybersecurity</span><span>90%</span></div>
+              <div class="pbr-t"><div class="pbr-f" style="width:90%"></div></div>
+            </div>
+            <div>
+              <div class="pbr-lbl"><span>Cloud / Azure</span><span>85%</span></div>
+              <div class="pbr-t"><div class="pbr-f" style="width:85%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="w">
+    <div class="fu" style="margin-bottom:46px">
+      <div class="seye">What I do</div>
+      <h2 class="stitle">Areas of Expertise</h2>
+      <p class="ssub">Enterprise-grade delivery across the full IT stack — security, cloud automation, and network infrastructure.</p>
+    </div>
+
+    <div class="bento fu d1">
+
+      <div class="bcard c4">
+        <div class="bico ic">🛡</div>
+        <div class="btitle">Cybersecurity</div>
+        <div class="bdesc">ISO 27001-aligned security frameworks. Conditional Access, RBAC, MFA, and endpoint hardening — proven across large regulated environments.</div>
+        <div class="tags"><span class="tag tc">Security+</span><span class="tag tc">SC-900</span><span class="tag tc">ISO 27001</span><span class="tag tc">MFA</span></div>
+      </div>
+
+      <div class="bcard c4">
+        <div class="bico ig">🌐</div>
+        <div class="btitle">Network Infrastructure</div>
+        <div class="bdesc">LAN/WAN design, VLAN segmentation, VPN tunnels, and firewall policy management across enterprise multi-branch environments.</div>
+        <div class="tags"><span class="tag tg">Network+</span><span class="tag tg">Fortinet NSE</span><span class="tag tg">VPN</span><span class="tag tg">DNS/DHCP</span></div>
+      </div>
+
+      <div class="bcard c4">
+        <div class="bico ia">☁️</div>
+        <div class="btitle">Cloud & Azure</div>
+        <div class="bdesc">Azure Security Engineer certified (AZ-500). Entra ID, Intune MDM, Conditional Access, and hybrid cloud architecture for modern workplaces.</div>
+        <div class="tags"><span class="tag ta">AZ-500</span><span class="tag ta">AZ-900</span><span class="tag ta">Entra ID</span><span class="tag ta">Intune</span></div>
+      </div>
+
+      <div class="bcard c8">
+        <div class="split">
+          <div>
+            <div class="bico ic">⚡</div>
+            <div class="btitle">Microsoft 365 & Automation</div>
+            <div class="bdesc">Power Automate multi-stage workflows, SharePoint architecture, Power Apps for internal tools. Currently managing fully automated communication pipelines for a 1,600-customer base — zero manual effort, data-driven from SharePoint.</div>
+            <div class="tags"><span class="tag tc">Power Automate</span><span class="tag tc">SharePoint</span><span class="tag tc">Power Apps</span><span class="tag tc">Microsoft 365</span><span class="tag tc">Exchange Online</span></div>
+          </div>
+          <div style="text-align:center;flex-shrink:0">
+            <div class="bnum">1,600+</div>
+            <div class="bnl">Customers in<br>automated workflows</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bcard c4">
+        <div class="bico ip">🖥</div>
+        <div class="btitle">Windows Server</div>
+        <div class="bdesc">Active Directory, Group Policy, DNS/DHCP, Windows Server 2016–2022, Hyper-V virtualisation, and enterprise patch management.</div>
+        <div class="tags"><span class="tag tp">AD DS</span><span class="tag tp">GPO</span><span class="tag tp">Hyper-V</span><span class="tag tp">WSUS</span></div>
+      </div>
+
+      <div class="bcard c6">
+        <div class="bico ig">🐧</div>
+        <div class="btitle">Linux Administration</div>
+        <div class="bdesc">User and group management, systemd services, UFW/iptables firewall hardening, and Bash scripting for infrastructure automation.</div>
+        <div class="tags"><span class="tag tg">Ubuntu</span><span class="tag tg">Bash</span><span class="tag tg">systemd</span><span class="tag tg">iptables</span></div>
+      </div>
+
+      <div class="bcard c6">
+        <div class="bico ia">🔄</div>
+        <div class="btitle">Backup & Disaster Recovery</div>
+        <div class="bdesc">3-2-1 backup strategies, system snapshots, and RTO/RPO-aligned continuity planning. Proven 99.99% uptime SLA across critical infrastructure.</div>
+        <div class="tags"><span class="tag ta">Veeam</span><span class="tag ta">DR Planning</span><span class="tag ta">Snapshots</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="w">
+    <div class="fu" style="margin-bottom:42px">
+      <div class="seye">Credentials</div>
+      <h2 class="stitle">Certifications</h2>
+      <p class="ssub">Industry-verified qualifications across security, cloud, and networking.</p>
+    </div>
+
+    <div class="cgrid fu d1">
+
+      <a class="cc" href="https://www.credly.com/badges/8f6be7e2-d01c-41cf-83bb-1684414e3884/public_url" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ic">🔐</div>
+        <div class="ciss">CompTIA</div>
+        <div class="cname">Security+</div>
+        <div class="cyr">Verified · Credly</div>
+      </a>
+
+      <a class="cc" href="https://www.credly.com/badges/d6134e81-b0a4-4bf3-b04b-9d4427883a58/public_url" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ig">🌐</div>
+        <div class="ciss">CompTIA</div>
+        <div class="cname">Network+</div>
+        <div class="cyr">Verified · Credly</div>
+      </a>
+
+      <a class="cc" href="https://www.credly.com/badges/46aab8a9-9f4c-4d7b-a9d5-b8125b0c6a63/public_url" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ia">☁️</div>
+        <div class="ciss">Microsoft</div>
+        <div class="cname">Azure Fundamentals AZ-900</div>
+        <div class="cyr">Verified · Credly</div>
+      </a>
+
+      <a class="cc" href="#" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ia">🔒</div>
+        <div class="ciss">Microsoft</div>
+        <div class="cname">Azure Security Engineer AZ-500</div>
+        <div class="cyr">Microsoft Certified</div>
+      </a>
+
+      <a class="cc" href="#" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ic">🛡</div>
+        <div class="ciss">Microsoft</div>
+        <div class="cname">Security, Compliance &amp; Identity SC-900</div>
+        <div class="cyr">Microsoft Certified</div>
+      </a>
+
+      <a class="cc" href="https://www.pecb.com/en/verify-certificate" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ic">📋</div>
+        <div class="ciss">PECB</div>
+        <div class="cname">ISO/IEC 27001 Lead Auditor</div>
+        <div class="cyr">Verified · PECB</div>
+      </a>
+
+      <a class="cc" href="https://training.fortinet.com/mod/page/view.php?id=91984" target="_blank" rel="noopener">
+        <span class="carrow">↗</span>
+        <div class="cico ig">🛡</div>
+        <div class="ciss">Fortinet</div>
+        <div class="cname">NSE 2 Network Security Associate</div>
+        <div class="cyr">Verified · Fortinet</div>
+      </a>
+
+      <div class="cc cprog">
+        <div class="cico" style="background:rgba(99,179,237,.09)">⏳</div>
+        <div class="ciss" style="color:var(--teal)">In Progress</div>
+        <div class="cname">PL-900 Power Platform Fundamentals</div>
+        <div class="cyr">Microsoft · 2025</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="w">
+    <div class="fu" style="margin-bottom:48px">
+      <div class="seye">Career</div>
+      <h2 class="stitle">Experience</h2>
+      <p class="ssub">Delivering enterprise IT across banking and mid-market environments in Germany.</p>
+    </div>
+
+    <div class="tl fu d1">
+
+      <!-- Role 1: Current -->
+      <div class="tli">
+        <div class="tld now"></div>
+        <div class="tlp">2023 — Present</div>
+        <div class="tlr">IT Systemadministrator &amp; Digitalisierungsspezialist</div>
+        <div class="tlc"><strong>Wischhusen Haustechnik GmbH</strong> · Bremen, Germany</div>
+        <ul class="tlpts">
+          <li>Built Power Automate three-stage email campaigns delivering automated maintenance reminders to 1,600+ customers from SharePoint-backed data</li>
+          <li>Developed Power Apps intranet tools for weekly management meetings and live KPI dashboards used by the CEO daily</li>
+          <li>Full Microsoft 365 administration — Exchange Online, Teams, SharePoint, and Intune endpoint management</li>
+          <li>Leading company-wide digitalization: replacing manual paper processes with cloud-native M365 workflows across operations and customer service</li>
+        </ul>
+      </div>
+
+      <!-- Role 2: Central Bank -->
+      <div class="tli">
+        <div class="tld"></div>
+        <div class="tlp">Previous Role</div>
+        <div class="tlr">IT Security Specialist</div>
+        <div class="tlc"><strong>National Central Bank</strong> · Multi-branch environment</div>
+        <ul class="tlpts">
+          <li>Secured and administered IT infrastructure for 2,500+ users across a regulated multi-branch national banking environment</li>
+          <li>Implemented ISO/IEC 27001-aligned security controls — reduced organisation-wide vulnerabilities by 85%</li>
+          <li>Managed Windows Server infrastructure: Active Directory, DNS, DHCP, Group Policy, and centralised patch management across all branches</li>
+          <li>Designed and enforced network segmentation, Fortinet firewall policies, and VPN configurations — maintained 99.99% uptime SLA</li>
+          <li>Owned disaster recovery planning and conducted regular DR tests across all locations</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="w">
+    <div class="fu" style="margin-bottom:44px">
+      <div class="seye">Technical stack</div>
+      <h2 class="stitle">Skills Matrix</h2>
+    </div>
+
+    <div class="skgrid fu d1">
+      <div>
+        <div class="skgt">Microsoft &amp; Cloud</div>
+        <div class="ski"><div class="skt"><span class="skn">Microsoft 365 / Power Platform</span><span class="skp">95%</span></div><div class="sktr"><div class="skf c" data-w="95"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">SharePoint / Power Automate</span><span class="skp">92%</span></div><div class="sktr"><div class="skf c" data-w="92"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Azure / Entra ID</span><span class="skp">85%</span></div><div class="sktr"><div class="skf c" data-w="85"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Intune / Endpoint Manager</span><span class="skp">82%</span></div><div class="sktr"><div class="skf c" data-w="82"></div></div></div>
+        <div style="height:26px"></div>
+        <div class="skgt">Windows Infrastructure</div>
+        <div class="ski"><div class="skt"><span class="skn">Active Directory / GPO</span><span class="skp">94%</span></div><div class="sktr"><div class="skf c" data-w="94"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Windows Server 2016–2022</span><span class="skp">90%</span></div><div class="sktr"><div class="skf c" data-w="90"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Hyper-V / Virtualisation</span><span class="skp">80%</span></div><div class="sktr"><div class="skf c" data-w="80"></div></div></div>
+      </div>
+      <div>
+        <div class="skgt">Security &amp; Compliance</div>
+        <div class="ski"><div class="skt"><span class="skn">ISO 27001 / Risk Management</span><span class="skp">90%</span></div><div class="sktr"><div class="skf g" data-w="90"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Azure Security (AZ-500)</span><span class="skp">85%</span></div><div class="sktr"><div class="skf g" data-w="85"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">MFA / Conditional Access</span><span class="skp">88%</span></div><div class="sktr"><div class="skf g" data-w="88"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Fortinet Firewall / VPN</span><span class="skp">82%</span></div><div class="sktr"><div class="skf g" data-w="82"></div></div></div>
+        <div style="height:26px"></div>
+        <div class="skgt">Networking &amp; Systems</div>
+        <div class="ski"><div class="skt"><span class="skn">LAN/WAN / VLAN / DNS</span><span class="skp">88%</span></div><div class="sktr"><div class="skf g" data-w="88"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Linux Administration</span><span class="skp">75%</span></div><div class="sktr"><div class="skf g" data-w="75"></div></div></div>
+        <div class="ski"><div class="skt"><span class="skn">Backup &amp; Disaster Recovery</span><span class="skp">85%</span></div><div class="sktr"><div class="skf g" data-w="85"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="w">
+    <div class="ctgrid fu">
+      <div>
+        <h2 class="cttitle">Let's build something<br><em>that lasts.</em></h2>
+        <p class="ctsub">Available for freelance consulting, security audits, and Microsoft 365 projects across Germany and remotely. I respond within one business day.</p>
+        <div class="ctlinks">
+          <a class="ctlink" href="mailto:hashmat@bahadari.de">
+            <div class="ctli">✉️</div>
+            <div><div class="ctlbl">Email</div><div class="ctval">hashmat@bahadari.de</div></div>
+          </a>
+          <a class="ctlink" href="https://www.linkedin.com/in/bahadari/" target="_blank" rel="noopener">
+            <div class="ctli" style="background:rgba(10,102,194,.14);color:#60A5FA">in</div>
+            <div><div class="ctlbl">LinkedIn</div><div class="ctval">linkedin.com/in/bahadari</div></div>
+          </a>
+          <div class="ctlink" style="cursor:default">
+            <div class="ctli">📍</div>
+            <div><div class="ctlbl">Location</div><div class="ctval">Bremen, Germany · Remote available</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fpanel">
+        <div class="fpt">Send a message</div>
+        <div class="fps">I'll reply within one business day.</div>
+        <div class="fg"><label class="fl">Your name</label><input class="fi" id="fn" type="text" placeholder="Max Mustermann"/></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" id="fe" type="email" placeholder="max@company.de"/></div>
+        <div class="fg"><label class="fl">Message</label><textarea class="fta" id="fm" placeholder="Describe your project or question…"></textarea></div>
+        <button class="fsub" id="fsend">Send Message →</button>
+        <div class="fok" id="fok">✓ Opening your mail client — speak soon.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="ftin">
+      <div class="ftlogo">
+        <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+          <path d="M20 3L35 10V22C35 30 28 36 20 38C12 36 5 30 5 22V10L20 3Z" fill="rgba(99,179,237,0.09)" stroke="rgba(99,179,237,0.45)" stroke-width="1.3"/>
+          <line x1="13" y1="20" x2="27" y2="20" stroke="#63B3ED" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="20" y1="13" x2="20" y2="27" stroke="#63B3ED" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="13" cy="20" r="2" fill="#38BDF8"/>
+          <circle cx="27" cy="20" r="2" fill="#38BDF8"/>
+          <circle cx="20" cy="13" r="2" fill="#63B3ED"/>
+          <circle cx="20" cy="27" r="2" fill="#63B3ED"/>
+          <circle cx="20" cy="20" r="2.8" fill="#63B3ED" opacity=".9"/>
+        </svg>
+        <div class="ftlt">Baha<em>dari</em></div>
+      </div>
+      <div class="ftcopy">&copy; 2025 Bahadari · bahadari.de · Bremen, Germany</div>
+      <div class="ftlinks">
+        <a href="https://www.linkedin.com/in/bahadari/" target="_blank">LinkedIn</a>
+        <a href="mailto:hashmat@bahadari.de">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', window.scrollY > 40));
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.skf[data-w]').forEach(b => b.style.width = b.dataset.w + '%');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+document.getElementById('fsend').addEventListener('click', () => {
+  const n = document.getElementById('fn').value.trim();
+  const e = document.getElementById('fe').value.trim();
+  const m = document.getElementById('fm').value.trim();
+  if (!n || !e || !m) { alert('Please fill in all fields.'); return; }
+  window.location.href = 'mailto:hashmat@bahadari.de?subject=' + encodeURIComponent('Enquiry from ' + n + ' · bahadari.de') + '&body=' + encodeURIComponent('Name: ' + n + '\nEmail: ' + e + '\n\n' + m);
+  document.getElementById('fok').style.display = 'block';
+});
+</script>
+</body>
+</html>
